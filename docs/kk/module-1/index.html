@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <meta name="googlebot" content="noindex,nofollow">
-<title>ShokanLab · Модуль 1 — Управляемая лампа</title>
+<title>ShokanLab · 1-модуль — Басқарылатын шам</title>
 <style>
   :root{
     --bg:#F4F1EA; --ink:#1F3A5F; --ink2:#2B4A75; --muted:#6B6B6B;
@@ -104,7 +104,7 @@
   .phase h2 .num{display:none}
   .phase p{margin:6px 0 0;opacity:.85;font-size:14px}
 
-  /* Тема (theme) */
+  /* Тақырып (topic) */
   .topic{padding:8px 0}
   .topic-title{font-size:19px;color:var(--ink);font-weight:700;margin-bottom:12px;
     padding-bottom:8px;border-bottom:2px solid var(--bg)}
@@ -113,12 +113,12 @@
     padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;
     color:var(--ink);letter-spacing:.5px;margin-bottom:8px}
 
-  /* Checklist (inert, декоративный) */
+  /* Checklist (inert, decorative) */
   .check li{list-style:none;position:relative;padding-left:26px;margin-bottom:6px}
   .check li:before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;
     border:2px solid #BBB;border-radius:4px}
 
-  /* Стоп. Проверь себя */
+  /* Stop. Self-check */
   .stop{background:linear-gradient(135deg,#FFF4E8,#FFEADA);
     border-radius:var(--radius);padding:26px 30px;margin:18px 0;
     border-left:6px solid var(--accent);box-shadow:var(--shadow)}
@@ -166,7 +166,7 @@
   /* Back to top / progress marker */
   .progress-note{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
 
-  /* Термины с подсказкой при наведении */
+  /* Terms with hover tooltip */
   .term{border-bottom:1px dotted var(--ink);cursor:help;position:relative;
     font-weight:600;color:var(--ink)}
   .term:hover::after, .term:focus::after{
@@ -239,7 +239,7 @@
   .lang-switch a:hover{opacity:1;background:rgba(255,255,255,.1)}
   .lang-switch a.active{opacity:1;background:rgba(255,255,255,.2)}
   .topnav-m.disabled{opacity:.4;pointer-events:none;cursor:not-allowed}
-  .topnav-m.disabled::after{content:" · скоро";font-size:10px;opacity:.8}
+  .topnav-m.disabled::after{content:" · жақын арада";font-size:10px;opacity:.8}
 
   footer{text-align:center;color:var(--muted);margin-top:40px;font-size:13px}
   footer a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--ink)}
@@ -259,17 +259,17 @@
   <div class="topnav-inner">
     <a href="../index.html" class="topnav-home">
       <span class="topnav-logo">ShokanLab</span>
-      <span class="topnav-stage">Этап 1 · База</span>
+      <span class="topnav-stage">1-кезең · Негіз</span>
     </a>
     <div class="topnav-modules">
-      <a href="../intro/index.html" class="topnav-m">✨ Введение</a>
-      <a href="../module-1/index.html" class="topnav-m active">💡 М1 — Управляемая лампа</a>
-      <a href="../module-2/index.html" class="topnav-m">💨 М2 — Умная сушилка</a>
-      <a href="../module-3/index.html" class="topnav-m">🌙 М3 — Ночник</a>
+      <a href="../intro/index.html" class="topnav-m">✨ Кіріспе</a>
+      <a href="../module-1/index.html" class="topnav-m active">💡 М1 — Басқарылатын шам</a>
+      <a href="../module-2/index.html" class="topnav-m">💨 М2 — Ақылды кептіргіш</a>
+      <a href="../module-3/index.html" class="topnav-m">🌙 М3 — Түнгі шам</a>
     </div>
     <div class="lang-switch">
-      <a href="index.html" class="active">RU</a>
-      <a href="../kk/module-1/index.html">KK</a>
+      <a href="../../module-1/index.html">RU</a>
+      <a href="index.html" class="active">KK</a>
     </div>
   </div>
 </nav>
@@ -278,94 +278,94 @@
 
   <!-- HERO -->
   <header class="hero">
-    <span class="tag">ИИ-Инженерия · ShokanLab · База</span>
-    <h1>Модуль 1 — Управляемая лампа</h1>
-    <p class="lead">Собираем светодиод-маячок, которым управляет ваш код, написанный с ИИ.</p>
+    <span class="tag">ЖИ-инженерия · ShokanLab · Негіз</span>
+    <h1>1-модуль — Басқарылатын шам</h1>
+    <p class="lead">ЖИ көмегімен жазылған сіздің кодыңыз басқаратын жарықдиодты-шамды құрастырамыз.</p>
     <div class="meta">
-      <span>⏱ до 6 занятий</span>
+      <span>⏱ 6 сабаққа дейін</span>
       <span>·</span>
-      <span>своим темпом</span>
+      <span>өз қарқыныңызбен</span>
     </div>
     <div class="comps">
       <span class="comp">🔍 Диагностика</span>
-      <span class="comp">🔧 Сборка</span>
-      <span class="comp">🤖 ИИ-программирование</span>
-      <span class="comp">💬 Объяснение</span>
-      <span class="comp">📸 Документирование</span>
+      <span class="comp">🔧 Құрастыру</span>
+      <span class="comp">🤖 ЖИ-бағдарламалау</span>
+      <span class="comp">💬 Түсіндіру</span>
+      <span class="comp">📸 Құжаттау</span>
     </div>
   </header>
 
   <!-- ROADMAP -->
   <section>
-    <h2><span class="num">🗺</span> Маршрут модуля</h2>
-    <p>Модуль состоит из <b>6 этапов</b>. Двигайтесь по порядку: сверху вниз. Каждый этап разбит на темы. В каждой теме — 4 шага: <b>🛠 Практика → 💡 Теория → 🧩 Выводы → ✅ Чекпоинт</b>.</p>
+    <h2><span class="num">🗺</span> Модуль маршруты</h2>
+    <p>Модуль <b>6 кезеңнен</b> тұрады. Ретімен жүріңіз: жоғарыдан төменге. Әр кезең тақырыптарға бөлінген. Әр тақырыпта — 4 қадам: <b>🛠 Практика → 💡 Теория → 🧩 Қорытынды → ✅ Тексеру</b>.</p>
     <div class="roadmap" id="roadmap">
-      <div class="step"><span class="emoji">📋</span><span class="label">DEFINE</span><div class="sub">задача</div></div>
-      <div class="step"><span class="emoji">🎨</span><span class="label">DESIGN</span><div class="sub">источник</div></div>
-      <div class="step"><span class="emoji">📐</span><span class="label">DRAFT</span><div class="sub">схема</div></div>
-      <div class="step"><span class="emoji">🔧</span><span class="label">DETAIL</span><div class="sub">сборка+код</div></div>
-      <div class="step"><span class="emoji">🚀</span><span class="label">DEPLOY</span><div class="sub">запуск</div></div>
-      <div class="step"><span class="emoji">🎬</span><span class="label">DEMO</span><div class="sub">защита</div></div>
+      <div class="step"><span class="emoji">📋</span><span class="label">DEFINE</span><div class="sub">тапсырма</div></div>
+      <div class="step"><span class="emoji">🎨</span><span class="label">DESIGN</span><div class="sub">қуат көзі</div></div>
+      <div class="step"><span class="emoji">📐</span><span class="label">DRAFT</span><div class="sub">сұлба</div></div>
+      <div class="step"><span class="emoji">🔧</span><span class="label">DETAIL</span><div class="sub">құрастыру+код</div></div>
+      <div class="step"><span class="emoji">🚀</span><span class="label">DEPLOY</span><div class="sub">іске қосу</div></div>
+      <div class="step"><span class="emoji">🎬</span><span class="label">DEMO</span><div class="sub">қорғау</div></div>
     </div>
   </section>
 
   <!-- ЗАСТРЯЛ -->
   <section>
-    <h2><span class="num">✋</span> Застрял?</h2>
-    <p>Если не получается — работайте по протоколу:</p>
+    <h2><span class="num">✋</span> Тығырыққа тірелдіңіз бе?</h2>
+    <p>Шықпаса — хаттама бойынша әрекет етіңіз:</p>
     <ol>
-      <li>Перечитайте последний шаг и критерий успеха</li>
-      <li>Объясните ИИ одним предложением: что ожидал / что получил</li>
-      <li>Разбейте шаг на 2 подшага</li>
-      <li>15 минут самостоятельно — дальше зовите ментора</li>
+      <li>Соңғы қадам мен табыс критерийін қайта оқыңыз</li>
+      <li>ЖИ-ге бір сөйлеммен түсіндіріңіз: не күттім / не алдым</li>
+      <li>Қадамды 2 ішкі қадамға бөліңіз</li>
+      <li>15 минут өздігінен — содан соң менторды шақырыңыз</li>
     </ol>
   </section>
 
   <!-- МАСТЕР-ПРОМПТ -->
   <section>
-    <h2><span class="num">🤖</span> ИИ-напарник — мастер-промпт</h2>
+    <h2><span class="num">🤖</span> ЖИ-серіктес — мастер-промпт</h2>
 
-    <h3>📅 Как начинать каждый урок</h3>
+    <h3>📅 Әр сабақты қалай бастау керек</h3>
     <ol>
-      <li>Откройте чат с ИИ (ChatGPT, Claude и т.п.). Лучше чистый новый чат.</li>
-      <li>Скопируйте мастер-промпт ниже.</li>
-      <li>В конце добавьте одну строку:
+      <li>ЖИ чатын ашыңыз (ChatGPT, Claude, т.б.). Жаңа таза чат жақсырақ.</li>
+      <li>Төмендегі мастер-промптты көшіріңіз.</li>
+      <li>Соңына бір жол қосыңыз:
         <ul>
-          <li>Если это <b>первый урок модуля</b>: «Это мой первый урок, начинаю с Темы 1.1»</li>
-          <li>Если это <b>продолжение</b>: «На прошлом уроке я остановился на Теме X.Y. Сегодня продолжаю с Темы X.Y+1»</li>
+          <li>Егер бұл <b>модульдің бірінші сабағы</b>: «Бұл менің бірінші сабағым, 1.1-тақырыптан бастаймын»</li>
+          <li>Егер бұл <b>жалғасы</b>: «Өткен сабақта X.Y-тақырыпта тоқтадым. Бүгін X.Y+1-тақырыптан жалғастырамын»</li>
         </ul>
       </li>
-      <li>Отправьте. ИИ готов помогать.</li>
+      <li>Жіберіңіз. ЖИ көмектесуге дайын.</li>
     </ol>
 
-    <div class="callout cal-tip"><b>💡 Совет</b>Мастер-промпт один для всего модуля. Сохраните его в заметку — будете копировать каждый урок.</div>
+    <div class="callout cal-tip"><b>💡 Кеңес</b>Мастер-промпт бүкіл модуль үшін біреу. Оны жазбаға сақтаңыз — әр сабақта көшіресіз.</div>
 
     <h3>Мастер-промпт</h3>
-    <div class="prompt" id="promptBox"><button class="copy-btn" onclick="copyPrompt()">копировать</button>Привет! Ты мой напарник по электронике.
+    <div class="prompt" id="promptBox"><button class="copy-btn" onclick="copyPrompt()">көшіру</button>Сәлем! Сен менің электроника бойынша серіктесімсің.
 
-Мне 12 лет, я первый раз собираю устройство. Сейчас я делаю Модуль 1 «Управляемая лампа» в школе ShokanLab: светодиод + реле + кнопка + Raspberry Pi Pico.
+Маған 12 жаста, мен бірінші рет құрылғы құрастырамын. Қазір мен ShokanLab мектебінде 1-модуль «Басқарылатын шам» жасап жатырмын: жарықдиод + реле + түйме + Raspberry Pi Pico.
 
-Три правила:
-1. Не давай сразу готовый ответ или код. Задай один вопрос, чтобы понять что я уже знаю.
-2. Объясняй простыми словами, как школьнику.
-3. Никогда не советуй трогать 220V и подавать больше 3.3V в пины Pico.
+Үш ереже:
+1. Бірден дайын жауап немесе код берме. Мен не білетінімді түсіну үшін бір сұрақ қой.
+2. Оқушыға түсіндіргендей қарапайым сөздермен түсіндір.
+3. Ешқашан 220V-қа тиюге және Pico пиндеріне 3.3V-тан жоғары беруге кеңес берме.
 
-Я учусь через ошибки. Помогай, но не решай за меня.</div>
-    <div class="callout cal-tip"><b>💡 Совет</b>После этого ИИ знает проект, ваш уровень и на какой теме вы находитесь. Никаких дополнительных промптов не нужно — просто спрашивайте, когда понадобится.</div>
+Мен қателер арқылы үйренемін. Көмектес, бірақ мен үшін шешпе.</div>
+    <div class="callout cal-tip"><b>💡 Кеңес</b>Осыдан кейін ЖИ жобаны, сіздің деңгейіңізді және қай тақырыпта екеніңізді біледі. Қосымша промпттар керек емес — қажет болғанда жай сұраңыз.</div>
   </section>
 
   <!-- ПРОЛОГ — быстрая победа -->
   <section style="background:linear-gradient(135deg,#FFF6E0,#FDECEA);border-left:6px solid #E6A85C">
-    <h2><span class="num" style="background:#E6A85C">🚀</span> Пролог — зажгите LED за 5 минут</h2>
-    <p><b>Сначала опыт. Потом объяснения.</b> Повторите 3 шага и увидите свет. Не надо пока понимать как это работает — разберёмся дальше.</p>
+    <h2><span class="num" style="background:#E6A85C">🚀</span> Пролог — 5 минутта LED жағыңыз</h2>
+    <p><b>Алдымен тәжірибе. Содан кейін түсіндірме.</b> 3 қадамды қайталаңыз және жарықты көресіз. Бұл қалай жұмыс істейтінін түсіну әзірге қажет емес — әрі қарай түсінеміз.</p>
 
     <ol style="font-size:16px;line-height:1.8">
-      <li><b>Попросите ментора</b> включить блок питания ATX. Загорится красный индикатор на плате питания.</li>
-      <li><b>Возьмите</b> 2 провода Dupont и светодиод.</li>
-      <li><b>Соедините по клеммам</b>:
+      <li><b>Ментордан сұраңыз</b> ATX қуат блогін қосуды. Қуат тақтасында қызыл индикатор жанады.</li>
+      <li><b>Алыңыз</b> 2 Dupont сымы мен жарықдиодты.</li>
+      <li><b>Клеммалар арқылы жалғаңыз</b>:
         <ul>
-          <li>Клемма <code>+3.3V</code> платы ATX → <b>длинная</b> ножка светодиода</li>
-          <li><b>Короткая</b> ножка светодиода → клемма <code>GND</code></li>
+          <li>ATX тақтасының <code>+3.3V</code> клеммасы → жарықдиодтың <b>ұзын</b> аяғы</li>
+          <li>Жарықдиодтың <b>қысқа</b> аяғы → <code>GND</code> клеммасы</li>
         </ul>
       </li>
     </ol>
@@ -381,106 +381,106 @@
         </circle>
       </svg>
       <div>
-        <div style="font-size:17px;font-weight:700;color:#5E8D6E;margin-bottom:4px">✓ Светодиод горит</div>
-        <div style="color:#5A5A5A;font-size:14px">Поздравляем — вы собрали первую электрическую цепь. Полных 3 компонента, одна замкнутая дорожка для тока.</div>
+        <div style="font-size:17px;font-weight:700;color:#5E8D6E;margin-bottom:4px">✓ Жарықдиод жанып тұр</div>
+        <div style="color:#5A5A5A;font-size:14px">Құттықтаймыз — сіз алғашқы электр тізбегін құрастырдыңыз. 3 компонент, ток үшін бір тұйық жол.</div>
       </div>
     </div>
 
     <div class="callout cal-warn" style="margin-top:14px">
-      <b>⚠️ Если не горит</b>
-      • Переверните светодиод — возможно перепутали плюс/минус (длинная ножка = плюс)<br>
-      • Проверьте винты клемм — должны быть закручены до упора<br>
-      • Проверьте: ментор точно включил ATX?
+      <b>⚠️ Жанбаса</b>
+      • Жарықдиодты аударыңыз — мүмкін плюс/минусты шатастырғансыз (ұзын аяғы = плюс)<br>
+      • Клемма бұрандаларын тексеріңіз — соңына дейін бұралуы керек<br>
+      • Тексеріңіз: ментор ATX-ті шынымен қосты ма?
     </div>
 
     <p style="text-align:center;margin-top:22px;font-size:15px;color:#6B6B6B;font-style:italic">
-      ↓ Теперь разберёмся, что именно произошло ↓
+      ↓ Енді не болғанын нақты түсінейік ↓
     </p>
   </section>
 
   <!-- PHASE 1 DEFINE -->
   <div class="phase">
-    <div class="phase-num">Фаза 1</div>
-    <h2>📋 DEFINE — Понимаем задачу</h2>
-    <p>Что строим, зачем, какими компонентами. Инженер всегда начинает с чёткого «что».</p>
+    <div class="phase-num">1-фаза</div>
+    <h2>📋 DEFINE — Тапсырманы түсінеміз</h2>
+    <p>Не құрастырамыз, не үшін, қандай компоненттермен. Инженер әрдайым айқын «нені»-ден бастайды.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 1.1 — Что будем строить</div>
+      <div class="topic-title">1.1-тақырып — Не құрастырамыз</div>
 
-      <h4>🎯 Цель модуля</h4>
-      <p>Собрать <b>светодиод-маячок</b>, которым сначала управляет <b>кнопка</b> (палец), затем — <b>программа</b> на Pico, которую вы напишете с ИИ. К концу модуля вы выберете <b>свой режим мигания</b>, заснимете видео и сдадите ментору.</p>
+      <h4>🎯 Модуль мақсаты</h4>
+      <p>Алдымен <b>түйме</b> (саусақ) басқаратын, содан кейін сіз ЖИ-мен жазатын Pico-дағы <b>бағдарлама</b> басқаратын <b>жарықдиодты-шам</b> құрастыру. Модуль соңында <b>өз жыпылықтау режиміңізді</b> таңдап, видеоға түсіріп, менторға тапсырасыз.</p>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Найдите на столе все компоненты:</p>
+        <p>Үстелден барлық компоненттерді табыңыз:</p>
         <ul class="check">
-          <li><span class="term" data-tip="Raspberry Pi Pico — маленький компьютер-микроконтроллер размером с палец. Работает от 3.3V, выполняет ваш код и управляет схемой.">Pico</span></li>
-          <li>плата расширения <span class="term" data-tip="Плата с винтовыми клеммами — позволяет подключать провода без пайки. Просто закручиваете отвёрткой.">(с винтовыми клеммами)</span></li>
-          <li><span class="term" data-tip="Блок питания ATX — переделан из компьютерного. Даёт 3 линии напряжения: 3.3V, 5V, 12V + GND. На плате-разветвителе выведен на банановые клеммы.">блок ATX</span></li>
-          <li><span class="term" data-tip="Светодиод — диод, который светится, когда через него течёт ток. У него 2 ножки: длинная «+» (анод), короткая «−» (катод). Наш — 3 ватта.">светодиод</span> 3Вт</li>
-          <li>1-канальное <span class="term" data-tip="Реле — электронный выключатель. Слабый сигнал (от кнопки или Pico) замыкает отдельную силовую цепь. При срабатывании слышно щелчок.">реле</span></li>
-          <li>кнопка</li>
-          <li>4 провода <span class="term" data-tip="Dupont — гибкие провода с разъёмами на концах. Нужны для быстрого соединения компонентов без пайки. Бывают «папа-папа», «папа-мама», «мама-мама».">Dupont</span></li>
-          <li><span class="term" data-tip="Мультиметр — прибор для измерения электричества: напряжения, сопротивления, проверки целости провода (прозвонка). Ваша модель — UNI-T UT33C+.">мультиметр</span> <b>UNI-T UT33C+</b></li>
-          <li>отвёртка</li>
+          <li><span class="term" data-tip="Raspberry Pi Pico — саусақ өлшеміндей шағын компьютер-микроконтроллер. 3.3V-пен жұмыс істейді, кодыңызды орындайды және сұлбаны басқарады.">Pico</span></li>
+          <li>кеңейту тақтасы <span class="term" data-tip="Бұрандалы клеммалары бар тақта — сымдарды дәнекерлеусіз қосуға мүмкіндік береді. Жай бұрауышпен бұрайсыз.">(бұрандалы клеммалармен)</span></li>
+          <li><span class="term" data-tip="ATX қуат блогі — компьютерліктен өзгертілген. 3 кернеу сызығын береді: 3.3V, 5V, 12V + GND. Бөлгіш тақтада банан клеммаларымен шығарылған.">ATX блогі</span></li>
+          <li><span class="term" data-tip="Жарықдиод — арқылы ток өткенде жанатын диод. 2 аяғы бар: ұзын «+» (анод), қысқа «−» (катод). Біздікі — 3 ватт.">жарықдиод</span> 3Вт</li>
+          <li>1-каналды <span class="term" data-tip="Реле — электронды ажыратқыш. Әлсіз сигнал (түймеден немесе Pico-дан) жеке қуат тізбегін тұйықтайды. Іске қосылғанда шертпе естіледі.">реле</span></li>
+          <li>түйме</li>
+          <li>4 <span class="term" data-tip="Dupont — ұштарында жалғаулары бар иілгіш сымдар. Компоненттерді дәнекерлеусіз жылдам қосуға қажет. «Еркек-еркек», «еркек-ұрғашы», «ұрғашы-ұрғашы» болады.">Dupont</span></li>
+          <li><span class="term" data-tip="Мультиметр — электрді өлшейтін құрал: кернеу, кедергі, сымның бүтіндігін тексеру (шалу). Моделіңіз — UNI-T UT33C+.">мультиметр</span> <b>UNI-T UT33C+</b></li>
+          <li>бұрауыш</li>
         </ul>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p>В инженерии первым делом <b>определяют задачу</b>. Что должно делать устройство? Какие ограничения? Что считается «готово»? В нашем случае: маячок, который сначала включается кнопкой, потом по коду.</p>
+        <p>Инженерияда бірінші кезекте <b>тапсырманы анықтайды</b>. Құрылғы не істеуі керек? Қандай шектеулер бар? Не «дайын» саналады? Біздің жағдайда: алдымен түймемен, содан кейін кодпен қосылатын шам.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Без чёткого понимания задачи легко сделать «что-то похожее», но не то, что нужно. Инженер всегда начинает с вопроса «что строим».</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Тапсырманы айқын түсінбей-ақ «ұқсас бірдеңе» жасау оңай, бірақ қажеттіні емес. Инженер әрдайым «не құрастырамыз» деген сұрақтан бастайды.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Могу пересказать цель модуля своими словами</li>
-          <li>Все компоненты на столе</li>
-          <li>Прочитал правила безопасности</li>
+          <li>Модуль мақсатын өз сөзіммен айтып бере аламын</li>
+          <li>Барлық компоненттер үстелде</li>
+          <li>Қауіпсіздік ережелерін оқыдым</li>
         </ul>
       </div>
 
       <div class="callout cal-warn">
-        <b>⚠️ Безопасность</b>
-        • Розетку 220V не трогаем — ATX включает ментор<br>
-        • Металл в работающую схему не суём<br>
-        • 12V в Pico не подаём<br>
-        • Дым или треск → стоп, ментор
+        <b>⚠️ Қауіпсіздік</b>
+        • 220V розеткасына тиіспейміз — ATX-ті ментор қосады<br>
+        • Жұмыс істеп тұрған сұлбаға металл сұғалмаймыз<br>
+        • Pico-ға 12V бермейміз<br>
+        • Түтін немесе шатыр → тоқта, ментор
       </div>
     </div>
   </section>
 
   <div class="stop">
-    <h3>🛑 Стоп. Проверьте себя — конец фазы DEFINE</h3>
-    <p>Без подглядывания в текст ответьте себе мысленно:</p>
+    <h3>🛑 Тоқта. Өзіңізді тексеріңіз — DEFINE фазасының соңы</h3>
+    <p>Мәтінге қарамай өзіңізге ойша жауап беріңіз:</p>
     <ol>
-      <li>Какой проект мы строим в этом модуле?</li>
-      <li>Какие основные компоненты на столе?</li>
-      <li>Что непонятно из прочитанного?</li>
+      <li>Осы модульде қандай жоба құрастырамыз?</li>
+      <li>Үстелде қандай негізгі компоненттер?</li>
+      <li>Оқығаннан не түсініксіз?</li>
     </ol>
-    <div class="bonus">«Всё понятно»? — попробуйте предсказать, какой будет первый шаг сборки. Не можете — вернитесь к Теме 1.1.</div>
+    <div class="bonus">«Бәрі түсінікті»? — құрастырудың алғашқы қадамы қандай болатынын болжауға тырысыңыз. Болмаса — 1.1-тақырыпқа қайтыңыз.</div>
   </div>
 
   <!-- PHASE 2 DESIGN -->
   <div class="phase">
-    <div class="phase-num">Фаза 2</div>
-    <h2>🎨 DESIGN — Источник и компоненты</h2>
-    <p>Изучаем блок питания ATX и роль каждого компонента в будущей цепи.</p>
+    <div class="phase-num">2-фаза</div>
+    <h2>🎨 DESIGN — Қуат көзі мен компоненттер</h2>
+    <p>ATX қуат блогі мен әр компоненттің болашақ тізбектегі рөлін зерттейміз.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 2.1 — Напряжение и три линии ATX</div>
+      <div class="topic-title">2.1-тақырып — Кернеу және ATX-тің үш сызығы</div>
 
       <div class="figure">
-        <svg viewBox="0 0 340 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Плата-разветвитель ATX 24-pin" style="max-width:360px">
+        <svg viewBox="0 0 340 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ATX 24-pin бөлгіш тақтасы" style="max-width:360px">
           <defs>
             <linearGradient id="pcbGrad" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stop-color="#2367B5"/>
@@ -595,7 +595,7 @@
             <rect x="6" y="-4" width="48" height="8" rx="1" fill="url(#fuseGlass)" stroke="#8B7E5C" stroke-width="0.5"/>
             <!-- нить накала -->
             <path d="M 10 0 L 15 -2 L 20 0 L 25 2 L 30 0 L 35 -2 L 40 0 L 45 2 L 50 0" stroke="#555" stroke-width="0.8" fill="none"/>
-            <text x="30" y="22" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#B3D1F0">предохранитель</text>
+            <text x="30" y="22" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#B3D1F0">сақтандырғыш</text>
           </g>
 
           <!-- Тумблер ON/OFF (низ-слева) -->
@@ -737,14 +737,14 @@
           </g>
 
         </svg>
-        <div class="caption">Плата-разветвитель ATX 24-pin: 24-контактный разъём (от блока питания), 8 банановых клемм (4 пары GND/+V), предохранитель, тумблер питания, индикатор. Размеры 128×48 мм.</div>
+        <div class="caption">ATX 24-pin бөлгіш тақтасы: 24-контактты разъем (қуат блогінен), 8 банан клеммасы (4 GND/+V жұп), сақтандырғыш, қуат тумблері, индикатор. Өлшемі 128×48 мм.</div>
       </div>
 
-      <h4>🔍 Знакомство с мультиметром UT33C+</h4>
-      <p><b>Мультиметр</b> — прибор, который измеряет электричество. У вас модель <b>UNI-T UT33C+</b>. Перед первым замером разберитесь с его частями.</p>
+      <h4>🔍 UT33C+ мультиметрімен танысу</h4>
+      <p><b>Мультиметр</b> — электрді өлшейтін құрал. Сізде <b>UNI-T UT33C+</b> моделі. Алғашқы өлшеу алдында оның бөліктерін түсініп алыңыз.</p>
 
       <div class="figure">
-        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Мультиметр UNI-T UT33C+ с подписями">
+        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Жазулары бар UNI-T UT33C+ мультиметрі">
           <defs>
             <linearGradient id="mmBody" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stop-color="#F0BC3A"/>
@@ -818,25 +818,25 @@
             <path d="M 185 74 L 110 74" stroke="#C94C4C" stroke-width="1.5" fill="none"/>
             <circle cx="185" cy="74" r="3" fill="#C94C4C"/>
             <text x="100" y="70" text-anchor="end" font-weight="bold">① Экран</text>
-            <text x="100" y="84" text-anchor="end" font-size="10" fill="#6B6B6B">показывает результат</text>
+            <text x="100" y="84" text-anchor="end" font-size="10" fill="#6B6B6B">нәтижені көрсетеді</text>
 
             <!-- 2. Переключатель режимов -->
             <path d="M 350 210 L 460 210" stroke="#C94C4C" stroke-width="1.5" fill="none"/>
             <circle cx="350" cy="210" r="3" fill="#C94C4C"/>
-            <text x="470" y="205" font-weight="bold">② Переключатель</text>
-            <text x="470" y="220" font-size="10" fill="#6B6B6B">что мерять</text>
-            <text x="470" y="234" font-size="10" fill="#B8822A" font-weight="bold">V=  постоянное напряжение</text>
-            <text x="470" y="248" font-size="10" fill="#6B6B6B">Ω — сопротивление</text>
-            <text x="470" y="262" font-size="10" fill="#6B6B6B">🔊 — прозвонка (пикает)</text>
+            <text x="470" y="205" font-weight="bold">② Ауыстырғыш</text>
+            <text x="470" y="220" font-size="10" fill="#6B6B6B">нені өлшеу керек</text>
+            <text x="470" y="234" font-size="10" fill="#B8822A" font-weight="bold">V=  тұрақты кернеу</text>
+            <text x="470" y="248" font-size="10" fill="#6B6B6B">Ω — кедергі</text>
+            <text x="470" y="262" font-size="10" fill="#6B6B6B">🔊 — шалу (шылдыр ешеді)</text>
 
             <!-- 3. Гнездо COM -->
             <path d="M 355 335 L 355 360 L 460 360" stroke="#2B2B2B" stroke-width="1.5" fill="none"/>
-            <text x="470" y="358" font-weight="bold" fill="#2B2B2B">③ COM (чёрный)</text>
-            <text x="470" y="372" font-size="10" fill="#6B6B6B">сюда чёрный провод — «минус»</text>
+            <text x="470" y="358" font-weight="bold" fill="#2B2B2B">③ COM (қара)</text>
+            <text x="470" y="372" font-size="10" fill="#6B6B6B">қара сым осында — «минус»</text>
 
             <!-- 4. Гнездо VΩmA -->
             <path d="M 280 335 L 280 375 L 180 375" stroke="#D4503A" stroke-width="1.5" fill="none"/>
-            <text x="175" y="373" text-anchor="end" font-weight="bold" fill="#D4503A">④ VΩmA (красный)</text>
+            <text x="175" y="373" text-anchor="end" font-weight="bold" fill="#D4503A">④ VΩmA (қызыл)</text>
           </g>
 
           <!-- Щупы (упрощённо) -->
@@ -856,25 +856,25 @@
             <path d="M 490 130 L 490 125" stroke="#888" stroke-width="3"/>
           </g>
         </svg>
-        <div class="caption">Мультиметр UT33C+. Четыре главные части: экран, переключатель, гнездо COM (чёрный провод), гнездо VΩmA (красный провод).</div>
+        <div class="caption">UT33C+ мультиметрі. Төрт негізгі бөлік: экран, ауыстырғыш, COM ұясы (қара сым), VΩmA ұясы (қызыл сым).</div>
       </div>
 
       <div class="callout cal-tip">
-        <b>💡 Что такое «щуп»</b>
-        Два провода с металлическими палочками на концах. Чёрный вставляется в гнездо COM, красный — в VΩmA. Палочками касаются точек, между которыми хотите измерить.
+        <b>💡 «Щуп» дегеніміз не</b>
+        Ұштарында металл таяқшалары бар екі сым. Қара COM ұясына, қызыл — VΩmA ұясына қосылады. Таяқшалармен өлшегіңіз келетін нүктелерге тиесіз.
       </div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Теперь замеры. Проверьте себя перед началом — ментор включит ATX только после вашей проверки.</p>
+        <p>Енді өлшеулер. Бастар алдында өзіңізді тексеріңіз — ментор сізді тексергеннен кейін ғана ATX-ті қосады.</p>
         <ol>
-          <li>Попросите ментора включить ATX.</li>
-          <li>Поверните <b>переключатель</b> мультиметра на <code>V=</code> (постоянное напряжение).</li>
-          <li><b>Красный щуп</b> вставьте в гнездо <code>VΩmA</code>, <b>чёрный</b> — в <code>COM</code>.</li>
-          <li>Чёрный щуп держите на <span class="term" data-tip="GND (Ground) — «земля». Минус источника, точка куда возвращается ток. На плате ATX это чёрные клеммы.">GND</span> платы ATX. Красным по очереди касайтесь трёх других клемм и смотрите на экран:</li>
+          <li>ATX-ті қосуды ментордан сұраңыз.</li>
+          <li>Мультиметр <b>ауыстырғышын</b> <code>V=</code>-ке (тұрақты кернеу) бұрыңыз.</li>
+          <li><b>Қызыл щупты</b> <code>VΩmA</code> ұясына, <b>қараны</b> — <code>COM</code>-ға салыңыз.</li>
+          <li>Қара щупты ATX тақтасының <span class="term" data-tip="GND (Ground) — «жер». Қуат көзінің минусы, ток қайтатын нүкте. ATX тақтасында бұл қара клеммалар.">GND</span>-інде ұстаңыз. Қызылмен кезекпен басқа үш клеммаға тиіп, экранға қараңыз:</li>
         </ol>
         <table>
-          <tr><th>Линия</th><th>Замер</th></tr>
+          <tr><th>Сызық</th><th>Өлшем</th></tr>
           <tr><td><code>+3.3V → GND</code></td><td>___ В</td></tr>
           <tr><td><code>+5V → GND</code></td><td>___ В</td></tr>
           <tr><td><code>+12V → GND</code></td><td>___ В</td></tr>
@@ -883,88 +883,88 @@
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p><b>Напряжение</b> (V, вольт) — сила, с которой источник толкает электроны. ATX даёт 3 линии, потому что разным устройствам нужна разная сила:</p>
+        <p><b>Кернеу</b> (V, вольт) — қуат көзі электрондарды итеретін күш. ATX 3 сызық береді, өйткені әр түрлі құрылғыларға әр түрлі күш керек:</p>
 
         <div class="bars">
           <div class="bar-row">
             <div class="label">+3.3V</div>
-            <div class="bar"><div class="bar-fill" style="width:27.5%;background:#E8A33D">слабая</div></div>
+            <div class="bar"><div class="bar-fill" style="width:27.5%;background:#E8A33D">әлсіз</div></div>
             <div class="use">Pico, LED</div>
           </div>
           <div class="bar-row">
             <div class="label">+5V</div>
-            <div class="bar"><div class="bar-fill" style="width:42%;background:#D4503A">средняя</div></div>
-            <div class="use">серво, модули</div>
+            <div class="bar"><div class="bar-fill" style="width:42%;background:#D4503A">орташа</div></div>
+            <div class="use">серво, модульдер</div>
           </div>
           <div class="bar-row">
             <div class="label">+12V</div>
-            <div class="bar"><div class="bar-fill" style="width:100%;background:#C94C4C">сильная</div></div>
-            <div class="use">моторы, ленты</div>
+            <div class="bar"><div class="bar-fill" style="width:100%;background:#C94C4C">күшті</div></div>
+            <div class="use">моторлар, ленталар</div>
           </div>
         </div>
-        <p style="font-size:13px;color:var(--muted);font-style:italic">Длина полосы — относительная «сила» напряжения. 12V в ~3.6 раз сильнее, чем 3.3V.</p>
+        <p style="font-size:13px;color:var(--muted);font-style:italic">Жолақ ұзындығы — кернеудің салыстырмалы «күші». 12V 3.3V-тан ~3.6 есе күшті.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>ATX — универсальный источник. Инженер выбирает линию по паспорту устройства. <b>12V в пин Pico = моментальная поломка.</b></p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>ATX — әмбебап қуат көзі. Инженер сызықты құрылғы паспорты бойынша таңдайды. <b>Pico пиніне 12V = бірден бұзылу.</b></p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Замерил все три линии</li>
-          <li>Могу объяснить, зачем три разных напряжения</li>
-          <li>Знаю: 12V в Pico нельзя</li>
+          <li>Барлық үш сызықты өлшедім</li>
+          <li>Үш түрлі кернеудің неге екенін түсіндіре аламын</li>
+          <li>Білемін: Pico-ға 12V болмайды</li>
         </ul>
       </div>
     </div>
 
     <div class="topic">
-      <div class="topic-title">Тема 2.2 — Роль каждого компонента</div>
+      <div class="topic-title">2.2-тақырып — Әр компоненттің рөлі</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Положите перед собой и подумайте — для чего каждый?</p>
+        <p>Алдыңызға қойып ойланыңыз — әрқайсысы не үшін?</p>
         <table>
-          <tr><th>Компонент</th><th>Для чего (ответьте сами)</th></tr>
-          <tr><td>Светодиод</td><td>___</td></tr>
-          <tr><td>Кнопка</td><td>___</td></tr>
+          <tr><th>Компонент</th><th>Не үшін (өзіңіз жауап беріңіз)</th></tr>
+          <tr><td>Жарықдиод</td><td>___</td></tr>
+          <tr><td>Түйме</td><td>___</td></tr>
           <tr><td>Реле</td><td>___</td></tr>
-          <tr><td>Провода</td><td>___</td></tr>
+          <tr><td>Сымдар</td><td>___</td></tr>
         </table>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p>Любая электрическая цепь = <b>источник + нагрузка + управление + провода</b>:</p>
+        <p>Кез келген электр тізбегі = <b>қуат көзі + жүктеме + басқару + сымдар</b>:</p>
         <ul>
-          <li><b>Источник</b> — ATX (даёт напряжение)</li>
-          <li><b>Нагрузка</b> — светодиод (потребляет ток, светится)</li>
-          <li><b>Управление</b> — сначала кнопка (палец), потом реле (Pico)</li>
-          <li><b>Провода</b> — путь для тока</li>
+          <li><b>Қуат көзі</b> — ATX (кернеу береді)</li>
+          <li><b>Жүктеме</b> — жарықдиод (ток тұтынады, жанады)</li>
+          <li><b>Басқару</b> — алдымен түйме (саусақ), содан кейін реле (Pico)</li>
+          <li><b>Сымдар</b> — ток жолы</li>
         </ul>
 
         <div class="figure">
-          <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4 части любой цепи">
+          <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Кез келген тізбектің 4 бөлігі">
             <rect x="20"  y="50" width="140" height="100" rx="8" class="bd-comp bd-source"/>
-            <text x="90"  y="95"  text-anchor="middle" class="bd-title">ИСТОЧНИК</text>
-            <text x="90"  y="115" text-anchor="middle" class="bd-sub">даёт напряжение</text>
+            <text x="90"  y="95"  text-anchor="middle" class="bd-title">ҚУАТ КӨЗІ</text>
+            <text x="90"  y="115" text-anchor="middle" class="bd-sub">кернеу береді</text>
             <text x="90"  y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">ATX</text>
 
             <rect x="200" y="50" width="140" height="100" rx="8" class="bd-comp bd-ctrl"/>
-            <text x="270" y="95"  text-anchor="middle" class="bd-title">УПРАВЛЕНИЕ</text>
-            <text x="270" y="115" text-anchor="middle" class="bd-sub">кто-то решает</text>
-            <text x="270" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">кнопка · реле · Pico</text>
+            <text x="270" y="95"  text-anchor="middle" class="bd-title">БАСҚАРУ</text>
+            <text x="270" y="115" text-anchor="middle" class="bd-sub">біреу шешеді</text>
+            <text x="270" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">түйме · реле · Pico</text>
 
             <rect x="380" y="50" width="140" height="100" rx="8" class="bd-comp bd-load"/>
-            <text x="450" y="95"  text-anchor="middle" class="bd-title">НАГРУЗКА</text>
-            <text x="450" y="115" text-anchor="middle" class="bd-sub">потребляет ток</text>
+            <text x="450" y="95"  text-anchor="middle" class="bd-title">ЖҮКТЕМЕ</text>
+            <text x="450" y="115" text-anchor="middle" class="bd-sub">ток тұтынады</text>
             <text x="450" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">LED</text>
 
             <rect x="560" y="50" width="120" height="100" rx="8" class="bd-comp bd-wires"/>
-            <text x="620" y="95"  text-anchor="middle" class="bd-title">ПРОВОДА</text>
-            <text x="620" y="115" text-anchor="middle" class="bd-sub">путь для тока</text>
+            <text x="620" y="95"  text-anchor="middle" class="bd-title">СЫМДАР</text>
+            <text x="620" y="115" text-anchor="middle" class="bd-sub">ток жолы</text>
             <text x="620" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">Dupont</text>
 
             <!-- стрелки тока -->
@@ -979,55 +979,55 @@
               </marker>
             </defs>
 
-            <text x="360" y="205" text-anchor="middle" style="font:italic 10px sans-serif;fill:#666">ток идёт по кругу — от источника через управление и нагрузку обратно</text>
+            <text x="360" y="205" text-anchor="middle" style="font:italic 10px sans-serif;fill:#666">ток шеңбер бойымен жүреді — қуат көзінен басқару мен жүктеме арқылы қайтадан</text>
           </svg>
-          <div class="caption">4 части любой электрической цепи — меняются детали, структура одна.</div>
+          <div class="caption">Кез келген электр тізбегінің 4 бөлігі — бөлшектер өзгереді, құрылымы бір.</div>
         </div>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Меняются конкретные детали, но структура одна. Это поможет в любом будущем проекте.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Нақты бөлшектер өзгереді, бірақ құрылымы бір. Бұл кез келген болашақ жобада көмектеседі.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Могу назвать роль каждого компонента</li>
-          <li>Понимаю 4 части цепи: источник, нагрузка, управление, провода</li>
+          <li>Әр компоненттің рөлін айта аламын</li>
+          <li>4 бөліктен тұратын тізбекті түсінемін: қуат көзі, жүктеме, басқару, сымдар</li>
         </ul>
       </div>
     </div>
   </section>
 
   <div class="stop">
-    <h3>🛑 Стоп. Проверьте себя — конец фазы DESIGN</h3>
-    <p>Без подглядывания:</p>
+    <h3>🛑 Стоп. Проверьте себя — DESIGN фазасының соңы</h3>
+    <p>Қарамай:</p>
     <ol>
-      <li>Зачем ATX выдаёт три разных линии напряжения, а не одну?</li>
-      <li>К какой линии подключим LED? Почему именно её?</li>
-      <li>Что непонятно?</li>
+      <li>ATX неге бір емес, үш түрлі кернеу сызығын береді?</li>
+      <li>LED-ті қай сызыққа қосамыз? Неге дәл оған?</li>
+      <li>Не түсініксіз?</li>
     </ol>
-    <div class="bonus">«Всё понятно»? — какое напряжение безопасно трогать пальцами, а какое нет?</div>
+    <div class="bonus">«Бәрі түсінікті»? — қай кернеуге саусақпен тиюге болады, қайсысына болмайды?</div>
   </div>
 
   <!-- PHASE 3 DRAFT -->
   <div class="phase">
-    <div class="phase-num">Фаза 3</div>
-    <h2>📐 DRAFT — Рисуем схему</h2>
-    <p>Рисуем путь тока на бумаге. Схема до сборки = меньше ошибок при сборке.</p>
+    <div class="phase-num">3-фаза</div>
+    <h2>📐 DRAFT — Сұлба саламыз</h2>
+    <p>Ток жолын қағазға саламыз. Құрастыру алдындағы сұлба = құрастыру кезіндегі қателер аз.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 3.1 — Схема на бумаге</div>
+      <div class="topic-title">3.1-тақырып — Қағаздағы сұлба</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Возьмите лист бумаги и ручку. Нарисуйте <b>путь, по которому побежит ток</b>. Ниже — пример, как это может выглядеть:</p>
+        <p>Қағаз бен қалам алыңыз. <b>Ток жүретін жолды</b> салыңыз. Төменде — бұл қалай көрінуі мүмкін мысал:</p>
 
         <div class="figure">
-          <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Пример схемы на бумаге">
+          <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Қағаздағы сұлба мысалы">
             <!-- Блок ATX (плюс) -->
             <rect x="30"  y="80" width="110" height="80" rx="8" class="bd-comp bd-source"/>
             <text x="85"  y="108" text-anchor="middle" class="bd-title">ATX</text>
@@ -1038,8 +1038,8 @@
 
             <!-- Кнопка -->
             <rect x="220" y="80" width="110" height="80" rx="8" class="bd-comp bd-btn"/>
-            <text x="275" y="108" text-anchor="middle" class="bd-title">КНОПКА</text>
-            <text x="275" y="128" text-anchor="middle" class="bd-sub">палец</text>
+            <text x="275" y="108" text-anchor="middle" class="bd-title">ТҮЙМЕ</text>
+            <text x="275" y="128" text-anchor="middle" class="bd-sub">саусақ</text>
             <circle cx="220" cy="100" r="5" class="bd-pin"/>
             <circle cx="330" cy="100" r="5" class="bd-pin"/>
 
@@ -1048,10 +1048,10 @@
             <text x="465" y="108" text-anchor="middle" class="bd-title">LED</text>
             <circle cx="410" cy="100" r="5" fill="#C94C4C" stroke="#8B1A1A" stroke-width="2"/>
             <text x="420" y="104" class="bd-pinlbl" font-weight="bold">+</text>
-            <text x="402" y="104" text-anchor="end" class="bd-sub" style="fill:#C94C4C">длинная</text>
+            <text x="402" y="104" text-anchor="end" class="bd-sub" style="fill:#C94C4C">ұзын</text>
             <circle cx="520" cy="100" r="5" fill="#2B2B2B" stroke="#000" stroke-width="1.5"/>
             <text x="515" y="104" text-anchor="end" class="bd-pinlbl" font-weight="bold">−</text>
-            <text x="530" y="104" class="bd-sub">короткая</text>
+            <text x="530" y="104" class="bd-sub">қысқа</text>
 
             <!-- провода с стрелками направления тока -->
             <defs>
@@ -1062,51 +1062,51 @@
 
             <!-- провод 1: ATX + → кнопка -->
             <path d="M 140 100 L 220 100" class="bd-wire" stroke="#E8A33D" marker-end="url(#arrCurrent)"/>
-            <text x="180" y="92" text-anchor="middle" class="bd-wlbl" fill="#B8822A">провод</text>
+            <text x="180" y="92" text-anchor="middle" class="bd-wlbl" fill="#B8822A">сым</text>
 
             <!-- провод 2: кнопка → LED + -->
             <path d="M 330 100 L 410 100" class="bd-wire" stroke="#E8A33D" marker-end="url(#arrCurrent)"/>
-            <text x="370" y="92" text-anchor="middle" class="bd-wlbl" fill="#B8822A">провод</text>
+            <text x="370" y="92" text-anchor="middle" class="bd-wlbl" fill="#B8822A">сым</text>
 
             <!-- провод 3 (обратный): LED − → ATX GND -->
             <path d="M 520 100 L 600 100 L 600 180 L 140 180 L 140 140" class="bd-wire" stroke="#2B2B2B" marker-end="url(#arrCurrent)"/>
-            <text x="370" y="196" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">провод — обратный путь</text>
+            <text x="370" y="196" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">сым — кері жол</text>
 
             <!-- подпись -->
-            <text x="340" y="30" text-anchor="middle" style="font:italic 13px sans-serif;fill:#5A5A5A">← ток течёт от плюса через цепь обратно в минус ←</text>
+            <text x="340" y="30" text-anchor="middle" style="font:italic 13px sans-serif;fill:#5A5A5A">← ток плюстан тізбек арқылы қайтадан минусқа ағады ←</text>
           </svg>
-          <div class="caption">Пример схемы. Ваш рисунок может быть любым — главное показать <b>замкнутый круг</b> от плюса через кнопку и LED обратно в минус. Рисуйте стрелки — куда идёт ток.</div>
+          <div class="caption">Сұлба мысалы. Сіздің суретіңіз кез келген болуы мүмкін — ең бастысы плюстан түйме мен LED арқылы минусқа <b>тұйық шеңберді</b> көрсету. Ток қайда баратынын — тілдермен көрсетіңіз.</div>
         </div>
 
-        <p><b>Не обязательно красиво.</b> Главное — показать направление и что круг замкнут.</p>
-        <div class="callout cal-tip"><b>💬 Полярность LED</b>Длинная ножка = плюс (+), короткая = минус (−).</div>
+        <p><b>Әдемі болу міндетті емес.</b> Ең бастысы — бағытты көрсету және шеңбер тұйық екенін.</p>
+        <div class="callout cal-tip"><b>💬 LED полярлығы</b>Ұзын аяғы = плюс (+), қысқасы = минус (−).</div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
 
-        <h4>Что такое цепь</h4>
-        <p>Электроны не могут просто «выйти из плюса и исчезнуть». Им нужен <b>путь обратно в минус</b> источника. Этот полный путь — <b>цепь</b>.</p>
-        <p>Представьте водовод дома: вода не льётся «наружу». Она заходит из водоканала, проходит через ваш кран, в раковину и по сливу возвращается. Точно так же электроны: циркулируют по кругу.</p>
+        <h4>Тізбек дегеніміз не</h4>
+        <p>Электрондар жай «плюстан шығып жоғалуы» мүмкін емес. Оларға қуат көзінің <b>минусына қайту жолы</b> керек. Бұл толық жол — <b>тізбек</b>.</p>
+        <p>Үйдегі су құбырын елестетіңіз: су «сыртқа» ақпайды. Ол су арнасынан кіреді, краныңыз арқылы раковинаға және ағын арқылы қайтады. Электрондар да дәл солай: шеңбер бойымен айналады.</p>
 
-        <h4>Замкнутая vs разомкнутая</h4>
+        <h4>Тұйық vs ашық</h4>
         <ul>
-          <li><b>Замкнутая</b> (круг целый, кнопка нажата) → ток течёт → LED горит.</li>
-          <li><b>Разомкнутая</b> (разрыв в круге, кнопка отпущена) → ток не течёт → LED не горит.</li>
+          <li><b>Тұйық</b> (шеңбер бүтін, түйме басылған) → ток ағады → LED жанады.</li>
+          <li><b>Ашық</b> (шеңберде үзіліс, түйме жіберілген) → ток ағымайды → LED жанбайды.</li>
         </ul>
-        <p><b>Ключевое правило:</b> хоть один разрыв в круге — и всё останавливается.</p>
+        <p><b>Негізгі ереже:</b> шеңберде тіпті бір үзіліс болса да — бәрі тоқтайды.</p>
 
         <div class="figure">
-          <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Замкнутая и разомкнутая цепь">
+          <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Тұйық және ашық тізбек">
             <!-- ЗАМКНУТАЯ -->
-            <text x="170" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#5E8D6E">✓ ЗАМКНУТАЯ — LED горит</text>
+            <text x="170" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#5E8D6E">✓ ТҰЙЫҚ — LED жанады</text>
             <rect x="40"  y="70" width="100" height="60" rx="6" class="bd-comp bd-source"/>
             <text x="90"  y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">ATX +3.3V</text>
-            <text x="90"  y="115" text-anchor="middle" class="bd-sub">источник</text>
+            <text x="90"  y="115" text-anchor="middle" class="bd-sub">қуат көзі</text>
 
             <rect x="200" y="70" width="100" height="60" rx="6" class="bd-comp bd-led"/>
             <text x="250" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">LED</text>
-            <text x="250" y="115" text-anchor="middle" class="bd-sub" style="fill:#C94C4C">🔴 горит</text>
+            <text x="250" y="115" text-anchor="middle" class="bd-sub" style="fill:#C94C4C">🔴 жанады</text>
 
             <!-- замкнутый круг тока -->
             <path d="M 140 100 L 200 100" class="bd-wire" stroke="#C94C4C"/>
@@ -1125,87 +1125,87 @@
               </circle>
             </g>
 
-            <text x="170" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">электроны идут по кругу → LED горит</text>
+            <text x="170" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">электрондар шеңбер бойымен → LED жанады</text>
 
             <!-- РАЗОМКНУТАЯ -->
-            <text x="550" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#C94C4C">✗ РАЗОМКНУТАЯ — LED не горит</text>
+            <text x="550" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#C94C4C">✗ АШЫҚ — LED жанбайды</text>
             <rect x="400" y="70" width="100" height="60" rx="6" class="bd-comp bd-source"/>
             <text x="450" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">ATX +3.3V</text>
-            <text x="450" y="115" text-anchor="middle" class="bd-sub">источник</text>
+            <text x="450" y="115" text-anchor="middle" class="bd-sub">қуат көзі</text>
 
             <rect x="580" y="70" width="100" height="60" rx="6" class="bd-comp bd-led"/>
             <text x="630" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">LED</text>
-            <text x="630" y="115" text-anchor="middle" class="bd-sub" style="fill:#888">⚫ не горит</text>
+            <text x="630" y="115" text-anchor="middle" class="bd-sub" style="fill:#888">⚫ жанбайды</text>
 
             <!-- разрыв в проводе -->
             <path d="M 500 100 L 540 100" class="bd-wire" stroke="#2B2B2B"/>
             <text x="560" y="94" text-anchor="middle" style="font:bold 20px sans-serif;fill:#C94C4C">✕</text>
-            <text x="560" y="120" text-anchor="middle" style="font:9px sans-serif;fill:#C94C4C">РАЗРЫВ</text>
+            <text x="560" y="120" text-anchor="middle" style="font:9px sans-serif;fill:#C94C4C">ҮЗІЛІС</text>
             <path d="M 580 100 L 580 100" class="bd-wire" stroke="#2B2B2B"/>
             <path d="M 680 100 L 700 100 L 700 180 L 400 180 L 400 130" class="bd-wire" stroke="#2B2B2B"/>
 
-            <text x="550" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">один разрыв в круге — и всё останавливается</text>
+            <text x="550" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">шеңберде бір үзіліс — бәрі тоқтайды</text>
           </svg>
-          <div class="caption">Ток движется только в замкнутом круге. Хоть один разрыв — и LED не горит.</div>
+          <div class="caption">Ток тек тұйық шеңберде қозғалады. Тіпті бір үзіліс — LED жанбайды.</div>
         </div>
 
-        <h4>Полярность LED — почему это важно</h4>
-        <p>Внутри светодиода — <b>специальный кристалл</b>, пропускающий ток только в одну сторону (как односторонняя дорога). Подключите наоборот — не загорится. Не сгорит — просто не заработает.</p>
+        <h4>LED полярлығы — бұл неге маңызды</h4>
+        <p>Жарықдиод ішінде — токты тек бір бағытта өткізетін <b>арнайы кристалл</b> (бір жақты жол сияқты). Керісінше қоссаңыз — жанбайды. Күймейді — жай істемейді.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Схема до сборки = меньше ошибок при сборке. Инженер всегда сначала проектирует, потом собирает.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Құрастыру алдындағы сұлба = құрастыру кезіндегі қателер аз. Инженер әрдайым алдымен жобалайды, содан кейін құрастырады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Нарисовал схему</li>
-          <li>Могу объяснить направление тока</li>
-          <li>Знаю полярность LED</li>
+          <li>Сұлба салдым</li>
+          <li>Ток бағытын түсіндіре аламын</li>
+          <li>LED полярлығын білемін</li>
         </ul>
       </div>
     </div>
   </section>
 
   <div class="stop">
-    <h3>🛑 Стоп. Проверьте себя — конец фазы DRAFT</h3>
-    <p>Без подглядывания:</p>
+    <h3>🛑 Стоп. Проверьте себя — DRAFT фазасының соңы</h3>
+    <p>Қарамай:</p>
     <ol>
-      <li>В каком направлении движется ток в нашей цепи?</li>
-      <li>Что такое <b>замкнутая</b> цепь? <b>Разомкнутая</b>?</li>
-      <li>Какая ножка LED — плюс?</li>
+      <li>Біздің тізбекте ток қай бағытта қозғалады?</li>
+      <li>Что <b>тұйық</b> тізбек дегеніміз не? <b>Ашық</b> ше?</li>
+      <li>LED-тің қай аяғы — плюс?</li>
     </ol>
-    <div class="bonus">«Всё понятно»? — что произойдёт, если подключить LED наоборот?</div>
+    <div class="bonus">«Бәрі түсінікті»? — LED-ті керісінше қоссаңыз не болады?</div>
   </div>
 
   <!-- PHASE 4 DETAIL -->
   <div class="phase">
-    <div class="phase-num">Фаза 4</div>
-    <h2>🔧 DETAIL — Собираем и пишем код</h2>
-    <p>Четыре темы: простая цепь → кнопка → реле → первый код. Шаг за шагом.</p>
+    <div class="phase-num">4-фаза</div>
+    <h2>🔧 DETAIL — Құрастырамыз және код жазамыз</h2>
+    <p>Төрт тақырып: қарапайым тізбек → түйме → реле → алғашқы код. Қадам-қадам.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 4.1 — Простая цепь (только LED)</div>
+      <div class="topic-title">4.1-тақырып — Қарапайым тізбек (тек LED)</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Самая простая цепь, без кнопки, всего 2 провода:</p>
+        <p>Ең қарапайым тізбек, түймесіз, бар болғаны 2 сым:</p>
         <ol>
-          <li>Провод 1: клемма <code>+3.3V</code> → длинная ножка LED</li>
-          <li>Провод 2: короткая ножка LED → клемма <code>GND</code></li>
-          <li>Закрутите винты</li>
+          <li>1-сым: <code>+3.3V</code> клеммасы → LED-тің ұзын аяғы</li>
+          <li>2-сым: LED-тің қысқа аяғы → <code>GND</code> клеммасы</li>
+          <li>Бұрандаларды бұрыңыз</li>
         </ol>
-        <p><b>Ожидание:</b> LED горит сразу как подключили — и не гаснет.</p>
-        <div class="callout cal-tip"><b>💡 Мини-эксперимент</b>Отсоедините один из двух проводов. Что произошло? Подсоедините обратно — LED снова горит. Физически почувствуйте, что цепь должна быть <b>замкнута</b>.</div>
+        <p><b>Күту:</b> LED қосысымен жанады — өшпейді.</p>
+        <div class="callout cal-tip"><b>💡 Шағын тәжірибе</b>Екі сымның бірін ажыратыңыз. Не болды? Қайта қосыңыз — LED қайта жанады. Тізбек <b>тұйық</b> болуы керек екенін физикалық сезініңіз.</div>
 
         <div class="figure">
-          <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Простая цепь — только LED">
+          <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Қарапайым тізбек — тек LED">
             <rect x="40"  y="80" width="160" height="80" rx="8" class="bd-comp bd-atx"/>
-            <text x="120" y="110" text-anchor="middle" class="bd-title">БЛОК ATX</text>
+            <text x="120" y="110" text-anchor="middle" class="bd-title">ATX БЛОГІ</text>
             <circle cx="200" cy="105" r="5" fill="#E8A33D" stroke="#8B6F18" stroke-width="2"/>
             <text x="195" y="102" text-anchor="end" class="bd-pinlbl" font-weight="bold">+3.3V</text>
             <circle cx="200" cy="140" r="5" fill="#2B2B2B" stroke="#000" stroke-width="1.5"/>
@@ -1223,67 +1223,67 @@
             <path d="M 200 140 L 400 140" class="bd-wire" stroke="#2B2B2B"/>
             <text x="300" y="157" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">GND</text>
 
-            <text x="290" y="210" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">2 провода · нет управления · LED горит постоянно</text>
+            <text x="290" y="210" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">2 сым · басқару жоқ · LED үнемі жанады</text>
           </svg>
-          <div class="caption">Тема 4.1 — простейшая цепь: ATX → LED → ATX. Никакого управления.</div>
+          <div class="caption">4.1-тақырып — ең қарапайым тізбек: ATX → LED → ATX. Ешқандай басқару жоқ.</div>
         </div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p>Вы только что собрали <b>самую простую электрическую цепь</b> в мире. Ничего лишнего:</p>
+        <p>Сіз дәл қазір әлемдегі <b>ең қарапайым электр тізбегін</b> құрастырдыңыз. Артық ештеңе жоқ:</p>
         <ul>
-          <li>Источник (<code>+3.3V</code> от ATX)</li>
-          <li>Провод «туда»</li>
-          <li>Устройство (LED)</li>
-          <li>Провод «обратно» (в <code>GND</code>)</li>
+          <li>Қуат көзі (ATX-тен <code>+3.3V</code>)</li>
+          <li>Сым «оған»</li>
+          <li>Құрылғы (LED)</li>
+          <li>Сым «қайтадан» (<code>GND</code>-ке)</li>
         </ul>
-        <p>Ток выходит из плюса, проходит через светодиод, возвращается в минус. Всё работает <b>потому что круг замкнут</b>. Отсоединили провод — круг разорван, ток остановился, свет погас.</p>
-        <p>Следующей темой мы добавим кнопку — и получим <b>управление</b> этой цепью. Потом реле заменит палец. Потом Pico заменит реле-с-пальцем на программу.</p>
+        <p>Ток плюстан шығады, жарықдиод арқылы өтеді, минусқа қайтады. Бәрі <b>шеңбер тұйық болғандықтан</b> жұмыс істейді. Сымды ажыратсаңыз — шеңбер үзілді, ток тоқтады, жарық өшті.</p>
+        <p>Келесі тақырыпта түйме қосамыз — және осы тізбекке <b>басқару</b> аламыз. Содан кейін реле саусақты алмастырады. Содан кейін Pico реле-саусақты бағдарламаға алмастырады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Каждое инженерное устройство начинается с такой же простой цепи. Дальше только добавляются слои управления, но <b>основа всегда такая</b>.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Әр инженерлік құрылғы осындай қарапайым тізбектен басталады. Әрі қарай тек басқару қабаттары қосылады, бірақ <b>негізі әрдайым осындай</b>.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>LED горит сразу при подключении</li>
-          <li>При отсоединении провода — гаснет</li>
-          <li>Могу объяснить, что такое замкнутая цепь</li>
+          <li>LED қосысымен жанады</li>
+          <li>Сымды ажыратқанда — өшеді</li>
+          <li>Тұйық тізбек дегеніміз не, түсіндіре аламын</li>
         </ul>
       </div>
     </div>
 
     <div class="topic">
-      <div class="topic-title">Тема 4.2 — Цепь с кнопкой</div>
+      <div class="topic-title">4.2-тақырып — Түймесі бар тізбек</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
         <ol>
-          <li>Провод 1: <code>+3.3V</code> → одна ножка кнопки</li>
-          <li>Провод 2: другая ножка кнопки → <b>длинная</b> ножка LED</li>
-          <li>Провод 3: <b>короткая</b> ножка LED → <code>GND</code></li>
-          <li>Винты клемм закручены до упора</li>
-          <li>Нажмите кнопку</li>
+          <li>1-сым: <code>+3.3V</code> → түйменің бір аяғы</li>
+          <li>2-сым: түйменің басқа аяғы → LED-тің <b>ұзын</b> аяғы</li>
+          <li>3-сым: LED-тің <b>қысқа</b> аяғы → <code>GND</code></li>
+          <li>Клемма бұрандалары соңына дейін бұралған</li>
+          <li>Түймені басыңыз</li>
         </ol>
-        <p><b>Ожидание:</b> LED горит при нажатии, гаснет при отпускании.</p>
-        <div class="callout cal-warn"><b>⚠️ Если не работает</b>• Проверьте полярность LED (длинная = плюс)<br>• <span class="term" data-tip="Прозвонка — режим мультиметра 🔊. Касаетесь щупами двух концов провода: пикает — провод целый, тишина — обрыв.">Прозвоните</span> каждый провод мультиметром (режим 🔊)</div>
+        <p><b>Күту:</b> басқанда LED жанады, жібергенде өшеді.</p>
+        <div class="callout cal-warn"><b>⚠️ Жұмыс істемесе</b>• LED полярлығын тексеріңіз (ұзыны = плюс)<br>• Әр сымды мультиметрмен <span class="term" data-tip="Шалу — мультиметр режимі 🔊. Щуптармен сымның екі ұшына тиесіз: шылдыр ешеді — сым бүтін, тыныштық — үзілім.">шалыңыз</span> (🔊 режимі)</div>
 
         <div class="figure">
-          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Цепь с кнопкой">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Түймесі бар тізбек">
             <rect x="40"  y="70" width="140" height="80" rx="8" class="bd-comp bd-atx"/>
-            <text x="110" y="100" text-anchor="middle" class="bd-title">БЛОК ATX</text>
+            <text x="110" y="100" text-anchor="middle" class="bd-title">ATX БЛОГІ</text>
             <circle cx="180" cy="95" r="5" fill="#E8A33D" stroke="#8B6F18" stroke-width="2"/>
             <text x="175" y="92" text-anchor="end" class="bd-pinlbl" font-weight="bold">+3.3V</text>
             <circle cx="180" cy="130" r="5" fill="#2B2B2B" stroke="#000" stroke-width="1.5"/>
             <text x="175" y="127" text-anchor="end" class="bd-pinlbl" font-weight="bold">GND</text>
 
             <rect x="280" y="70" width="140" height="80" rx="8" class="bd-comp bd-btn"/>
-            <text x="350" y="100" text-anchor="middle" class="bd-title">КНОПКА</text>
-            <text x="350" y="118" text-anchor="middle" class="bd-sub">механический контакт</text>
+            <text x="350" y="100" text-anchor="middle" class="bd-title">ТҮЙМЕ</text>
+            <text x="350" y="118" text-anchor="middle" class="bd-sub">механикалық түйіс</text>
             <circle cx="280" cy="95" r="5" class="bd-pin"/>
             <text x="290" y="99" class="bd-pinlbl">1</text>
             <circle cx="420" cy="95" r="5" class="bd-pin"/>
@@ -1299,73 +1299,73 @@
             <path d="M 180 95 L 280 95" class="bd-wire" stroke="#E8A33D"/>
             <text x="230" y="88" text-anchor="middle" class="bd-wlbl" fill="#B8822A">+3.3V</text>
             <path d="M 420 95 L 520 95" class="bd-wire" stroke="#F0C040"/>
-            <text x="470" y="88" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">к LED+</text>
+            <text x="470" y="88" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">LED+-қа</text>
             <path d="M 520 130 L 200 130 L 180 130" class="bd-wire" stroke="#2B2B2B"/>
             <text x="360" y="146" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">GND</text>
 
-            <text x="360" y="195" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">кнопка нажата → контакт замкнут → LED горит · отпустили → разрыв → LED гаснет</text>
+            <text x="360" y="195" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">түйме басылған → түйіс тұйық → LED жанады · жіберілді → үзіліс → LED өшеді</text>
           </svg>
-          <div class="caption">Тема 4.2 — добавили кнопку как разрыв в цепи. Палец управляет током.</div>
+          <div class="caption">4.2-тақырып — тізбекке үзіліс ретінде түйме қостық. Саусақ токты басқарады.</div>
         </div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <h4>Что произошло, когда вы нажали кнопку</h4>
-        <p>С клеммы <code>+3.3V</code> электроны потекли по проводу к кнопке. Внутри кнопки — пружина, которая нажатием пальца соединяет две металлические пластины. Электроны прошли через замкнутый контакт → через LED → вернулись в <code>GND</code>.</p>
-        <p>Отпустили кнопку — пружина разъединила пластины. Разрыв. Ток остановился.</p>
+        <h4>Түймені басқанда не болды</h4>
+        <p><code>+3.3V</code> клеммасынан электрондар сым арқылы түймеге ақты. Түйме ішінде — серіппе, саусақ басқанда екі металл пластинаны қосады. Электрондар тұйық түйіс арқылы өтті → LED арқылы → <code>GND</code>-ге қайтты.</p>
+        <p>Түймені жібергенде — серіппе пластиналарды ажыратты. Үзіліс. Ток тоқтады.</p>
 
-        <h4>Что внутри провода</h4>
-        <p>В середине — <b>медь</b>. В меди много «свободных» электронов, которые готовы двигаться. Снаружи — <b>пластик</b> (изолятор). Поэтому провод можно держать рукой — ток не уходит «в вас».</p>
+        <h4>Сым ішінде не бар</h4>
+        <p>Ортасында — <b>мыс</b>. Мыста қозғалуға дайын көптеген «еркін» электрондар. Сыртында — <b>пластик</b> (оқшаулағыш). Сондықтан сымды қолмен ұстауға болады — ток «сізге» кетпейді.</p>
 
-        <h4>Прозвонка — глаза инженера</h4>
-        <p>Мультиметр в режиме прозвонки пропускает маленький ток через щупы. Если ток прошёл — пикает (провод целый). Тишина — обрыв или изолятор.</p>
+        <h4>Шалу — инженердің көздері</h4>
+        <p>Шалу режиміндегі мультиметр щуптар арқылы кішкентай ток жібереді. Ток өтсе — шылдыр ешеді (сым бүтін). Тыныштық — үзілім немесе оқшаулағыш.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Вы собрали <b>первую электрическую цепь с управлением</b>. Кнопка управляет током своим механическим контактом.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Сіз <b>басқаруы бар алғашқы электр тізбегін</b> құрастырдыңыз. Түйме токты өзінің механикалық түйісімен басқарады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>LED горит при нажатии</li>
-          <li>Использовал прозвонку хотя бы раз</li>
-          <li>Могу объяснить, что такое замкнутая/разомкнутая цепь</li>
+          <li>Басқанда LED жанады</li>
+          <li>Кем дегенде бір рет шалуды пайдаландым</li>
+          <li>Тұйық/ашық тізбек дегеніміз не, түсіндіре аламын</li>
         </ul>
       </div>
     </div>
 
     <div class="topic">
-      <div class="topic-title">Тема 4.3 — Цепь с реле</div>
+      <div class="topic-title">4.3-тақырып — Релесі бар тізбек</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Разберите предыдущую цепь. Соберите новую:</p>
+        <p>Алдыңғы тізбекті бөлшектеңіз. Жаңасын құрастырыңыз:</p>
 
-        <h4>Силовая часть</h4>
+        <h4>Қуат бөлігі</h4>
         <ul>
-          <li><code>+3.3V</code> → <code>COM</code> реле</li>
-          <li><code>NO</code> реле → длинная ножка LED</li>
-          <li>Короткая ножка LED → <code>GND</code></li>
+          <li><code>+3.3V</code> → реленің <code>COM</code>-ы</li>
+          <li>реленің <code>NO</code> → LED-тің ұзын аяғы</li>
+          <li>LED-тің қысқа аяғы → <code>GND</code></li>
         </ul>
 
-        <h4>Управление (пока кнопкой)</h4>
+        <h4>Басқару (әзірге түймемен)</h4>
         <ul>
-          <li><code>+3.3V</code> → одна ножка кнопки</li>
-          <li>Другая ножка кнопки → <code>IN</code> реле</li>
-          <li><code>VCC</code> реле → <code>+3.3V</code></li>
-          <li><code>GND</code> реле → <code>GND</code></li>
+          <li><code>+3.3V</code> → түйменің бір аяғы</li>
+          <li>Түйменің басқа аяғы → реленің <code>IN</code>-і</li>
+          <li>реленің <code>VCC</code>-і → <code>+3.3V</code></li>
+          <li>реленің <code>GND</code>-і → <code>GND</code></li>
         </ul>
-        <p>Нажмите кнопку. <b>Ожидание:</b> слышен щелчок внутри реле + LED горит.</p>
+        <p>Түймені басыңыз. <b>Күту:</b> реле ішінде шертпе естіледі + LED жанады.</p>
 
         <div class="figure">
-          <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема 4.3 — цепь с реле (управление кнопкой)">
+          <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4.3-сұлба — релесі бар тізбек (түймемен басқару)">
             <!-- ATX внизу -->
             <rect x="40" y="400" width="720" height="80" rx="8" class="bd-comp bd-atx"/>
-            <text x="60" y="428" class="bd-title">БЛОК ATX</text>
-            <text x="60" y="444" class="bd-sub">источник питания</text>
+            <text x="60" y="428" class="bd-title">ATX БЛОГІ</text>
+            <text x="60" y="444" class="bd-sub">қуат көзі</text>
 
             <circle cx="200" cy="400" r="5" fill="#E8A33D" stroke="#8B6F18" stroke-width="2"/>
             <text x="200" y="392" text-anchor="middle" class="bd-pinlbl" font-weight="bold">+3.3V</text>
@@ -1381,8 +1381,8 @@
 
             <!-- КНОПКА (слева сверху, на месте Pico) -->
             <rect x="40" y="80" width="200" height="130" rx="8" class="bd-comp bd-btn"/>
-            <text x="60" y="108" class="bd-title">КНОПКА</text>
-            <text x="60" y="124" class="bd-sub">палец управляет током</text>
+            <text x="60" y="108" class="bd-title">ТҮЙМЕ</text>
+            <text x="60" y="124" class="bd-sub">саусақ токты басқарады</text>
 
             <circle cx="240" cy="150" r="5" class="bd-pin"/>
             <text x="230" y="154" text-anchor="end" class="bd-pinlbl">1</text>
@@ -1392,10 +1392,10 @@
 
             <!-- РЕЛЕ (центр) -->
             <rect x="340" y="80" width="220" height="260" rx="8" class="bd-comp bd-relay"/>
-            <text x="360" y="108" class="bd-title">РЕЛЕ 1 канал</text>
+            <text x="360" y="108" class="bd-title">1 каналды РЕЛЕ</text>
             <text x="360" y="124" class="bd-sub">SRD-05VDC</text>
 
-            <text x="360" y="150" class="bd-section">управление:</text>
+            <text x="360" y="150" class="bd-section">басқару:</text>
             <circle cx="340" cy="170" r="5" class="bd-pin"/>
             <text x="350" y="174" class="bd-pinlbl">GND</text>
 
@@ -1405,7 +1405,7 @@
             <circle cx="340" cy="230" r="5" class="bd-pin"/>
             <text x="350" y="234" class="bd-pinlbl">IN</text>
 
-            <text x="540" y="150" text-anchor="end" class="bd-section">силовые:</text>
+            <text x="540" y="150" text-anchor="end" class="bd-section">қуаттық:</text>
             <circle cx="560" cy="170" r="5" class="bd-pin"/>
             <text x="550" y="174" text-anchor="end" class="bd-pinlbl">COM</text>
 
@@ -1414,12 +1414,12 @@
 
             <circle cx="560" cy="270" r="5" class="bd-pin"/>
             <text x="550" y="274" text-anchor="end" class="bd-pinlbl" style="fill:#AAA">NC</text>
-            <text x="550" y="286" text-anchor="end" style="font:italic 9px sans-serif;fill:#AAA">не используем</text>
+            <text x="550" y="286" text-anchor="end" style="font:italic 9px sans-serif;fill:#AAA">пайдаланбаймыз</text>
 
             <!-- LED справа -->
             <rect x="640" y="150" width="120" height="120" rx="8" class="bd-comp bd-led"/>
             <text x="660" y="178" class="bd-title">LED 3 Вт</text>
-            <text x="660" y="194" class="bd-sub">красный</text>
+            <text x="660" y="194" class="bd-sub">қызыл</text>
 
             <circle cx="640" cy="215" r="5" fill="#C94C4C" stroke="#8B1A1A" stroke-width="2"/>
             <text x="650" y="219" class="bd-pinlbl" font-weight="bold">+</text>
@@ -1447,7 +1447,7 @@
 
             <!-- 5. ATX +3.3V (через верх) → Relay COM (силовая) -->
             <path d="M 420 400 L 420 50 L 560 50 L 560 170" class="bd-wire" stroke="#F0C040"/>
-            <text x="490" y="42" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">+3.3V (сила)</text>
+            <text x="490" y="42" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">+3.3V (қуат)</text>
 
             <!-- 6. Relay NO → LED + -->
             <path d="M 560 220 L 640 215" class="bd-wire" stroke="#F0C040"/>
@@ -1458,49 +1458,49 @@
             <!-- Легенда -->
             <g transform="translate(40, 510)" font-family="sans-serif" font-size="11">
               <line x1="0" y1="0" x2="26" y2="0" stroke="#C94C4C" stroke-width="2.5" stroke-linecap="round"/>
-              <text x="32" y="4" fill="#333">сигнал управления</text>
+              <text x="32" y="4" fill="#333">басқару сигналы</text>
               <line x1="180" y1="0" x2="206" y2="0" stroke="#E8A33D" stroke-width="2.5" stroke-linecap="round"/>
-              <text x="212" y="4" fill="#333">питание</text>
+              <text x="212" y="4" fill="#333">қоректену</text>
               <line x1="290" y1="0" x2="316" y2="0" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round"/>
               <text x="322" y="4" fill="#333">GND</text>
               <line x1="370" y1="0" x2="396" y2="0" stroke="#F0C040" stroke-width="2.5" stroke-linecap="round"/>
-              <text x="402" y="4" fill="#333">силовая к LED</text>
+              <text x="402" y="4" fill="#333">LED-ке қуаттық</text>
             </g>
           </svg>
-          <div class="caption">Тема 4.3 — реле как посредник. Кнопка (слабая цепь) управляет отдельной силовой цепью через реле.</div>
+          <div class="caption">4.3-тақырып — реле делдал ретінде. Түйме (әлсіз тізбек) реле арқылы жеке қуат тізбегін басқарады.</div>
         </div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p><b>Реле — электронный выключатель.</b> Внутри маленький электромагнит. Когда на <code>IN</code> приходит сигнал — магнит притягивает металлическую пластинку, замыкая силовую цепь. Слышен <b>щелчок</b>. Убрали сигнал — пружина оттянула пластинку обратно, цепь разомкнута.</p>
-        <p><b>3 управляющих вывода</b> (от Pico): <code>VCC</code> (питание 3.3V), <code>GND</code> (земля), <code>IN</code> (сигнал).</p>
-        <p><b>3 силовых вывода</b>: <code>COM</code> (общий), <code>NO</code> (Normally Open — замыкается при сигнале), <code>NC</code> (разомкнут при сигнале — не используем).</p>
-        <p><b>Зачем нужно реле.</b> Pico может выдать на пин максимум <b>0.025 ампера</b> — хватит на LED, но не на мотор или ленту. Реле — <b>посредник</b>: принимает слабый сигнал от Pico, коммутирует сильный ток от отдельного источника.</p>
-        <p>Где встречаете реле каждый день: в машинах (стартер, клаксон), холодильниках, кондиционерах.</p>
+        <p><b>Реле — электронды ажыратқыш.</b> Ішінде шағын электромагнит. <code>IN</code>-ге сигнал келгенде — магнит металл пластинаны тартады, қуат тізбегін тұйықтайды. <b>Шертпе</b> естіледі. Сигналды алып тастағанда — серіппе пластинаны артқа тартты, тізбек ашық.</p>
+        <p><b>3 басқару шығысы</b> (Pico-дан): <code>VCC</code> (3.3V қоректену), <code>GND</code> (жер), <code>IN</code> (сигнал).</p>
+        <p><b>3 қуаттық шығыс</b>: <code>COM</code> (жалпы), <code>NO</code> (Normally Open — сигналда тұйықталады), <code>NC</code> (сигналда ашық — пайдаланбаймыз).</p>
+        <p><b>Реле неге қажет.</b> Pico пинге ең көбі <b>0.025 ампер</b> бере алады — LED-ке жетеді, бірақ моторға немесе лентаға жетпейді. Реле — <b>делдал</b>: Pico-дан әлсіз сигналды қабылдайды, жеке көзден күшті токты қосады.</p>
+        <p>Релені күнделікті қайдан кездестіресіз: көліктерде (стартер, дабыл), тоңазытқыштарда, кондиционерлерде.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Реле — <b>посредник</b>. Слабый сигнал управляет отдельной силовой цепью.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Реле — <b>делдал</b>. Әлсіз сигнал жеке қуат тізбегін басқарады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Реле щёлкает и LED горит при нажатии</li>
-          <li>Могу объяснить: зачем реле, если кнопка уже работала</li>
+          <li>Басқанда реле шертпе береді және LED жанады</li>
+          <li>Түсіндіре аламын: түйме жұмыс істеп тұрса, реле неге керек</li>
         </ul>
       </div>
     </div>
 
     <div class="topic">
-      <div class="topic-title">Тема 4.4 — Первый код с ИИ</div>
+      <div class="topic-title">4.4-тақырып — ЖИ-мен алғашқы код</div>
 
-      <div class="callout cal-warn"><b>⚠️ Самая плотная тема модуля</b>Если чувствуете, что много нового сразу — разделите на 2 занятия.</div>
+      <div class="callout cal-warn"><b>⚠️ Модульдің ең тығыз тақырыбы</b>Бірден көп жаңалық деп сезсеңіз — 2 сабаққа бөліңіз.</div>
 
       <div class="figure">
-        <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема соединений Модуля 1">
+        <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1-модуль жалғану сұлбасы">
           <style>
             .bd-comp   { fill: #FFFFFF; stroke: #1F3A5F; stroke-width: 2 }
             .bd-pico   { fill: #E8F0F9 }
@@ -1518,8 +1518,8 @@
 
           <!-- ATX (внизу, широкий) -->
           <rect x="40" y="400" width="720" height="80" rx="8" class="bd-comp bd-atx"/>
-          <text x="60" y="428" class="bd-title">БЛОК ATX</text>
-          <text x="60" y="444" class="bd-sub">источник питания</text>
+          <text x="60" y="428" class="bd-title">ATX БЛОГІ</text>
+          <text x="60" y="444" class="bd-sub">қуат көзі</text>
 
           <circle cx="200" cy="400" r="5" class="bd-pin"/>
           <text x="200" y="392" text-anchor="middle" class="bd-pinlbl">+5V</text>
@@ -1552,11 +1552,11 @@
 
           <!-- RELAY (центр) -->
           <rect x="340" y="80" width="220" height="260" rx="8" class="bd-comp bd-relay"/>
-          <text x="360" y="108" class="bd-title">РЕЛЕ 1 канал</text>
-          <text x="360" y="124" class="bd-sub">SRD-05VDC, управляется 3.3V</text>
+          <text x="360" y="108" class="bd-title">1 каналды РЕЛЕ</text>
+          <text x="360" y="124" class="bd-sub">SRD-05VDC, 3.3V-пен басқарылады</text>
 
           <!-- управление (левая сторона) -->
-          <text x="360" y="150" class="bd-section">управление:</text>
+          <text x="360" y="150" class="bd-section">басқару:</text>
           <circle cx="340" cy="170" r="5" class="bd-pin"/>
           <text x="350" y="174" class="bd-pinlbl">GND</text>
 
@@ -1567,7 +1567,7 @@
           <text x="350" y="234" class="bd-pinlbl">IN</text>
 
           <!-- силовые (правая сторона) -->
-          <text x="540" y="150" text-anchor="end" class="bd-section">силовые:</text>
+          <text x="540" y="150" text-anchor="end" class="bd-section">қуаттық:</text>
           <circle cx="560" cy="170" r="5" class="bd-pin"/>
           <text x="550" y="174" text-anchor="end" class="bd-pinlbl">COM</text>
 
@@ -1576,12 +1576,12 @@
 
           <circle cx="560" cy="270" r="5" class="bd-pin"/>
           <text x="550" y="274" text-anchor="end" class="bd-pinlbl" style="fill:#AAA">NC</text>
-          <text x="550" y="286" text-anchor="end" style="font:italic 9px sans-serif;fill:#AAA">не используем</text>
+          <text x="550" y="286" text-anchor="end" style="font:italic 9px sans-serif;fill:#AAA">пайдаланбаймыз</text>
 
           <!-- LED (справа) -->
           <rect x="640" y="150" width="120" height="120" rx="8" class="bd-comp bd-led"/>
           <text x="660" y="178" class="bd-title">LED 3 Вт</text>
-          <text x="660" y="194" class="bd-sub">красный</text>
+          <text x="660" y="194" class="bd-sub">қызыл</text>
 
           <circle cx="640" cy="215" r="5" fill="#C94C4C" stroke="#8B1A1A" stroke-width="2"/>
           <text x="650" y="219" class="bd-pinlbl" font-weight="bold">+</text>
@@ -1604,11 +1604,11 @@
 
           <!-- 4. ATX +3.3V → Relay COM (через верх) -->
           <path d="M 440 400 L 440 50 L 560 50 L 560 170" class="bd-wire" stroke="#E8A33D"/>
-          <text x="500" y="42" text-anchor="middle" class="bd-wlbl" fill="#B8822A">+3.3V (сила)</text>
+          <text x="500" y="42" text-anchor="middle" class="bd-wlbl" fill="#B8822A">+3.3V (қуат)</text>
 
           <!-- 5. Relay NO → LED + -->
           <path d="M 560 220 L 640 215" class="bd-wire" stroke="#F0C040"/>
-          <text x="600" y="210" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">нагрузка</text>
+          <text x="600" y="210" text-anchor="middle" class="bd-wlbl" fill="#9B7F20">жүктеме</text>
 
           <!-- 6. LED − → ATX GND -->
           <path d="M 640 248 L 700 248 L 700 400" class="bd-wire" stroke="#2B2B2B"/>
@@ -1617,44 +1617,44 @@
           <!-- Легенда -->
           <g transform="translate(40, 510)" font-family="sans-serif" font-size="11">
             <line x1="0" y1="0" x2="26" y2="0" stroke="#C94C4C" stroke-width="2.5" stroke-linecap="round"/>
-            <text x="32" y="4" fill="#333">сигнал (3.3V от Pico)</text>
+            <text x="32" y="4" fill="#333">сигнал (Pico-дан 3.3V)</text>
 
             <line x1="180" y1="0" x2="206" y2="0" stroke="#E8A33D" stroke-width="2.5" stroke-linecap="round"/>
-            <text x="212" y="4" fill="#333">питание</text>
+            <text x="212" y="4" fill="#333">қоректену</text>
 
             <line x1="290" y1="0" x2="316" y2="0" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round"/>
-            <text x="322" y="4" fill="#333">GND (земля)</text>
+            <text x="322" y="4" fill="#333">GND (жер)</text>
 
             <line x1="420" y1="0" x2="446" y2="0" stroke="#F0C040" stroke-width="2.5" stroke-linecap="round"/>
-            <text x="452" y="4" fill="#333">силовая к LED</text>
+            <text x="452" y="4" fill="#333">LED-ке қуаттық</text>
           </g>
         </svg>
-        <div class="caption">Финальная схема Модуля 1 — что с чем соединяется. Прямоугольник = компонент, кружок = клемма, линия = провод.</div>
+        <div class="caption">1-модульдің соңғы сұлбасы — не немен жалғанады. Тіктөртбұрыш = компонент, шеңбер = клемма, сызық = сым.</div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
         <ol>
-          <li>Уберите кнопку. Подключите Pico к реле:
+          <li>Түймені алып тастаңыз. Pico-ны релеге қосыңыз:
             <ul>
-              <li>Pico <span class="term" data-tip="GP15 — пин (контакт) номер 15 на Pico. GP = General Purpose (универсальный). Этим пином Pico управляет реле — отправляет 0V или 3.3V.">GP15</span> → <code>IN</code> реле</li>
-              <li>Pico <code>3.3V</code> → <code>VCC</code> реле</li>
-              <li>Pico <code>GND</code> → <code>GND</code> реле</li>
+              <li>Pico <span class="term" data-tip="GP15 — Pico-дағы 15-нөмірлі пин (түйіс). GP = General Purpose (әмбебап). Pico осы пинмен релені басқарады — 0V немесе 3.3V жібереді.">GP15</span> → реленің <code>IN</code>-і</li>
+              <li>Pico <code>3.3V</code> → реленің <code>VCC</code>-і</li>
+              <li>Pico <code>GND</code> → реленің <code>GND</code>-і</li>
             </ul>
           </li>
-          <li>В чате с ИИ отправьте промпт:</li>
+          <li>ЖИ чатына промпт жіберіңіз:</li>
         </ol>
-        <pre class="code"><button class="copy-btn" onclick="copyNearest(this)">копировать</button><span class="com"># промпт ИИ</span>
-Напиши программу на MicroPython для Raspberry Pi Pico.
-Управляй реле на пине GP15.
-Включай на 1 секунду, выключай на 1 секунду, бесконечно.
-Используй while True и sleep.
-Добавь комментарии на русском.</pre>
+        <pre class="code"><button class="copy-btn" onclick="copyNearest(this)">көшіру</button><span class="com"># ЖИ промпты</span>
+Raspberry Pi Pico үшін MicroPython-да бағдарлама жаз.
+Реле GP15 пинімен басқар.
+1 секундқа қос, 1 секундқа өшір, шексіз.
+while True және sleep пайдалан.
+Қазақша түсініктемелер қос.</pre>
         <ol start="3">
-          <li><b>Проверка в 2 шага:</b>
+          <li><b>2 қадаммен тексеру:</b>
             <ul>
-              <li>Прочитайте код построчно, переведите каждую строку на русский.</li>
-              <li>Сравните: делает ли код то, что вы просили?</li>
+              <li>Кодты жол-жол оқыңыз, әр жолды қазақшаға аударыңыз.</li>
+              <li>Салыстырыңыз: код сіз сұраған нәрсені істей ме?</li>
             </ul>
           </li>
         </ol>
@@ -1662,30 +1662,30 @@
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p><b>Что такое Pico.</b> Микроконтроллер — маленький компьютер размером с палец. Процессор + память + 40 пинов для общения с внешним миром.</p>
-        <p><span class="term" data-tip="MicroPython — упрощённая версия языка программирования Python, работает на маленьких чипах типа Pico. Пишете код как обычный Python, но он управляет железом.">MicroPython</span> — упрощённая версия Python для микроконтроллеров.</p>
-        <p><b>Ваши строки кода:</b></p>
+        <p><b>Pico дегеніміз не.</b> Микроконтроллер — саусақ өлшеміндей шағын компьютер. Процессор + жад + сыртқы әлеммен байланысу үшін 40 пин.</p>
+        <p><span class="term" data-tip="MicroPython — Python бағдарламалау тілінің жеңілдетілген нұсқасы, Pico сияқты кішкентай чиптерде жұмыс істейді. Қарапайым Python сияқты код жазасыз, бірақ темірді басқарады.">MicroPython</span> — микроконтроллерлерге арналған Python-ның жеңілдетілген нұсқасы.</p>
+        <p><b>Сіздің код жолдарыңыз:</b></p>
         <ul>
-          <li><code>while True:</code> — «повторяй пока не выключат»</li>
-          <li><code>pin.value(1)</code> — «подать 3.3V на пин» (реле включается)</li>
-          <li><code>sleep(1)</code> — «ждать 1 секунду»</li>
-          <li><code>pin.value(0)</code> — «подать 0V» (реле выключается)</li>
+          <li><code>while True:</code> — «өшірілмегенше қайтала»</li>
+          <li><code>pin.value(1)</code> — «пинге 3.3V беру» (реле қосылады)</li>
+          <li><code>sleep(1)</code> — «1 секунд күту»</li>
+          <li><code>pin.value(0)</code> — «0V беру» (реле өшеді)</li>
         </ul>
-        <p><b>Почему 2-шаговая проверка критична.</b> ИИ пишет код «гладко», кажется понятным. Это <b>иллюзия</b>. Через 2 дня забудете всё. Когда переводите каждую строку на русский — иллюзия разрушается, мозг запоминает.</p>
-        <p><b>Промпт — ваш инструмент.</b> Хороший промпт = <b>что за железо + что делать + ограничения + в каком виде ответ</b>.</p>
+        <p><b>2 қадаммен тексеру неге маңызды.</b> ЖИ кодты «тегіс» жазады, түсінікті сияқты. Бұл <b>елес</b>. 2 күннен кейін бәрін ұмытасыз. Әр жолды қазақшаға аударғанда — елес жойылады, ми есте сақтайды.</p>
+        <p><b>Промпт — сіздің құралыңыз.</b> Жақсы промпт = <b>қандай темір + не істеу + шектеулер + жауап қандай түрде</b>.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Вы не писали код сами, но <b>поняли и проверили</b> его. Это и есть <b>ИИ-инженерия</b>.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Сіз кодты өзіңіз жазған жоқсыз, бірақ оны <b>түсіндіңіз және тексердіңіз</b>. Бұл <b>ЖИ-инженерия</b> дегеніміз.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Получил код от ИИ</li>
-          <li>Прочитал построчно, перевёл каждую строку</li>
-          <li>Знаю, что делают <code>while True:</code> и <code>sleep(1)</code></li>
+          <li>ЖИ-ден код алдым</li>
+          <li>Жол-жол оқыдым, әр жолды аудардым</li>
+          <li><code>while True:</code> және <code>sleep(1)</code> не істейтінін білемін</li>
         </ul>
       </div>
     </div>
@@ -1693,169 +1693,169 @@
 
   <!-- SIMULATOR -->
   <section>
-    <h2><span class="num">🎮</span> Симулятор — предвкушение</h2>
-    <p>Это то, что вы получите в конце Фазы 5. LED на экране работает так же, как настоящий. Выберите режим — посмотрите, как мигает код.</p>
+    <h2><span class="num">🎮</span> Симулятор — алдын ала күту</h2>
+    <p>Бұл — 5-фазаның соңында не аласыз. Экрандағы LED нағызы сияқты жұмыс істейді. Режим таңдаңыз — код қалай жыпылықтайтынын көріңіз.</p>
     <div class="sim">
       <div class="sim-stage">
         <div class="sim-led" id="led"></div>
-        <div class="sim-pico">GP15 = <span id="gp15">0</span> · <span id="ledstate">выкл</span></div>
+        <div class="sim-pico">GP15 = <span id="gp15">0</span> · <span id="ledstate">өшірулі</span></div>
       </div>
       <div class="sim-panel">
-        <h3>Режим мигания</h3>
-        <p>Так же вы сможете выбрать свой режим в Теме 6.1, попросив ИИ изменить код.</p>
+        <h3>Жыпылықтау режимі</h3>
+        <p>6.1-тақырыпта ЖИ-ден кодты өзгертуді сұрап, өз режиміңізді осылай таңдай аласыз.</p>
         <div class="modes">
-          <button class="mode-btn" onclick="startMode('steady', this)">Ровное (1/1)</button>
-          <button class="mode-btn" onclick="startMode('fast', this)">Быстрое (10 Гц)</button>
+          <button class="mode-btn" onclick="startMode('steady', this)">Біркелкі (1/1)</button>
+          <button class="mode-btn" onclick="startMode('fast', this)">Жылдам (10 Гц)</button>
           <button class="mode-btn" onclick="startMode('sos', this)">SOS (Морзе)</button>
-          <button class="mode-btn stop-btn" onclick="stopMode()">■ Стоп</button>
+          <button class="mode-btn stop-btn" onclick="stopMode()">■ Тоқта</button>
         </div>
       </div>
     </div>
   </section>
 
   <div class="stop">
-    <h3>🛑 Стоп. Проверьте себя — конец фазы DETAIL</h3>
-    <p>Без подглядывания:</p>
+    <h3>🛑 Стоп. Проверьте себя — DETAIL фазасының соңы</h3>
+    <p>Қарамай:</p>
     <ol>
-      <li>Зачем в цепи реле, если раньше кнопка уже работала?</li>
-      <li>Что делают <code>while True:</code> и <code>sleep(1)</code> в вашем коде?</li>
-      <li>Почему мы проверяем код от ИИ <b>в 2 шага</b>, а не копируем сразу?</li>
+      <li>Бұрын түйме жұмыс істеп тұрса, тізбекте реле неге керек?</li>
+      <li>Кодыңызда <code>while True:</code> және <code>sleep(1)</code> не істейді?</li>
+      <li>ЖИ кодын неге <b>2 қадаммен</b> тексереміз, бірден көшірмейміз?</li>
     </ol>
-    <div class="bonus">«Всё понятно»? — что произойдёт, если убрать <code>sleep(1)</code> из кода?</div>
+    <div class="bonus">«Бәрі түсінікті»? — кодтан <code>sleep(1)</code> алып тастасаңыз не болады?</div>
   </div>
 
   <!-- PHASE 5 DEPLOY -->
   <div class="phase">
-    <div class="phase-num">Фаза 5</div>
-    <h2>🚀 DEPLOY — Запускаем на Pico</h2>
-    <p>Заливаем код на Pico, устройство работает автономно.</p>
+    <div class="phase-num">5-фаза</div>
+    <h2>🚀 DEPLOY — Pico-да іске қосамыз</h2>
+    <p>Кодты Pico-ға жүктейміз, құрылғы автономды жұмыс істейді.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 5.1 — Заливка кода</div>
+      <div class="topic-title">5.1-тақырып — Кодты жүктеу</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
         <ol>
-          <li>Подключите Pico к ноутбуку USB-кабелем.</li>
-          <li>Откройте <b>Thonny</b>.</li>
-          <li>Вставьте ваш код.</li>
-          <li>Нажмите «Запустить».</li>
+          <li>Pico-ны ноутбукке USB-кабельмен қосыңыз.</li>
+          <li><b>Thonny</b>-ды ашыңыз.</li>
+          <li>Кодыңызды қойыңыз.</li>
+          <li>«Іске қосу» түймесін басыңыз.</li>
         </ol>
-        <p><b>Ожидание:</b> слышен щелчок реле каждую секунду, LED мигает.</p>
-        <div class="callout cal-warn"><b>⚠️ Если не работает</b>• Ошибка в Thonny → скопируйте её в ИИ, попросите расшифровать<br>• Не мигает → прозвоните <code>GP15</code> → <code>IN</code><br>• После 10 мин — ментор</div>
+        <p><b>Күту:</b> әр секунд сайын реле шертпесі естіледі, LED жыпылықтайды.</p>
+        <div class="callout cal-warn"><b>⚠️ Жұмыс істемесе</b>• Thonny-да қате → оны ЖИ-ге көшіріп, шешіп беруді сұраңыз<br>• Жыпылықтамайды → <code>GP15</code> → <code>IN</code>-ді шалыңыз<br>• 10 мин кейін — ментор</div>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p><b>Thonny</b> — редактор, через который ноутбук «разговаривает» с Pico. Код копируется в память Pico по USB и выполняется микроконтроллером автономно.</p>
+        <p><b>Thonny</b> — ноутбук арқылы Pico-мен «сөйлесетін» редактор. Код USB арқылы Pico жадына көшіріледі және микроконтроллермен автономды орындалады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Ваш первый <b>работающий программный управляемый прибор</b>. Pico сам, без ноутбука, выполняет ваш код.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Сіздің алғашқы <b>жұмыс істейтін бағдарламалық басқарылатын құралыңыз</b>. Pico өзі, ноутбуксіз, кодыңызды орындайды.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>LED мигает по коду</li>
-          <li>Могу отсоединить ноутбук — Pico продолжает работать? (попробуйте)</li>
-          <li>Понимаю, что Thonny — это просто редактор</li>
+          <li>LED код бойынша жыпылықтайды</li>
+          <li>Ноутбукті ажырата аламын — Pico жұмыс істей бере ме? (көріңіз)</li>
+          <li>Thonny жай редактор екенін түсінемін</li>
         </ul>
       </div>
     </div>
   </section>
 
   <div class="stop">
-    <h3>🛑 Стоп. Проверьте себя — конец фазы DEPLOY</h3>
-    <p>Без подглядывания:</p>
+    <h3>🛑 Стоп. Проверьте себя — DEPLOY фазасының соңы</h3>
+    <p>Қарамай:</p>
     <ol>
-      <li>Что делает программа Thonny?</li>
-      <li>Может ли Pico работать без ноутбука после заливки?</li>
-      <li>Что делаешь, если код в Thonny выдаёт ошибку?</li>
+      <li>Thonny бағдарламасы не істейді?</li>
+      <li>Жүктелгеннен кейін Pico ноутбуксіз жұмыс істей ала ма?</li>
+      <li>Thonny-дағы код қате берсе не істейсіз?</li>
     </ol>
-    <div class="bonus">«Всё понятно»? — как отсоединить ноутбук правильно, не потеряв код в Pico?</div>
+    <div class="bonus">«Бәрі түсінікті»? — Pico-дағы кодты жоғалтпай ноутбукті қалай дұрыс ажыратуға болады?</div>
   </div>
 
   <!-- PHASE 6 DEMO -->
   <div class="phase">
-    <div class="phase-num">Фаза 6</div>
-    <h2>🎬 DEMO — Ваш режим + защита</h2>
-    <p>Выбираете свой режим мигания, записываете видео, защищаете перед ментором.</p>
+    <div class="phase-num">6-фаза</div>
+    <h2>🎬 DEMO — Сіздің режиміңіз + қорғау</h2>
+    <p>Өз жыпылықтау режиміңізді таңдайсыз, видео жазасыз, ментор алдында қорғайсыз.</p>
   </div>
 
   <section>
     <div class="topic">
-      <div class="topic-title">Тема 6.1 — Свой режим мигания</div>
+      <div class="topic-title">6.1-тақырып — Өз жыпылықтау режиміңіз</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
-        <p>Выберите:</p>
+        <p>Таңдаңыз:</p>
         <ul>
-          <li><b>Ровное</b> — 1 сек горит, 1 нет (как сейчас)</li>
-          <li><b>Быстрое</b> — 10 миганий в секунду</li>
-          <li><b>SOS</b> в Морзе — 3 коротких, 3 длинных, 3 коротких, пауза, повтор</li>
-          <li><b>Свой вариант</b> — опишите</li>
+          <li><b>Біркелкі</b> — 1 сек жанады, 1 жоқ (қазіргідей)</li>
+          <li><b>Жылдам</b> — секундына 10 жыпылықтау</li>
+          <li><b>SOS</b> Морзе бойынша — 3 қысқа, 3 ұзын, 3 қысқа, үзіліс, қайталау</li>
+          <li><b>Өз нұсқаңыз</b> — сипаттаңыз</li>
         </ul>
-        <p>Попросите ИИ изменить код. Пример:</p>
-        <pre class="code"><button class="copy-btn" onclick="copyNearest(this)">копировать</button>Измени мой код: пусть LED мигает SOS в Морзе.
-Короткое — 0.2 сек, длинное — 0.6 сек.
-Пауза между буквами — 0.3 сек, между повторами — 2 сек.</pre>
-        <p>Проверьте в 2 шага. Залейте. Наблюдайте.</p>
+        <p>ЖИ-ден кодты өзгертуді сұраңыз. Мысал:</p>
+        <pre class="code"><button class="copy-btn" onclick="copyNearest(this)">копировать</button>Менің кодымды өзгерт: LED Морзе бойынша SOS жыпылықтасын.
+Қысқа — 0.2 сек, ұзын — 0.6 сек.
+Әріптер арасындағы үзіліс — 0.3 сек, қайталаулар арасында — 2 сек.</pre>
+        <p>2 қадаммен тексеріңіз. Жүктеңіз. Бақылаңыз.</p>
       </div>
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p>Модификация существующего кода — суть инженерной работы. Чаще меняют, чем пишут с нуля.</p>
+        <p>Бар кодты өзгерту — инженерлік жұмыстың мәні. Нөлден жазғаннан гөрі өзгерту жиі болады.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Теперь устройство <b>ваше</b>. Не универсальное — именно ваше.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Енді құрылғы <b>сіздікі</b>. Әмбебап емес — дәл сіздікі.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Ваш режим работает</li>
-          <li>Могу объяснить, что именно я поменял в коде и почему</li>
+          <li>Сіздің режиміңіз жұмыс істейді</li>
+          <li>Кодта не өзгерткенімді және неге екенін түсіндіре аламын</li>
         </ul>
       </div>
     </div>
 
     <div class="topic">
-      <div class="topic-title">Тема 6.2 — Защита перед ментором</div>
+      <div class="topic-title">6.2-тақырып — Ментор алдында қорғау</div>
 
       <div class="topic-part">
         <span class="part-label">🛠 ПРАКТИКА</span>
         <ol>
-          <li><b>Фото устройства</b> — общий план + крупный план.</li>
-          <li><b>Видео 30 секунд</b> — работающий маячок.</li>
+          <li><b>Құрылғының фотосы</b> — жалпы план + ірі план.</li>
+          <li><b>30 секунд видео</b> — жұмыс істейтін шам.</li>
           <li><b>Запись в портфолио</b> — ментор откроет страницу в Notion:
             <ul>
               <li>Фото</li>
               <li>Видео</li>
-              <li>Код (в блок кода)</li>
-              <li><b>Teardown-заметка</b> (3 вопроса): что понял / что было сложно / что улучшил бы</li>
+              <li>Код (код блогінде)</li>
+              <li><b>Teardown-жазба</b> (3 сұрақ): не түсіндім / не қиын болды / нені жақсартар едім</li>
             </ul>
           </li>
-          <li><b>Самооценка</b> — какой режим выбрал, почему. Интересно 1-5? Понятно 1-5?</li>
-          <li><b>Защита ментору</b> — ментор задаст 3 вопроса:
+          <li><b>Өзін-өзі бағалау</b> — қай режимді таңдадым, неге. Қызық 1-5? Түсінікті 1-5?</li>
+          <li><b>Менторға қорғау</b> — ментор 3 сұрақ қояды:
             <ul>
-              <li>Как работает ваша цепь?</li>
-              <li>Что делает каждая строка кода?</li>
-              <li>Если LED перестанет мигать — с чего начнёте искать проблему?</li>
+              <li>Сіздің тізбегіңіз қалай жұмыс істейді?</li>
+              <li>Кодтың әр жолы не істейді?</li>
+              <li>LED жыпылықтауды тоқтатса — мәселені қайдан іздей бастайсыз?</li>
             </ul>
-            Отвечайте <b>своими словами</b>, не подглядывая.
+            Қарамай, <b>өз сөзіңізбен</b> жауап беріңіз.
           </li>
-          <li><b>Teardown</b> (только после всего выше):
+          <li><b>Teardown</b> (тек жоғарыдағылардан кейін):
             <ul>
-              <li>Сохраните код</li>
-              <li>Разберите устройство</li>
-              <li>Компоненты на стеллаж</li>
-              <li>Протрите рабочее место</li>
+              <li>Кодты сақтаңыз</li>
+              <li>Құрылғыны бөлшектеңіз</li>
+              <li>Компоненттер сөреге</li>
+              <li>Жұмыс орнын сүртіңіз</li>
             </ul>
           </li>
         </ol>
@@ -1863,21 +1863,21 @@
 
       <div class="topic-part">
         <span class="part-label">💡 ТЕОРИЯ</span>
-        <p><b>Защита</b> — свидетельство, что компетенция у вас есть. Ментор не экзаменует, а подтверждает то, что вы уже умеете.</p>
+        <p><b>Қорғау</b> — сізде құзырет бар екенінің дәлелі. Ментор емтихан алмайды, сіз білетінді растайды.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">🧩 ВЫВОДЫ</span>
-        <p>Вы прошли первый модуль. У вас <b>первое свидетельство</b> в портфолио — реальное устройство + реальное понимание.</p>
+        <span class="part-label">🧩 ҚОРЫТЫНДЫ</span>
+        <p>Сіз бірінші модульді өттіңіз. Портфолиоңызда <b>алғашқы куәлік</b> — нақты құрылғы + нақты түсіну.</p>
       </div>
 
       <div class="topic-part">
-        <span class="part-label">✅ ЧЕКПОИНТ</span>
+        <span class="part-label">✅ ТЕКСЕРУ</span>
         <ul class="check">
-          <li>Портфолио заполнено</li>
-          <li>Самооценка написана</li>
-          <li>Ментор поставил зачёт</li>
-          <li>Устройство разобрано, место чистое</li>
+          <li>Портфолио толтырылды</li>
+          <li>Өзін-өзі бағалау жазылды</li>
+          <li>Ментор сынақ қойды</li>
+          <li>Құрылғы бөлшектелді, орын таза</li>
         </ul>
       </div>
     </div>
@@ -1885,20 +1885,20 @@
 
   <!-- DELAYED CHECKPOINT -->
   <section>
-    <h2><span class="num">🕐</span> Отложенный чекпоинт — через 2 дня</h2>
-    <p>Через <b>2 дня</b> после сдачи модуля откройте эту страницу. Ответьте себе <b>без методички и без ИИ</b>:</p>
+    <h2><span class="num">🕐</span> Кейінге қалдырылған тексеру — 2 күннен кейін</h2>
+    <p>Модульді тапсырғаннан <b>2 күн</b> кейін осы бетті ашыңыз. <b>Әдістемесіз және ЖИ-сіз</b> өзіңізге жауап беріңіз:</p>
     <ol>
-      <li>Что делает <code>pin.value(1)</code>?</li>
-      <li>Почему нельзя 12V напрямую в пин Pico?</li>
-      <li>Что покажет прозвонка на целом проводе?</li>
+      <li><code>pin.value(1)</code> не істейді?</li>
+      <li>Pico пиніне неге тікелей 12V беруге болмайды?</li>
+      <li>Бүтін сымда шалу не көрсетеді?</li>
     </ol>
-    <p>Сверьтесь с методичкой.</p>
-    <div class="callout cal-info"><b>💡 Зачем это?</b>Разница между «прочитал» и «помнит» проверяется временем. Если ответили — знания ваши. Если нет — вернитесь к теории перед Модулем 2.</div>
+    <p>Әдістемемен салыстырыңыз.</p>
+    <div class="callout cal-info"><b>💡 Бұл не үшін?</b>«Оқыды» мен «есте сақтайды» арасындағы айырмашылық уақытпен тексеріледі. Жауап берсеңіз — білім сіздікі. Жоқ болса — 2-модуль алдында теорияға қайтыңыз.</div>
   </section>
 
   <footer>
-    ShokanLab · Модуль 1 v13 · адаптация методички из Notion<br>
-    <a href="https://github.com/NomadRama/ShokanLab">исходники на GitHub</a>
+    ShokanLab · 1-модуль v13 · Notion-нан бейімделген әдістеме<br>
+    <a href="https://github.com/NomadRama/ShokanLab">GitHub бастапқы коды</a>
   </footer>
 
 </div>
@@ -1907,17 +1907,17 @@
   // Copy master prompt
   function copyPrompt() {
     const box = document.getElementById('promptBox');
-    const txt = box.innerText.replace(/^копировать\n?/, '').trim();
+    const txt = box.innerText.replace(/^көшіру\n?/, '').trim();
     navigator.clipboard.writeText(txt);
     const btn = box.querySelector('.copy-btn');
-    btn.textContent = '✓ скопировано';
-    setTimeout(() => btn.textContent = 'копировать', 1500);
+    btn.textContent = '✓ көшірілді';
+    setTimeout(() => btn.textContent = 'көшіру', 1500);
   }
 
   // Copy from nearest <pre>
   function copyNearest(btn) {
     const pre = btn.closest('pre');
-    const txt = pre.innerText.replace(/^копировать\n?/, '').trim();
+    const txt = pre.innerText.replace(/^көшіру\n?/, '').trim();
     navigator.clipboard.writeText(txt);
     btn.textContent = '✓ скопировано';
     setTimeout(() => btn.textContent = 'копировать', 1500);
@@ -1933,7 +1933,7 @@
   function setLed(on) {
     led.classList.toggle('on', on);
     gp15.textContent = on ? '1' : '0';
-    ledstate.textContent = on ? 'горит' : 'выкл';
+    ledstate.textContent = on ? 'жанады' : 'өшірулі';
   }
   function stopMode() {
     if (simTimer) { clearTimeout(simTimer); clearInterval(simTimer); simTimer = null; }

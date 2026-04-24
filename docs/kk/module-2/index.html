@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <meta name="googlebot" content="noindex,nofollow">
-<title>ShokanLab · Модуль 2 — Умная сушилка</title>
+<title>ShokanLab · 2-модуль — Ақылды кептіргіш</title>
 <style>
   :root{--bg:#F4F1EA;--ink:#1F3A5F;--muted:#6B6B6B;--card:#FFFFFF;--radius:14px;
     --shadow:0 4px 20px rgba(31,58,95,.08)}
@@ -32,8 +32,7 @@
   .lang-switch{display:flex;gap:2px;margin-left:12px;
     border-left:1px solid rgba(255,255,255,.25);padding-left:14px}
   .lang-switch a{text-decoration:none;color:#fff;opacity:.6;
-    font-size:12px;font-weight:700;padding:4px 8px;border-radius:6px;
-    letter-spacing:.5px}
+    font-size:12px;font-weight:700;padding:4px 8px;border-radius:6px;letter-spacing:.5px}
   .lang-switch a:hover{opacity:1;background:rgba(255,255,255,.1)}
   .lang-switch a.active{opacity:1;background:rgba(255,255,255,.2)}
 
@@ -47,8 +46,7 @@
   .card p{margin-bottom:10px}
   .card ul{margin:10px 0 10px 22px}
   .btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
-    padding:14px 28px;border-radius:100px;font-weight:600;font-size:15px;
-    margin-top:10px}
+    padding:14px 28px;border-radius:100px;font-weight:600;font-size:15px;margin-top:10px}
   .btn:hover{opacity:.9}
   .status{display:inline-block;padding:6px 14px;border-radius:100px;
     background:#FFF4E0;color:#8B6F18;font-weight:700;font-size:12px;letter-spacing:1px;
@@ -61,17 +59,17 @@
   <div class="topnav-inner">
     <a href="../index.html" class="topnav-home">
       <span class="topnav-logo">ShokanLab</span>
-      <span class="topnav-stage">Этап 1 · База</span>
+      <span class="topnav-stage">1-кезең · Негіз</span>
     </a>
     <div class="topnav-modules">
-      <a href="../intro/index.html" class="topnav-m">✨ Введение</a>
-      <a href="../module-1/index.html" class="topnav-m">💡 М1 — Управляемая лампа</a>
-      <a href="../module-2/index.html" class="topnav-m active">💨 М2 — Умная сушилка</a>
-      <a href="../module-3/index.html" class="topnav-m">🌙 М3 — Ночник</a>
+      <a href="../intro/index.html" class="topnav-m">✨ Кіріспе</a>
+      <a href="../module-1/index.html" class="topnav-m">💡 М1 — Басқарылатын шам</a>
+      <a href="../module-2/index.html" class="topnav-m active">💨 М2 — Ақылды кептіргіш</a>
+      <a href="../module-3/index.html" class="topnav-m">🌙 М3 — Түнгі шам</a>
     </div>
     <div class="lang-switch">
-      <a href="index.html" class="active">RU</a>
-      <a href="../kk/module-2/index.html">KK</a>
+      <a href="../../module-2/index.html">RU</a>
+      <a href="index.html" class="active">KK</a>
     </div>
   </div>
 </nav>
@@ -79,30 +77,30 @@
 <div class="wrap">
 
   <div class="emoji-big">💨</div>
-  <div class="status">Скоро откроется</div>
-  <h1>Модуль 2 — Умная сушилка</h1>
-  <p class="lead">Вентилятор 12V, ИК-датчик, первая реакция на внешний мир. Модуль откроется после пилотного запуска Модуля 1.</p>
+  <div class="status">Жақын арада ашылады</div>
+  <h1>2-модуль — Ақылды кептіргіш</h1>
+  <p class="lead">12V желдеткіш, ИҚ-сенсор, сыртқы әлемге алғашқы әрекет. Модуль 1-модульдің пилоттық іске қосуынан кейін ашылады.</p>
 
   <div class="card">
-    <h2>Что вас ждёт</h2>
-    <p>В этом модуле вы научитесь:</p>
+    <h2>Не күтеді сізді</h2>
+    <p>Осы модульде сіз үйренесіз:</p>
     <ul>
-      <li>Управлять вентилятором 12V через реле</li>
-      <li>Читать показания <b>ИК-датчика</b> (датчик движения)</li>
-      <li>Писать условие <code>if / else</code> — когда включать, когда выключать</li>
-      <li>Работать с двумя напряжениями одновременно (3.3V + 12V)</li>
+      <li>12V желдеткішті реле арқылы басқаруды</li>
+      <li><b>ИҚ-сенсордың</b> (қозғалыс сенсоры) көрсеткіштерін оқуды</li>
+      <li><code>if / else</code> шартын жазуды — қашан қосу, қашан өшіру</li>
+      <li>Екі кернеумен бір уақытта жұмыс істеуді (3.3V + 12V)</li>
     </ul>
-    <p style="margin-top:14px;color:var(--muted);font-size:14px"><b>Новое в модуле:</b> датчик как вход, 12V нагрузка, первое условие в коде.</p>
+    <p style="margin-top:14px;color:var(--muted);font-size:14px"><b>Модульде жаңа:</b> кіріс ретінде сенсор, 12V жүктеме, кодтағы алғашқы шарт.</p>
   </div>
 
   <div class="card">
-    <h2>Что нужно знать заранее</h2>
-    <p>Пройдите сначала Модуль 1 — там вы познакомитесь с Pico, реле, LED, мультиметром и ИИ-напарником. Всё это пригодится здесь.</p>
-    <a href="../module-1/index.html" class="btn">💡 Открыть Модуль 1</a>
+    <h2>Алдын ала не білу керек</h2>
+    <p>Алдымен 1-модульден өтіңіз — онда сіз Pico, реле, LED, мультиметр және ЖИ-серіктеспен танысасыз. Бәрі осы жерде қажет болады.</p>
+    <a href="../module-1/index.html" class="btn">💡 1-модульді ашу</a>
   </div>
 
   <div style="margin-top:40px;color:var(--muted);font-size:13px">
-    ← <a href="../index.html" style="color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--ink)">Вернуться к обзору Этапа 1</a>
+    ← <a href="../index.html" style="color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--ink)">1-кезең шолуына оралу</a>
   </div>
 
 </div>
