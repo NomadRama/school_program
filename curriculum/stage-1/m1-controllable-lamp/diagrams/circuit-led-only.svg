@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
+<!-- aria-label: Простая цепь — только LED -->
+<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Простая цепь — только LED">
+            <rect x="40"  y="80" width="160" height="80" rx="8" class="bd-comp bd-atx"/>
+            <text x="120" y="110" text-anchor="middle" class="bd-title">БЛОК ATX</text>
+            <circle cx="200" cy="105" r="5" fill="#E8A33D" stroke="#8B6F18" stroke-width="2"/>
+            <text x="195" y="102" text-anchor="end" class="bd-pinlbl" font-weight="bold">+3.3V</text>
+            <circle cx="200" cy="140" r="5" fill="#2B2B2B" stroke="#000" stroke-width="1.5"/>
+            <text x="195" y="137" text-anchor="end" class="bd-pinlbl" font-weight="bold">GND</text>
+
+            <rect x="400" y="80" width="140" height="80" rx="8" class="bd-comp bd-led"/>
+            <text x="470" y="110" text-anchor="middle" class="bd-title">LED</text>
+            <circle cx="400" cy="105" r="5" fill="#C94C4C" stroke="#8B1A1A" stroke-width="2"/>
+            <text x="410" y="109" class="bd-pinlbl" font-weight="bold">+</text>
+            <circle cx="400" cy="140" r="5" fill="#2B2B2B" stroke="#000" stroke-width="1.5"/>
+            <text x="410" y="144" class="bd-pinlbl" font-weight="bold">−</text>
+
+            <path d="M 200 105 L 400 105" class="bd-wire" stroke="#E8A33D"/>
+            <text x="300" y="98" text-anchor="middle" class="bd-wlbl" fill="#B8822A">+3.3V</text>
+            <path d="M 200 140 L 400 140" class="bd-wire" stroke="#2B2B2B"/>
+            <text x="300" y="157" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">GND</text>
+
+            <text x="290" y="210" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">2 провода · нет управления · LED горит постоянно</text>
+          </svg>

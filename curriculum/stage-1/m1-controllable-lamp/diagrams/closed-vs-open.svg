@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
+<!-- aria-label: Замкнутая и разомкнутая цепь -->
+<svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Замкнутая и разомкнутая цепь">
+            <!-- ЗАМКНУТАЯ -->
+            <text x="170" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#5E8D6E">✓ ЗАМКНУТАЯ — LED горит</text>
+            <rect x="40"  y="70" width="100" height="60" rx="6" class="bd-comp bd-source"/>
+            <text x="90"  y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">ATX +3.3V</text>
+            <text x="90"  y="115" text-anchor="middle" class="bd-sub">источник</text>
+
+            <rect x="200" y="70" width="100" height="60" rx="6" class="bd-comp bd-led"/>
+            <text x="250" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">LED</text>
+            <text x="250" y="115" text-anchor="middle" class="bd-sub" style="fill:#C94C4C">🔴 горит</text>
+
+            <!-- замкнутый круг тока -->
+            <path d="M 140 100 L 200 100" class="bd-wire" stroke="#C94C4C"/>
+            <path d="M 300 100 L 330 100 L 330 180 L 40 180 L 40 130" class="bd-wire" stroke="#2B2B2B"/>
+
+            <!-- движущиеся точки-электроны -->
+            <g fill="#E8A33D">
+              <circle r="4">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M 140 100 L 200 100 L 300 100 L 330 100 L 330 180 L 40 180 L 40 100 L 140 100"/>
+              </circle>
+              <circle r="4">
+                <animateMotion dur="3s" repeatCount="indefinite" begin="1s" path="M 140 100 L 200 100 L 300 100 L 330 100 L 330 180 L 40 180 L 40 100 L 140 100"/>
+              </circle>
+              <circle r="4">
+                <animateMotion dur="3s" repeatCount="indefinite" begin="2s" path="M 140 100 L 200 100 L 300 100 L 330 100 L 330 180 L 40 180 L 40 100 L 140 100"/>
+              </circle>
+            </g>
+
+            <text x="170" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">электроны идут по кругу → LED горит</text>
+
+            <!-- РАЗОМКНУТАЯ -->
+            <text x="550" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#C94C4C">✗ РАЗОМКНУТАЯ — LED не горит</text>
+            <rect x="400" y="70" width="100" height="60" rx="6" class="bd-comp bd-source"/>
+            <text x="450" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">ATX +3.3V</text>
+            <text x="450" y="115" text-anchor="middle" class="bd-sub">источник</text>
+
+            <rect x="580" y="70" width="100" height="60" rx="6" class="bd-comp bd-led"/>
+            <text x="630" y="97" text-anchor="middle" class="bd-pinlbl" font-weight="bold">LED</text>
+            <text x="630" y="115" text-anchor="middle" class="bd-sub" style="fill:#888">⚫ не горит</text>
+
+            <!-- разрыв в проводе -->
+            <path d="M 500 100 L 540 100" class="bd-wire" stroke="#2B2B2B"/>
+            <text x="560" y="94" text-anchor="middle" style="font:bold 20px sans-serif;fill:#C94C4C">✕</text>
+            <text x="560" y="120" text-anchor="middle" style="font:9px sans-serif;fill:#C94C4C">РАЗРЫВ</text>
+            <path d="M 580 100 L 580 100" class="bd-wire" stroke="#2B2B2B"/>
+            <path d="M 680 100 L 700 100 L 700 180 L 400 180 L 400 130" class="bd-wire" stroke="#2B2B2B"/>
+
+            <text x="550" y="220" text-anchor="middle" style="font:italic 11px sans-serif;fill:#5A5A5A">один разрыв в круге — и всё останавливается</text>
+          </svg>

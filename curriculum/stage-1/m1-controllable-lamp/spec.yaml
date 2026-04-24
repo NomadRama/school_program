@@ -1,0 +1,132 @@
+# Модуль 1 — Управляемая лампа (спецификация)
+# Машиночитаемые метаданные модуля. Текст методички — в content.md.
+
+id: m1-controllable-lamp
+stage: 1
+stage_name: База
+number: 1
+name: Управляемая лампа
+name_short: М1
+slogan: Собираем светодиод-маячок, которым управляет ваш код
+emoji: 💡
+
+# Статус
+version: "1.0"
+status: ready            # draft | ready | piloted | deprecated
+last_updated: "2026-04-23"
+verified_by: null        # заполнить после пилота с реальным учеником
+
+# Длительность
+duration:
+  max_lessons: 6
+  typical_lessons: 4
+  self_paced: true
+
+# Педагогика
+methodology: 6D          # DEFINE → DESIGN → DRAFT → DETAIL → DEPLOY → DEMO
+gradual_release: I_do    # I_do | We_do | You_do (Модуль 1 — максимум поддержки)
+phases:
+  - { key: define, emoji: "📋", name: "Понимаем задачу",           topics: 1 }
+  - { key: design, emoji: "🎨", name: "Источник и компоненты",     topics: 2 }
+  - { key: draft,  emoji: "📐", name: "Рисуем схему",              topics: 1 }
+  - { key: detail, emoji: "🔧", name: "Собираем и пишем код",      topics: 4 }
+  - { key: deploy, emoji: "🚀", name: "Запускаем на Pico",         topics: 1 }
+  - { key: demo,   emoji: "🎬", name: "Свой режим + защита",       topics: 2 }
+
+# Главное обещание модуля
+promise:
+  visible: "ученик зажигает LED кнопкой, потом кодом, потом выбирает свой режим"
+  internal: "первая настоящая инженерная цепь + первый опыт ИИ-программирования"
+
+# Компетенции
+competencies:
+  - { code: diagnose,   emoji: "🔍", name: "Диагностика" }
+  - { code: assembly,   emoji: "🔧", name: "Сборка" }
+  - { code: ai_coding,  emoji: "🤖", name: "ИИ-программирование" }
+  - { code: explain,    emoji: "💬", name: "Объяснение" }
+  - { code: document,   emoji: "📸", name: "Документирование" }
+
+# Что новое (учебный фокус модуля)
+teaches_new:
+  - "Базовая электрическая цепь (источник → нагрузка → обратно)"
+  - "Замкнутая vs разомкнутая цепь"
+  - "Полярность LED"
+  - "Мультиметр: режим V=, прозвонка"
+  - "Реле как электронный выключатель"
+  - "Pico: GP-пины, first code"
+  - "MicroPython: while, sleep, pin.value"
+  - "Socratic-промпт для ИИ-напарника"
+  - "Двухшаговая проверка кода"
+
+# Железо
+hardware:
+  required:
+    - { id: raspberry_pi_pico, qty: 1 }
+    - { id: atx_breakout_24pin, qty: 1 }
+    - { id: relay_1ch_5v, qty: 1 }
+    - { id: led_3w, qty: 1 }
+    - { id: button_tactile, qty: 1 }
+    - { id: multimeter_ut33c_plus, qty: 1 }
+    - { id: dupont_wire, qty: 4 }
+    - { id: screwdriver, qty: 1 }
+  optional: []
+
+# Код, с которым работает модуль
+code:
+  language: MicroPython
+  files:
+    - { path: code/main.py, description: "мигание LED через реле, GP15" }
+  runs_on: raspberry_pi_pico
+  ide: Thonny
+
+# Точки выбора (Gradual Release: 3+ обязательно)
+choice_points:
+  - { phase: demo,   decision: "режим мигания", options: ["ровное", "быстрое", "SOS", "свой"] }
+  - { phase: demo,   decision: "длительность своего мигания", options: "student defines" }
+  - { phase: detail, decision: "разделить Тему 4.4 на 2 занятия?", options: ["да", "нет"] }
+
+# 5 обязательных элементов самообучения
+self_learning_elements:
+  ai_prompt:          { file: prompt.md, present: true }
+  stop_check:         { count: 5, after_each_phase: true }
+  delayed_checkpoint: { after_days: 2, questions: 3 }
+  red_flags_table:    { present: false, note: "добавим после пилота" }
+  stuck_protocol:     { present: true, location: "вначале модуля" }
+
+# Оценка
+assessment:
+  mentor_checks:
+    - "Все 6 этапов 6D пройдены"
+    - "LED мигает по коду ученика"
+    - "Свой режим (6.1) реализован"
+    - "Портфолио заполнено"
+    - "Устная защита прошла"
+    - "Отложенный чекпоинт заполнен (проверить через неделю)"
+  portfolio_entry:
+    - photo_full: required
+    - photo_close: required
+    - video_30s: required
+    - code_block: required
+    - teardown_note: "3 вопроса: что понял / что сложно / что улучшил бы"
+    - self_rating: "interesting 1-5, clear 1-5"
+
+# Безопасность (критичные моменты)
+safety:
+  - "ATX 220V включает ТОЛЬКО ментор"
+  - "12V в пин Pico НЕ подавать (мгновенная поломка)"
+  - "Металл в работающую схему НЕ совать"
+  - "Дым / треск / запах → немедленно отсоединить и звать ментора"
+
+# Связи с другими модулями
+prerequisites:
+  - intro
+next_module: m2-smart-dryer
+spiral_partners: [m2-smart-dryer, m3-night-light]  # Модули 1-3 составляют спираль
+
+# Артефакты (файлы в этой папке)
+artifacts:
+  content: content.md
+  prompt: prompt.md
+  mentor: mentor.md
+  code_dir: code/
+  diagrams_dir: diagrams/

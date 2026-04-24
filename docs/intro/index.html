@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShokanLab · Введение</title>
+<style>
+  :root{--bg:#F4F1EA;--ink:#1F3A5F;--ink2:#2B4A75;--muted:#6B6B6B;
+    --accent:#C94C4C;--warm:#E6A85C;--green:#5E8D6E;--yellow:#F0C040;
+    --card:#FFFFFF;--radius:14px;--shadow:0 4px 20px rgba(31,58,95,.08)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:#2A2A2A;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .topnav{position:sticky;top:0;background:#1F3A5F;z-index:200;
+    box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  .topnav-inner{max-width:1100px;margin:0 auto;padding:10px 22px;
+    display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .topnav-home{text-decoration:none;color:#fff;display:flex;flex-direction:column;line-height:1.15}
+  .topnav-logo{font-size:15px;font-weight:800;letter-spacing:.5px}
+  .topnav-stage{font-size:11px;opacity:.75;margin-top:1px}
+  .topnav-modules{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-m{text-decoration:none;color:#fff;opacity:.7;padding:6px 12px;
+    border-radius:100px;font-size:12.5px;font-weight:500;white-space:nowrap;
+    border:1px solid transparent;transition:all .15s}
+  .topnav-m:hover{opacity:1;background:rgba(255,255,255,.08)}
+  .topnav-m.active{opacity:1;background:rgba(255,255,255,.15);
+    border-color:rgba(255,255,255,.3);font-weight:600}
+
+  .wrap{max-width:820px;margin:0 auto;padding:44px 22px 80px}
+
+  header.hero{text-align:center;padding:40px 0 20px}
+  header.hero .tag{display:inline-block;background:var(--warm);color:#fff;
+    padding:5px 14px;border-radius:100px;font-size:12px;letter-spacing:1.5px;
+    text-transform:uppercase;margin-bottom:18px;font-weight:600}
+  header.hero h1{font-size:46px;font-weight:800;color:var(--ink);
+    margin-bottom:10px;letter-spacing:-.5px;line-height:1.1}
+  header.hero .lead{font-size:17px;color:var(--muted);max-width:600px;margin:0 auto}
+
+  section{background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:30px 34px;margin-bottom:18px;position:relative}
+  section > h2{font-size:24px;margin-bottom:14px;color:var(--ink);
+    display:flex;align-items:center;gap:12px;line-height:1.2}
+  section > h2 .num{display:inline-flex;align-items:center;justify-content:center;
+    min-width:36px;height:36px;border-radius:10px;background:var(--ink);
+    color:#fff;font-size:15px;font-weight:700}
+  section p{margin-bottom:12px}
+  section ul,section ol{margin:10px 0 12px 22px}
+  section li{margin-bottom:5px}
+  section b{color:var(--ink)}
+
+  /* Safety rules */
+  .safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;margin:16px 0}
+  .safety-card{background:linear-gradient(135deg,#FDECEA,#FFF4E0);
+    border-left:5px solid var(--accent);padding:18px 20px;border-radius:10px}
+  .safety-card .icon{font-size:28px;line-height:1;margin-bottom:8px}
+  .safety-card h3{color:var(--accent);font-size:16px;margin-bottom:6px}
+  .safety-card p{font-size:14px;color:#3A3A3A;margin:0}
+
+  /* Workstation SVG */
+  .figure{background:linear-gradient(135deg,#F7F5F0,#EEE8DC);
+    border-radius:12px;padding:20px;margin:14px 0;text-align:center}
+  .figure svg{max-width:100%;height:auto;display:block;margin:0 auto}
+  .figure .caption{font-size:13px;color:var(--muted);margin-top:10px;font-style:italic}
+
+  /* AI intro mini-action */
+  .prompt-mini{background:#0F2440;color:#E8E8E8;padding:16px 20px;
+    border-radius:10px;font-family:"SF Mono",Monaco,Consolas,monospace;
+    font-size:13px;line-height:1.7;position:relative;margin:14px 0;white-space:pre-wrap}
+  .copy-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);
+    color:#fff;border:1px solid rgba(255,255,255,.25);padding:4px 10px;
+    border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit}
+  .copy-btn:hover{background:rgba(255,255,255,.2)}
+
+  /* Mindset cards */
+  .mindset{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;margin:14px 0}
+  .mindset-card{background:linear-gradient(135deg,#E8F4EC,#F0F7F0);
+    padding:18px;border-radius:10px;text-align:center;
+    border:1px solid rgba(94,141,110,.25)}
+  .mindset-card .emoji{font-size:36px;line-height:1;margin-bottom:8px}
+  .mindset-card h3{color:var(--green);font-size:15px;margin-bottom:4px}
+  .mindset-card p{font-size:13px;color:#3A3A3A;margin:0}
+
+  /* Final check */
+  .check-ready{background:linear-gradient(135deg,#E0F4E5,#F0F7F0);
+    border-left:5px solid var(--green);padding:24px 28px;border-radius:10px;
+    margin:16px 0}
+  .check-ready h3{color:var(--green);margin-bottom:14px;font-size:18px}
+  .check-ready ol{margin-left:22px}
+  .check-ready li{margin-bottom:8px}
+
+  .big-btn{display:inline-flex;align-items:center;gap:10px;
+    background:var(--ink);color:#fff;text-decoration:none;
+    padding:16px 32px;border-radius:100px;font-weight:700;font-size:16px;
+    margin-top:16px;transition:all .15s}
+  .big-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(31,58,95,.25)}
+
+  footer{text-align:center;color:var(--muted);margin-top:40px;font-size:13px}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--ink)}
+
+  @media(max-width:720px){
+    header.hero h1{font-size:34px}
+    section{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="../index.html" class="topnav-home">
+      <span class="topnav-logo">ShokanLab</span>
+      <span class="topnav-stage">Этап 1 · База</span>
+    </a>
+    <div class="topnav-modules">
+      <a href="../intro/index.html" class="topnav-m active">✨ Введение</a>
+      <a href="../module-1/index.html" class="topnav-m">💡 М1 — Управляемая лампа</a>
+      <a href="../module-2/index.html" class="topnav-m">💨 М2 — Умная сушилка</a>
+      <a href="../module-3/index.html" class="topnav-m">🌙 М3 — Ночник</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">Начните здесь · 15–20 минут</span>
+    <h1>Введение</h1>
+    <p class="lead">Знакомство с рабочим местом, правилами безопасности и ИИ-напарником. После этого вы готовы к первому модулю.</p>
+  </header>
+
+  <!-- 1. Привет -->
+  <section>
+    <h2><span class="num">1</span> Привет!</h2>
+    <p>Вы пришли в школу инженерии <b>ShokanLab</b>. За этот учебный год вы соберёте <b>8 настоящих устройств</b> своими руками. От простого светодиода-маячка до ночника с режимами, умного пылесоса и собственного изобретения.</p>
+    <p>Программа разделена на <b>3 этапа</b>:</p>
+    <ul>
+      <li><b>Этап 1 — База</b> (вы здесь) — 3 модуля. Учитесь основам: электрика, сборка, первая программа.</li>
+      <li><b>Этап 2 — Проекты</b> — ваши собственные устройства с датчиками и моторами.</li>
+      <li><b>Этап 3 — Продукт</b> — большой проект, который вы защищаете.</li>
+    </ul>
+    <p>Занимаетесь <b>своим темпом</b>. Никто никого не ждёт, никто никого не гонит. Главное — <b>сам собрал, сам объяснил</b>.</p>
+  </section>
+
+  <!-- 2. Безопасность -->
+  <section>
+    <h2><span class="num">2</span> 🚨 Безопасность — 3 правила</h2>
+    <p>В школе мы работаем с электричеством. Это безопасно, если соблюдать три правила. Запомните их до начала любого модуля.</p>
+
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="icon">⚡</div>
+        <h3>1. Не трогаем 220V</h3>
+        <p>Розетку и провод от ATX к розетке включает <b>только ментор</b>. Руками никогда не трогаем.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">🔌</div>
+        <h3>2. Pico — 3.3V максимум</h3>
+        <p>В пин Pico никогда не подаём 5V или 12V. Сгорит за секунду. Проверяем линию до подключения.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">✋</div>
+        <h3>3. Дым / треск → стоп</h3>
+        <p>Если что-то шипит, дымит или пахнет горелым — <b>сразу отсоединяем</b> и зовём ментора.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">Другие правила появятся по ходу модулей. Эти три — главные, работают всегда.</p>
+  </section>
+
+  <!-- 3. Рабочее место -->
+  <section>
+    <h2><span class="num">3</span> 🛠 Ваше рабочее место</h2>
+    <p>Перед тем как сесть, посмотрите — что где лежит. Всё возвращается на свои места в конце занятия.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема рабочего места">
+        <!-- стол -->
+        <rect x="20" y="40" width="660" height="280" rx="12" fill="#D4B88A" stroke="#8B6F18" stroke-width="2"/>
+        <rect x="20" y="40" width="660" height="280" rx="12" fill="url(#wood)" opacity="0.5"/>
+        <defs>
+          <pattern id="wood" width="40" height="40" patternUnits="userSpaceOnUse">
+            <rect width="40" height="40" fill="#D4B88A"/>
+            <path d="M 0 20 Q 10 18 20 20 Q 30 22 40 20" stroke="#B39060" stroke-width="0.5" fill="none"/>
+          </pattern>
+        </defs>
+
+        <!-- Ноутбук -->
+        <g transform="translate(80, 80)">
+          <rect x="0" y="0" width="140" height="90" rx="6" fill="#2A2A2A" stroke="#555"/>
+          <rect x="10" y="8" width="120" height="74" rx="2" fill="#3A5A8A"/>
+          <rect x="-5" y="90" width="150" height="8" rx="2" fill="#1A1A1A"/>
+          <text x="70" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Ноутбук</text>
+          <text x="70" y="140" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5A5A5A">Thonny · ИИ-чат</text>
+        </g>
+
+        <!-- Плата ATX -->
+        <g transform="translate(280, 80)">
+          <rect x="0" y="0" width="140" height="60" rx="4" fill="#2367B5" stroke="#0E3A6B"/>
+          <circle cx="20" cy="15" r="4" fill="#D8392B"/>
+          <rect x="40" y="14" width="40" height="32" fill="#FAFAFA"/>
+          <circle cx="95" cy="20" r="3" fill="#D8392B"/>
+          <circle cx="115" cy="20" r="3" fill="#D8392B"/>
+          <circle cx="95" cy="40" r="3" fill="#1A1A1A"/>
+          <circle cx="115" cy="40" r="3" fill="#1A1A1A"/>
+          <text x="70" y="95" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Блок ATX</text>
+          <text x="70" y="110" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5A5A5A">источник питания</text>
+        </g>
+
+        <!-- Мультиметр -->
+        <g transform="translate(460, 80)">
+          <rect x="0" y="0" width="60" height="90" rx="6" fill="#F0BC3A" stroke="#8B6F18"/>
+          <rect x="6" y="8" width="48" height="22" fill="#B8D4B8"/>
+          <circle cx="30" cy="50" r="16" fill="#2A2A2A"/>
+          <circle cx="18" cy="80" r="4" fill="#D4503A"/>
+          <circle cx="42" cy="80" r="4" fill="#1A1A1A"/>
+          <text x="30" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Мультиметр</text>
+          <text x="30" y="140" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5A5A5A">UT33C+</text>
+        </g>
+
+        <!-- Контейнер с компонентами (Pico, LED, реле, провода) -->
+        <g transform="translate(80, 200)">
+          <rect x="0" y="0" width="180" height="80" rx="8" fill="#E8E0C8" stroke="#8B7E5C" stroke-width="1.5"/>
+          <!-- Pico внутри -->
+          <rect x="10" y="12" width="50" height="20" rx="2" fill="#0F6B48"/>
+          <text x="35" y="25" text-anchor="middle" font-family="monospace" font-size="7" fill="#FFF">Pico</text>
+          <!-- LED -->
+          <circle cx="85" cy="22" r="7" fill="#C94C4C"/>
+          <!-- Реле -->
+          <rect x="105" y="12" width="30" height="20" rx="2" fill="#2B5FAA"/>
+          <text x="120" y="25" text-anchor="middle" font-family="monospace" font-size="7" fill="#FFF">реле</text>
+          <!-- провода -->
+          <path d="M 10 55 Q 40 45 70 55 Q 100 65 130 55 Q 160 45 170 50" stroke="#D8392B" stroke-width="2" fill="none"/>
+          <path d="M 10 65 Q 50 58 90 65 Q 130 72 170 65" stroke="#2B2B2B" stroke-width="2" fill="none"/>
+          <text x="90" y="105" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Компоненты</text>
+          <text x="90" y="120" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5A5A5A">Pico · LED · реле · провода</text>
+        </g>
+
+        <!-- Отвёртка -->
+        <g transform="translate(300, 230)">
+          <rect x="0" y="0" width="80" height="12" rx="2" fill="#D4503A"/>
+          <rect x="80" y="2" width="30" height="8" fill="#888"/>
+          <text x="40" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Отвёртка</text>
+        </g>
+
+        <!-- Блокнот -->
+        <g transform="translate(440, 210)">
+          <rect x="0" y="0" width="90" height="100" rx="4" fill="#FFFFFF" stroke="#999"/>
+          <line x1="10" y1="20" x2="80" y2="20" stroke="#CCC"/>
+          <line x1="10" y1="35" x2="80" y2="35" stroke="#CCC"/>
+          <line x1="10" y1="50" x2="80" y2="50" stroke="#CCC"/>
+          <line x1="10" y1="65" x2="80" y2="65" stroke="#CCC"/>
+          <text x="45" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">Блокнот</text>
+          <text x="45" y="140" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5A5A5A">для схем и мыслей</text>
+        </g>
+      </svg>
+      <div class="caption">Примерный вид рабочего места. Ваше может отличаться — ментор покажет на первом занятии.</div>
+    </div>
+
+    <p><b>Правила стола:</b></p>
+    <ul>
+      <li>Ноутбук — слева, ближе к руке которой пишете</li>
+      <li>Компоненты в контейнере — не раскидываем по столу</li>
+      <li>Провода сворачиваем после использования, не тянем за них</li>
+      <li>В конце занятия — всё на свои места, стол чистый</li>
+    </ul>
+  </section>
+
+  <!-- 4. ИИ-напарник -->
+  <section>
+    <h2><span class="num">4</span> 🤖 Знакомство с ИИ-напарником</h2>
+    <p><b>ИИ</b> (искусственный интеллект) — это программа, которая умеет понимать текст и отвечать на вопросы. В ShokanLab вы работаете с ИИ <b>как с напарником</b>: он не делает задания за вас, а помогает разобраться.</p>
+
+    <p><b>Почему это важно</b>: если ИИ будет давать готовые ответы — вы ничего не запомните. Поэтому в наших промптах есть правило: <i>«Не давай готовый ответ сразу. Задай один вопрос, чтобы понять что я знаю».</i></p>
+
+    <h3 style="margin-top:18px;font-size:16px;color:var(--ink)">✋ Попробуйте прямо сейчас</h3>
+    <ol>
+      <li>Откройте чат с ИИ (ChatGPT, Claude или другой — ментор покажет).</li>
+      <li>Скопируйте промпт ниже и отправьте.</li>
+      <li>Прочитайте ответ. Обратите внимание — ИИ задаёт вам вопрос, а не рассказывает лекцию.</li>
+    </ol>
+
+    <div class="prompt-mini" id="testPrompt"><button class="copy-btn" onclick="copyTest()">копировать</button>Привет! Я новый ученик в школе ShokanLab. Мне 12 лет, и я первый раз иду в инженерную школу. Скажи 2-3 предложения: что ты можешь делать как мой напарник, и главное правило — как мне с тобой общаться, чтобы я учился, а не получал готовые ответы.</div>
+
+    <p style="margin-top:14px;color:var(--muted);font-size:14px">Если ИИ дал много текста — нормально. Прочитайте и переходите дальше. Главное, что вы <b>первый раз отправили сообщение ИИ</b> — это и было задание.</p>
+  </section>
+
+  <!-- 5. Портфолио -->
+  <section>
+    <h2><span class="num">5</span> 📓 Ваше портфолио</h2>
+    <p>За учебный год вы соберёте 8 устройств. Каждое попадёт в ваше <b>портфолио</b> — личную страницу с фото, видео и кодом всех проектов.</p>
+
+    <p><b>Сейчас</b> — ментор покажет вашу страницу в Notion. Заполните 4 поля:</p>
+    <ul>
+      <li><b>Имя и возраст</b></li>
+      <li><b>Фото с рабочего места</b> (в первый день)</li>
+      <li><b>Что хотите научиться</b> — одно предложение</li>
+      <li><b>Первая цель</b> — например, «собрать устройство с мигающим светодиодом»</li>
+    </ul>
+
+    <div class="callout" style="background:#FFF9DB;border-left:4px solid var(--yellow);padding:14px 18px;border-radius:8px;margin:14px 0;font-size:14px">
+      <b style="color:#5A4A10">💡 Зачем это?</b><br>
+      Через год вы откроете портфолио и удивитесь — «неужели это всё собрал я?». Плюс родители, друзья, будущие работодатели видят реальные работы, а не просто оценки.
+    </div>
+  </section>
+
+  <!-- 6. Установки -->
+  <section>
+    <h2><span class="num">6</span> 💪 Установки инженера</h2>
+    <p>Три правила, которые отличают инженера от ученика. Помните их на каждом занятии.</p>
+
+    <div class="mindset">
+      <div class="mindset-card">
+        <div class="emoji">🔧</div>
+        <h3>Делаю сам</h3>
+        <p>Не жду, что всё объяснят. Читаю, пробую, спрашиваю ИИ, только потом зову ментора.</p>
+      </div>
+      <div class="mindset-card">
+        <div class="emoji">🧪</div>
+        <h3>Ошибка — это информация</h3>
+        <p>LED не горит? Реле не щёлкает? Это подсказка, не катастрофа. Ищу причину.</p>
+      </div>
+      <div class="mindset-card">
+        <div class="emoji">⏱</div>
+        <h3>5-15 минут сам</h3>
+        <p>Прежде чем звать ментора — дам себе 5-15 минут. Только потом прошу помощь.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Готовы -->
+  <section>
+    <h2><span class="num">7</span> ✅ Вы готовы</h2>
+    <p>Проверьте себя мысленно — всё ли сделали:</p>
+
+    <div class="check-ready">
+      <h3>Перед началом Модуля 1 вы должны:</h3>
+      <ol>
+        <li>Знать <b>3 правила безопасности</b> (220V, 3.3V на Pico, дым → стоп)</li>
+        <li>Видеть где на столе: <b>ноутбук, ATX, мультиметр, компоненты, блокнот</b></li>
+        <li>Отправить <b>первое сообщение ИИ</b> и получить ответ</li>
+        <li>Заполнить <b>свою страницу портфолио</b> в Notion (ментор поможет)</li>
+      </ol>
+    </div>
+
+    <p style="text-align:center;margin-top:22px">
+      <a href="../module-1/index.html" class="big-btn">💡 Открыть Модуль 1 — Управляемая лампа →</a>
+    </p>
+  </section>
+
+  <footer>
+    ShokanLab · Этап 1, v0.1 · <a href="../index.html">Обзор этапа</a>
+  </footer>
+
+</div>
+
+<script>
+  function copyTest() {
+    const box = document.getElementById('testPrompt');
+    const txt = box.innerText.replace(/^копировать\n?/, '').trim();
+    navigator.clipboard.writeText(txt);
+    const btn = box.querySelector('.copy-btn');
+    btn.textContent = '✓ скопировано';
+    setTimeout(() => btn.textContent = 'копировать', 1500);
+  }
+</script>
+</body>
+</html>

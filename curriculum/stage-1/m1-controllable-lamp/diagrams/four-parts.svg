@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
+<!-- aria-label: 4 части любой цепи -->
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4 части любой цепи">
+            <rect x="20"  y="50" width="140" height="100" rx="8" class="bd-comp bd-source"/>
+            <text x="90"  y="95"  text-anchor="middle" class="bd-title">ИСТОЧНИК</text>
+            <text x="90"  y="115" text-anchor="middle" class="bd-sub">даёт напряжение</text>
+            <text x="90"  y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">ATX</text>
+
+            <rect x="200" y="50" width="140" height="100" rx="8" class="bd-comp bd-ctrl"/>
+            <text x="270" y="95"  text-anchor="middle" class="bd-title">УПРАВЛЕНИЕ</text>
+            <text x="270" y="115" text-anchor="middle" class="bd-sub">кто-то решает</text>
+            <text x="270" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">кнопка · реле · Pico</text>
+
+            <rect x="380" y="50" width="140" height="100" rx="8" class="bd-comp bd-load"/>
+            <text x="450" y="95"  text-anchor="middle" class="bd-title">НАГРУЗКА</text>
+            <text x="450" y="115" text-anchor="middle" class="bd-sub">потребляет ток</text>
+            <text x="450" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">LED</text>
+
+            <rect x="560" y="50" width="120" height="100" rx="8" class="bd-comp bd-wires"/>
+            <text x="620" y="95"  text-anchor="middle" class="bd-title">ПРОВОДА</text>
+            <text x="620" y="115" text-anchor="middle" class="bd-sub">путь для тока</text>
+            <text x="620" y="135" text-anchor="middle" class="bd-sub" style="font-weight:600">Dupont</text>
+
+            <!-- стрелки тока -->
+            <path d="M 160 100 L 200 100" class="bd-wire" stroke="#E8A33D" marker-end="url(#arr)"/>
+            <path d="M 340 100 L 380 100" class="bd-wire" stroke="#E8A33D" marker-end="url(#arr)"/>
+            <path d="M 520 100 L 560 100" class="bd-wire" stroke="#E8A33D" marker-end="url(#arr)"/>
+            <path d="M 620 150 L 620 180 L 90 180 L 90 150" class="bd-wire" stroke="#2B2B2B" stroke-dasharray="4 3"/>
+
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#E8A33D"/>
+              </marker>
+            </defs>
+
+            <text x="360" y="205" text-anchor="middle" style="font:italic 10px sans-serif;fill:#666">ток идёт по кругу — от источника через управление и нагрузку обратно</text>
+          </svg>
