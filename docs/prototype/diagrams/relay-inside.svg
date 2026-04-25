@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Реле в разрезе: катушка + якорь + контакты. Анимация: якорь притягивается к катушке при активации. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img"
+     aria-label="Устройство реле в разрезе"
+     style="max-width:520px">
+  <defs>
+    <linearGradient id="caseBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F1EA"/>
+      <stop offset="1" stop-color="#E8E0C8"/>
+    </linearGradient>
+    <linearGradient id="metalCoil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B8860B"/>
+      <stop offset="1" stop-color="#8B6F18"/>
+    </linearGradient>
+    <linearGradient id="iron" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7A7A7A"/>
+      <stop offset="1" stop-color="#3A3A3A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Корпус реле (фон) -->
+  <rect x="20" y="20" width="460" height="260" rx="10" fill="url(#caseBg)" stroke="#8B7E5C" stroke-width="1.5"/>
+
+  <!-- Подпись корпуса -->
+  <text x="250" y="42" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#6B5A2A" font-weight="bold" letter-spacing="1">РЕЛЕ В РАЗРЕЗЕ</text>
+
+  <!-- ========== КАТУШКА (слева) ========== -->
+  <g id="coil">
+    <!-- железный сердечник -->
+    <rect x="80" y="110" width="70" height="100" rx="2" fill="url(#iron)" stroke="#222" stroke-width="1"/>
+    <text x="115" y="165" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#EEE" font-weight="bold">железный</text>
+    <text x="115" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#EEE" font-weight="bold">сердечник</text>
+
+    <!-- обмотка (многократные витки) -->
+    <g stroke="url(#metalCoil)" stroke-width="3" fill="none">
+      <path d="M 75 115 Q 115 108 155 115"/>
+      <path d="M 75 130 Q 115 123 155 130"/>
+      <path d="M 75 145 Q 115 138 155 145"/>
+      <path d="M 75 160 Q 115 153 155 160"/>
+      <path d="M 75 175 Q 115 168 155 175"/>
+      <path d="M 75 190 Q 115 183 155 190"/>
+      <path d="M 75 205 Q 115 198 155 205"/>
+    </g>
+
+    <!-- Подпись катушки -->
+    <text x="115" y="240" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1F3A5F" font-weight="bold">КАТУШКА</text>
+    <text x="115" y="255" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#5A5A5A">становится магнитом</text>
+
+    <!-- Магнитное поле (появляется при активации) -->
+    <g id="magneticField" opacity="0">
+      <ellipse cx="115" cy="160" rx="80" ry="14" fill="none" stroke="#5B8DEF" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
+      <ellipse cx="115" cy="160" rx="90" ry="20" fill="none" stroke="#5B8DEF" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+      <ellipse cx="115" cy="160" rx="100" ry="26" fill="none" stroke="#5B8DEF" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.4"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" dur="4s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- ========== ЯКОРЬ (anchor/armature) — подвижная пластина ========== -->
+  <g id="armature">
+    <!-- Ось вращения -->
+    <circle cx="230" cy="90" r="4" fill="#555" stroke="#222"/>
+
+    <!-- Подвижная пластина -->
+    <g>
+      <!-- Позиция по умолчанию: разомкнуто (пластина торчит вверх, касается NC) -->
+      <rect x="226" y="90" width="8" height="100" fill="url(#iron)" stroke="#222" stroke-width="1">
+        <animateTransform attributeName="transform" type="rotate"
+          values="15 230 90; 15 230 90; -8 230 90; -8 230 90; 15 230 90"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="4s" repeatCount="indefinite"/>
+      </rect>
+
+      <!-- Контактная точка на конце пластины -->
+      <circle cx="230" cy="195" r="5" fill="#D4A017" stroke="#8B6F18" stroke-width="1">
+        <animateTransform attributeName="transform" type="rotate"
+          values="15 230 90; 15 230 90; -8 230 90; -8 230 90; 15 230 90"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Пружина (возвращает назад) -->
+    <g stroke="#888" stroke-width="1.2" fill="none">
+      <path d="M 240 110 L 265 108 L 240 118 L 265 116 L 240 126 L 265 124 L 240 134"/>
+    </g>
+    <text x="285" y="125" font-family="sans-serif" font-size="9" fill="#6B6B6B" font-style="italic">пружина</text>
+
+    <!-- Подпись якоря -->
+    <text x="230" y="75" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F3A5F" font-weight="bold">ЯКОРЬ</text>
+  </g>
+
+  <!-- ========== КОНТАКТЫ ========== -->
+  <g id="contacts">
+    <!-- NC (Normally Closed) — сверху, в покое касается якоря -->
+    <circle cx="258" cy="105" r="6" fill="#D4A017" stroke="#8B6F18" stroke-width="1"/>
+    <text x="275" y="108" font-family="monospace" font-size="11" fill="#1F3A5F" font-weight="bold">NC</text>
+    <text x="275" y="121" font-family="sans-serif" font-size="9" fill="#5A5A5A">замкнут в покое</text>
+
+    <!-- COM (Common) — ось якоря -->
+    <circle cx="230" cy="90" r="6" fill="#D4A017" stroke="#8B6F18" stroke-width="1"/>
+    <text x="200" y="65" font-family="monospace" font-size="11" fill="#1F3A5F" font-weight="bold" text-anchor="end">COM</text>
+    <text x="200" y="78" font-family="sans-serif" font-size="9" fill="#5A5A5A" text-anchor="end">общий</text>
+
+    <!-- NO (Normally Open) — снизу справа, замыкается при активации -->
+    <circle cx="290" cy="210" r="6" fill="#D4A017" stroke="#8B6F18" stroke-width="1"/>
+    <text x="305" y="213" font-family="monospace" font-size="11" fill="#1F3A5F" font-weight="bold">NO</text>
+    <text x="305" y="226" font-family="sans-serif" font-size="9" fill="#5A5A5A">замыкается с IN</text>
+  </g>
+
+  <!-- ========== Управляющие выводы (катушка) ========== -->
+  <g>
+    <rect x="55" y="90" width="18" height="10" fill="#D4A017" stroke="#8B6F18"/>
+    <text x="64" y="85" text-anchor="middle" font-family="monospace" font-size="10" fill="#1F3A5F" font-weight="bold">IN</text>
+
+    <rect x="55" y="205" width="18" height="10" fill="#D4A017" stroke="#8B6F18"/>
+    <text x="64" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#1F3A5F" font-weight="bold">DC−</text>
+
+    <rect x="157" y="115" width="18" height="10" fill="#D4A017" stroke="#8B6F18"/>
+    <text x="190" y="124" font-family="monospace" font-size="10" fill="#1F3A5F" font-weight="bold">DC+</text>
+  </g>
+
+  <!-- ========== Индикатор состояния (справа внизу) ========== -->
+  <g transform="translate(380, 230)">
+    <text x="0" y="0" font-family="sans-serif" font-size="10" fill="#1F3A5F" font-weight="bold">Состояние:</text>
+    <g id="stateIndicator">
+      <text x="0" y="18" font-family="sans-serif" font-size="11" fill="#5E8D6E" font-weight="bold">
+        <tspan>
+          <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+          ■ покой · NC замкнут
+        </tspan>
+      </text>
+      <text x="0" y="18" font-family="sans-serif" font-size="11" fill="#C94C4C" font-weight="bold">
+        <tspan>
+          <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+          ▶ активно · NO замкнут, щелчок!
+        </tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Подпись снизу -->
+  <text x="250" y="285" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#5A5A5A" font-style="italic">Сигнал на IN → катушка становится магнитом → якорь притягивается → COM касается NO</text>
+</svg>

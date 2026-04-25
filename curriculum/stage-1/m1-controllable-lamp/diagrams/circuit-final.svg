@@ -2,6 +2,26 @@
 <!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
 <!-- aria-label: Схема соединений Модуля 1 -->
 <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема соединений Модуля 1">
+  <style>
+    .bd-comp   { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:2 }
+    .bd-pico   { fill:#E8F0F9 }
+    .bd-relay  { fill:#E8F4EC }
+    .bd-led    { fill:#FDECEA }
+    .bd-atx    { fill:#F5F5F0 }
+    .bd-btn    { fill:#FFF4E0 }
+    .bd-source { fill:#FFE6D9 }
+    .bd-load   { fill:#FDECEA }
+    .bd-ctrl   { fill:#E8F4EC }
+    .bd-wires  { fill:#F0F0F0 }
+    .bd-title  { font:bold 14px sans-serif; fill:#1F3A5F }
+    .bd-sub    { font:10px sans-serif; fill:#6B6B6B }
+    .bd-section{ font:italic 10px sans-serif; fill:#8B8B8B }
+    .bd-pin    { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:1.5 }
+    .bd-pinlbl { font:11px monospace; fill:#1F3A5F }
+    .bd-wire   { stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .bd-wlbl   { font:bold 10px monospace }
+  </style>
+
           <style>
             .bd-comp   { fill: #FFFFFF; stroke: #1F3A5F; stroke-width: 2 }
             .bd-pico   { fill: #E8F0F9 }
@@ -54,15 +74,15 @@
           <!-- RELAY (центр) -->
           <rect x="340" y="80" width="220" height="260" rx="8" class="bd-comp bd-relay"/>
           <text x="360" y="108" class="bd-title">РЕЛЕ 1 канал</text>
-          <text x="360" y="124" class="bd-sub">SRD-05VDC, управляется 3.3V</text>
+          <text x="360" y="124" class="bd-sub">JQC-3FF-S-Z · джампер H</text>
 
-          <!-- управление (левая сторона) -->
+          <!-- управление (левая сторона) — DC+ сверху, DC− в центре, IN снизу -->
           <text x="360" y="150" class="bd-section">управление:</text>
           <circle cx="340" cy="170" r="5" class="bd-pin"/>
-          <text x="350" y="174" class="bd-pinlbl">GND</text>
+          <text x="350" y="174" class="bd-pinlbl">DC+</text>
 
           <circle cx="340" cy="200" r="5" class="bd-pin"/>
-          <text x="350" y="204" class="bd-pinlbl">VCC</text>
+          <text x="350" y="204" class="bd-pinlbl">DC−</text>
 
           <circle cx="340" cy="230" r="5" class="bd-pin"/>
           <text x="350" y="234" class="bd-pinlbl">IN</text>
@@ -91,13 +111,13 @@
           <text x="650" y="252" class="bd-pinlbl" font-weight="bold">−</text>
 
           <!-- ========== ПРОВОДА ========== -->
-          <!-- 1. Pico GND → Relay GND -->
-          <path d="M 240 150 L 290 150 L 290 170 L 340 170" class="bd-wire" stroke="#2B2B2B"/>
-          <text x="290" y="145" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">GND</text>
+          <!-- 1. Pico 3V3 → Relay DC+ (сверху) -->
+          <path d="M 240 185 L 290 185 L 290 170 L 340 170" class="bd-wire" stroke="#E8A33D"/>
+          <text x="290" y="165" text-anchor="middle" class="bd-wlbl" fill="#B8822A">3.3V</text>
 
-          <!-- 2. Pico 3V3 → Relay VCC -->
-          <path d="M 240 185 L 290 185 L 290 200 L 340 200" class="bd-wire" stroke="#E8A33D"/>
-          <text x="290" y="178" text-anchor="middle" class="bd-wlbl" fill="#B8822A">3.3V</text>
+          <!-- 2. Pico GND → Relay DC− (середина) -->
+          <path d="M 240 150 L 290 150 L 290 200 L 340 200" class="bd-wire" stroke="#2B2B2B"/>
+          <text x="290" y="215" text-anchor="middle" class="bd-wlbl" fill="#2B2B2B">GND</text>
 
           <!-- 3. Pico GP15 → Relay IN (СИГНАЛ — красный!) -->
           <path d="M 240 220 L 290 220 L 290 230 L 340 230" class="bd-wire" stroke="#C94C4C"/>

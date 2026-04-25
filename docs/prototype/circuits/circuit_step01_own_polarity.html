@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Own 1 · LED Polarity</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #1d1d1f;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Flow animation */
+        @keyframes flow {
+            from { stroke-dashoffset: 40; }
+            to { stroke-dashoffset: 0; }
+        }
+        
+        /* Pulse for blocked current */
+        @keyframes pulse-block {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .wire { stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .wire-solid { stroke-width: 4; }
+        
+        .electron-flow {
+            stroke: #FFC107;
+            stroke-width: 3;
+            stroke-dasharray: 4 16;
+            animation: flow 1s linear infinite;
+            fill: none;
+        }
+
+        .electron-blocked {
+            stroke: #FFC107;
+            stroke-width: 3;
+            stroke-dasharray: 4 16;
+            /* No animation */
+            fill: none;
+            opacity: 0.5;
+        }
+
+        .label { font-weight: 700; font-size: 14px; letter-spacing: 0.5px; }
+        .desc { font-size: 11px; fill: #6e6e73; font-style: italic; }
+        
+        .barrier-icon {
+            transform-origin: center;
+            animation: pulse-block 1.5s infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <svg id="circuit" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+        
+        <defs>
+            <radialGradient id="ledGlowStrong">
+                <stop offset="0%" stop-color="#FFEB3B" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#FFEB3B" stop-opacity="0"/>
+            </radialGradient>
+        </defs>
+
+        <!-- ========================================== -->
+        <!-- LEFT SIDE: CORRECT POLARITY                -->
+        <!-- ========================================== -->
+        <g transform="translate(15, 50)">
+            <text x="220" y="-15" class="label" fill="#10B981" text-anchor="middle">✓ ПРАВИЛЬНО (Анод к +3.3V)</text>
+            
+            <g transform="scale(0.55)">
+                <g id="left-components"></g>
+                <g id="left-wires"></g>
+            </g>
+            
+            <text x="220" y="415" class="desc" text-anchor="middle">Ток проходит через кристалл, LED светится</text>
+        </g>
+
+        <!-- ========================================== -->
+        <!-- RIGHT SIDE: REVERSED POLARITY               -->
+        <!-- ========================================== -->
+        <g transform="translate(485, 50)">
+            <text x="220" y="-15" class="label" fill="#EF4444" text-anchor="middle">✗ ПЕРЕВЁРНУТО (Катод к +3.3V)</text>
+            
+            <g transform="scale(0.55)">
+                <g id="right-components"></g>
+                <g id="right-wires"></g>
+            </g>
+            
+            <!-- Blocking indicator -->
+            <g transform="translate(204, 346)">
+                <g class="barrier-icon">
+                    <circle cx="0" cy="0" r="16" fill="#EF4444" opacity="0.2" />
+                    <line x1="-10" y1="-10" x2="10" y2="10" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="-10" y1="10" x2="10" y2="-10" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+                </g>
+            </g>
+            
+            <!-- Connection labels to emphasize the flip -->
+            <text x="80" y="350" fill="#EF4444" font-size="12" font-weight="700">Ток заблокирован</text>
+            
+            <text x="220" y="415" class="desc" text-anchor="middle">Односторонняя дорога: ток не может пройти</text>
+        </g>
+
+    </svg>
+
+<script src="component_registry.js"></script>
+<script>
+    const atxComp = COMPONENT_LIBRARY["atx_xh_m229"];
+    const ledComp = COMPONENT_LIBRARY["led_3w_star"];
+
+    // SOP: координаты — через pin() helper от реестра
+    const ATX_OFFSET = { tx: 30,  ty: 0   };
+    const LED_OFFSET = { tx: 370, ty: 600 };
+
+    const atxPins = {
+        "plus3V3": pin(atxComp, 'plus3V3', ATX_OFFSET),
+        "gnd_4":   pin(atxComp, 'gnd_4',   ATX_OFFSET)
+    };
+
+    // Обычная LED: анод слева, катод справа
+    const ledPinsNorm = {
+        "anode":   pin(ledComp, 'anode',   LED_OFFSET),
+        "cathode": pin(ledComp, 'cathode', LED_OFFSET)
+    };
+
+    // Перевёрнутая LED (rotate 180 вокруг центра) — физические левый/правый пин
+    // получают противоположную роль; визуально pads остаются на тех же координатах
+    const ledPinsFlip = {
+        "leftPin":  pin(ledComp, 'anode',   LED_OFFSET),   // визуально слева = катод (−)
+        "rightPin": pin(ledComp, 'cathode', LED_OFFSET)    // визуально справа = анод (+)
+    };
+
+    let atxSvg = atxComp.renderSVG({ x: ATX_OFFSET.tx, y: ATX_OFFSET.ty });
+    let ledOnSvg  = ledComp.renderSVG({ x: 0, y: 0 }); // We will wrap with translate
+    let ledOffSvg = ledComp.renderSVG({ x: 0, y: 0 });
+
+    ledOnSvg = ledOnSvg.replace('opacity="0.3"', 'opacity="0.9" r="28"');
+    ledOffSvg = ledOffSvg.replace(/<circle cx="\d+" cy="\d+" r="\d+" fill="url\(#ledGlow\)".*?\/>/, '');
+
+    // ==========================================
+    // 1. LEFT SIDE (Correct)
+    // ==========================================
+    const leftLedWrap = `<g transform="translate(${ledbbox.x}, ${ledbbox.y})">${ledOnSvg}</g>`;
+    document.getElementById('left-components').innerHTML = atxSvg + leftLedWrap;
+    
+    const wireRed = `
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPinsNorm.anode.x - 50},450 ${ledPinsNorm.anode.x - 50},${ledPinsNorm.anode.y} ${ledPinsNorm.anode.x},${ledPinsNorm.anode.y}" class="wire wire-solid" stroke="#ef4444" />
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPinsNorm.anode.x - 50},450 ${ledPinsNorm.anode.x - 50},${ledPinsNorm.anode.y} ${ledPinsNorm.anode.x},${ledPinsNorm.anode.y}" class="electron-flow" />
+    `;
+    const wireBlack = `
+        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},500 ${ledPinsNorm.cathode.x + 50},500 ${ledPinsNorm.cathode.x + 50},${ledPinsNorm.cathode.y} ${ledPinsNorm.cathode.x},${ledPinsNorm.cathode.y}" class="wire wire-solid" stroke="#1d1d1f" />
+        <polyline points="${ledPinsNorm.cathode.x},${ledPinsNorm.cathode.y} ${ledPinsNorm.cathode.x + 50},${ledPinsNorm.cathode.y} ${ledPinsNorm.cathode.x + 50},500 ${atxPins.gnd_4.x},500 ${atxPins.gnd_4.x},${atxPins.gnd_4.y}" class="electron-flow" />
+    `;
+    
+    document.getElementById('left-wires').innerHTML = wireRed + wireBlack + 
+        `<text x="${ledPinsNorm.anode.x - 15}" y="${ledPinsNorm.anode.y - 15}" font-size="24" font-weight="bold" fill="#ef4444">+</text>
+         <text x="${ledPinsNorm.cathode.x + 5}" y="${ledPinsNorm.cathode.y - 15}" font-size="24" font-weight="bold" fill="#1d1d1f">-</text>
+         <circle cx="${atxPins.plus3V3.x}" cy="${atxPins.plus3V3.y}" r="8" fill="#ef4444"/>
+         <circle cx="${ledPinsNorm.anode.x}" cy="${ledPinsNorm.anode.y}" r="8" fill="#ef4444"/>
+         <circle cx="${atxPins.gnd_4.x}" cy="${atxPins.gnd_4.y}" r="8" fill="#1d1d1f"/>
+         <circle cx="${ledPinsNorm.cathode.x}" cy="${ledPinsNorm.cathode.y}" r="8" fill="#1d1d1f"/>`;
+
+
+    // ==========================================
+    // 2. RIGHT SIDE (Reversed)
+    // ==========================================
+    // Wrap LED in translate and rotate(180) around its center (30, 30)
+    const rightLedWrap = `
+        <g transform="translate(${ledbbox.x}, ${ledbbox.y}) rotate(180, 30, 30)">
+            ${ledOffSvg}
+        </g>
+    `;
+    document.getElementById('right-components').innerHTML = atxSvg + rightLedWrap;
+
+    // Red wire goes to the left pin (which is now physically cathode!)
+    // We only animate the flow UP TO the LED, then it gets blocked.
+    const wireRedRev = `
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPinsFlip.leftPin.x - 50},450 ${ledPinsFlip.leftPin.x - 50},${ledPinsFlip.leftPin.y} ${ledPinsFlip.leftPin.x},${ledPinsFlip.leftPin.y}" class="wire wire-solid" stroke="#ef4444" />
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPinsFlip.leftPin.x - 50},450 ${ledPinsFlip.leftPin.x - 50},${ledPinsFlip.leftPin.y} ${ledPinsFlip.leftPin.x},${ledPinsFlip.leftPin.y}" class="electron-flow" />
+    `;
+    // Black wire connects to the right pin (which is now physically anode!)
+    const wireBlackRev = `
+        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},500 ${ledPinsFlip.rightPin.x + 50},500 ${ledPinsFlip.rightPin.x + 50},${ledPinsFlip.rightPin.y} ${ledPinsFlip.rightPin.x},${ledPinsFlip.rightPin.y}" class="wire wire-solid" stroke="#1d1d1f" />
+    `;
+
+    document.getElementById('right-wires').innerHTML = wireRedRev + wireBlackRev +
+        `<text x="${ledPinsFlip.leftPin.x - 15}" y="${ledPinsFlip.leftPin.y - 15}" font-size="24" font-weight="bold" fill="#1d1d1f">-</text> <!-- Was +, now - due to rotate -->
+         <text x="${ledPinsFlip.rightPin.x + 5}" y="${ledPinsFlip.rightPin.y - 15}" font-size="24" font-weight="bold" fill="#ef4444">+</text> <!-- Was -, now + due to rotate -->
+         <circle cx="${atxPins.plus3V3.x}" cy="${atxPins.plus3V3.y}" r="8" fill="#ef4444"/>
+         <circle cx="${ledPinsFlip.leftPin.x}" cy="${ledPinsFlip.leftPin.y}" r="8" fill="#ef4444"/>
+         <circle cx="${atxPins.gnd_4.x}" cy="${atxPins.gnd_4.y}" r="8" fill="#1d1d1f"/>
+         <circle cx="${ledPinsFlip.rightPin.x}" cy="${ledPinsFlip.rightPin.y}" r="8" fill="#1d1d1f"/>`;
+
+</script>
+</body>
+</html>

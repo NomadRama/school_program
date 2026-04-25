@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цикл 2 · Know — Мультиметр UT33C+</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { margin:0; padding:0; display:flex; justify-content:center; align-items:flex-start;
+         background:transparent; overflow:hidden;
+         font-family:'Inter','Segoe UI',system-ui,sans-serif; }
+  .sim { width:100%; height:440px; display:flex; flex-direction:column;
+         align-items:center; justify-content:center; background:transparent; }
+  svg { width:100%; height:100%; overflow:visible; }
+
+  .co-line { stroke:#EF4444; stroke-width:1.4; stroke-dasharray:3 3; fill:none; }
+  .co-dot  { fill:#EF4444; }
+  .co-num  { font-family:sans-serif; font-size:14px; font-weight:800; fill:#EF4444; }
+  .co-text { font-family:sans-serif; font-size:11px; fill:#1e2a4a; font-weight:600; }
+  .co-sub  { font-family:sans-serif; font-size:10px; fill:#6B6B6B; font-weight:500; }
+  .co-hl   { font-family:sans-serif; font-size:10px; fill:#FBBF24; font-weight:700; }
+</style>
+</head>
+<body>
+
+<div class="sim">
+  <svg viewBox="0 0 700 400">
+    <g id="comp-layer"></g>
+    <g id="callouts"></g>
+  </svg>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+  // ==== КООРДИНАТЫ И РЕНДЕР КОМПОНЕНТА ====
+  const TX = 140, TY = 20;   // смещение мультиметра в viewBox
+  const mm = COMPONENT_LIBRARY["multimeter_ut33c_plus"];
+  mm.bbox = { x: 0, y: 0, w: 200, h: 340 };
+  document.getElementById('comp-layer').innerHTML = mm.renderSVG({ x: TX, y: TY });
+
+  // ==== ВЫНОСКИ ЧЕРЕЗ ANCHORS (а не хардкод) ====
+  // Правило SOP: callouts anchor to registry.anchors + transform, не на глаз.
+  function abs(anchor) {
+    return { x: anchor.x + TX, y: anchor.y + TY };
+  }
+
+  const callouts = [
+    {
+      num: "①",
+      anchor: abs(mm.anchors.screen),
+      label: { x: 500, y: 70, text: "Экран", sub: "показывает результат (1999)" }
+    },
+    {
+      num: "②",
+      anchor: abs(mm.anchors.dial_pointer),
+      label: { x: 500, y: 195, text: "Переключатель",
+               sub: "V= / V~ / Ω / 🔊 / A",
+               hl: "Для Модуля 1: V= (20V)" }
+    },
+    {
+      num: "③",
+      anchor: abs(mm.anchors.jack_com),
+      label: { x: 100, y: 390, text: "COM (чёрный щуп)", align: "end" }
+    },
+    {
+      num: "④",
+      anchor: abs(mm.anchors.jack_vma),
+      label: { x: 500, y: 390, text: "VΩmA (красный щуп)" }
+    }
+  ];
+
+  const layer = document.getElementById('callouts');
+  let svg = '';
+  callouts.forEach(c => {
+    const a = c.anchor, l = c.label;
+    const anchor = l.align || "start";
+    // Точка на компоненте
+    svg += `<circle class="co-dot" cx="${a.x}" cy="${a.y}" r="4"/>`;
+    // Линия к блоку-подписи
+    svg += `<line class="co-line" x1="${a.x}" y1="${a.y}" x2="${l.x - 10}" y2="${l.y - 4}"/>`;
+    // Номер + текст
+    svg += `<text class="co-num" x="${l.x - 18}" y="${l.y}">${c.num}</text>`;
+    svg += `<text class="co-text" x="${l.x}" y="${l.y}" text-anchor="${anchor}">${l.text}</text>`;
+    if (l.sub) svg += `<text class="co-sub" x="${l.x}" y="${l.y + 16}" text-anchor="${anchor}">${l.sub}</text>`;
+    if (l.hl)  svg += `<text class="co-hl"  x="${l.x}" y="${l.y + 30}" text-anchor="${anchor}">${l.hl}</text>`;
+  });
+  layer.innerHTML = svg;
+</script>
+</body>
+</html>

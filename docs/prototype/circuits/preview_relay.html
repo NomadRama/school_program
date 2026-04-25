@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShokanLab · Preview: Relay JQC-3FF-S-Z</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Inter','Segoe UI',system-ui,sans-serif;
+    background:#f5f5f7; padding:40px 20px; color:#1d1d1f;
+  }
+  .wrap { max-width:720px; margin:0 auto; background:#fff;
+    padding:32px; border-radius:14px; box-shadow:0 4px 24px rgba(0,0,0,.08); }
+  h1 { font-size:20px; margin-bottom:4px; }
+  .sub { color:#86868b; font-size:13px; margin-bottom:22px; }
+
+  .stage { background:#F5F5F7; border-radius:10px; padding:30px 20px;
+    display:flex; justify-content:center; align-items:center; }
+  svg { max-width:100%; height:auto; overflow:visible; }
+
+  .debug-bar { margin-top:16px; text-align:center; font-size:12px; color:#86868b; }
+  .bbox-debug { fill:rgba(255,0,0,.06); stroke:rgba(255,0,0,.3);
+    stroke-width:1; stroke-dasharray:4 4; }
+  .pin-debug { fill:#22c55e; stroke:#16a34a; stroke-width:1; }
+
+  .pins-table { width:100%; margin-top:20px; font-size:13px; border-collapse:collapse; }
+  .pins-table th { text-align:left; padding:8px 10px; background:#f5f5f7; color:#6e6e73;
+    font-weight:600; font-size:11px; letter-spacing:.5px; text-transform:uppercase; }
+  .pins-table td { padding:8px 10px; border-bottom:1px solid #f0f0f2; }
+  .pin-color { display:inline-block; width:12px; height:12px; border-radius:3px;
+    vertical-align:middle; margin-right:6px; border:1px solid #ccc; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Реле JQC-3FF-S-Z</h1>
+  <div class="sub">1-канальный модуль реле 5V с оптопарой, джампер H/L, клеммы DC+/DC−/IN + NC/COM/NO</div>
+
+  <div class="stage">
+    <svg id="preview" viewBox="0 0 280 170">
+      <g id="comp-layer"></g>
+      <g id="debug-layer" style="display:none"></g>
+    </svg>
+  </div>
+
+  <div class="debug-bar">
+    <label><input type="checkbox" id="toggleDebug"> Показать bbox и пины (debug)</label>
+  </div>
+
+  <table class="pins-table">
+    <tr><th>Пин</th><th>Side</th><th>Тип</th><th>Назначение в Модуле 1</th></tr>
+    <tr><td><span class="pin-color" style="background:#ef4444"></span><b>DC+</b></td><td>left</td><td>power</td><td>Pico 3V3 → питание катушки</td></tr>
+    <tr><td><span class="pin-color" style="background:#1d1d1f"></span><b>DC−</b></td><td>left</td><td>ground</td><td>Pico GND → земля</td></tr>
+    <tr><td><span class="pin-color" style="background:#22c55e"></span><b>IN</b></td><td>left</td><td>signal</td><td>Pico GP15 → сигнал (триггер)</td></tr>
+    <tr><td><span class="pin-color" style="background:#9CA3AF"></span><b>NC</b></td><td>right</td><td>contact</td><td>Normally Closed — не используем</td></tr>
+    <tr><td><span class="pin-color" style="background:#ef4444"></span><b>COM</b></td><td>right</td><td>contact</td><td>ATX +3.3V → общий вход</td></tr>
+    <tr><td><span class="pin-color" style="background:#ef4444"></span><b>NO</b></td><td>right</td><td>contact</td><td>Normally Open → LED+</td></tr>
+  </table>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+  const relay = COMPONENT_LIBRARY["relay_jqc_3ff_s_z"];
+  relay.bbox = { x: 10, y: 10, w: 260, h: 130 };
+  document.getElementById('comp-layer').innerHTML = relay.renderSVG({ x: 10, y: 10 });
+
+  // Debug layer
+  let dbg = '';
+  const b = relay.bbox;
+  dbg += `<rect class="bbox-debug" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}"/>`;
+  dbg += `<text x="${b.x+2}" y="${b.y-3}" fill="red" font-size="8">bbox</text>`;
+  Object.entries(relay.pins).forEach(([name, p]) => {
+    const cx = b.x + p.x, cy = b.y + p.y;
+    dbg += `<circle class="pin-debug" cx="${cx}" cy="${cy}" r="3"/>`;
+    const dx = p.side === 'right' ? 8 : p.side === 'left' ? -8 : 0;
+    dbg += `<text x="${cx + dx}" y="${cy + 2}" fill="#16a34a" font-size="7"
+            text-anchor="${p.side === 'right' ? 'start' : 'end'}">${p.label}</text>`;
+  });
+  document.getElementById('debug-layer').innerHTML = dbg;
+
+  document.getElementById('toggleDebug').addEventListener('change', function() {
+    document.getElementById('debug-layer').style.display = this.checked ? 'block' : 'none';
+  });
+</script>
+</body>
+</html>

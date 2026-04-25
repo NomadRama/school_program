@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Component Preview</title>
+    <style>
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #f0f0f0; 
+        }
+        svg {
+            background-color: transparent;
+            width: 400px;
+            height: 400px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+        }
+    </style>
+</head>
+<body>
+    <svg viewBox="-20 -20 100 100" xmlns="http://www.w3.org/2000/svg" id="canvas">
+        <defs>
+            <radialGradient id="ledGlow">
+                <stop offset="0%" stop-color="#FFEB3B" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#FFEB3B" stop-opacity="0"/>
+            </radialGradient>
+        </defs>
+        <!-- The button will be injected here -->
+    </svg>
+
+    <script src="component_registry.js"></script>
+    <script>
+        const btnComp = COMPONENT_LIBRARY["button_tactile_2pin"];
+        document.getElementById('canvas').innerHTML += btnComp.renderSVG();
+    </script>
+</body>
+</html>

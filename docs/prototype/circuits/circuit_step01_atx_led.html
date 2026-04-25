@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цикл 1 · Try — ATX + LED 3Вт</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: transparent;
+            display: flex; flex-direction: column; align-items: center;
+            color: #1d1d1f; overflow: hidden;
+        }
+        .circuit-container {
+            background:#ffffff; border-radius:16px; padding:24px 16px;
+            box-shadow:0 4px 24px rgba(0,0,0,0.08);
+            max-width:950px; width:100%; height:100vh;
+        }
+        .circuit-title { text-align:center; margin-bottom:24px; font-size:18px; color:#6e6e73; }
+        .circuit-caption { text-align:center; margin-top:20px; font-size:15px; color:#86868b; font-style:italic; }
+        .circuit-description { text-align:center; margin-top:12px; font-size:16px; color:#1d1d1f; }
+        .wire { fill:none; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; }
+    </style>
+</head>
+<body>
+
+<div class="circuit-container">
+    <div class="circuit-title">
+        Цикл 1 · Try — всего 2 провода, LED горит когда цепь замкнута
+    </div>
+
+    <svg id="circuit" viewBox="0 0 820 460" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+        <g id="components-layer"></g>
+        <g id="wires-layer"></g>
+    </svg>
+
+    <div class="circuit-caption">
+        Цикл 1 · Try — 2 провода · нет управления · LED горит постоянно
+    </div>
+    <div class="circuit-description">
+        Что вы сейчас соберёте: 2 провода, светодиод, два напряжения блока ATX.
+    </div>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+// ==== SOP: pins = визуальная позиция; координаты — через pin()/pinExit() ====
+
+const ATX_OFFSET = { tx: 0,   ty: 0   };
+const LED_OFFSET = { tx: 370, ty: 380 };
+
+const atx = COMPONENT_LIBRARY["atx_xh_m229"];
+const led = COMPONENT_LIBRARY["led_3w_star"];
+
+// bbox компонента ATX по умолчанию {x:40, y:30, ...}. Оставляем как есть,
+// origin = (0,0) означает "рисуй с этого локального origin на странице"
+const compLayer = document.getElementById('components-layer');
+compLayer.innerHTML += atx.renderSVG({ x: ATX_OFFSET.tx, y: ATX_OFFSET.ty });
+compLayer.innerHTML += led.renderSVG({ x: LED_OFFSET.tx, y: LED_OFFSET.ty });
+
+// ==== РАЗВОДКА ПРОВОДОВ ЧЕРЕЗ HELPER'ы ====
+const wires = [
+    {
+        color: '#ef4444', label: '+3.3V',
+        from: pin(atx, 'plus3V3', ATX_OFFSET),
+        fromExit: pinExit(atx, 'plus3V3', ATX_OFFSET),
+        to:   pin(led, 'anode',   LED_OFFSET),
+        toExit:   pinExit(led, 'anode', LED_OFFSET),
+        bendOffset: -15
+    },
+    {
+        color: '#1d1d1f', label: 'GND',
+        from: pin(atx, 'gnd_4', ATX_OFFSET),
+        fromExit: pinExit(atx, 'gnd_4', ATX_OFFSET),
+        to:   pin(led, 'cathode', LED_OFFSET),
+        toExit:   pinExit(led, 'cathode', LED_OFFSET),
+        bendOffset: 15
+    }
+];
+
+const wiresLayer = document.getElementById('wires-layer');
+wires.forEach(w => {
+    const bendY = (w.fromExit.y + w.toExit.y) / 2 + w.bendOffset;
+    const pts = [
+        `${w.from.x},${w.from.y}`,
+        `${w.fromExit.x},${w.fromExit.y}`,
+        `${w.fromExit.x},${bendY}`,
+        `${w.toExit.x},${bendY}`,
+        `${w.toExit.x},${w.toExit.y}`,
+        `${w.to.x},${w.to.y}`
+    ].join(' ');
+
+    wiresLayer.innerHTML += `
+        <polyline class="wire" points="${pts}" stroke="${w.color}"/>
+        <circle cx="${w.from.x}" cy="${w.from.y}" r="4" fill="${w.color}"/>
+        <circle cx="${w.to.x}"   cy="${w.to.y}"   r="4" fill="${w.color}"/>
+        <text x="${(w.fromExit.x + w.toExit.x)/2}" y="${bendY - 8}"
+              text-anchor="middle" fill="${w.color}" font-size="13" font-weight="600">
+            ${w.label}
+        </text>
+    `;
+});
+</script>
+
+</body>
+</html>

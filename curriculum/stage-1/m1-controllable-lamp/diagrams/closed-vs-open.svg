@@ -2,6 +2,26 @@
 <!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
 <!-- aria-label: Замкнутая и разомкнутая цепь -->
 <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Замкнутая и разомкнутая цепь">
+  <style>
+    .bd-comp   { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:2 }
+    .bd-pico   { fill:#E8F0F9 }
+    .bd-relay  { fill:#E8F4EC }
+    .bd-led    { fill:#FDECEA }
+    .bd-atx    { fill:#F5F5F0 }
+    .bd-btn    { fill:#FFF4E0 }
+    .bd-source { fill:#FFE6D9 }
+    .bd-load   { fill:#FDECEA }
+    .bd-ctrl   { fill:#E8F4EC }
+    .bd-wires  { fill:#F0F0F0 }
+    .bd-title  { font:bold 14px sans-serif; fill:#1F3A5F }
+    .bd-sub    { font:10px sans-serif; fill:#6B6B6B }
+    .bd-section{ font:italic 10px sans-serif; fill:#8B8B8B }
+    .bd-pin    { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:1.5 }
+    .bd-pinlbl { font:11px monospace; fill:#1F3A5F }
+    .bd-wire   { stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .bd-wlbl   { font:bold 10px monospace }
+  </style>
+
             <!-- ЗАМКНУТАЯ -->
             <text x="170" y="30" text-anchor="middle" style="font:bold 14px sans-serif;fill:#5E8D6E">✓ ЗАМКНУТАЯ — LED горит</text>
             <rect x="40"  y="70" width="100" height="60" rx="6" class="bd-comp bd-source"/>

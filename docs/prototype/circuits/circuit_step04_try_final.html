@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цикл 4 · Try — Pico → реле → LED (финал)</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { margin:0; padding:0; display:flex; justify-content:center; align-items:flex-start;
+         background:transparent; overflow:hidden;
+         font-family:'Inter','Segoe UI',system-ui,sans-serif; }
+  .sim { width:100%; height:680px; display:flex; flex-direction:column;
+         align-items:center; justify-content:center; background:transparent; }
+  svg { width:100%; height:100%; overflow:visible; }
+
+  .wire { fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+  .dot  { r:4; }
+  .wlbl { font-family:monospace; font-size:11px; font-weight:700; }
+
+  .hl { animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse {
+    0%,100% { filter: drop-shadow(0 0 0 transparent); }
+    50% { filter: drop-shadow(0 0 5px currentColor); }
+  }
+</style>
+</head>
+<body>
+
+<div class="sim">
+  <svg viewBox="0 0 900 620">
+    <g id="atx-simple"></g>
+    <g id="wires-layer"></g>
+    <g id="pico-layer"></g>
+    <g id="relay-layer"></g>
+    <g id="led-layer"></g>
+    <g id="highlight-layer"></g>
+    <g id="labels-layer"></g>
+  </svg>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+  // ==== SOP: pins=визуальная позиция; провода НЕ пересекают bbox ====
+
+  const PICO_OFFSET  = { tx: 80,  ty: 180 };
+  const RELAY_OFFSET = { tx: 400, ty: 340 };
+  const LED_OFFSET   = { tx: 780, ty: 370 };
+
+  const pico  = COMPONENT_LIBRARY["raspberry_pi_pico"];
+  const relay = COMPONENT_LIBRARY["relay_jqc_3ff_s_z"];
+  const led   = COMPONENT_LIBRARY["led_3w_star"];
+
+  document.getElementById('pico-layer').innerHTML  = pico.renderSVG({ x: PICO_OFFSET.tx,  y: PICO_OFFSET.ty });
+  document.getElementById('relay-layer').innerHTML = relay.renderSVG({ x: RELAY_OFFSET.tx, y: RELAY_OFFSET.ty });
+  document.getElementById('led-layer').innerHTML   = led.renderSVG({ x: LED_OFFSET.tx,    y: LED_OFFSET.ty });
+
+  // ==== Упрощённая ATX-полоса (одна декоративная картинка снизу) ====
+  const ATX_STRIP_TOP = 540;
+  const ATX_3V3 = { x: 600, y: 585 };
+  const ATX_GND = { x: 710, y: 585 };
+
+  const atxSimple = `
+    <rect x="80" y="${ATX_STRIP_TOP}" width="770" height="65" rx="6"
+          fill="#1565C0" stroke="#0D47A1" stroke-width="1.5"/>
+    <text x="465" y="560" text-anchor="middle" fill="#90CAF9" font-size="11" font-weight="600">
+      Плата ATX — активные клеммы
+    </text>
+    ${[240, 285, 360, 405, 480, 525].map(cx =>
+      `<circle cx="${cx}" cy="585" r="10" fill="none" stroke="#8b8b8b" stroke-width="1.5" opacity="0.4"/>`
+    ).join('')}
+    <circle class="hl" style="color:#EF4444" cx="${ATX_3V3.x}" cy="${ATX_3V3.y}" r="11"
+            fill="#EF4444" stroke="#8a1a1a" stroke-width="2"/>
+    <text x="${ATX_3V3.x}" y="605" text-anchor="middle" fill="#fff"
+          font-size="11" font-weight="700" font-family="monospace">+3.3V</text>
+    <circle class="hl" style="color:#1d1d1f" cx="${ATX_GND.x}" cy="${ATX_GND.y}" r="11"
+            fill="#1d1d1f" stroke="#000" stroke-width="2"/>
+    <text x="${ATX_GND.x}" y="605" text-anchor="middle" fill="#fff"
+          font-size="11" font-weight="700" font-family="monospace">GND</text>
+  `;
+  document.getElementById('atx-simple').innerHTML = atxSimple;
+
+  // ==== Подсветка активных пинов Pico (через registry) ====
+  const gp15 = pin(pico, 'gp15',     PICO_OFFSET);
+  const v3v3 = pin(pico, 'v3v3_out', PICO_OFFSET);
+  const gndP = pin(pico, 'gnd_38',   PICO_OFFSET);
+
+  document.getElementById('highlight-layer').innerHTML = [
+    { at: gp15, color: '#3b82f6' },
+    { at: v3v3, color: '#F59E0B' },
+    { at: gndP, color: '#1d1d1f' }
+  ].map(h =>
+    `<circle class="hl" style="color:${h.color}" cx="${h.at.x}" cy="${h.at.y}" r="7"
+             fill="none" stroke="${h.color}" stroke-width="2"/>`
+  ).join('');
+
+  // ==== Точки реле и LED ====
+  const dcPlus  = pin(relay, 'dc_plus', RELAY_OFFSET);
+  const dcMinus = pin(relay, 'dc_minus',RELAY_OFFSET);
+  const sigIn   = pin(relay, 'signal',  RELAY_OFFSET);
+  const com     = pin(relay, 'com',     RELAY_OFFSET);
+  const no      = pin(relay, 'no',      RELAY_OFFSET);
+  const anode   = pin(led,   'anode',   LED_OFFSET);
+  const cathode = pin(led,   'cathode', LED_OFFSET);
+
+  // ==== Координаты «коридоров» (зоны без компонентов) ====
+  const PICO_RIGHT  = PICO_OFFSET.tx  + pico.bbox.w;          // 220
+  const RELAY_LEFT  = RELAY_OFFSET.tx;                        // 400
+  const RELAY_RIGHT = RELAY_OFFSET.tx + relay.bbox.w;         // 660
+  const LED_LEFT    = LED_OFFSET.tx;                          // 780
+  const LED_RIGHT   = LED_OFFSET.tx   + led.bbox.w;           // 840
+  const PICO_BOTTOM = PICO_OFFSET.ty  + pico.bbox.h;          // 520
+  const ABOVE_ATX   = ATX_STRIP_TOP - 12;                     // 528 — коридор между Pico и ATX
+
+  const path = pts => pts.map(p => `${p.x},${p.y}`).join(' ');
+
+  const wires = [
+    // 1. GP15 → IN (выход слева Pico, под Pico, слева реле)
+    {
+      color: '#3b82f6',
+      points: [
+        gp15,
+        { x: 60,            y: gp15.y },
+        { x: 60,            y: ABOVE_ATX },
+        { x: RELAY_LEFT-20, y: ABOVE_ATX },
+        { x: RELAY_LEFT-20, y: sigIn.y },
+        sigIn
+      ],
+      labelAt: { x: 200, y: ABOVE_ATX - 6 }, labelText: 'GP15 → IN (сигнал)'
+    },
+    // 2. 3V3 → DC+ (выход справа Pico, через коридор, слева реле)
+    {
+      color: '#F59E0B',
+      points: [
+        v3v3,
+        { x: PICO_RIGHT+20,  y: v3v3.y },
+        { x: PICO_RIGHT+20,  y: dcPlus.y },
+        { x: RELAY_LEFT-30,  y: dcPlus.y },
+        dcPlus
+      ],
+      labelAt: { x: PICO_RIGHT+30, y: v3v3.y - 6 }, labelText: '3V3 → DC+'
+    },
+    // 3. GND (Pico) → DC− (через коридор отдельно от 3V3)
+    {
+      color: '#1d1d1f',
+      points: [
+        gndP,
+        { x: PICO_RIGHT+40,  y: gndP.y },
+        { x: PICO_RIGHT+40,  y: dcMinus.y },
+        { x: RELAY_LEFT-15,  y: dcMinus.y },
+        dcMinus
+      ],
+      labelAt: { x: PICO_RIGHT+50, y: gndP.y - 6 }, labelText: 'GND → DC−'
+    },
+    // 4. ATX +3.3V → COM (вверх над ATX, через коридор справа реле)
+    {
+      color: '#EF4444',
+      points: [
+        ATX_3V3,
+        { x: ATX_3V3.x,      y: ABOVE_ATX },
+        { x: RELAY_RIGHT+20, y: ABOVE_ATX },
+        { x: RELAY_RIGHT+20, y: com.y },
+        com
+      ],
+      labelAt: { x: ATX_3V3.x + 8, y: ABOVE_ATX - 6 }, labelText: '+3.3V → COM'
+    },
+    // 5. NO → LED+ (между реле и LED)
+    {
+      color: '#FBBF24',
+      points: [
+        no,
+        { x: RELAY_RIGHT+40, y: no.y },
+        { x: RELAY_RIGHT+40, y: anode.y },
+        anode
+      ],
+      labelAt: { x: RELAY_RIGHT+50, y: no.y - 6 }, labelText: 'NO → LED+'
+    },
+    // 6. LED− → ATX GND (справа LED, над ATX, вниз к GND клемме)
+    {
+      color: '#1d1d1f',
+      points: [
+        cathode,
+        { x: LED_RIGHT+20,   y: cathode.y },
+        { x: LED_RIGHT+20,   y: ABOVE_ATX },
+        { x: ATX_GND.x,      y: ABOVE_ATX },
+        ATX_GND
+      ],
+      labelAt: { x: LED_RIGHT+28, y: cathode.y + 14 }, labelText: 'GND'
+    }
+  ];
+
+  document.getElementById('wires-layer').innerHTML = wires.map(w => `
+    <polyline class="wire" points="${path(w.points)}" stroke="${w.color}"/>
+    <circle class="dot" cx="${w.points[0].x}" cy="${w.points[0].y}" fill="${w.color}"/>
+    <circle class="dot" cx="${w.points[w.points.length-1].x}" cy="${w.points[w.points.length-1].y}" fill="${w.color}"/>
+    <text class="wlbl" x="${w.labelAt.x}" y="${w.labelAt.y}" fill="${w.color}">${w.labelText}</text>
+  `).join('');
+
+  // ==== Легенда и подпись ====
+  document.getElementById('labels-layer').innerHTML = `
+    <g transform="translate(60, 20)" font-family="sans-serif" font-size="11">
+      ${[
+        ['#3b82f6', 'GP15 сигнал',          0],
+        ['#F59E0B', '3V3 питание катушки',  130],
+        ['#EF4444', '+3.3V силовой',        310],
+        ['#FBBF24', 'нагрузка LED',         470],
+        ['#1d1d1f', 'GND',                  620]
+      ].map(([c, t, x]) =>
+        `<line x1="${x}" y1="0" x2="${x+20}" y2="0" stroke="${c}" stroke-width="3" stroke-linecap="round"/>
+         <text x="${x+26}" y="4" fill="#1e2a4a">${t}</text>`
+      ).join('')}
+    </g>
+    <text x="450" y="60" text-anchor="middle" fill="#6e6e73" font-size="12" font-style="italic">
+      Финальная схема: Pico через GP15 управляет реле, реле коммутирует +3.3V на LED
+    </text>
+  `;
+</script>
+</body>
+</html>

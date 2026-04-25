@@ -2,6 +2,26 @@
 <!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
 <!-- aria-label: Цепь с кнопкой -->
 <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Цепь с кнопкой">
+  <style>
+    .bd-comp   { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:2 }
+    .bd-pico   { fill:#E8F0F9 }
+    .bd-relay  { fill:#E8F4EC }
+    .bd-led    { fill:#FDECEA }
+    .bd-atx    { fill:#F5F5F0 }
+    .bd-btn    { fill:#FFF4E0 }
+    .bd-source { fill:#FFE6D9 }
+    .bd-load   { fill:#FDECEA }
+    .bd-ctrl   { fill:#E8F4EC }
+    .bd-wires  { fill:#F0F0F0 }
+    .bd-title  { font:bold 14px sans-serif; fill:#1F3A5F }
+    .bd-sub    { font:10px sans-serif; fill:#6B6B6B }
+    .bd-section{ font:italic 10px sans-serif; fill:#8B8B8B }
+    .bd-pin    { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:1.5 }
+    .bd-pinlbl { font:11px monospace; fill:#1F3A5F }
+    .bd-wire   { stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .bd-wlbl   { font:bold 10px monospace }
+  </style>
+
             <rect x="40"  y="70" width="140" height="80" rx="8" class="bd-comp bd-atx"/>
             <text x="110" y="100" text-anchor="middle" class="bd-title">БЛОК ATX</text>
             <circle cx="180" cy="95" r="5" fill="#E8A33D" stroke="#8B6F18" stroke-width="2"/>

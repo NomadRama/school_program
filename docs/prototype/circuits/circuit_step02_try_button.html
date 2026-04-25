@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цикл 2 · Try — Кнопка</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: flex-start; background: transparent; overflow: hidden; font-family: 'Inter', sans-serif; }
+        
+        .simulation-container {
+            width: 100%; height: 560px;
+            display: flex; flex-direction: column; align-items: center;
+            background: transparent;
+        }
+
+        svg { width: 100%; height: 100%; overflow: visible; }
+
+        .wire { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+        .wire-vcc { stroke: #EF4444; }
+        .wire-gnd { stroke: #1D1D1F; }
+        
+        /* Switched wire starts gray, turns red when active */
+        .wire-switched { stroke: #9CA3AF; transition: stroke 0.2s; }
+        .wire-switched.active { stroke: #EF4444; }
+        
+        /* Electron flow animation */
+        .electron-flow {
+            stroke: #FFF; stroke-width: 2; stroke-dasharray: 4 8; fill: none;
+            stroke-linecap: round; pointer-events: none; opacity: 0; transition: opacity 0.2s;
+        }
+        .electron-flow.active {
+            opacity: 0.8;
+            animation: flow 1s linear infinite;
+        }
+        @keyframes flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+
+        /* The LED Glow Control */
+        #interactive-glow { opacity: 0; transition: opacity 0.1s; pointer-events: none; }
+        #interactive-glow.active { opacity: 0.6; }
+        
+        /* The Button Press Animation */
+        #btn-top { transition: transform 0.1s, fill 0.1s; transform-origin: 30px 30px; }
+        #btn-top.pressed { transform: scale(0.95); fill: #C62828 !important; }
+
+        .hint { fill: #86868b; font-size: 14px; font-weight: 500; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<div class="simulation-container">
+    <svg viewBox="0 0 800 460">
+        <g id="circuit-group" transform="translate(10, 10)">
+            <g id="atx-layer"></g>
+            <g id="wires-layer"></g>
+            <g id="led-layer"></g>
+            <g transform="translate(350, 320)" id="button-layer"></g>
+            <text x="380" y="420" class="hint" text-anchor="middle">НАЖМИ НА КНОПКУ</text>
+        </g>
+    </svg>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+    // SOP: все координаты через pin() от реестра. Все offset — относительно
+    // внешнего translate(10, 10) на circuit-group, т.е. в локальной системе группы.
+    const ATX_OFFSET = { tx: 30,  ty: 0   };
+    const LED_OFFSET = { tx: 550, ty: 320 };
+    const BTN_OFFSET = { tx: 350, ty: 320 };   // совпадает с translate button-layer
+
+    const atx = COMPONENT_LIBRARY["atx_xh_m229"];
+    const led = COMPONENT_LIBRARY["led_3w_star"];
+    const btn = COMPONENT_LIBRARY["button_tactile_2pin"];
+
+    // 1. Render ATX
+    document.getElementById('atx-layer').innerHTML = atx.renderSVG({ x: ATX_OFFSET.tx, y: ATX_OFFSET.ty });
+
+    // 2. Render LED с подменой glow на контролируемый
+    let ledSVG = led.renderSVG({ x: LED_OFFSET.tx, y: LED_OFFSET.ty });
+    ledSVG = ledSVG.replace('url(#ledGlow)" opacity="0.3"', 'url(#ledGlow)" id="interactive-glow"');
+    document.getElementById('led-layer').innerHTML = ledSVG;
+
+    // 3. Render Button (translate уже на группе — рисуем в локальных 0,0)
+    let btnSVG = btn.renderSVG();
+    btnSVG = btnSVG.replace('fill="#E53935"', 'fill="#E53935" id="btn-top"');
+    document.getElementById('button-layer').innerHTML = btnSVG;
+
+    // 4. ПРОВОДА — координаты через pin()
+    const vcc = pin(atx, 'plus3V3', ATX_OFFSET);   // +3.3V клемма
+    const gnd = pin(atx, 'gnd_4',   ATX_OFFSET);   // GND клемма
+    const bA  = pin(btn, 'pin_a', BTN_OFFSET);     // левый пин кнопки
+    const bB  = pin(btn, 'pin_b', BTN_OFFSET);     // правый пин кнопки
+    const lA  = pin(led, 'anode',   LED_OFFSET);   // анод LED (+)
+    const lC  = pin(led, 'cathode', LED_OFFSET);   // катод LED (−)
+
+    const wiresSvg = `
+        <!-- 1. VCC → левый пин кнопки (красный) -->
+        <path d="M ${vcc.x} ${vcc.y} L ${vcc.x} 250 L 250 250 L 250 ${bA.y} L ${bA.x} ${bA.y}"
+              class="wire wire-vcc"/>
+        <path d="M ${vcc.x} ${vcc.y} L ${vcc.x} 250 L 250 250 L 250 ${bA.y} L ${bA.x} ${bA.y}"
+              class="electron-flow active"/>
+
+        <!-- 2. GND → катод LED (чёрный) -->
+        <path d="M ${gnd.x} ${gnd.y} L ${gnd.x} ${lC.y} L ${lC.x} ${lC.y}" class="wire wire-gnd"/>
+
+        <!-- 3. Правый пин кнопки → анод LED (переключаемый) -->
+        <path d="M ${bB.x} ${bB.y} L ${lA.x} ${lA.y}" class="wire wire-switched" id="wire-switch"/>
+        <path d="M ${bB.x} ${bB.y} L ${lA.x} ${lA.y}" class="electron-flow" id="flow-switch"/>
+
+        <!-- Connection Dots -->
+        <circle cx="${vcc.x}" cy="${vcc.y}" r="4" fill="#EF4444"/>
+        <circle cx="${gnd.x}" cy="${gnd.y}" r="4" fill="#1D1D1F"/>
+        <circle cx="${bA.x}"  cy="${bA.y}"  r="4" fill="#EF4444"/>
+        <circle cx="${bB.x}"  cy="${bB.y}"  r="4" fill="#9CA3AF" id="dot-switch"/>
+        <circle cx="${lA.x}"  cy="${lA.y}"  r="4" fill="#9CA3AF" id="dot-led-plus"/>
+        <circle cx="${lC.x}"  cy="${lC.y}"  r="4" fill="#1D1D1F"/>
+    `;
+    document.getElementById('wires-layer').innerHTML = wiresSvg;
+
+    // 4. Interactivity logic
+    const btnHitArea = document.querySelector('.btn-hit-area');
+    const btnTop = document.getElementById('btn-top');
+    const glow = document.getElementById('interactive-glow');
+    const wireSwitch = document.getElementById('wire-switch');
+    const flowSwitch = document.getElementById('flow-switch');
+    const dotSwitch = document.getElementById('dot-switch');
+    const dotLedPlus = document.getElementById('dot-led-plus');
+
+    function turnOn() {
+        btnTop.classList.add('pressed');
+        glow.classList.add('active');
+        wireSwitch.classList.add('active');
+        flowSwitch.classList.add('active');
+        dotSwitch.setAttribute('fill', '#EF4444');
+        dotLedPlus.setAttribute('fill', '#EF4444');
+    }
+
+    function turnOff() {
+        btnTop.classList.remove('pressed');
+        glow.classList.remove('active');
+        wireSwitch.classList.remove('active');
+        flowSwitch.classList.remove('active');
+        dotSwitch.setAttribute('fill', '#9CA3AF');
+        dotLedPlus.setAttribute('fill', '#9CA3AF');
+    }
+
+    // Touch and mouse events
+    btnHitArea.addEventListener('mousedown', turnOn);
+    btnHitArea.addEventListener('mouseup', turnOff);
+    btnHitArea.addEventListener('mouseleave', turnOff);
+    btnHitArea.addEventListener('touchstart', (e) => { e.preventDefault(); turnOn(); });
+    btnHitArea.addEventListener('touchend', (e) => { e.preventDefault(); turnOff(); });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цикл 2 · Own — Плата ATX (подсветка +3.3V и GND)</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { margin:0; padding:0; display:flex; justify-content:center; align-items:flex-start;
+         background:transparent; overflow:hidden;
+         font-family:'Inter','Segoe UI',system-ui,sans-serif; }
+  .sim { width:100%; height:380px; display:flex; flex-direction:column; align-items:center;
+         justify-content:center; background:transparent; }
+  svg { width:100%; height:100%; overflow:visible; }
+
+  .hl { animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 0.4 } 50% { opacity: 1 } }
+</style>
+</head>
+<body>
+
+<div class="sim">
+  <svg viewBox="0 0 800 290">
+    <g id="atx-layer"></g>
+    <g id="highlight-layer"></g>
+  </svg>
+</div>
+
+<script src="component_registry.js"></script>
+<script>
+  // ==== SOP: pins = визуальная позиция, никаких offset-хаков ====
+  const ATX_OFFSET = { tx: -10, ty: -20 };   // origin компонента
+  const atx = COMPONENT_LIBRARY["atx_xh_m229"];
+  document.getElementById('atx-layer').innerHTML =
+      atx.renderSVG({ x: ATX_OFFSET.tx, y: ATX_OFFSET.ty });
+
+  // ==== ПОДСВЕТКА — координаты через helper pin(), а не хардкод ====
+  const highlighted = [
+    { pinKey: 'plus3V3', color: '#EF4444', label: 'щуп сюда (+)' },
+    { pinKey: 'gnd_4',   color: '#1d1d1f', label: 'щуп сюда (−)' }
+  ];
+
+  let hl = '';
+  highlighted.forEach(h => {
+    const p = pin(atx, h.pinKey, ATX_OFFSET);
+    hl += `<circle class="hl" cx="${p.x}" cy="${p.y}" r="22"
+                   fill="none" stroke="${h.color}" stroke-width="2.5" stroke-dasharray="4 4"/>`;
+    hl += `<text x="${p.x}" y="${p.y + 58}" text-anchor="middle"
+                 fill="${h.color}" font-size="12" font-weight="700">${h.label}</text>`;
+  });
+  document.getElementById('highlight-layer').innerHTML = hl;
+</script>
+</body>
+</html>

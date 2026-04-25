@@ -2,6 +2,26 @@
 <!-- Извлечено из docs/module-1/index.html скриптом tools/extract_svgs.py -->
 <!-- aria-label: Схема 4.3 — цепь с реле (управление кнопкой) -->
 <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема 4.3 — цепь с реле (управление кнопкой)">
+  <style>
+    .bd-comp   { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:2 }
+    .bd-pico   { fill:#E8F0F9 }
+    .bd-relay  { fill:#E8F4EC }
+    .bd-led    { fill:#FDECEA }
+    .bd-atx    { fill:#F5F5F0 }
+    .bd-btn    { fill:#FFF4E0 }
+    .bd-source { fill:#FFE6D9 }
+    .bd-load   { fill:#FDECEA }
+    .bd-ctrl   { fill:#E8F4EC }
+    .bd-wires  { fill:#F0F0F0 }
+    .bd-title  { font:bold 14px sans-serif; fill:#1F3A5F }
+    .bd-sub    { font:10px sans-serif; fill:#6B6B6B }
+    .bd-section{ font:italic 10px sans-serif; fill:#8B8B8B }
+    .bd-pin    { fill:#FFFFFF; stroke:#1F3A5F; stroke-width:1.5 }
+    .bd-pinlbl { font:11px monospace; fill:#1F3A5F }
+    .bd-wire   { stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .bd-wlbl   { font:bold 10px monospace }
+  </style>
+
             <!-- ATX внизу -->
             <rect x="40" y="400" width="720" height="80" rx="8" class="bd-comp bd-atx"/>
             <text x="60" y="428" class="bd-title">БЛОК ATX</text>
@@ -33,14 +53,14 @@
             <!-- РЕЛЕ (центр) -->
             <rect x="340" y="80" width="220" height="260" rx="8" class="bd-comp bd-relay"/>
             <text x="360" y="108" class="bd-title">РЕЛЕ 1 канал</text>
-            <text x="360" y="124" class="bd-sub">SRD-05VDC</text>
+            <text x="360" y="124" class="bd-sub">JQC-3FF-S-Z · джампер H</text>
 
             <text x="360" y="150" class="bd-section">управление:</text>
             <circle cx="340" cy="170" r="5" class="bd-pin"/>
-            <text x="350" y="174" class="bd-pinlbl">GND</text>
+            <text x="350" y="174" class="bd-pinlbl">DC+</text>
 
             <circle cx="340" cy="200" r="5" class="bd-pin"/>
-            <text x="350" y="204" class="bd-pinlbl">VCC</text>
+            <text x="350" y="204" class="bd-pinlbl">DC−</text>
 
             <circle cx="340" cy="230" r="5" class="bd-pin"/>
             <text x="350" y="234" class="bd-pinlbl">IN</text>
@@ -77,13 +97,13 @@
             <path d="M 240 190 L 300 190 L 300 230 L 340 230" class="bd-wire" stroke="#C94C4C"/>
             <text x="300" y="215" text-anchor="middle" class="bd-wlbl" fill="#C94C4C">сигнал</text>
 
-            <!-- 3. ATX +3.3V (второй) → Relay VCC -->
-            <path d="M 420 400 L 420 360 L 310 360 L 310 200 L 340 200" class="bd-wire" stroke="#E8A33D"/>
-            <text x="370" y="355" class="bd-wlbl" fill="#B8822A">+3.3V (VCC)</text>
+            <!-- 3. ATX +3.3V (второй) → Relay DC+ (верх) -->
+            <path d="M 420 400 L 420 360 L 310 360 L 310 170 L 340 170" class="bd-wire" stroke="#E8A33D"/>
+            <text x="370" y="355" class="bd-wlbl" fill="#B8822A">+3.3V (DC+)</text>
 
-            <!-- 4. ATX GND → Relay GND -->
-            <path d="M 580 400 L 580 380 L 320 380 L 320 170 L 340 170" class="bd-wire" stroke="#2B2B2B"/>
-            <text x="480" y="374" class="bd-wlbl" fill="#2B2B2B">GND</text>
+            <!-- 4. ATX GND → Relay DC− (середина) -->
+            <path d="M 580 400 L 580 380 L 320 380 L 320 200 L 340 200" class="bd-wire" stroke="#2B2B2B"/>
+            <text x="480" y="374" class="bd-wlbl" fill="#2B2B2B">GND (DC−)</text>
 
             <!-- 5. ATX +3.3V (через верх) → Relay COM (силовая) -->
             <path d="M 420 400 L 420 50 L 560 50 L 560 170" class="bd-wire" stroke="#F0C040"/>
