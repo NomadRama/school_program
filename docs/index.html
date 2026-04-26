@@ -226,6 +226,12 @@
 
   .share-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
     gap:10px;margin:14px 0}
+  .share-mode-recommended{position:relative;border-color:var(--accent) !important;
+    box-shadow:0 0 0 1px var(--accent-soft)}
+  .share-mode-recommended::before{content:"Рекомендуется";position:absolute;
+    top:-9px;left:14px;background:var(--accent);color:#fff;font-size:10px;
+    font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:100px;
+    text-transform:uppercase}
   .share-mode{background:var(--card);border:1px solid var(--border);
     border-radius:var(--radius);padding:14px;font-size:13px;line-height:1.5}
   .share-mode b{display:block;color:var(--ink);margin-bottom:6px;font-size:13.5px}
@@ -808,31 +814,53 @@
       <div class="step-content" data-step="1-share">
         <div class="phase-title-row">
           <span class="cycle-label">Цикл 1 · Просто LED</span>
-          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
         </div>
-        <h1 class="step-h">Объясните соседу за 30 секунд</h1>
-        <p class="step-intro">Научить = понять. Если вы можете объяснить другому — значит сами разобрались. Это тренировка главного инженерного навыка.</p>
+        <h1 class="step-h">Закрепи Цикл 1 — самопроверка</h1>
+        <p class="step-intro">Прежде чем перейти к Циклу 2 — проверь себя одним из 3 способов. Главный инженерный навык: понимать что ты знаешь, и где у тебя дыры.</p>
 
-        <div class="share-prompt">
-          <div class="lbl">Задание</div>
-          <p>Повернитесь к соседу по парте (или позовите ментора). Скажите <b>2 предложения</b> по шаблону:</p>
-          <ol style="color:var(--ink);margin-top:10px">
-            <li>«Я собрал цепь из ___ и ___.»</li>
-            <li>«LED горит потому что ___.»</li>
-          </ol>
-          <em>Подсказка: ключевые слова — «замкнутая цепь», «длинная ножка», «ток идёт от плюса в минус».</em>
+        <h2>Выбери один способ</h2>
+        <div class="share-modes">
+          <div class="share-mode share-mode-recommended">
+            <div class="ico">🤖</div>
+            <b>ИИ-самопроверка</b>
+            Скопируй промпт ниже, отправь в ИИ-чат. Он задаст 5 строгих вопросов и оценит, где у тебя дыры. Без поблажек.
+            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 1 Модуля 1: электрическая цепь и полярность LED.
+
+Задай мне 5 вопросов от простого к сложному, проверяя:
+- помню ли термины (цепь, анод, катод, замкнутая/разомкнутая)
+- понимаю ли причинно-следственные связи
+- могу ли применить (что будет если...)
+
+Правила СТРОГО:
+1. Только вопросы, без подсказок.
+2. После каждого ответа — оцени строго: «верно», «неполно», «неверно».
+   НЕ подбадривай. НЕ говори «хороший ответ» если ответ неполный.
+3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
+4. Если 2+ неверных — назови раздел методички, к которому вернуться.
+
+Готов?</pre>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">👥</div>
+            <b>Сосед или ментор за 30 сек</b>
+            Если ты на занятии в школе — поверни голову и скажи 2 предложения:
+            <ul style="margin:8px 0 0 18px;font-size:13px">
+              <li>«Я собрал цепь из ___ и ___.»</li>
+              <li>«LED горит потому что ___.»</li>
+            </ul>
+            <em style="display:block;margin-top:8px">Ключевые слова: «замкнутая цепь», «длинная ножка», «ток от плюса в минус».</em>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">✍️</div>
+            <b>Запись для себя</b>
+            Открой заметки на телефоне. Напиши 3 предложения «что я понял / где запутался». Перечитай вслух — себе ты не обманешь.
+          </div>
         </div>
 
-        <h2>Что должно получиться (пример ответа)</h2>
-        <div class="callout c-info">«Я собрал цепь из блока питания ATX и светодиода. LED горит потому что провода замыкают цепь — ток идёт из плюса через LED в минус и возвращается обратно.»</div>
-
-        <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Сформулировали вслух</div></div>
-          <div class="action-body">Не обязательно идеально — главное, что вы смогли <b>сказать</b> своими словами.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал соседу</button></div>
-        </div>
-
-        <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы знаете: цепь, замкнутая/разомкнутая, полярность LED, умеете объяснить. Дальше — добавляем управление.</div>
+        <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы знаете: цепь, замкнутая/разомкнутая, полярность LED. Дальше — добавляем управление.</div>
 
         <div class="delayed-check">
           <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
@@ -997,20 +1025,50 @@
       <div class="step-content" data-step="2-share">
         <div class="phase-title-row">
           <span class="cycle-label">Цикл 2 · С кнопкой</span>
-          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
         </div>
-        <h1 class="step-h">Зачем нужна кнопка?</h1>
-        <p class="step-intro">Кажется очевидно, но попробуйте сформулировать — это тренирует мышление.</p>
+        <h1 class="step-h">Закрепи Цикл 2 — самопроверка</h1>
+        <p class="step-intro">Кнопка добавила управление. Прежде чем перейти к реле — проверь себя одним из 3 способов.</p>
 
-        <div class="share-prompt">
-          <div class="lbl">Задание</div>
-          <p>Объясните соседу или ментору <b>разницу между Циклом 1 и Циклом 2</b>:</p>
-          <ol style="color:var(--ink);margin-top:10px">
-            <li>«В первой цепи LED ___.»</li>
-            <li>«Во второй цепи LED ___.»</li>
-            <li>«Кнопка нужна, чтобы ___.»</li>
-          </ol>
-          <em>Ключевые слова: «управление», «замыкает и размыкает», «вкл/выкл пальцем».</em>
+        <h2>Выбери один способ</h2>
+        <div class="share-modes">
+          <div class="share-mode share-mode-recommended">
+            <div class="ico">🤖</div>
+            <b>ИИ-самопроверка</b>
+            Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
+            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 2 Модуля 1: тактовая кнопка, мультиметр (V= и прозвонка),
+3 линии ATX (3.3V, 5V, 12V).
+
+Задай мне 5 вопросов от простого к сложному, проверяя:
+- помню ли термины (NO, прозвонка, проводник, изолятор)
+- понимаю ли как работает кнопка изнутри
+- могу ли применить мультиметр (что замерить, в каком режиме)
+
+Правила СТРОГО:
+1. Только вопросы, без подсказок.
+2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
+3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
+4. Если 2+ неверных — назови раздел методички, к которому вернуться.
+
+Готов?</pre>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">👥</div>
+            <b>Сосед или ментор за 30 сек</b>
+            Расскажи 3 предложения о разнице между Циклом 1 и 2:
+            <ul style="margin:8px 0 0 18px;font-size:13px">
+              <li>«В первой цепи LED ___.»</li>
+              <li>«Во второй цепи LED ___.»</li>
+              <li>«Кнопка нужна, чтобы ___.»</li>
+            </ul>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">✍️</div>
+            <b>Запись для себя</b>
+            Запиши в заметках: «Самое полезное что я узнал во 2-м цикле — это ___». Перечитай вслух.
+          </div>
         </div>
 
         <div class="callout c-success"><b>Цикл 2 пройден.</b> Вы добавили <b>управление</b> — теперь током можно управлять пальцем. Дальше — заменим палец на реле.</div>
@@ -1024,11 +1082,6 @@
             <li>Почему 12V в Pico — это сразу поломка?</li>
           </ol>
           <em>Не помнишь — вернись к Циклу 2 KNOW.</em>
-        </div>
-
-        <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Объяснил</div></div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал</button></div>
         </div>
 
         <div class="nav-row">
@@ -1198,27 +1251,52 @@
       <div class="step-content" data-step="3-share">
         <div class="phase-title-row">
           <span class="cycle-label">Цикл 3 · С реле</span>
-          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
         </div>
-        <h1 class="step-h">Зачем посредник, если напрямую работало?</h1>
-        <p class="step-intro">Тонкий вопрос: в Цикле 2 кнопка напрямую включала LED. Зачем усложнять?</p>
+        <h1 class="step-h">Закрепи Цикл 3 — самопроверка</h1>
+        <p class="step-intro">Реле освоено. Прежде чем писать первый код для Pico — проверь себя одним из 3 способов.</p>
 
-        <div class="share-prompt">
-          <div class="lbl">Задание</div>
-          <p>Объясните <b>почему инженеры добавляют реле</b>, хотя без него «работало». Два момента:</p>
-          <ol style="color:var(--ink);margin-top:10px">
-            <li>«В прямой цепи кнопка не справится с ___ (мотором / большим током / 220V).»</li>
-            <li>«Реле — это ___ между слабым сигналом и сильным током.»</li>
-          </ol>
-          <em>Ключевые слова: «посредник», «слабый сигнал управляет сильным током», «разделение».</em>
+        <h2>Выбери один способ</h2>
+        <div class="share-modes">
+          <div class="share-mode share-mode-recommended">
+            <div class="ico">🤖</div>
+            <b>ИИ-самопроверка</b>
+            Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
+            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 3 Модуля 1: реле с оптопарой, гальваническая развязка,
+NO/NC контакты, джампер H/L.
+
+Задай мне 5 вопросов от простого к сложному, проверяя:
+- помню ли термины (катушка, контакты, NO, NC, оптопара, джампер)
+- понимаю ли физику работы реле (что движется внутри, откуда щелчок)
+- могу ли применить (зачем реле если кнопка тоже работает; когда NC, когда NO)
+
+Правила СТРОГО:
+1. Только вопросы, без подсказок.
+2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
+3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
+4. Если 2+ неверных — назови раздел методички, к которому вернуться.
+
+Готов?</pre>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">👥</div>
+            <b>Сосед или ментор за 30 сек</b>
+            Объясни 2 предложения о том зачем нужно реле:
+            <ul style="margin:8px 0 0 18px;font-size:13px">
+              <li>«В прямой цепи кнопка не справится с ___.»</li>
+              <li>«Реле — это ___ между слабым сигналом и сильным током.»</li>
+            </ul>
+          </div>
+
+          <div class="share-mode">
+            <div class="ico">✍️</div>
+            <b>Запись для себя</b>
+            Запиши: «Реле нужно когда ___. Если бы у меня его не было, я бы не смог ___».
+          </div>
         </div>
 
-        <div class="callout c-info"><b>Главное:</b> в Модуле 2 вам понадобится управлять вентилятором 12V. Кнопка его не включит — она не предназначена для таких токов. А реле — да. Поэтому вы учитесь работать с реле сейчас.</div>
-
-        <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Объяснил идею посредника</div></div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал</button></div>
-        </div>
+        <div class="callout c-info"><b>Главное:</b> в Модуле 2 вам понадобится управлять вентилятором 12V. Кнопка его не включит — она не предназначена для таких токов. А реле — да.</div>
 
         <div class="callout c-success"><b>Цикл 3 пройден.</b> Вы поняли как работает реле и зачем оно нужно. Готовы к главному — коду вместо пальца.</div>
 
@@ -1409,46 +1487,60 @@ relay = Pin(15, Pin.OUT)
           <span class="cycle-label">Цикл 4 · С Pico (финал)</span>
           <span class="phase-big-badge big-S">SHARE · Большой финал</span>
         </div>
-        <h1 class="step-h">Портфолио и защита перед ментором</h1>
-        <p class="step-intro">Это большое SHARE — завершение всего Модуля 1. Через год вы откроете портфолио и увидите здесь начало своего пути.</p>
+        <h1 class="step-h">Финал Модуля 1 — фото, видео, защита</h1>
+        <p class="step-intro">Завершение всего модуля. Три шага: материалы для портфолио → ИИ-самопроверка → защита перед ментором.</p>
 
-        <h2>1. Фото и видео</h2>
+        <h2>1. Сними фото и видео</h2>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">2 фото устройства</div></div>
-          <div class="action-body">Общий план (всё рабочее место) + крупный план компонентов.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Снял</button></div>
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Фото устройства</div></div>
+          <div class="action-body">Сделай <b>1 фото</b> готового устройства на телефон. Просто общий план — всё что собрано на столе. Сохрани у себя — ментор добавит в твоё портфолио.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Снял фото</button></div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">2</div><div class="action-title">Видео 30 секунд</div></div>
-          <div class="action-body">Работающий маячок в вашем режиме. Снимайте на телефон.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Записал</button></div>
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Видео 30 секунд → в TG-группу школы</div></div>
+          <div class="action-body">Сними <b>30 секунд видео</b> работающего устройства в твоём режиме мигания. Отправь в Telegram-группу школы — родители и одноклассники увидят что ты сделал. Это твоё доказательство, что устройство реально работает.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Видео в TG отправлено</button></div>
         </div>
 
-        <h2>2. Запись в портфолио</h2>
+        <h2>2. Финальная ИИ-самопроверка</h2>
+        <p>Прежде чем идти к ментору на защиту — проверь себя на ИИ. Это разогрев и понимание где у тебя дыры.</p>
+        <div class="socratic-block">
+          <div class="lbl">🤖 Финальный self-check за весь Модуль 1</div>
+          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я закончил Модуль 1 «Управляемая лампа» школы ShokanLab — собрал
+цепь LED через реле, управляемое Pico с кодом на MicroPython.
+
+Задай мне 5 вопросов разной сложности (от простого до сложного),
+охватывая:
+- электрическую цепь (Цикл 1)
+- мультиметр и кнопку (Цикл 2)
+- реле, NO/NC, оптопара (Цикл 3)
+- код Pin/sleep/while (Цикл 4)
+
+Правила СТРОГО:
+1. Только вопросы, без подсказок.
+2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
+3. После 5 ответов — конкретный итог: что я понял, какие 2-3 пробела.
+4. Если 2+ неверных — назови раздел методички, к которому вернуться.
+5. В конце дай мне ОДНУ фразу: с какой темы я бы начал готовиться к защите.
+
+Готов?</pre>
+        </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">3</div><div class="action-title">Заполните страницу</div></div>
-          <div class="action-body">
-            Ментор откроет вашу страницу в Google Drive. Заполните:
-            <ul>
-              <li>Фото и видео</li>
-              <li>Ваш финальный код</li>
-              <li><b>Teardown-заметка</b> (3 вопроса): что понял / что было сложно / что улучшил бы</li>
-              <li>Самооценка: интересно 1–5, понятно 1–5</li>
-            </ul>
-          </div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Портфолио заполнено</button></div>
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Прошёл ИИ-самопроверку</div></div>
+          <div class="action-body">Если ИИ нашёл дыры — вернись к нужному циклу. Если всё хорошо — иди к ментору.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Самопроверка пройдена</button></div>
         </div>
 
         <h2>3. Защита перед ментором</h2>
-        <p>Ментор задаст три вопроса. Отвечайте <b>своими словами</b>, не подглядывая:</p>
+        <p>Подойди к ментору. Он задаст три вопроса — отвечай <b>своими словами</b>, не подглядывая:</p>
         <ol>
-          <li>Как работает ваша цепь? (от плюса ATX до LED и обратно)</li>
+          <li>Как работает твоя цепь? (от плюса ATX до LED и обратно)</li>
           <li>Что делает каждая строка кода?</li>
-          <li>Если LED перестанет мигать — с чего начнёте искать проблему?</li>
+          <li>Если LED перестанет мигать — с чего начнёшь искать проблему?</li>
         </ol>
-        <div class="callout c-info"><b>Защита — не экзамен.</b> Ментор подтверждает то, что вы уже умеете.</div>
+        <div class="callout c-info"><b>Защита — не экзамен.</b> Ментор подтверждает то, что ты уже умеешь.</div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">4</div><div class="action-title">Защитился</div></div>
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Защитился у ментора</div></div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Зачёт получил</button></div>
         </div>
 
@@ -1457,10 +1549,10 @@ relay = Pin(15, Pin.OUT)
           <div class="action-head"><div class="action-num">5</div><div class="action-title">Сохранить и разобрать</div></div>
           <div class="action-body">
             <ul>
-              <li>Сохраните код в файл у себя</li>
-              <li>Разберите устройство</li>
+              <li>Сохрани код в файл у себя (потом ментор положит в твоё портфолио)</li>
+              <li>Разбери устройство</li>
               <li>Компоненты на стеллаж</li>
-              <li>Протрите рабочее место</li>
+              <li>Протри рабочее место</li>
             </ul>
           </div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Всё убрано</button></div>
@@ -1468,7 +1560,7 @@ relay = Pin(15, Pin.OUT)
 
         <div class="callout c-success">
           <b>🎉 Модуль 1 пройден!</b><br>
-          Вы собрали реальное программно-управляемое устройство, объяснили как оно работает, записали в портфолио. Это первое свидетельство того, что вы — начинающий инженер.
+          Ты собрал реальное программно-управляемое устройство и защитил его перед ментором. Это первое свидетельство того, что ты — начинающий инженер. Портфолио заполнит ментор по фото и видео из TG-группы.
         </div>
 
         <h2>Отложенная проверка через 2 дня</h2>
@@ -2248,7 +2340,6 @@ relay = Pin(15, Pin.OUT)
     const safe = (label, fn) => { try { fn(); } catch(e) { console.warn('[init] '+label+':', e); } };
     safe('time badges',      () => injectTimeBadges());
     safe('parts grids',      () => renderPartsGrids());
-    safe('share modes',      () => injectShareModes());
     safe('term tooltips',    () => attachTermTooltips());
     safe('progress restore', () => applyProgressFromStorage());
 
