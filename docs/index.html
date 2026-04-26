@@ -224,13 +224,23 @@
   .share-prompt p{color:var(--ink);font-size:14px}
   .share-prompt em{color:var(--muted);font-style:italic;font-size:13px}
 
-  .share-modes{display:flex;flex-direction:column;gap:12px;margin:14px 0}
+  .share-modes{display:flex;flex-direction:column;gap:0;margin:14px 0}
+  .share-mode{padding-left:60px !important;position:relative}
+  .share-mode .num{position:absolute;top:14px;left:14px;width:34px;height:34px;
+    border-radius:50%;background:var(--card);border:2px solid var(--border-strong);
+    color:var(--ink-dim);font-weight:800;font-size:15px;
+    display:flex;align-items:center;justify-content:center;line-height:1}
   .share-mode-recommended{position:relative;border-color:var(--accent) !important;
     box-shadow:0 0 0 1px var(--accent-soft)}
+  .share-mode-recommended .num{background:var(--accent);border-color:var(--accent);color:#fff}
   .share-mode-recommended::before{content:"Рекомендуется";position:absolute;
-    top:-9px;left:14px;background:var(--accent);color:#fff;font-size:10px;
+    top:-9px;right:14px;background:var(--accent);color:#fff;font-size:10px;
     font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:100px;
     text-transform:uppercase}
+  .share-divider{display:flex;align-items:center;gap:10px;margin:14px 0;
+    color:var(--muted);font-size:11px;font-weight:700;letter-spacing:2px}
+  .share-divider::before, .share-divider::after{content:"";flex:1;
+    height:1px;background:var(--border)}
   .share-mode{background:var(--card);border:1px solid var(--border);
     border-radius:var(--radius);padding:14px;font-size:13px;line-height:1.5}
   .share-mode b{display:block;color:var(--ink);margin-bottom:6px;font-size:13.5px}
@@ -821,6 +831,7 @@
         <h2>Выбери один способ</h2>
         <div class="share-modes">
           <div class="share-mode share-mode-recommended">
+            <div class="num">1</div>
             <div class="ico">🤖</div>
             <b>ИИ-самопроверка</b>
             Скопируй промпт ниже, отправь в ИИ-чат. Он задаст 5 строгих вопросов и оценит, где у тебя дыры. Без поблажек.
@@ -841,7 +852,10 @@
 Готов?</pre>
           </div>
 
+          <div class="share-divider">или</div>
+
           <div class="share-mode">
+            <div class="num">2</div>
             <div class="ico">👥</div>
             <b>Сосед или ментор за 30 сек</b>
             Если ты на занятии в школе — поверни голову и скажи 2 предложения:
@@ -1026,6 +1040,7 @@
         <h2>Выбери один способ</h2>
         <div class="share-modes">
           <div class="share-mode share-mode-recommended">
+            <div class="num">1</div>
             <div class="ico">🤖</div>
             <b>ИИ-самопроверка</b>
             Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
@@ -1046,7 +1061,10 @@
 Готов?</pre>
           </div>
 
+          <div class="share-divider">или</div>
+
           <div class="share-mode">
+            <div class="num">2</div>
             <div class="ico">👥</div>
             <b>Сосед или ментор за 30 сек</b>
             Расскажи 3 предложения о разнице между Циклом 1 и 2:
@@ -1246,6 +1264,7 @@
         <h2>Выбери один способ</h2>
         <div class="share-modes">
           <div class="share-mode share-mode-recommended">
+            <div class="num">1</div>
             <div class="ico">🤖</div>
             <b>ИИ-самопроверка</b>
             Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
@@ -1266,7 +1285,10 @@ NO/NC контакты, джампер H/L.
 Готов?</pre>
           </div>
 
+          <div class="share-divider">или</div>
+
           <div class="share-mode">
+            <div class="num">2</div>
             <div class="ico">👥</div>
             <b>Сосед или ментор за 30 сек</b>
             Объясни 2 предложения о том зачем нужно реле:
