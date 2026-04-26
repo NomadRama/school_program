@@ -293,6 +293,43 @@
 
   .h-empty{font-size:12px;color:var(--muted);font-style:italic;padding:8px 0}
 
+  /* ============ Сетка карточек комплектующих (для «Перед началом») ============ */
+  .parts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;margin:14px 0}
+  .part-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+    padding:14px 12px;text-align:center;display:flex;flex-direction:column;
+    box-shadow:var(--shadow-sm);transition:border-color .12s,box-shadow .12s}
+  .part-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
+  .part-card .icon{flex:1;min-height:110px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:10px}
+  .part-card .icon svg{max-width:100%;max-height:110px;width:auto;height:auto;display:block}
+  .part-card .icon-fallback{font-size:48px;line-height:1;opacity:.7}
+  .part-card .name{font-weight:600;font-size:13.5px;color:var(--ink);
+    margin-bottom:3px;line-height:1.3}
+  .part-card .desc{font-size:11.5px;color:var(--muted);line-height:1.4;
+    margin-bottom:8px;flex-shrink:0}
+  .part-card .qty{font-size:11px;color:var(--accent);font-weight:700;
+    background:var(--accent-soft);padding:3px 10px;border-radius:100px;
+    align-self:center;letter-spacing:.3px}
+
+  /* ============ Сетка комплектующих с иконками ============ */
+  .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:12px;margin:14px 0 22px}
+  .part-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+    padding:14px 16px 12px;display:flex;flex-direction:column;align-items:center;
+    box-shadow:var(--shadow-sm);transition:border-color .12s,box-shadow .12s;
+    position:relative;min-height:160px}
+  .part-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
+  .part-card .part-count{position:absolute;top:8px;right:10px;font-size:11px;
+    font-weight:700;color:var(--accent);background:var(--accent-soft);
+    padding:2px 8px;border-radius:100px}
+  .part-card .part-svg{width:100%;height:88px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:8px;overflow:hidden}
+  .part-card .part-svg svg{max-width:100%;max-height:100%;display:block}
+  .part-card .part-name{font-size:13px;font-weight:700;color:var(--ink);
+    text-align:center;line-height:1.35;margin-bottom:2px}
+  .part-card .part-hint{font-size:11.5px;color:var(--muted);text-align:center;line-height:1.4}
+
   /* ============ 5 обязательных элементов методики ============ */
 
   /* «Стоп. Проверь себя» — метакогнитивный блок после KNOW */
@@ -548,24 +585,11 @@
         <p class="step-intro">К концу модуля у вас будет работающее устройство — управляемая лампа, которой управляет ваш код. Дальше — что должно лежать на столе.</p>
 
         <h2>На столе у каждого ученика</h2>
-        <table>
-          <tr><th>Деталь</th><th>Количество</th></tr>
-          <tr><td><b>Raspberry Pi Pico</b> — микроконтроллер</td><td>1 шт</td></tr>
-          <tr><td><b>Плата расширения ATX</b> с винтовыми клеммами</td><td>1 шт</td></tr>
-          <tr><td><b>Реле</b> 1-канальное с оптопарой</td><td>1 шт</td></tr>
-          <tr><td><b>Светодиод 3 Вт</b> на алюминиевой звезде</td><td>1 шт</td></tr>
-          <tr><td><b>Тактовая кнопка</b></td><td>1 шт</td></tr>
-          <tr><td><b>Dupont-провода</b> для соединений</td><td>10 шт</td></tr>
-          <tr><td><b>USB-кабель</b> Micro-B для Pico</td><td>1 шт</td></tr>
-        </table>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Найдите эти детали на столе. Если чего-то не хватает — скажите ментору до начала.</p>
+        <div class="parts-grid" id="partsStudent"></div>
 
         <h2>Общее на лабораторию</h2>
-        <ul>
-          <li><b>Лабораторный блок питания ATX</b> с выведенными клеммами 3.3 V / 5 V / 12 V</li>
-          <li><b>Мультиметр</b> — один на 2–3 ученика</li>
-          <li><b>Плоская отвёртка</b> для клемм</li>
-          <li><b>Ноутбук с Thonny IDE</b></li>
-        </ul>
+        <div class="parts-grid" id="partsLab"></div>
 
         <h2>Что нужно знать заранее</h2>
         <ul>
@@ -1492,6 +1516,7 @@ relay = Pin(15, Pin.OUT)
   </ol>
 </div>
 
+<script src="circuits/component_registry.js"></script>
 <script>
   // Flat order for progression: 16 steps
   const ORDER = [
@@ -1793,6 +1818,113 @@ relay = Pin(15, Pin.OUT)
       btn.textContent = '✗ Микрофон недоступен';
       btn.disabled = true;
     }
+  }
+
+  // ============ Сетка комплектующих с иконками ============
+  // Inline SVG для деталей которых нет в реестре (провода, USB, отвёртка, ноутбук)
+  const PARTS_INLINE_SVG = {
+    dupont: `<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+      <g stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M 10 20 Q 40 10 70 25 Q 90 32 110 18" stroke="#EF4444"/>
+        <path d="M 10 30 Q 40 22 70 35 Q 90 42 110 30" stroke="#22C55E"/>
+        <path d="M 10 40 Q 40 32 70 45 Q 90 52 110 42" stroke="#1d1d1f"/>
+      </g>
+      <g fill="#888" stroke="#555" stroke-width="0.8">
+        <rect x="3" y="16" width="8" height="8" rx="1"/>
+        <rect x="3" y="26" width="8" height="8" rx="1"/>
+        <rect x="3" y="36" width="8" height="8" rx="1"/>
+        <rect x="109" y="14" width="8" height="8" rx="1"/>
+        <rect x="109" y="26" width="8" height="8" rx="1"/>
+        <rect x="109" y="38" width="8" height="8" rx="1"/>
+      </g>
+    </svg>`,
+    usb: `<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="15" width="22" height="30" rx="3" fill="#C0C0C0" stroke="#888"/>
+      <rect x="6" y="20" width="14" height="20" rx="1" fill="#1A1A1A"/>
+      <line x1="24" y1="30" x2="100" y2="30" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+      <rect x="100" y="22" width="16" height="16" rx="2" fill="#3B3B3B" stroke="#222"/>
+      <rect x="103" y="26" width="10" height="8" rx="1" fill="#222"/>
+    </svg>`,
+    multimeter: `<svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="5" width="80" height="120" rx="6" fill="#FBBF24" stroke="#92400E" stroke-width="1.5"/>
+      <rect x="18" y="14" width="64" height="24" rx="2" fill="#1F2937"/>
+      <text x="50" y="32" text-anchor="middle" fill="#9CA3AF" font-size="10" font-family="monospace">1999</text>
+      <circle cx="50" cy="64" r="18" fill="#374151" stroke="#111" stroke-width="1.5"/>
+      <line x1="50" y1="64" x2="50" y2="50" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="32" cy="106" r="6" fill="#1F2937"/>
+      <circle cx="68" cy="106" r="6" fill="#DC2626"/>
+    </svg>`,
+    screwdriver: `<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="9" width="50" height="12" rx="3" fill="#DC2626" stroke="#7F1D1D"/>
+      <rect x="58" y="11" width="6" height="8" fill="#9CA3AF"/>
+      <rect x="64" y="13" width="40" height="4" fill="#D1D5DB" stroke="#6B7280" stroke-width="0.5"/>
+      <rect x="104" y="11" width="8" height="8" fill="#6B7280"/>
+    </svg>`,
+    laptop: `<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 18 10 L 102 10 L 100 56 L 20 56 Z" fill="#374151" stroke="#111"/>
+      <rect x="22" y="14" width="76" height="38" fill="#3B82F6"/>
+      <text x="60" y="38" text-anchor="middle" fill="#fff" font-size="11" font-family="monospace">Thonny</text>
+      <path d="M 8 60 L 112 60 L 116 70 L 4 70 Z" fill="#1F2937" stroke="#111"/>
+      <rect x="50" y="62" width="20" height="3" rx="1" fill="#374151"/>
+    </svg>`,
+    psu: `<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="8" width="128" height="64" rx="4" fill="#1565C0" stroke="#0D47A1"/>
+      <rect x="14" y="14" width="22" height="14" rx="2" fill="#E0E0E0" stroke="#999"/>
+      <text x="22" y="24" fill="#4CAF50" font-size="6" font-weight="700">ON</text>
+      <g>
+        <circle cx="50" cy="58" r="6" fill="#E53935" stroke="#B71C1C"/>
+        <text x="50" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">3.3V</text>
+        <circle cx="68" cy="58" r="6" fill="#212121" stroke="#000"/>
+        <text x="68" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">GND</text>
+        <circle cx="86" cy="58" r="6" fill="#E53935" stroke="#B71C1C"/>
+        <text x="86" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">5V</text>
+        <circle cx="104" cy="58" r="6" fill="#F57C00" stroke="#E65100"/>
+        <text x="104" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">12V</text>
+      </g>
+    </svg>`
+  };
+
+  function partCard(opts) {
+    // opts = { svg: rawSvgString, name, hint, count }
+    return `<div class="part-card">
+      <div class="part-count">${opts.count}</div>
+      <div class="part-svg">${opts.svg}</div>
+      <div class="part-name">${opts.name}</div>
+      <div class="part-hint">${opts.hint || ''}</div>
+    </div>`;
+  }
+
+  function svgFromRegistry(key, viewBoxOverride){
+    const comp = COMPONENT_LIBRARY[key];
+    if (!comp) return '<div style="color:#999;font-size:11px">нет иконки</div>';
+    const b = comp.bbox;
+    // Render at component's natural origin; wrap in svg with viewBox so it scales
+    const inner = comp.renderSVG({ x: 0, y: 0 });
+    const vb = viewBoxOverride || `${b.x} ${b.y} ${b.w} ${b.h}`;
+    return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">${inner}</svg>`;
+  }
+
+  function renderPartsGrids(){
+    const studentEl = document.getElementById('partsStudent');
+    const labEl = document.getElementById('partsLab');
+    if (!studentEl || !labEl) return;
+
+    studentEl.innerHTML = [
+      partCard({ svg: svgFromRegistry('raspberry_pi_pico'), name: 'Raspberry Pi Pico', hint: 'микроконтроллер', count: '1 шт' }),
+      partCard({ svg: svgFromRegistry('atx_xh_m229'),       name: 'Плата расширения ATX', hint: 'с винтовыми клеммами', count: '1 шт' }),
+      partCard({ svg: svgFromRegistry('relay_jqc_3ff_s_z'), name: 'Реле',                hint: '1-канальное с оптопарой', count: '1 шт' }),
+      partCard({ svg: svgFromRegistry('led_3w_star'),       name: 'Светодиод 3 Вт',      hint: 'на алюминиевой звезде', count: '1 шт' }),
+      partCard({ svg: svgFromRegistry('button_tactile_2pin'), name: 'Тактовая кнопка',   hint: 'нажал — замкнула', count: '1 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'для соединений', count: '10 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.usb,                 name: 'USB-кабель Micro-B',  hint: 'с поддержкой данных', count: '1 шт' })
+    ].join('');
+
+    labEl.innerHTML = [
+      partCard({ svg: PARTS_INLINE_SVG.psu,                 name: 'Блок питания ATX',    hint: '3.3 V / 5 V / 12 V', count: '1 на стол' }),
+      partCard({ svg: PARTS_INLINE_SVG.multimeter,          name: 'Мультиметр',          hint: 'один на 2–3 ученика', count: '' }),
+      partCard({ svg: PARTS_INLINE_SVG.screwdriver,         name: 'Плоская отвёртка',    hint: 'для клемм', count: '' }),
+      partCard({ svg: PARTS_INLINE_SVG.laptop,              name: 'Ноутбук с Thonny',    hint: 'для прошивки Pico', count: '' })
+    ].join('');
   }
 
   // ============ Время на шаг ============
@@ -2103,6 +2235,7 @@ relay = Pin(15, Pin.OUT)
   document.addEventListener('DOMContentLoaded', () => {
     const safe = (label, fn) => { try { fn(); } catch(e) { console.warn('[init] '+label+':', e); } };
     safe('time badges',      () => injectTimeBadges());
+    safe('parts grids',      () => renderPartsGrids());
     safe('share modes',      () => injectShareModes());
     safe('term tooltips',    () => attachTermTooltips());
     safe('progress restore', () => applyProgressFromStorage());
