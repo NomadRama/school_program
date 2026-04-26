@@ -293,6 +293,67 @@
 
   .h-empty{font-size:12px;color:var(--muted);font-style:italic;padding:8px 0}
 
+  /* ============ 5 обязательных элементов методики ============ */
+
+  /* «Стоп. Проверь себя» — метакогнитивный блок после KNOW */
+  .self-check{background:#FFF7ED;border:1px solid #FB923C;border-radius:8px;
+    padding:14px 18px;margin:18px 0}
+  .self-check .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+    font-weight:700;color:#C2410C;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .self-check h3{margin:0 0 10px;color:var(--ink);font-size:15px;font-weight:700}
+  .self-check ol{margin:0 0 0 22px;color:var(--ink-dim);font-size:13.5px}
+  .self-check ol li{margin-bottom:6px;line-height:1.55}
+  .self-check em{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic}
+
+  /* Красные флаги — таблица сигналов «не учусь, а пролистываю» */
+  .red-flags{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:8px;
+    padding:14px 18px;margin:14px 0}
+  .red-flags .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+    font-weight:700;color:#991B1B;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .red-flags h3{color:#991B1B;margin:0 0 10px;font-size:15px;font-weight:700}
+  .red-flags table{width:100%;font-size:13px;border-collapse:collapse;margin:0}
+  .red-flags th{font-size:10.5px;color:#7F1D1D;border-bottom:1px solid #FCA5A5;
+    text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:6px 8px;font-weight:700}
+  .red-flags td{padding:7px 8px;border-bottom:1px solid rgba(252,165,165,.4);color:#7F1D1D;line-height:1.45}
+  .red-flags td:first-child{font-weight:600;width:42%}
+
+  /* Протокол «застрял» — плавающая кнопка + раскрывающаяся карточка */
+  .stuck-fab{position:fixed;bottom:20px;right:20px;width:54px;height:54px;
+    border-radius:50%;background:var(--accent);color:white;border:0;font-size:22px;
+    cursor:pointer;box-shadow:0 4px 16px rgba(59,130,246,.4);z-index:90;
+    transition:transform .15s,box-shadow .15s;display:flex;align-items:center;justify-content:center}
+  .stuck-fab:hover{transform:scale(1.08);box-shadow:0 6px 20px rgba(59,130,246,.5)}
+  .stuck-card{position:fixed;bottom:84px;right:20px;width:340px;background:white;
+    border:1px solid var(--border-strong);border-radius:10px;
+    box-shadow:0 12px 32px rgba(15,23,42,.18);padding:18px 20px;display:none;z-index:91}
+  .stuck-card.open{display:block;animation:stuckFadeIn .18s ease}
+  @keyframes stuckFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .stuck-card h3{font-size:14.5px;margin:0 0 12px;color:var(--ink);font-weight:700;padding-right:24px}
+  .stuck-card ol{margin:0 0 0 22px;font-size:13px;color:var(--ink-dim)}
+  .stuck-card ol li{margin-bottom:9px;line-height:1.5}
+  .stuck-card ol li b{color:var(--ink)}
+  .stuck-card .close{position:absolute;top:10px;right:12px;background:transparent;
+    border:0;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:0;width:24px;height:24px}
+  .stuck-card .close:hover{color:var(--ink)}
+
+  /* Отложенный чекпоинт через 2 дня — после SHARE */
+  .delayed-check{background:#EEF2FF;border-left:3px solid #6366F1;padding:14px 18px;
+    margin:18px 0;border-radius:0 8px 8px 0}
+  .delayed-check .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+    font-weight:700;color:#4338CA;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .delayed-check h3{font-size:14px;margin:0 0 8px;color:var(--ink);font-weight:700}
+  .delayed-check ol{margin:0 0 0 22px;font-size:13px;color:var(--ink-dim)}
+  .delayed-check ol li{margin-bottom:5px;line-height:1.5}
+  .delayed-check em{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic}
+
+  /* Системный Socratic-промпт — выделенный блок */
+  .socratic-block{background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;
+    padding:14px 18px;margin:14px 0}
+  .socratic-block .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+    font-weight:700;color:#166534;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .socratic-block h3{font-size:14.5px;color:#14532D;margin:0 0 8px;font-weight:700}
+  .socratic-block p{font-size:13px;margin-bottom:10px;color:var(--ink-dim)}
+
   /* ============ Глобальный глоссарий (tooltip) ============ */
   .term{border-bottom:1px dotted var(--accent);cursor:help;color:var(--ink)}
   .term:hover{background:var(--accent-soft);border-radius:2px}
@@ -526,6 +587,19 @@
         <h2>Сколько времени это займёт</h2>
         <p>Модуль рассчитан на <b>4–6 занятий</b>. Можно пройти быстрее или медленнее — темп ваш.</p>
 
+        <div class="red-flags">
+          <div class="lbl">🚨 Красные флаги — сигналы «не учусь, а пролистываю»</div>
+          <h3>Заметил у себя что-то из этого — остановись и сделай по правой колонке</h3>
+          <table>
+            <tr><th>Сигнал</th><th>Что делать</th></tr>
+            <tr><td>Залип на 15+ минут на одном шаге</td><td>Открой протокол «застрял» (✋ внизу справа)</td></tr>
+            <tr><td>Скопировал код от ИИ и запустил, не читая</td><td>Открой код, переведи каждую строку на русский ВСЛУХ</td></tr>
+            <tr><td>После урока не помнишь, что делал</td><td>Запиши 3 предложения о сегодня в портфолио</td></tr>
+            <tr><td>На «Стоп. Проверь себя» автоматически отвечаешь «всё понятно»</td><td>Попроси ИИ задать тебе 3 контрольных вопроса</td></tr>
+            <tr><td>Решил «доделаю дома» три раза подряд</td><td>Скажи ментору вслух — это сигнал блока, не лени</td></tr>
+          </table>
+        </div>
+
         <div class="callout c-success"><b>Готовы?</b> Если все компоненты на столе и блок питания у ментора — переходите к Циклу 1.</div>
 
         <div class="nav-row">
@@ -545,6 +619,22 @@
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 600px; border: none; overflow: hidden; transform: scale(1.05); transform-origin: top center;" data-src="circuits/circuit_step01_atx_led.html"></iframe>
+        </div>
+
+        <div class="socratic-block">
+          <div class="lbl">🤖 Перед первым обращением к ИИ</div>
+          <h3>Настрой ИИ-чат на роль напарника, не решателя</h3>
+          <p>Скопируй этот текст и отправь <b>первым сообщением</b> в ChatGPT или Claude. Без этого ИИ будет давать готовые решения, и через 2 дня ты ничего не запомнишь. Это правило на весь Модуль 1, не только на сегодня.</p>
+          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Ты мой напарник по электронике. Я школьник 12-17 лет, учусь собирать электронные устройства.
+
+Правила:
+1. Не давай мне готовые решения сразу.
+2. Сначала задай 1-2 уточняющих вопроса, чтобы понять что я уже знаю.
+3. Если я ошибся — спроси что я попробовал, не давай ответ.
+4. Объясняй простыми словами, без университетских терминов.
+5. Когда я понял — кратко подтверди и предложи следующий шаг.
+
+Готов начать?</pre>
         </div>
 
         <h2>Что делать</h2>
@@ -619,6 +709,17 @@
           <span class="chip">Замкнутая цепь</span>
           <span class="chip">Разомкнутая цепь</span>
           <span class="chip">Путь тока</span>
+        </div>
+
+        <div class="self-check">
+          <div class="lbl">🛑 Стоп. Проверь себя</div>
+          <h3>Ответь себе на 3 вопроса (вслух или в уме)</h3>
+          <ol>
+            <li>Что вы только что сделали с проводом, чтобы LED погас?</li>
+            <li>Почему ток перестал течь, когда вы оторвали провод?</li>
+            <li>Если на «всё понятно» — попросите ИИ задать вам 3 вопроса о замкнутой цепи. Не ответили хотя бы на 2 — значит ещё нет.</li>
+          </ol>
+          <em>Проверка не для оценки. Это инструмент против иллюзии «прочитал = понял».</em>
         </div>
 
         <div class="nav-row">
@@ -700,6 +801,17 @@
         </div>
 
         <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы знаете: цепь, замкнутая/разомкнутая, полярность LED, умеете объяснить. Дальше — добавляем управление.</div>
+
+        <div class="delayed-check">
+          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
+          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
+          <ol>
+            <li>Что такое замкнутая цепь?</li>
+            <li>Какая ножка LED длиннее — плюс или минус?</li>
+            <li>Что произойдёт, если оторвать один провод?</li>
+          </ol>
+          <em>Если не помнишь — это нормально. Просто вернись к Циклу 1 KNOW и пройди ещё раз. Это убивает иллюзию «я понял», когда на самом деле забыл.</em>
+        </div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-own')">← Own</button>
@@ -783,6 +895,17 @@
         </ul>
         <div class="callout c-info">Это ваш главный инструмент поиска неисправностей. Не работает цепь? Прозвоните каждый провод.</div>
 
+        <div class="self-check">
+          <div class="lbl">🛑 Стоп. Проверь себя</div>
+          <h3>Ответь себе на 3 вопроса</h3>
+          <ol>
+            <li>Что внутри кнопки физически делает её «кнопкой»? Что движется?</li>
+            <li>Почему провод в изоляции можно держать в руках, а оголённый конец — нет?</li>
+            <li>Если на «всё понятно» — объясните вслух разницу между проводником и изолятором за 30 секунд. Засеките таймер.</li>
+          </ol>
+          <em>Если уложился — понимаешь. Если запинался или говорил «эээ, ну...» — вернись к разделу.</em>
+        </div>
+
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('2-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('2-own')">Own: замерьте 3 линии →</button>
@@ -859,6 +982,17 @@
         </div>
 
         <div class="callout c-success"><b>Цикл 2 пройден.</b> Вы добавили <b>управление</b> — теперь током можно управлять пальцем. Дальше — заменим палец на реле.</div>
+
+        <div class="delayed-check">
+          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
+          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
+          <ol>
+            <li>В каком режиме мультиметра нужно проверять напряжение?</li>
+            <li>Что значит, если мультиметр пикает в режиме прозвонки?</li>
+            <li>Почему 12V в Pico — это сразу поломка?</li>
+          </ol>
+          <em>Не помнишь — вернись к Циклу 2 KNOW.</em>
+        </div>
 
         <div class="action-card">
           <div class="action-head"><div class="action-num">1</div><div class="action-title">Объяснил</div></div>
@@ -964,6 +1098,17 @@
         <p>Pico может выдать на свой пин максимум <b>0.025 ампер</b>. Хватит на LED, но не на мотор или 220V-лампу. Реле — <b>посредник</b>: принимает слабый сигнал от Pico, коммутирует сильный ток от отдельного источника.</p>
         <p>Где встречаете реле каждый день: машины (стартер, клаксон), холодильники, кондиционеры, умные розетки.</p>
 
+        <div class="self-check">
+          <div class="lbl">🛑 Стоп. Проверь себя</div>
+          <h3>Ответь себе на 3 вопроса</h3>
+          <ol>
+            <li>Что заставляет якорь реле двигаться в момент, когда вы нажали кнопку?</li>
+            <li>Откуда берётся щелчок — что физически произошло?</li>
+            <li>Если на «всё понятно» — попробуй предсказать: что будет, если оборвать провод между Pico и DC+ реле? Реле сработает или нет? Почему?</li>
+          </ol>
+          <em>Если на 3-й вопрос не можешь ответить уверенно — теория усвоена не до конца.</em>
+        </div>
+
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('3-own')">Own: переключите на NC →</button>
@@ -1044,6 +1189,17 @@
         </div>
 
         <div class="callout c-success"><b>Цикл 3 пройден.</b> Вы поняли как работает реле и зачем оно нужно. Готовы к главному — коду вместо пальца.</div>
+
+        <div class="delayed-check">
+          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
+          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
+          <ol>
+            <li>Чем NO отличается от NC у реле?</li>
+            <li>Что внутри реле физически двигается, когда оно срабатывает?</li>
+            <li>Зачем реле, если кнопка тоже умеет включать LED напрямую?</li>
+          </ol>
+          <em>Не помнишь — вернись к Циклу 3 KNOW.</em>
+        </div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-own')">← Own</button>
@@ -1149,6 +1305,17 @@ relay = Pin(15, Pin.OUT)
         <div class="callout c-info"><b>Правило двух шагов:</b> <br>1. Прочитать код построчно, перевести каждую строку на русский <br>2. Сравнить с ожиданием — делает ли код то, что вы просили <br>Только потом запускать.</div>
 
         <div class="callout c-tip"><b>Почему это критично:</b> ИИ пишет гладко, кажется понятным. Это иллюзия. Через 2 дня забудете всё. Когда переводите каждую строку — иллюзия разрушается, мозг запоминает.</div>
+
+        <div class="self-check">
+          <div class="lbl">🛑 Стоп. Проверь себя</div>
+          <h3>Ответь себе на 3 вопроса</h3>
+          <ol>
+            <li>Что делает строка <code>while True:</code> и почему она написана именно так — что значит двоеточие в конце?</li>
+            <li>Что произойдёт, если убрать <code>sleep(1)</code> из обоих мест в коде?</li>
+            <li>Если на «всё понятно» — попроси ИИ показать что произойдёт, если поменять <code>value(1)</code> на <code>value(0)</code> в обоих местах. Сначала угадай сам, потом сравни.</li>
+          </ol>
+          <em>Цель — не запомнить синтаксис, а понять «почему именно так».</em>
+        </div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('4-try')">← Try</button>
@@ -1311,6 +1478,20 @@ relay = Pin(15, Pin.OUT)
   <span id="glossDef"></span>
 </div>
 
+<!-- Протокол «застрял» — плавающая кнопка, доступна с любой страницы -->
+<button class="stuck-fab" onclick="toggleStuck()" aria-label="Застрял? Открой протокол" title="Застрял? Что делать">✋</button>
+<div class="stuck-card" id="stuckCard" role="dialog" aria-label="Протокол «застрял»">
+  <button class="close" aria-label="Закрыть" onclick="toggleStuck()">×</button>
+  <h3>✋ Застрял? Делай по порядку</h3>
+  <ol>
+    <li><b>Перечитай шаг.</b> Часто пропустил одну строчку.</li>
+    <li><b>Объясни ИИ одной фразой</b>, что не получается. Это часто сразу проясняет.</li>
+    <li><b>Загугли</b> точное сообщение об ошибке. Не своими словами — точный текст.</li>
+    <li><b>Разбей задачу на подшаги.</b> На какой минимальной части ты завис?</li>
+    <li><b>Зови ментора.</b> Не раньше 5 минут (сначала попробуй сам), не позже 15 (не выгорай).</li>
+  </ol>
+</div>
+
 <script>
   // Flat order for progression: 16 steps
   const ORDER = [
@@ -1325,6 +1506,10 @@ relay = Pin(15, Pin.OUT)
     3:'Цикл 3 · С реле',
     4:'Цикл 4 · С Pico (финал)'
   };
+
+  function toggleStuck(){
+    document.getElementById('stuckCard').classList.toggle('open');
+  }
 
   function toggleSidebar(){
     const side = document.querySelector('.side');
