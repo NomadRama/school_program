@@ -224,8 +224,7 @@
   .share-prompt p{color:var(--ink);font-size:14px}
   .share-prompt em{color:var(--muted);font-style:italic;font-size:13px}
 
-  .share-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:10px;margin:14px 0}
+  .share-modes{display:flex;flex-direction:column;gap:12px;margin:14px 0}
   .share-mode-recommended{position:relative;border-color:var(--accent) !important;
     box-shadow:0 0 0 1px var(--accent-soft)}
   .share-mode-recommended::before{content:"Рекомендуется";position:absolute;
@@ -495,7 +494,7 @@
           <div class="badge badge-O">O</div><span>Переверните LED</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="1-share" onclick="selectStep('1-share')">
-          <div class="badge badge-S">S</div><span>Расскажите соседу</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Закрепи цепь</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -518,7 +517,7 @@
           <div class="badge badge-O">O</div><span>Замерьте 3 линии ATX</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="2-share" onclick="selectStep('2-share')">
-          <div class="badge badge-S">S</div><span>Зачем кнопка</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Закрепи кнопку</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -541,7 +540,7 @@
           <div class="badge badge-O">O</div><span>Переключите NO → NC</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="3-share" onclick="selectStep('3-share')">
-          <div class="badge badge-S">S</div><span>Зачем посредник</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Закрепи реле</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -806,7 +805,7 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('1-share')">Share: расскажите соседу →</button>
+          <button class="nav-btn primary" onclick="selectStep('1-share')">Share: закрепи цепь →</button>
         </div>
       </div>
 
@@ -851,12 +850,6 @@
               <li>«LED горит потому что ___.»</li>
             </ul>
             <em style="display:block;margin-top:8px">Ключевые слова: «замкнутая цепь», «длинная ножка», «ток от плюса в минус».</em>
-          </div>
-
-          <div class="share-mode">
-            <div class="ico">✍️</div>
-            <b>Запись для себя</b>
-            Открой заметки на телефоне. Напиши 3 предложения «что я понял / где запутался». Перечитай вслух — себе ты не обманешь.
           </div>
         </div>
 
@@ -1017,7 +1010,7 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('2-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('2-share')">Share: зачем кнопка →</button>
+          <button class="nav-btn primary" onclick="selectStep('2-share')">Share: закрепи кнопку →</button>
         </div>
       </div>
 
@@ -1062,12 +1055,6 @@
               <li>«Во второй цепи LED ___.»</li>
               <li>«Кнопка нужна, чтобы ___.»</li>
             </ul>
-          </div>
-
-          <div class="share-mode">
-            <div class="ico">✍️</div>
-            <b>Запись для себя</b>
-            Запиши в заметках: «Самое полезное что я узнал во 2-м цикле — это ___». Перечитай вслух.
           </div>
         </div>
 
@@ -1243,7 +1230,7 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('3-share')">Share: зачем посредник →</button>
+          <button class="nav-btn primary" onclick="selectStep('3-share')">Share: закрепи реле →</button>
         </div>
       </div>
 
@@ -1287,12 +1274,6 @@ NO/NC контакты, джампер H/L.
               <li>«В прямой цепи кнопка не справится с ___.»</li>
               <li>«Реле — это ___ между слабым сигналом и сильным током.»</li>
             </ul>
-          </div>
-
-          <div class="share-mode">
-            <div class="ico">✍️</div>
-            <b>Запись для себя</b>
-            Запиши: «Реле нужно когда ___. Если бы у меня его не было, я бы не смог ___».
           </div>
         </div>
 
