@@ -126,6 +126,52 @@
     padding:4px 10px;background:var(--card);border:1px solid var(--border);
     border-radius:100px;font-weight:600;font-variant-numeric:tabular-nums}
 
+  /* ========== Cycle stepper (где я в модуле) ========== */
+  .cycle-stepper{position:sticky;top:61px;z-index:4;
+    background:rgba(247,248,251,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+    padding:14px 48px 12px;display:flex;align-items:center;gap:18px}
+  .cs-cycles{display:flex;align-items:center;gap:0;flex:1;max-width:560px}
+  .cs-node{display:flex;flex-direction:column;align-items:center;gap:6px;
+    cursor:pointer;flex-shrink:0;min-width:64px}
+  .cs-dot{width:30px;height:30px;border-radius:50%;
+    background:var(--card);border:2px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;color:var(--muted);
+    transition:all .15s}
+  .cs-name{font-size:11.5px;color:var(--muted);font-weight:500;letter-spacing:.2px;
+    white-space:nowrap;text-align:center}
+  .cs-line{flex:1;height:2px;background:var(--border-strong);min-width:14px;
+    margin:0 -1px;align-self:flex-start;margin-top:14px}
+  .cs-node.done .cs-dot{background:var(--s);border-color:var(--s);color:#fff}
+  .cs-node.done + .cs-line, .cs-line.done{background:var(--s)}
+  .cs-node.current .cs-dot{background:var(--accent);border-color:var(--accent);
+    color:#fff;transform:scale(1.18);
+    box-shadow:0 0 0 4px rgba(59,130,246,.18)}
+  .cs-node.current .cs-name{color:var(--ink);font-weight:700;font-size:12.5px}
+  .cs-phases{display:flex;align-items:center;gap:6px;margin-left:auto;
+    padding-left:18px;border-left:1px solid var(--border)}
+  .cs-phase{display:flex;flex-direction:column;align-items:center;gap:3px}
+  .cs-phase .pd{width:22px;height:22px;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;
+    background:var(--card);border:1.5px solid var(--border-strong);color:var(--muted)}
+  .cs-phase .pl{font-size:9.5px;color:var(--muted);letter-spacing:.4px;font-weight:600}
+  .cs-phase.current .pd{transform:scale(1.1)}
+  .cs-phase.current.t .pd{background:var(--t);border-color:var(--t);color:#fff}
+  .cs-phase.current.k .pd{background:var(--k);border-color:var(--k);color:#fff}
+  .cs-phase.current.o .pd{background:var(--o);border-color:var(--o);color:#fff}
+  .cs-phase.current.s .pd{background:var(--s);border-color:var(--s);color:#fff}
+  .cs-phase.current .pl{color:var(--ink);font-weight:700}
+  .cs-phase.done .pd{background:rgba(16,185,129,.12);border-color:var(--s);color:var(--s)}
+  @media (max-width:1080px){
+    .cycle-stepper{padding:10px 16px;gap:10px;top:57px;flex-wrap:wrap}
+    .cs-name{font-size:10px}
+    .cs-node{min-width:48px}
+    .cs-phases{padding-left:10px}
+    .cs-phase .pl{display:none}
+  }
+
   .panel{padding:28px 48px 80px;max-width:820px}
 
   .phase-title-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
@@ -199,17 +245,16 @@
   .figure.hero{margin:8px 0 22px}
 
   pre.code{background:#0D1117;border:1px solid #1F2937;border-radius:8px;
-    padding:10px 14px 14px;font-family:"SF Mono",Monaco,monospace;font-size:12.5px;
-    line-height:1.75;overflow-x:auto;margin:10px 0;color:#E5E9EE;
-    display:flex;flex-direction:column}
+    padding:14px 18px;font-family:"SF Mono",Monaco,monospace;font-size:12.5px;
+    line-height:1.75;overflow-x:auto;margin:10px 0;color:#E5E9EE;position:relative}
   pre.code code{background:transparent;color:inherit;padding:0}
   pre.code .kw{color:#FF7B72}
   pre.code .fn{color:#D2A8FF}
   pre.code .com{color:#8B949E;font-style:italic}
-  .copy-btn{align-self:flex-end;background:#1F2937;border:1px solid #374151;
-    color:#E5E9EE;font-size:11px;padding:3px 10px;border-radius:5px;cursor:pointer;
-    margin-bottom:8px;font-family:inherit;letter-spacing:.3px;flex-shrink:0}
-  .copy-btn:hover{background:#374151;border-color:#4B5563}
+  .copy-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);color:#E5E9EE;font-size:11px;
+    padding:3px 8px;border-radius:5px;cursor:pointer}
+  .copy-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}
 
   table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
   th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;
@@ -224,23 +269,8 @@
   .share-prompt p{color:var(--ink);font-size:14px}
   .share-prompt em{color:var(--muted);font-style:italic;font-size:13px}
 
-  .share-modes{display:flex;flex-direction:column;gap:0;margin:14px 0}
-  .share-mode{padding-left:60px !important;position:relative}
-  .share-mode .num{position:absolute;top:14px;left:14px;width:34px;height:34px;
-    border-radius:50%;background:var(--card);border:2px solid var(--border-strong);
-    color:var(--ink-dim);font-weight:800;font-size:15px;
-    display:flex;align-items:center;justify-content:center;line-height:1}
-  .share-mode-recommended{position:relative;border-color:var(--accent) !important;
-    box-shadow:0 0 0 1px var(--accent-soft)}
-  .share-mode-recommended .num{background:var(--accent);border-color:var(--accent);color:#fff}
-  .share-mode-recommended::before{content:"Рекомендуется";position:absolute;
-    top:-9px;right:14px;background:var(--accent);color:#fff;font-size:10px;
-    font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:100px;
-    text-transform:uppercase}
-  .share-divider{display:flex;align-items:center;gap:10px;margin:14px 0;
-    color:var(--muted);font-size:11px;font-weight:700;letter-spacing:2px}
-  .share-divider::before, .share-divider::after{content:"";flex:1;
-    height:1px;background:var(--border)}
+  .share-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;margin:14px 0}
   .share-mode{background:var(--card);border:1px solid var(--border);
     border-radius:var(--radius);padding:14px;font-size:13px;line-height:1.5}
   .share-mode b{display:block;color:var(--ink);margin-bottom:6px;font-size:13.5px}
@@ -298,115 +328,16 @@
   .h-pitfall::before{content:"⚠";position:absolute;left:8px;top:8px;
     color:var(--danger);font-size:12px;font-weight:700}
 
-  .h-prompt{background:#0D1117;color:#E5E9EE;border-radius:6px;padding:8px 12px 10px;
+  .h-prompt{background:#0D1117;color:#E5E9EE;border-radius:6px;padding:10px 12px;
     margin-bottom:8px;font-size:12px;line-height:1.5;font-family:"SF Mono",Monaco,monospace;
-    border:1px solid #1F2937;display:flex;flex-direction:column-reverse;gap:8px}
-  .h-prompt-copy{align-self:flex-end;background:#1F2937;
-    border:1px solid #374151;color:#E5E9EE;font-size:10.5px;letter-spacing:.3px;
-    padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
-    transition:background .12s,border-color .12s;flex-shrink:0}
-  .h-prompt-copy:hover{background:#374151;border-color:#4B5563}
-  .h-prompt-copy.ok{background:rgba(16,185,129,.25);color:#6EE7B7;border-color:#10B981}
+    position:relative;border:1px solid #1F2937}
+  .h-prompt-copy{position:absolute;top:6px;right:6px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);color:#C9D1D9;font-size:10.5px;
+    padding:3px 8px;border-radius:4px;cursor:pointer;font-family:inherit}
+  .h-prompt-copy:hover{background:rgba(255,255,255,.15)}
+  .h-prompt-copy.ok{background:rgba(16,185,129,.2);color:#6EE7B7;border-color:#10B981}
 
   .h-empty{font-size:12px;color:var(--muted);font-style:italic;padding:8px 0}
-
-  /* ============ Сетка карточек комплектующих (для «Перед началом») ============ */
-  .parts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;margin:14px 0}
-  .part-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
-    padding:14px 12px;text-align:center;display:flex;flex-direction:column;
-    box-shadow:var(--shadow-sm);transition:border-color .12s,box-shadow .12s}
-  .part-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
-  .part-card .icon{flex:1;min-height:110px;display:flex;align-items:center;
-    justify-content:center;margin-bottom:10px}
-  .part-card .icon svg{max-width:100%;max-height:110px;width:auto;height:auto;display:block}
-  .part-card .icon-fallback{font-size:48px;line-height:1;opacity:.7}
-  .part-card .name{font-weight:600;font-size:13.5px;color:var(--ink);
-    margin-bottom:3px;line-height:1.3}
-  .part-card .desc{font-size:11.5px;color:var(--muted);line-height:1.4;
-    margin-bottom:8px;flex-shrink:0}
-  .part-card .qty{font-size:11px;color:var(--accent);font-weight:700;
-    background:var(--accent-soft);padding:3px 10px;border-radius:100px;
-    align-self:center;letter-spacing:.3px}
-
-  /* ============ Сетка комплектующих с иконками ============ */
-  .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-    gap:12px;margin:14px 0 22px}
-  .part-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
-    padding:14px 16px 12px;display:flex;flex-direction:column;align-items:center;
-    box-shadow:var(--shadow-sm);transition:border-color .12s,box-shadow .12s;
-    position:relative;min-height:160px}
-  .part-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
-  .part-card .part-count{position:absolute;top:8px;right:10px;font-size:11px;
-    font-weight:700;color:var(--accent);background:var(--accent-soft);
-    padding:2px 8px;border-radius:100px}
-  .part-card .part-svg{width:100%;height:88px;display:flex;align-items:center;
-    justify-content:center;margin-bottom:8px;overflow:hidden}
-  .part-card .part-svg svg{max-width:100%;max-height:100%;display:block}
-  .part-card .part-name{font-size:13px;font-weight:700;color:var(--ink);
-    text-align:center;line-height:1.35;margin-bottom:2px}
-  .part-card .part-hint{font-size:11.5px;color:var(--muted);text-align:center;line-height:1.4}
-
-  /* ============ 5 обязательных элементов методики ============ */
-
-  /* «Стоп. Проверь себя» — метакогнитивный блок после KNOW */
-  .self-check{background:#FFF7ED;border:1px solid #FB923C;border-radius:8px;
-    padding:14px 18px;margin:18px 0}
-  .self-check .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
-    font-weight:700;color:#C2410C;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-  .self-check h3{margin:0 0 10px;color:var(--ink);font-size:15px;font-weight:700}
-  .self-check ol{margin:0 0 0 22px;color:var(--ink-dim);font-size:13.5px}
-  .self-check ol li{margin-bottom:6px;line-height:1.55}
-  .self-check em{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic}
-
-  /* Красные флаги — таблица сигналов «не учусь, а пролистываю» */
-  .red-flags{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:8px;
-    padding:14px 18px;margin:14px 0}
-  .red-flags .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
-    font-weight:700;color:#991B1B;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-  .red-flags h3{color:#991B1B;margin:0 0 10px;font-size:15px;font-weight:700}
-  .red-flags table{width:100%;font-size:13px;border-collapse:collapse;margin:0}
-  .red-flags th{font-size:10.5px;color:#7F1D1D;border-bottom:1px solid #FCA5A5;
-    text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:6px 8px;font-weight:700}
-  .red-flags td{padding:7px 8px;border-bottom:1px solid rgba(252,165,165,.4);color:#7F1D1D;line-height:1.45}
-  .red-flags td:first-child{font-weight:600;width:42%}
-
-  /* Протокол «застрял» — плавающая кнопка + раскрывающаяся карточка */
-  .stuck-fab{position:fixed;bottom:20px;right:20px;width:54px;height:54px;
-    border-radius:50%;background:var(--accent);color:white;border:0;font-size:22px;
-    cursor:pointer;box-shadow:0 4px 16px rgba(59,130,246,.4);z-index:90;
-    transition:transform .15s,box-shadow .15s;display:flex;align-items:center;justify-content:center}
-  .stuck-fab:hover{transform:scale(1.08);box-shadow:0 6px 20px rgba(59,130,246,.5)}
-  .stuck-card{position:fixed;bottom:84px;right:20px;width:340px;background:white;
-    border:1px solid var(--border-strong);border-radius:10px;
-    box-shadow:0 12px 32px rgba(15,23,42,.18);padding:18px 20px;display:none;z-index:91}
-  .stuck-card.open{display:block;animation:stuckFadeIn .18s ease}
-  @keyframes stuckFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-  .stuck-card h3{font-size:14.5px;margin:0 0 12px;color:var(--ink);font-weight:700;padding-right:24px}
-  .stuck-card ol{margin:0 0 0 22px;font-size:13px;color:var(--ink-dim)}
-  .stuck-card ol li{margin-bottom:9px;line-height:1.5}
-  .stuck-card ol li b{color:var(--ink)}
-  .stuck-card .close{position:absolute;top:10px;right:12px;background:transparent;
-    border:0;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:0;width:24px;height:24px}
-  .stuck-card .close:hover{color:var(--ink)}
-
-  /* Отложенный чекпоинт через 2 дня — после SHARE */
-  .delayed-check{background:#EEF2FF;border-left:3px solid #6366F1;padding:14px 18px;
-    margin:18px 0;border-radius:0 8px 8px 0}
-  .delayed-check .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
-    font-weight:700;color:#4338CA;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-  .delayed-check h3{font-size:14px;margin:0 0 8px;color:var(--ink);font-weight:700}
-  .delayed-check ol{margin:0 0 0 22px;font-size:13px;color:var(--ink-dim)}
-  .delayed-check ol li{margin-bottom:5px;line-height:1.5}
-  .delayed-check em{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic}
-
-  /* Системный Socratic-промпт — выделенный блок */
-  .socratic-block{background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;
-    padding:14px 18px;margin:14px 0}
-  .socratic-block .lbl{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
-    font-weight:700;color:#166534;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-  .socratic-block h3{font-size:14.5px;color:#14532D;margin:0 0 8px;font-weight:700}
-  .socratic-block p{font-size:13px;margin-bottom:10px;color:var(--ink-dim)}
 
   /* ============ Глобальный глоссарий (tooltip) ============ */
   .term{border-bottom:1px dotted var(--accent);cursor:help;color:var(--ink)}
@@ -504,7 +435,7 @@
           <div class="badge badge-O">O</div><span>Переверните LED</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="1-share" onclick="selectStep('1-share')">
-          <div class="badge badge-S">S</div><span>Закрепи цепь</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Расскажите соседу</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -527,7 +458,7 @@
           <div class="badge badge-O">O</div><span>Замерьте 3 линии ATX</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="2-share" onclick="selectStep('2-share')">
-          <div class="badge badge-S">S</div><span>Закрепи кнопку</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Зачем кнопка</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -550,7 +481,7 @@
           <div class="badge badge-O">O</div><span>Переключите NO → NC</span><span class="mark-dot"></span>
         </div>
         <div class="phase-item" role="button" tabindex="0" data-step="3-share" onclick="selectStep('3-share')">
-          <div class="badge badge-S">S</div><span>Закрепи реле</span><span class="mark-dot"></span>
+          <div class="badge badge-S">S</div><span>Зачем посредник</span><span class="mark-dot"></span>
         </div>
       </div>
     </div>
@@ -587,7 +518,25 @@
       <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Открыть навигацию">☰ <span style="font-size:13px">меню</span></button>
       <div class="crumb-path" style="flex:1"><b>Модуль 1</b> / <span id="crumbCycle">Цикл 1 · Просто LED</span></div>
       <button class="mobile-toggle" onclick="toggleHelper()" aria-label="Открыть помощник">💡</button>
-      <div class="step-counter"><span id="stepIdx">1</span> / 16</div>
+      <div class="step-counter">Шаг <span id="stepIdx">1</span>/16</div>
+    </div>
+
+    <div class="cycle-stepper" id="cycleStepper">
+      <div class="cs-cycles">
+        <div class="cs-node" data-cycle="1" onclick="selectStep('1-try')"><div class="cs-dot">1</div><div class="cs-name">Просто LED</div></div>
+        <div class="cs-line" data-line="1"></div>
+        <div class="cs-node" data-cycle="2" onclick="selectStep('2-try')"><div class="cs-dot">2</div><div class="cs-name">С кнопкой</div></div>
+        <div class="cs-line" data-line="2"></div>
+        <div class="cs-node" data-cycle="3" onclick="selectStep('3-try')"><div class="cs-dot">3</div><div class="cs-name">С реле</div></div>
+        <div class="cs-line" data-line="3"></div>
+        <div class="cs-node" data-cycle="4" onclick="selectStep('4-try')"><div class="cs-dot">4</div><div class="cs-name">С Pico</div></div>
+      </div>
+      <div class="cs-phases" id="csPhases">
+        <div class="cs-phase t" data-phase="try"><div class="pd">T</div><div class="pl">TRY</div></div>
+        <div class="cs-phase k" data-phase="know"><div class="pd">K</div><div class="pl">KNOW</div></div>
+        <div class="cs-phase o" data-phase="own"><div class="pd">O</div><div class="pl">OWN</div></div>
+        <div class="cs-phase s" data-phase="share"><div class="pd">S</div><div class="pl">SHARE</div></div>
+      </div>
     </div>
 
     <div class="panel">
@@ -599,49 +548,49 @@
           <span class="phase-big-badge" style="background:var(--accent-soft);color:var(--accent);border:1px solid rgba(59,130,246,.3)">START · Что собрать на стол</span>
         </div>
         <h1 class="step-h">Перед тем как начать Модуль 1</h1>
-        <p class="step-intro">К концу модуля у вас будет работающее устройство — управляемая лампа, которой управляет ваш код. Дальше — что должно лежать на столе.</p>
+        <p class="step-intro">Соберите эти комплектующие и инструменты на столе. С ними вы пройдёте все 4 цикла. Без чего-то одного — застрянете.</p>
 
-        <h2>На столе у каждого ученика</h2>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Найдите эти детали на столе. Если чего-то не хватает — скажите ментору до начала.</p>
-        <div class="parts-grid" id="partsStudent"></div>
+        <h2>Комплектующие (один раз на ученика)</h2>
+        <table>
+          <tr><th>Деталь</th><th>Количество</th><th>Где взять</th></tr>
+          <tr><td><b>Raspberry Pi Pico</b> (RP2040, без WiFi)</td><td>1 шт</td><td>AliExpress · ~$4</td></tr>
+          <tr><td><b>Плата ATX XH-M229</b></td><td>1 шт</td><td>AliExpress · ~$2.50</td></tr>
+          <tr><td><b>Реле JQC-3FF-S-Z</b> с оптопарой, 1-канал</td><td>1 шт</td><td>AliExpress · ~$0.80</td></tr>
+          <tr><td><b>LED 3Вт</b> на алюминиевой звезде</td><td>1 шт</td><td>AliExpress · ~$0.30</td></tr>
+          <tr><td><b>Тактовая кнопка</b> 6×6 мм</td><td>1 шт</td><td>AliExpress · ~$0.05</td></tr>
+          <tr><td><b>Dupont-провода</b> male-male</td><td>10 шт</td><td>AliExpress · набор</td></tr>
+          <tr><td><b>USB-кабель</b> Micro-B (для Pico)</td><td>1 шт</td><td>любой <em>с данными</em>, не только зарядный</td></tr>
+        </table>
 
-        <h2>Общее на лабораторию</h2>
-        <div class="parts-grid" id="partsLab"></div>
+        <h2>На класс / лабораторию (общее)</h2>
+        <ul>
+          <li><b>Блок питания ATX</b> от старого ПК (с 24-pin разъёмом)</li>
+          <li><b>Мультиметр UNI-T UT33C+</b> — ~1 на 2-3 учеников</li>
+          <li><b>Маленькая плоская отвёртка</b> для винтов клемм</li>
+          <li><b>Ноутбук с Thonny IDE</b> (бесплатно, thonny.org)</li>
+        </ul>
 
         <h2>Что нужно знать заранее</h2>
         <ul>
           <li>Читать по-русски — да</li>
           <li>Математика — нет, базовых знаний достаточно</li>
-          <li>Программирование — нет, код вы напишете в паре с ИИ</li>
+          <li>Программирование — нет, Python пишется с помощью ИИ</li>
         </ul>
 
         <h2>⚠️ Безопасность</h2>
         <div class="callout c-warn">
           <b>Три правила, которые нельзя нарушать:</b>
           <ol style="margin-top:8px">
-            <li><b>Блок питания включает ментор.</b> Вы соединяете провода на обесточенной плате.</li>
-            <li><b>Никогда не подавайте 5 V или 12 V на пин Pico.</b> Чип сгорит мгновенно. На Pico — только 3.3 V.</li>
-            <li><b>Не коммутируйте 220 V.</b> Реле умеет, но в этом модуле — только 3.3 V.</li>
+            <li><b>ATX включает только ментор.</b> Вы провода подсоединяете на выключенной плате.</li>
+            <li><b>Никогда не подавайте 5V или 12V на пин Pico.</b> Чип сгорит мгновенно. Только 3.3V.</li>
+            <li><b>Не коммутируйте 220V.</b> Реле умеет, но в этом модуле — только 3.3V.</li>
           </ol>
         </div>
 
-        <h2>Сколько времени это займёт</h2>
-        <p>Модуль рассчитан на <b>4–6 занятий</b>. Можно пройти быстрее или медленнее — темп ваш.</p>
+        <h2>Сколько времени займёт</h2>
+        <p>Полный модуль: <b>~2 часа</b> чистой работы (без перерывов и объяснений ментора). Реально на 4–6 занятий по 60 мин с обсуждениями.</p>
 
-        <div class="red-flags">
-          <div class="lbl">🚨 Красные флаги — сигналы «не учусь, а пролистываю»</div>
-          <h3>Заметил у себя что-то из этого — остановись и сделай по правой колонке</h3>
-          <table>
-            <tr><th>Сигнал</th><th>Что делать</th></tr>
-            <tr><td>Залип на 15+ минут на одном шаге</td><td>Открой протокол «застрял» (✋ внизу справа)</td></tr>
-            <tr><td>Скопировал код от ИИ и запустил, не читая</td><td>Открой код, переведи каждую строку на русский ВСЛУХ</td></tr>
-            <tr><td>После урока не помнишь, что делал</td><td>Запиши 3 предложения о сегодня в портфолио</td></tr>
-            <tr><td>На «Стоп. Проверь себя» автоматически отвечаешь «всё понятно»</td><td>Попроси ИИ задать тебе 3 контрольных вопроса</td></tr>
-            <tr><td>Решил «доделаю дома» три раза подряд</td><td>Скажи ментору вслух — это сигнал блока, не лени</td></tr>
-          </table>
-        </div>
-
-        <div class="callout c-success"><b>Готовы?</b> Если все компоненты на столе и блок питания у ментора — переходите к Циклу 1.</div>
+        <div class="callout c-success"><b>Готовы?</b> Если все компоненты на столе и ATX на проверке у ментора — переходите к Циклу 1.</div>
 
         <div class="nav-row">
           <button class="nav-btn" disabled>←</button>
@@ -652,7 +601,6 @@
       <!-- ========== CYCLE 1 · TRY ========== -->
       <div class="step-content active" data-step="1-try">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 1 · Просто LED</span>
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Зажгите светодиод за 5 минут</h1>
@@ -660,28 +608,6 @@
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 600px; border: none; overflow: hidden; transform: scale(1.05); transform-origin: top center;" data-src="circuits/circuit_step01_atx_led.html"></iframe>
-        </div>
-
-        <div class="socratic-block">
-          <div class="lbl">🤖 Перед первым обращением к ИИ</div>
-          <h3>Настрой ИИ-чат на роль напарника по проекту</h3>
-          <p>Скопируй этот текст и отправь <b>первым сообщением</b> в ChatGPT или Claude. Без этого ИИ будет давать готовые решения, и через 2 дня ты ничего не запомнишь. Настрой нужен один раз — действует на весь Модуль 1.</p>
-          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я школьник 12-17 лет, учусь инженерии в школе ShokanLab.
-Сейчас прохожу Модуль 1 «Управляемая лампа» — собираю устройство,
-где светодиод 3 Вт включается:
-1) напрямую от блока питания ATX (3.3V)
-2) через тактовую кнопку
-3) через реле с оптопарой
-4) финально — кодом на Raspberry Pi Pico (MicroPython)
-
-Ты мой ИИ-напарник на весь модуль. Правила:
-1. Не давай готовых решений — сначала задавай уточняющие вопросы.
-2. Если спрашиваю «как сделать X» — спроси «что ты уже попробовал?»
-3. Объясняй простыми словами, без университетских терминов.
-4. Когда я ошибся — направь, но не давай ответ.
-5. Когда я понял — кратко подтверди и предложи следующий шаг.
-
-Готов начать?</pre>
         </div>
 
         <h2>Что делать</h2>
@@ -719,7 +645,6 @@
       <!-- ========== CYCLE 1 · KNOW ========== -->
       <div class="step-content" data-step="1-know">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 1 · Просто LED</span>
           <span class="phase-big-badge big-K">KNOW · Пойми</span>
         </div>
         <h1 class="step-h">Что такое цепь и почему LED загорелся</h1>
@@ -758,17 +683,6 @@
           <span class="chip">Путь тока</span>
         </div>
 
-        <div class="self-check">
-          <div class="lbl">🛑 Стоп. Проверь себя</div>
-          <h3>Ответь себе на 3 вопроса (вслух или в уме)</h3>
-          <ol>
-            <li>Что вы только что сделали с проводом, чтобы LED погас?</li>
-            <li>Почему ток перестал течь, когда вы оторвали провод?</li>
-            <li>Если на «всё понятно» — попросите ИИ задать вам 3 вопроса о замкнутой цепи. Не ответили хотя бы на 2 — значит ещё нет.</li>
-          </ol>
-          <em>Проверка не для оценки. Это инструмент против иллюзии «прочитал = понял».</em>
-        </div>
-
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('1-own')">Own: полярность →</button>
@@ -778,7 +692,6 @@
       <!-- ========== CYCLE 1 · OWN ========== -->
       <div class="step-content" data-step="1-own">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 1 · Просто LED</span>
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
         <h1 class="step-h">Переверните LED. Что будет?</h1>
@@ -815,70 +728,38 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('1-share')">Share: закрепи цепь →</button>
+          <button class="nav-btn primary" onclick="selectStep('1-share')">Share: расскажите соседу →</button>
         </div>
       </div>
 
       <!-- ========== CYCLE 1 · SHARE ========== -->
       <div class="step-content" data-step="1-share">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 1 · Просто LED</span>
-          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
         </div>
-        <h1 class="step-h">Закрепи Цикл 1 — самопроверка</h1>
-        <p class="step-intro">Прежде чем перейти к Циклу 2 — проверь себя одним из 3 способов. Главный инженерный навык: понимать что ты знаешь, и где у тебя дыры.</p>
+        <h1 class="step-h">Объясните соседу за 30 секунд</h1>
+        <p class="step-intro">Научить = понять. Если вы можете объяснить другому — значит сами разобрались. Это тренировка главного инженерного навыка.</p>
 
-        <h2>Выбери один способ</h2>
-        <div class="share-modes">
-          <div class="share-mode share-mode-recommended">
-            <div class="num">1</div>
-            <div class="ico">🤖</div>
-            <b>ИИ-самопроверка</b>
-            Скопируй промпт ниже, отправь в ИИ-чат. Он задаст 5 строгих вопросов и оценит, где у тебя дыры. Без поблажек.
-            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 1 Модуля 1: электрическая цепь и полярность LED.
-
-Задай мне 5 вопросов от простого к сложному, проверяя:
-- помню ли термины (цепь, анод, катод, замкнутая/разомкнутая)
-- понимаю ли причинно-следственные связи
-- могу ли применить (что будет если...)
-
-Правила СТРОГО:
-1. Только вопросы, без подсказок.
-2. После каждого ответа — оцени строго: «верно», «неполно», «неверно».
-   НЕ подбадривай. НЕ говори «хороший ответ» если ответ неполный.
-3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
-4. Если 2+ неверных — назови раздел методички, к которому вернуться.
-
-Готов?</pre>
-          </div>
-
-          <div class="share-divider">или</div>
-
-          <div class="share-mode">
-            <div class="num">2</div>
-            <div class="ico">👥</div>
-            <b>Сосед или ментор за 30 сек</b>
-            Если ты на занятии в школе — поверни голову и скажи 2 предложения:
-            <ul style="margin:8px 0 0 18px;font-size:13px">
-              <li>«Я собрал цепь из ___ и ___.»</li>
-              <li>«LED горит потому что ___.»</li>
-            </ul>
-            <em style="display:block;margin-top:8px">Ключевые слова: «замкнутая цепь», «длинная ножка», «ток от плюса в минус».</em>
-          </div>
-        </div>
-
-        <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы знаете: цепь, замкнутая/разомкнутая, полярность LED. Дальше — добавляем управление.</div>
-
-        <div class="delayed-check">
-          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
-          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
-          <ol>
-            <li>Что такое замкнутая цепь?</li>
-            <li>Какая ножка LED длиннее — плюс или минус?</li>
-            <li>Что произойдёт, если оторвать один провод?</li>
+        <div class="share-prompt">
+          <div class="lbl">Задание</div>
+          <p>Повернитесь к соседу по парте (или позовите ментора). Скажите <b>2 предложения</b> по шаблону:</p>
+          <ol style="color:var(--ink);margin-top:10px">
+            <li>«Я собрал цепь из ___ и ___.»</li>
+            <li>«LED горит потому что ___.»</li>
           </ol>
-          <em>Если не помнишь — это нормально. Просто вернись к Циклу 1 KNOW и пройди ещё раз. Это убивает иллюзию «я понял», когда на самом деле забыл.</em>
+          <em>Подсказка: ключевые слова — «замкнутая цепь», «длинная ножка», «ток идёт от плюса в минус».</em>
         </div>
+
+        <h2>Что должно получиться (пример ответа)</h2>
+        <div class="callout c-info">«Я собрал цепь из блока питания ATX и светодиода. LED горит потому что провода замыкают цепь — ток идёт из плюса через LED в минус и возвращается обратно.»</div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Сформулировали вслух</div></div>
+          <div class="action-body">Не обязательно идеально — главное, что вы смогли <b>сказать</b> своими словами.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал соседу</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы знаете: цепь, замкнутая/разомкнутая, полярность LED, умеете объяснить. Дальше — добавляем управление.</div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-own')">← Own</button>
@@ -889,7 +770,6 @@
       <!-- ========== CYCLE 2 · TRY ========== -->
       <div class="step-content" data-step="2-try">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 2 · С кнопкой</span>
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Теперь палец управляет LED</h1>
@@ -932,7 +812,6 @@
       <!-- ========== CYCLE 2 · KNOW ========== -->
       <div class="step-content" data-step="2-know">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 2 · С кнопкой</span>
           <span class="phase-big-badge big-K">KNOW · Пойми</span>
         </div>
         <h1 class="step-h">Что внутри кнопки и провода</h1>
@@ -962,17 +841,6 @@
         </ul>
         <div class="callout c-info">Это ваш главный инструмент поиска неисправностей. Не работает цепь? Прозвоните каждый провод.</div>
 
-        <div class="self-check">
-          <div class="lbl">🛑 Стоп. Проверь себя</div>
-          <h3>Ответь себе на 3 вопроса</h3>
-          <ol>
-            <li>Что внутри кнопки физически делает её «кнопкой»? Что движется?</li>
-            <li>Почему провод в изоляции можно держать в руках, а оголённый конец — нет?</li>
-            <li>Если на «всё понятно» — объясните вслух разницу между проводником и изолятором за 30 секунд. Засеките таймер.</li>
-          </ol>
-          <em>Если уложился — понимаешь. Если запинался или говорил «эээ, ну...» — вернись к разделу.</em>
-        </div>
-
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('2-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('2-own')">Own: замерьте 3 линии →</button>
@@ -982,7 +850,6 @@
       <!-- ========== CYCLE 2 · OWN ========== -->
       <div class="step-content" data-step="2-own">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 2 · С кнопкой</span>
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
         <h1 class="step-h">Замерьте все три линии ATX</h1>
@@ -1024,69 +891,34 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('2-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('2-share')">Share: закрепи кнопку →</button>
+          <button class="nav-btn primary" onclick="selectStep('2-share')">Share: зачем кнопка →</button>
         </div>
       </div>
 
       <!-- ========== CYCLE 2 · SHARE ========== -->
       <div class="step-content" data-step="2-share">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 2 · С кнопкой</span>
-          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
         </div>
-        <h1 class="step-h">Закрепи Цикл 2 — самопроверка</h1>
-        <p class="step-intro">Кнопка добавила управление. Прежде чем перейти к реле — проверь себя одним из 3 способов.</p>
+        <h1 class="step-h">Зачем нужна кнопка?</h1>
+        <p class="step-intro">Кажется очевидно, но попробуйте сформулировать — это тренирует мышление.</p>
 
-        <h2>Выбери один способ</h2>
-        <div class="share-modes">
-          <div class="share-mode share-mode-recommended">
-            <div class="num">1</div>
-            <div class="ico">🤖</div>
-            <b>ИИ-самопроверка</b>
-            Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
-            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 2 Модуля 1: тактовая кнопка, мультиметр (V= и прозвонка),
-3 линии ATX (3.3V, 5V, 12V).
-
-Задай мне 5 вопросов от простого к сложному, проверяя:
-- помню ли термины (NO, прозвонка, проводник, изолятор)
-- понимаю ли как работает кнопка изнутри
-- могу ли применить мультиметр (что замерить, в каком режиме)
-
-Правила СТРОГО:
-1. Только вопросы, без подсказок.
-2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
-3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
-4. Если 2+ неверных — назови раздел методички, к которому вернуться.
-
-Готов?</pre>
-          </div>
-
-          <div class="share-divider">или</div>
-
-          <div class="share-mode">
-            <div class="num">2</div>
-            <div class="ico">👥</div>
-            <b>Сосед или ментор за 30 сек</b>
-            Расскажи 3 предложения о разнице между Циклом 1 и 2:
-            <ul style="margin:8px 0 0 18px;font-size:13px">
-              <li>«В первой цепи LED ___.»</li>
-              <li>«Во второй цепи LED ___.»</li>
-              <li>«Кнопка нужна, чтобы ___.»</li>
-            </ul>
-          </div>
+        <div class="share-prompt">
+          <div class="lbl">Задание</div>
+          <p>Объясните соседу или ментору <b>разницу между Циклом 1 и Циклом 2</b>:</p>
+          <ol style="color:var(--ink);margin-top:10px">
+            <li>«В первой цепи LED ___.»</li>
+            <li>«Во второй цепи LED ___.»</li>
+            <li>«Кнопка нужна, чтобы ___.»</li>
+          </ol>
+          <em>Ключевые слова: «управление», «замыкает и размыкает», «вкл/выкл пальцем».</em>
         </div>
 
         <div class="callout c-success"><b>Цикл 2 пройден.</b> Вы добавили <b>управление</b> — теперь током можно управлять пальцем. Дальше — заменим палец на реле.</div>
 
-        <div class="delayed-check">
-          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
-          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
-          <ol>
-            <li>В каком режиме мультиметра нужно проверять напряжение?</li>
-            <li>Что значит, если мультиметр пикает в режиме прозвонки?</li>
-            <li>Почему 12V в Pico — это сразу поломка?</li>
-          </ol>
-          <em>Не помнишь — вернись к Циклу 2 KNOW.</em>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Объяснил</div></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал</button></div>
         </div>
 
         <div class="nav-row">
@@ -1098,7 +930,6 @@
       <!-- ========== CYCLE 3 · TRY ========== -->
       <div class="step-content" data-step="3-try">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 3 · С реле</span>
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Реле щёлкает — LED горит</h1>
@@ -1150,7 +981,6 @@
       <!-- ========== CYCLE 3 · KNOW ========== -->
       <div class="step-content" data-step="3-know">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 3 · С реле</span>
           <span class="phase-big-badge big-K">KNOW · Пойми</span>
         </div>
         <h1 class="step-h">Электромагнит внутри коробочки</h1>
@@ -1188,17 +1018,6 @@
         <p>Pico может выдать на свой пин максимум <b>0.025 ампер</b>. Хватит на LED, но не на мотор или 220V-лампу. Реле — <b>посредник</b>: принимает слабый сигнал от Pico, коммутирует сильный ток от отдельного источника.</p>
         <p>Где встречаете реле каждый день: машины (стартер, клаксон), холодильники, кондиционеры, умные розетки.</p>
 
-        <div class="self-check">
-          <div class="lbl">🛑 Стоп. Проверь себя</div>
-          <h3>Ответь себе на 3 вопроса</h3>
-          <ol>
-            <li>Что заставляет якорь реле двигаться в момент, когда вы нажали кнопку?</li>
-            <li>Откуда берётся щелчок — что физически произошло?</li>
-            <li>Если на «всё понятно» — попробуй предсказать: что будет, если оборвать провод между Pico и DC+ реле? Реле сработает или нет? Почему?</li>
-          </ol>
-          <em>Если на 3-й вопрос не можешь ответить уверенно — теория усвоена не до конца.</em>
-        </div>
-
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('3-own')">Own: переключите на NC →</button>
@@ -1208,7 +1027,6 @@
       <!-- ========== CYCLE 3 · OWN ========== -->
       <div class="step-content" data-step="3-own">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 3 · С реле</span>
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
         <h1 class="step-h">Переключите NO → NC. Что изменится?</h1>
@@ -1248,71 +1066,36 @@
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-know')">← Know</button>
-          <button class="nav-btn primary" onclick="selectStep('3-share')">Share: закрепи реле →</button>
+          <button class="nav-btn primary" onclick="selectStep('3-share')">Share: зачем посредник →</button>
         </div>
       </div>
 
       <!-- ========== CYCLE 3 · SHARE ========== -->
       <div class="step-content" data-step="3-share">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 3 · С реле</span>
-          <span class="phase-big-badge big-S">SHARE · Закрепи</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
         </div>
-        <h1 class="step-h">Закрепи Цикл 3 — самопроверка</h1>
-        <p class="step-intro">Реле освоено. Прежде чем писать первый код для Pico — проверь себя одним из 3 способов.</p>
+        <h1 class="step-h">Зачем посредник, если напрямую работало?</h1>
+        <p class="step-intro">Тонкий вопрос: в Цикле 2 кнопка напрямую включала LED. Зачем усложнять?</p>
 
-        <h2>Выбери один способ</h2>
-        <div class="share-modes">
-          <div class="share-mode share-mode-recommended">
-            <div class="num">1</div>
-            <div class="ico">🤖</div>
-            <b>ИИ-самопроверка</b>
-            Скопируй промпт ниже, отправь в ИИ-чат. 5 строгих вопросов, оценка дыр без поблажек.
-            <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я прошёл Цикл 3 Модуля 1: реле с оптопарой, гальваническая развязка,
-NO/NC контакты, джампер H/L.
-
-Задай мне 5 вопросов от простого к сложному, проверяя:
-- помню ли термины (катушка, контакты, NO, NC, оптопара, джампер)
-- понимаю ли физику работы реле (что движется внутри, откуда щелчок)
-- могу ли применить (зачем реле если кнопка тоже работает; когда NC, когда NO)
-
-Правила СТРОГО:
-1. Только вопросы, без подсказок.
-2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
-3. После 5 ответов — конкретный итог: что понял, какие 2-3 пробела.
-4. Если 2+ неверных — назови раздел методички, к которому вернуться.
-
-Готов?</pre>
-          </div>
-
-          <div class="share-divider">или</div>
-
-          <div class="share-mode">
-            <div class="num">2</div>
-            <div class="ico">👥</div>
-            <b>Сосед или ментор за 30 сек</b>
-            Объясни 2 предложения о том зачем нужно реле:
-            <ul style="margin:8px 0 0 18px;font-size:13px">
-              <li>«В прямой цепи кнопка не справится с ___.»</li>
-              <li>«Реле — это ___ между слабым сигналом и сильным током.»</li>
-            </ul>
-          </div>
+        <div class="share-prompt">
+          <div class="lbl">Задание</div>
+          <p>Объясните <b>почему инженеры добавляют реле</b>, хотя без него «работало». Два момента:</p>
+          <ol style="color:var(--ink);margin-top:10px">
+            <li>«В прямой цепи кнопка не справится с ___ (мотором / большим током / 220V).»</li>
+            <li>«Реле — это ___ между слабым сигналом и сильным током.»</li>
+          </ol>
+          <em>Ключевые слова: «посредник», «слабый сигнал управляет сильным током», «разделение».</em>
         </div>
 
-        <div class="callout c-info"><b>Главное:</b> в Модуле 2 вам понадобится управлять вентилятором 12V. Кнопка его не включит — она не предназначена для таких токов. А реле — да.</div>
+        <div class="callout c-info"><b>Главное:</b> в Модуле 2 вам понадобится управлять вентилятором 12V. Кнопка его не включит — она не предназначена для таких токов. А реле — да. Поэтому вы учитесь работать с реле сейчас.</div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Объяснил идею посредника</div></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сказал</button></div>
+        </div>
 
         <div class="callout c-success"><b>Цикл 3 пройден.</b> Вы поняли как работает реле и зачем оно нужно. Готовы к главному — коду вместо пальца.</div>
-
-        <div class="delayed-check">
-          <div class="lbl">⏰ Через 2 дня — отложенный чекпоинт</div>
-          <h3>Через 2 дня вернись и ответь без подглядывания</h3>
-          <ol>
-            <li>Чем NO отличается от NC у реле?</li>
-            <li>Что внутри реле физически двигается, когда оно срабатывает?</li>
-            <li>Зачем реле, если кнопка тоже умеет включать LED напрямую?</li>
-          </ol>
-          <em>Не помнишь — вернись к Циклу 3 KNOW.</em>
-        </div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('3-own')">← Own</button>
@@ -1323,7 +1106,6 @@ NO/NC контакты, джампер H/L.
       <!-- ========== CYCLE 4 · TRY ========== -->
       <div class="step-content" data-step="4-try">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 4 · С Pico (финал)</span>
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Код вместо пальца</h1>
@@ -1377,7 +1159,6 @@ NO/NC контакты, джампер H/L.
       <!-- ========== CYCLE 4 · KNOW ========== -->
       <div class="step-content" data-step="4-know">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 4 · С Pico (финал)</span>
           <span class="phase-big-badge big-K">KNOW · Пойми</span>
         </div>
         <h1 class="step-h">Pico, MicroPython и каждая строка кода</h1>
@@ -1419,17 +1200,6 @@ relay = Pin(15, Pin.OUT)
 
         <div class="callout c-tip"><b>Почему это критично:</b> ИИ пишет гладко, кажется понятным. Это иллюзия. Через 2 дня забудете всё. Когда переводите каждую строку — иллюзия разрушается, мозг запоминает.</div>
 
-        <div class="self-check">
-          <div class="lbl">🛑 Стоп. Проверь себя</div>
-          <h3>Ответь себе на 3 вопроса</h3>
-          <ol>
-            <li>Что делает строка <code>while True:</code> и почему она написана именно так — что значит двоеточие в конце?</li>
-            <li>Что произойдёт, если убрать <code>sleep(1)</code> из обоих мест в коде?</li>
-            <li>Если на «всё понятно» — попроси ИИ показать что произойдёт, если поменять <code>value(1)</code> на <code>value(0)</code> в обоих местах. Сначала угадай сам, потом сравни.</li>
-          </ol>
-          <em>Цель — не запомнить синтаксис, а понять «почему именно так».</em>
-        </div>
-
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('4-try')">← Try</button>
           <button class="nav-btn primary" onclick="selectStep('4-own')">Own: свой режим →</button>
@@ -1439,7 +1209,6 @@ relay = Pin(15, Pin.OUT)
       <!-- ========== CYCLE 4 · OWN ========== -->
       <div class="step-content" data-step="4-own">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 4 · С Pico (финал)</span>
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
         <h1 class="step-h">Ваш собственный режим мигания</h1>
@@ -1487,63 +1256,48 @@ relay = Pin(15, Pin.OUT)
       <!-- ========== CYCLE 4 · SHARE (BIG FINALE) ========== -->
       <div class="step-content" data-step="4-share">
         <div class="phase-title-row">
-          <span class="cycle-label">Цикл 4 · С Pico (финал)</span>
           <span class="phase-big-badge big-S">SHARE · Большой финал</span>
         </div>
-        <h1 class="step-h">Финал Модуля 1 — фото, видео, защита</h1>
-        <p class="step-intro">Завершение всего модуля. Три шага: материалы для портфолио → ИИ-самопроверка → защита перед ментором.</p>
+        <h1 class="step-h">Портфолио и защита перед ментором</h1>
+        <p class="step-intro">Это большое SHARE — завершение всего Модуля 1. Через год вы откроете портфолио и увидите здесь начало своего пути.</p>
 
-        <h2>1. Сними фото и видео</h2>
+        <h2>1. Фото и видео</h2>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Фото устройства</div></div>
-          <div class="action-body">Сделай <b>1 фото</b> готового устройства на телефон. Просто общий план — всё что собрано на столе. Сохрани у себя — ментор добавит в твоё портфолио.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Снял фото</button></div>
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">2 фото устройства</div></div>
+          <div class="action-body">Общий план (всё рабочее место) + крупный план компонентов.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Снял</button></div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">2</div><div class="action-title">Видео 30 секунд → в TG-группу школы</div></div>
-          <div class="action-body">Сними <b>30 секунд видео</b> работающего устройства в твоём режиме мигания. Отправь в Telegram-группу школы — родители и одноклассники увидят что ты сделал. Это твоё доказательство, что устройство реально работает.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Видео в TG отправлено</button></div>
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Видео 30 секунд</div></div>
+          <div class="action-body">Работающий маячок в вашем режиме. Снимайте на телефон.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Записал</button></div>
         </div>
 
-        <h2>2. Финальная ИИ-самопроверка</h2>
-        <p>Прежде чем идти к ментору на защиту — проверь себя на ИИ. Это разогрев и понимание где у тебя дыры.</p>
-        <div class="socratic-block">
-          <div class="lbl">🤖 Финальный self-check за весь Модуль 1</div>
-          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я закончил Модуль 1 «Управляемая лампа» школы ShokanLab — собрал
-цепь LED через реле, управляемое Pico с кодом на MicroPython.
-
-Задай мне 5 вопросов разной сложности (от простого до сложного),
-охватывая:
-- электрическую цепь (Цикл 1)
-- мультиметр и кнопку (Цикл 2)
-- реле, NO/NC, оптопара (Цикл 3)
-- код Pin/sleep/while (Цикл 4)
-
-Правила СТРОГО:
-1. Только вопросы, без подсказок.
-2. После каждого ответа — оцени строго: «верно», «неполно», «неверно». НЕ подбадривай.
-3. После 5 ответов — конкретный итог: что я понял, какие 2-3 пробела.
-4. Если 2+ неверных — назови раздел методички, к которому вернуться.
-5. В конце дай мне ОДНУ фразу: с какой темы я бы начал готовиться к защите.
-
-Готов?</pre>
-        </div>
+        <h2>2. Запись в портфолио</h2>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">3</div><div class="action-title">Прошёл ИИ-самопроверку</div></div>
-          <div class="action-body">Если ИИ нашёл дыры — вернись к нужному циклу. Если всё хорошо — иди к ментору.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Самопроверка пройдена</button></div>
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Заполните страницу</div></div>
+          <div class="action-body">
+            Ментор откроет вашу страницу в Google Drive. Заполните:
+            <ul>
+              <li>Фото и видео</li>
+              <li>Ваш финальный код</li>
+              <li><b>Teardown-заметка</b> (3 вопроса): что понял / что было сложно / что улучшил бы</li>
+              <li>Самооценка: интересно 1–5, понятно 1–5</li>
+            </ul>
+          </div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Портфолио заполнено</button></div>
         </div>
 
         <h2>3. Защита перед ментором</h2>
-        <p>Подойди к ментору. Он задаст три вопроса — отвечай <b>своими словами</b>, не подглядывая:</p>
+        <p>Ментор задаст три вопроса. Отвечайте <b>своими словами</b>, не подглядывая:</p>
         <ol>
-          <li>Как работает твоя цепь? (от плюса ATX до LED и обратно)</li>
+          <li>Как работает ваша цепь? (от плюса ATX до LED и обратно)</li>
           <li>Что делает каждая строка кода?</li>
-          <li>Если LED перестанет мигать — с чего начнёшь искать проблему?</li>
+          <li>Если LED перестанет мигать — с чего начнёте искать проблему?</li>
         </ol>
-        <div class="callout c-info"><b>Защита — не экзамен.</b> Ментор подтверждает то, что ты уже умеешь.</div>
+        <div class="callout c-info"><b>Защита — не экзамен.</b> Ментор подтверждает то, что вы уже умеете.</div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">4</div><div class="action-title">Защитился у ментора</div></div>
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Защитился</div></div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Зачёт получил</button></div>
         </div>
 
@@ -1552,10 +1306,10 @@ relay = Pin(15, Pin.OUT)
           <div class="action-head"><div class="action-num">5</div><div class="action-title">Сохранить и разобрать</div></div>
           <div class="action-body">
             <ul>
-              <li>Сохрани код в файл у себя (потом ментор положит в твоё портфолио)</li>
-              <li>Разбери устройство</li>
+              <li>Сохраните код в файл у себя</li>
+              <li>Разберите устройство</li>
               <li>Компоненты на стеллаж</li>
-              <li>Протри рабочее место</li>
+              <li>Протрите рабочее место</li>
             </ul>
           </div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Всё убрано</button></div>
@@ -1563,7 +1317,7 @@ relay = Pin(15, Pin.OUT)
 
         <div class="callout c-success">
           <b>🎉 Модуль 1 пройден!</b><br>
-          Ты собрал реальное программно-управляемое устройство и защитил его перед ментором. Это первое свидетельство того, что ты — начинающий инженер. Портфолио заполнит ментор по фото и видео из TG-группы.
+          Вы собрали реальное программно-управляемое устройство, объяснили как оно работает, записали в портфолио. Это первое свидетельство того, что вы — начинающий инженер.
         </div>
 
         <h2>Отложенная проверка через 2 дня</h2>
@@ -1605,21 +1359,6 @@ relay = Pin(15, Pin.OUT)
   <span id="glossDef"></span>
 </div>
 
-<!-- Протокол «застрял» — плавающая кнопка, доступна с любой страницы -->
-<button class="stuck-fab" onclick="toggleStuck()" aria-label="Застрял? Открой протокол" title="Застрял? Что делать">✋</button>
-<div class="stuck-card" id="stuckCard" role="dialog" aria-label="Протокол «застрял»">
-  <button class="close" aria-label="Закрыть" onclick="toggleStuck()">×</button>
-  <h3>✋ Застрял? Делай по порядку</h3>
-  <ol>
-    <li><b>Перечитай шаг.</b> Часто пропустил одну строчку.</li>
-    <li><b>Объясни ИИ одной фразой</b>, что не получается. Это часто сразу проясняет.</li>
-    <li><b>Загугли</b> точное сообщение об ошибке. Не своими словами — точный текст.</li>
-    <li><b>Разбей задачу на подшаги.</b> На какой минимальной части ты завис?</li>
-    <li><b>Зови ментора.</b> Не раньше 5 минут (сначала попробуй сам), не позже 15 (не выгорай).</li>
-  </ol>
-</div>
-
-<script src="circuits/component_registry.js"></script>
 <script>
   // Flat order for progression: 16 steps
   const ORDER = [
@@ -1634,10 +1373,6 @@ relay = Pin(15, Pin.OUT)
     3:'Цикл 3 · С реле',
     4:'Цикл 4 · С Pico (финал)'
   };
-
-  function toggleStuck(){
-    document.getElementById('stuckCard').classList.toggle('open');
-  }
 
   function toggleSidebar(){
     const side = document.querySelector('.side');
@@ -1679,6 +1414,7 @@ relay = Pin(15, Pin.OUT)
       document.getElementById('crumbCycle').textContent = CYCLE_NAMES[cycleNum];
       document.getElementById('stepIdx').textContent = ORDER.indexOf(stepId)+1;
     }
+    updateStepper(stepId);
     // lazy-инициализация iframe и контекстный помощник
     activateIframes(stepId);
     renderHelper(stepId);
@@ -1692,6 +1428,34 @@ relay = Pin(15, Pin.OUT)
       document.querySelector('.side')?.classList.remove('open');
       document.querySelector('.side-overlay')?.classList.remove('show');
     }
+  }
+
+  function updateStepper(stepId){
+    const stepper = document.getElementById('cycleStepper');
+    if (!stepper) return;
+    if (stepId === '0-start'){
+      stepper.style.display = 'none';
+      return;
+    }
+    stepper.style.display = '';
+    const [cy, ph] = stepId.split('-');
+    const cyNum = parseInt(cy,10);
+    stepper.querySelectorAll('.cs-node').forEach(n=>{
+      const c = parseInt(n.dataset.cycle,10);
+      n.classList.toggle('current', c===cyNum);
+      n.classList.toggle('done', c<cyNum);
+    });
+    stepper.querySelectorAll('.cs-line').forEach(l=>{
+      const c = parseInt(l.dataset.line,10);
+      l.classList.toggle('done', c<cyNum);
+    });
+    const phaseOrder = ['try','know','own','share'];
+    const phIdx = phaseOrder.indexOf(ph);
+    stepper.querySelectorAll('.cs-phase').forEach(p=>{
+      const i = phaseOrder.indexOf(p.dataset.phase);
+      p.classList.toggle('current', p.dataset.phase===ph);
+      p.classList.toggle('done', i<phIdx);
+    });
   }
 
   // ============ Прогресс через localStorage ============
@@ -1923,113 +1687,6 @@ relay = Pin(15, Pin.OUT)
     }
   }
 
-  // ============ Сетка комплектующих с иконками ============
-  // Inline SVG для деталей которых нет в реестре (провода, USB, отвёртка, ноутбук)
-  const PARTS_INLINE_SVG = {
-    dupont: `<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-      <g stroke-width="3" fill="none" stroke-linecap="round">
-        <path d="M 10 20 Q 40 10 70 25 Q 90 32 110 18" stroke="#EF4444"/>
-        <path d="M 10 30 Q 40 22 70 35 Q 90 42 110 30" stroke="#22C55E"/>
-        <path d="M 10 40 Q 40 32 70 45 Q 90 52 110 42" stroke="#1d1d1f"/>
-      </g>
-      <g fill="#888" stroke="#555" stroke-width="0.8">
-        <rect x="3" y="16" width="8" height="8" rx="1"/>
-        <rect x="3" y="26" width="8" height="8" rx="1"/>
-        <rect x="3" y="36" width="8" height="8" rx="1"/>
-        <rect x="109" y="14" width="8" height="8" rx="1"/>
-        <rect x="109" y="26" width="8" height="8" rx="1"/>
-        <rect x="109" y="38" width="8" height="8" rx="1"/>
-      </g>
-    </svg>`,
-    usb: `<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="15" width="22" height="30" rx="3" fill="#C0C0C0" stroke="#888"/>
-      <rect x="6" y="20" width="14" height="20" rx="1" fill="#1A1A1A"/>
-      <line x1="24" y1="30" x2="100" y2="30" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
-      <rect x="100" y="22" width="16" height="16" rx="2" fill="#3B3B3B" stroke="#222"/>
-      <rect x="103" y="26" width="10" height="8" rx="1" fill="#222"/>
-    </svg>`,
-    multimeter: `<svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="5" width="80" height="120" rx="6" fill="#FBBF24" stroke="#92400E" stroke-width="1.5"/>
-      <rect x="18" y="14" width="64" height="24" rx="2" fill="#1F2937"/>
-      <text x="50" y="32" text-anchor="middle" fill="#9CA3AF" font-size="10" font-family="monospace">1999</text>
-      <circle cx="50" cy="64" r="18" fill="#374151" stroke="#111" stroke-width="1.5"/>
-      <line x1="50" y1="64" x2="50" y2="50" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="32" cy="106" r="6" fill="#1F2937"/>
-      <circle cx="68" cy="106" r="6" fill="#DC2626"/>
-    </svg>`,
-    screwdriver: `<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="9" width="50" height="12" rx="3" fill="#DC2626" stroke="#7F1D1D"/>
-      <rect x="58" y="11" width="6" height="8" fill="#9CA3AF"/>
-      <rect x="64" y="13" width="40" height="4" fill="#D1D5DB" stroke="#6B7280" stroke-width="0.5"/>
-      <rect x="104" y="11" width="8" height="8" fill="#6B7280"/>
-    </svg>`,
-    laptop: `<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 18 10 L 102 10 L 100 56 L 20 56 Z" fill="#374151" stroke="#111"/>
-      <rect x="22" y="14" width="76" height="38" fill="#3B82F6"/>
-      <text x="60" y="38" text-anchor="middle" fill="#fff" font-size="11" font-family="monospace">Thonny</text>
-      <path d="M 8 60 L 112 60 L 116 70 L 4 70 Z" fill="#1F2937" stroke="#111"/>
-      <rect x="50" y="62" width="20" height="3" rx="1" fill="#374151"/>
-    </svg>`,
-    psu: `<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg">
-      <rect x="6" y="8" width="128" height="64" rx="4" fill="#1565C0" stroke="#0D47A1"/>
-      <rect x="14" y="14" width="22" height="14" rx="2" fill="#E0E0E0" stroke="#999"/>
-      <text x="22" y="24" fill="#4CAF50" font-size="6" font-weight="700">ON</text>
-      <g>
-        <circle cx="50" cy="58" r="6" fill="#E53935" stroke="#B71C1C"/>
-        <text x="50" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">3.3V</text>
-        <circle cx="68" cy="58" r="6" fill="#212121" stroke="#000"/>
-        <text x="68" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">GND</text>
-        <circle cx="86" cy="58" r="6" fill="#E53935" stroke="#B71C1C"/>
-        <text x="86" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">5V</text>
-        <circle cx="104" cy="58" r="6" fill="#F57C00" stroke="#E65100"/>
-        <text x="104" y="74" text-anchor="middle" fill="#90CAF9" font-size="6">12V</text>
-      </g>
-    </svg>`
-  };
-
-  function partCard(opts) {
-    // opts = { svg: rawSvgString, name, hint, count }
-    return `<div class="part-card">
-      <div class="part-count">${opts.count}</div>
-      <div class="part-svg">${opts.svg}</div>
-      <div class="part-name">${opts.name}</div>
-      <div class="part-hint">${opts.hint || ''}</div>
-    </div>`;
-  }
-
-  function svgFromRegistry(key, viewBoxOverride){
-    const comp = COMPONENT_LIBRARY[key];
-    if (!comp) return '<div style="color:#999;font-size:11px">нет иконки</div>';
-    const b = comp.bbox;
-    // Render at component's natural origin; wrap in svg with viewBox so it scales
-    const inner = comp.renderSVG({ x: 0, y: 0 });
-    const vb = viewBoxOverride || `${b.x} ${b.y} ${b.w} ${b.h}`;
-    return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">${inner}</svg>`;
-  }
-
-  function renderPartsGrids(){
-    const studentEl = document.getElementById('partsStudent');
-    const labEl = document.getElementById('partsLab');
-    if (!studentEl || !labEl) return;
-
-    studentEl.innerHTML = [
-      partCard({ svg: svgFromRegistry('raspberry_pi_pico'), name: 'Raspberry Pi Pico', hint: 'микроконтроллер', count: '1 шт' }),
-      partCard({ svg: svgFromRegistry('atx_xh_m229'),       name: 'Плата расширения ATX', hint: 'с винтовыми клеммами', count: '1 шт' }),
-      partCard({ svg: svgFromRegistry('relay_jqc_3ff_s_z'), name: 'Реле',                hint: '1-канальное с оптопарой', count: '1 шт' }),
-      partCard({ svg: svgFromRegistry('led_3w_star'),       name: 'Светодиод 3 Вт',      hint: 'на алюминиевой звезде', count: '1 шт' }),
-      partCard({ svg: svgFromRegistry('button_tactile_2pin'), name: 'Тактовая кнопка',   hint: 'нажал — замкнула', count: '1 шт' }),
-      partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'для соединений', count: '10 шт' }),
-      partCard({ svg: PARTS_INLINE_SVG.usb,                 name: 'USB-кабель Micro-B',  hint: 'с поддержкой данных', count: '1 шт' })
-    ].join('');
-
-    labEl.innerHTML = [
-      partCard({ svg: PARTS_INLINE_SVG.psu,                 name: 'Блок питания ATX',    hint: '3.3 V / 5 V / 12 V', count: '1 на стол' }),
-      partCard({ svg: PARTS_INLINE_SVG.multimeter,          name: 'Мультиметр',          hint: 'один на 2–3 ученика', count: '' }),
-      partCard({ svg: PARTS_INLINE_SVG.screwdriver,         name: 'Плоская отвёртка',    hint: 'для клемм', count: '' }),
-      partCard({ svg: PARTS_INLINE_SVG.laptop,              name: 'Ноутбук с Thonny',    hint: 'для прошивки Pico', count: '' })
-    ].join('');
-  }
-
   // ============ Время на шаг ============
   const STEP_TIMES = {
     '1-try': 5,  '1-know': 4, '1-own': 6,  '1-share': 3,
@@ -2134,8 +1791,7 @@ relay = Pin(15, Pin.OUT)
         'Длинные провода свисают — могут замкнуть друг друга.'
       ],
       prompts: [
-        'Чем тактовая кнопка отличается от тумблера или переключателя?',
-        'Я собрал цепь: блок питания ATX +3.3V → кнопка → длинная ножка LED → короткая ножка LED → GND. Кнопка нажата, но LED не горит. Не предлагай решение. Задавай мне вопросы по очереди — пусть я сам найду, что не так. После каждого моего ответа — следующий вопрос.'
+        'Чем тактовая кнопка отличается от тумблера или переключателя?'
       ]
     },
     '2-know': {
@@ -2190,8 +1846,7 @@ relay = Pin(15, Pin.OUT)
         'Подал 5V на катушку без проверки джампера.'
       ],
       prompts: [
-        'Зачем в реле гальваническая развязка через оптопару? От чего она защищает?',
-        'Я подключаю реле в первый раз. У него 3 пина управления (DC+/DC-/IN) и 3 силовых (COM/NO/NC). Спрашивай меня по очереди: что я уже подключил, что собираюсь следующим, и зачем именно в таком порядке. Поправляй если ошибаюсь, но не делай за меня.'
+        'Зачем в реле гальваническая развязка через оптопару? От чего она защищает?'
       ]
     },
     '3-know': {
@@ -2260,8 +1915,7 @@ relay = Pin(15, Pin.OUT)
         'Забыл двоеточие после while True — синтаксическая ошибка.'
       ],
       prompts: [
-        'Объясни построчно эту программу MicroPython: from machine import Pin; relay = Pin(15, Pin.OUT); while True: relay.value(1); sleep(1); relay.value(0); sleep(1)',
-        'Вот мой код для Pico. Объясни КАЖДУЮ строку на русском, как для 14-летнего. Не ускоряй, разбирай по одной строке. После каждой жди моего «ок, дальше». [вставь сюда свой код]'
+        'Объясни построчно эту программу MicroPython: from machine import Pin; relay = Pin(15, Pin.OUT); while True: relay.value(1); sleep(1); relay.value(0); sleep(1)'
       ]
     },
     '4-own': {
@@ -2288,8 +1942,7 @@ relay = Pin(15, Pin.OUT)
         'В teardown написал «всё было легко» — себя обманываешь, не пиши так.'
       ],
       prompts: [
-        'Дай 3 уточняющих вопроса, чтобы я проверил понимание моего проекта «Управляемая лампа на Pico+реле».',
-        'Я закончил Модуль 1 — собрал цепь LED через реле, управляемое Pico с кодом на MicroPython. Задай мне 5 вопросов разной сложности, чтобы я проверил что реально понимаю. Не показывай ответы. Только вопросы. После того как я отвечу на все 5 — оцени, где у меня дыры.'
+        'Дай 3 уточняющих вопроса, чтобы я проверил понимание моего проекта «Управляемая лампа на Pico+реле».'
       ]
     }
   };
@@ -2342,7 +1995,7 @@ relay = Pin(15, Pin.OUT)
   document.addEventListener('DOMContentLoaded', () => {
     const safe = (label, fn) => { try { fn(); } catch(e) { console.warn('[init] '+label+':', e); } };
     safe('time badges',      () => injectTimeBadges());
-    safe('parts grids',      () => renderPartsGrids());
+    safe('share modes',      () => injectShareModes());
     safe('term tooltips',    () => attachTermTooltips());
     safe('progress restore', () => applyProgressFromStorage());
 
