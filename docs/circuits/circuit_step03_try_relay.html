@@ -21,7 +21,7 @@
 <body>
 
 <div class="sim">
-  <svg viewBox="0 0 900 620">
+  <svg viewBox="0 0 940 620">
     <g id="atx-layer"></g>
     <g id="wires-layer"></g>
     <g id="button-layer"></g>
@@ -33,12 +33,18 @@
 
 <script src="component_registry.js"></script>
 <script>
-  // ==== SOP: pins = визуальная позиция; провода НЕ пересекают bbox ====
+  // ==== Правила (visual_rules.md):
+  //   1. Только 90° (никаких диагоналей)
+  //   2. Bus-rail для общих питаний (+3.3V и GND — единая шина, ответвления вниз)
+  //   3. Минимум пересечений
+  //   4. Палитра: красный=VCC, чёрный=GND, зелёный=сигнал, жёлтый=нагрузка
+  //   5. Лейблы коротко: «+3.3V», «GND», «сигнал», «нагрузка»
+  //   6. 40px padding от content до viewBox
 
-  const ATX_OFFSET    = { tx: 80,  ty: 10  };
-  const BUTTON_OFFSET = { tx: 130, ty: 330 };
-  const RELAY_OFFSET  = { tx: 320, ty: 330 };
-  const LED_OFFSET    = { tx: 740, ty: 360 };
+  const ATX_OFFSET    = { tx: 100, ty: 20  };
+  const BUTTON_OFFSET = { tx: 200, ty: 380 };
+  const RELAY_OFFSET  = { tx: 360, ty: 360 };
+  const LED_OFFSET    = { tx: 800, ty: 380 };
 
   const atx   = COMPONENT_LIBRARY["atx_xh_m229"];
   const btn   = COMPONENT_LIBRARY["button_tactile_2pin"];
@@ -51,9 +57,9 @@
   document.getElementById('relay-layer').innerHTML  = relay.renderSVG({ x: RELAY_OFFSET.tx, y: RELAY_OFFSET.ty });
   document.getElementById('led-layer').innerHTML    = led.renderSVG({ x: LED_OFFSET.tx, y: LED_OFFSET.ty });
 
-  // Точки подключения (визуальный центр = pin.x/y + offset)
-  const a_3v3 = pin(atx,   'plus3V3', ATX_OFFSET);    // y≈170
-  const a_gnd = pin(atx,   'gnd_4',   ATX_OFFSET);    // y≈170
+  // ==== Pin-координаты ====
+  const a_3v3 = pin(atx,   'plus3V3', ATX_OFFSET);
+  const a_gnd = pin(atx,   'gnd_4',   ATX_OFFSET);
   const b_a   = pin(btn,   'pin_a',   BUTTON_OFFSET);
   const b_b   = pin(btn,   'pin_b',   BUTTON_OFFSET);
   const r_dcp = pin(relay, 'dc_plus', RELAY_OFFSET);
@@ -64,128 +70,101 @@
   const l_a   = pin(led,   'anode',   LED_OFFSET);
   const l_c   = pin(led,   'cathode', LED_OFFSET);
 
-  // Нижние грани компонентов (для коридоров)
-  const ATX_BOTTOM   = ATX_OFFSET.ty   + atx.bbox.y   + atx.bbox.h;    // 10+30+220 = 260
-  const RELAY_BOTTOM = RELAY_OFFSET.ty + relay.bbox.y + relay.bbox.h;  // 330+0+130 = 460
-  const LED_TOP      = LED_OFFSET.ty   + led.bbox.y;                   // 360
-
-  // Коридор ПОД ATX (между низом ATX и верхом нижних компонентов),
-  // с разносом 15px для параллельных проводов
-  const CORRIDOR = (i) => ATX_BOTTOM + 20 + i * 15;
-  const Y_ABOVE_LED  = LED_TOP - 10;       // коридор выше LED (для обхода справа)
-  const X_RIGHT_ATX  = ATX_OFFSET.tx + atx.bbox.x + atx.bbox.w + 15;  // правее ATX
-  const X_RIGHT_RELAY = RELAY_OFFSET.tx + relay.bbox.x + relay.bbox.w + 20;  // правее реле
-  const X_LEFT_RELAY  = RELAY_OFFSET.tx + relay.bbox.x - 20;   // левее реле
-  const X_LEFT_BUTTON = BUTTON_OFFSET.tx + btn.bbox.x - 20;    // левее кнопки
+  // ==== Уровни шин (правило 2) ====
+  const VCC_BUS_Y = ATX_OFFSET.ty + atx.bbox.y + atx.bbox.h + 30;     // y ≈ 280, главная шина +3.3V
+  const GND_BUS_Y = VCC_BUS_Y + 25;                                    // y ≈ 305, шина GND ниже на 25px
 
   const path = pts => pts.map(p => `${p.x},${p.y}`).join(' ');
 
+  // ==== Палитра (правило 4) ====
+  const C_VCC  = '#EF4444';
+  const C_GND  = '#1d1d1f';
+  const C_SIG  = '#10B981';
+  const C_LOAD = '#FBBF24';
+
   const wires = [
-    // 1. ATX +3.3V → кнопка pin_a (коридор под ATX, затем слева кнопки)
-    {
-      color: '#EF4444',
-      points: [
+    // ── +3.3V шина ──
+    // 1. Из клеммы вниз на VCC bus (главная шина-стержень)
+    { color: C_VCC, points: [
         a_3v3,
-        { x: a_3v3.x,        y: CORRIDOR(0) },
-        { x: X_LEFT_BUTTON,  y: CORRIDOR(0) },
-        { x: X_LEFT_BUTTON,  y: b_a.y },
+        { x: a_3v3.x, y: VCC_BUS_Y },
+        { x: b_a.x,   y: VCC_BUS_Y }
+      ], label: { text: '+3.3V', x: 480, y: VCC_BUS_Y - 8 } },
+    // 2. Drop к кнопке pin_a
+    { color: C_VCC, points: [
+        { x: b_a.x, y: VCC_BUS_Y },
         b_a
-      ],
-      labelAt: { x: 400, y: CORRIDOR(0) - 5 }, labelText: '+3.3V → кнопка'
-    },
-    // 2. Кнопка pin_b → Relay IN (между кнопкой и реле, ниже их верхней границы)
-    {
-      color: '#22c55e',
-      points: [
-        b_b,
-        { x: X_LEFT_RELAY,   y: b_b.y },
-        { x: X_LEFT_RELAY,   y: r_sig.y },
-        r_sig
-      ],
-      labelAt: { x: X_LEFT_RELAY + 5, y: (b_b.y + r_sig.y)/2 - 4 }, labelText: 'сигнал → IN'
-    },
-    // 3. ATX +3.3V → Relay DC+ (коридор под ATX, затем слева реле)
-    {
-      color: '#EF4444',
-      points: [
-        a_3v3,
-        { x: a_3v3.x,        y: CORRIDOR(1) },
-        { x: X_LEFT_RELAY - 15, y: CORRIDOR(1) },
-        { x: X_LEFT_RELAY - 15, y: r_dcp.y },
+      ] },
+    // 3. Drop к relay DC+
+    { color: C_VCC, points: [
+        { x: r_dcp.x, y: VCC_BUS_Y },
         r_dcp
-      ],
-      labelAt: { x: 470, y: CORRIDOR(1) - 5 }, labelText: '+3.3V → DC+'
-    },
-    // 4. ATX GND → Relay DC- (коридор под ATX, ниже чем wire 3)
-    {
-      color: '#1d1d1f',
-      points: [
-        a_gnd,
-        { x: a_gnd.x,        y: CORRIDOR(2) },
-        { x: X_LEFT_RELAY - 30, y: CORRIDOR(2) },
-        { x: X_LEFT_RELAY - 30, y: r_dcm.y },
-        r_dcm
-      ],
-      labelAt: { x: 500, y: CORRIDOR(2) - 5 }, labelText: 'GND → DC−'
-    },
-    // 5. ATX +3.3V → Relay COM (обход ATX справа, над LED, справа реле)
-    {
-      color: '#EF4444',
-      points: [
-        a_3v3,
-        { x: a_3v3.x,        y: CORRIDOR(0) },
-        { x: X_RIGHT_ATX,    y: CORRIDOR(0) },
-        { x: X_RIGHT_ATX,    y: Y_ABOVE_LED },
-        { x: X_RIGHT_RELAY,  y: Y_ABOVE_LED },
-        { x: X_RIGHT_RELAY,  y: r_com.y },
+      ] },
+    // 4. Drop к relay COM (правее)
+    { color: C_VCC, points: [
+        { x: r_com.x, y: VCC_BUS_Y },
         r_com
-      ],
-      labelAt: { x: X_RIGHT_ATX + 5, y: Y_ABOVE_LED - 4 }, labelText: '+3.3V → COM'
-    },
-    // 6. Relay NO → LED+ (справа реле, в зазоре между реле и LED)
-    {
-      color: '#FBBF24',
-      points: [
+      ] },
+
+    // ── GND шина ──
+    // 5. Из клеммы вниз на GND bus + протяжка влево
+    { color: C_GND, points: [
+        a_gnd,
+        { x: a_gnd.x, y: GND_BUS_Y },
+        { x: r_dcm.x, y: GND_BUS_Y }
+      ], label: { text: 'GND', x: 500, y: GND_BUS_Y + 16 } },
+    // 6. Drop к relay DC−
+    { color: C_GND, points: [
+        { x: r_dcm.x, y: GND_BUS_Y },
+        r_dcm
+      ] },
+    // 7. Drop к LED− (катод). GND bus продлевается ВПРАВО до LED-катода
+    { color: C_GND, points: [
+        { x: a_gnd.x, y: GND_BUS_Y },
+        { x: l_c.x,   y: GND_BUS_Y },
+        l_c
+      ] },
+
+    // ── Сигнал (зелёный): button pin_b → relay IN ──
+    { color: C_SIG, points: [
+        b_b,
+        { x: b_b.x,   y: r_sig.y },
+        r_sig
+      ], label: { text: 'сигнал', x: b_b.x + 8, y: (b_b.y + r_sig.y)/2 + 4 } },
+
+    // ── Нагрузка (жёлтый): relay NO → LED+ (анод) ──
+    { color: C_LOAD, points: [
         r_no,
-        { x: X_RIGHT_RELAY,  y: r_no.y },
-        { x: X_RIGHT_RELAY,  y: l_a.y },
+        { x: l_a.x, y: r_no.y },
         l_a
-      ],
-      labelAt: { x: X_RIGHT_RELAY + 5, y: l_a.y - 8 }, labelText: 'NO → LED+'
-    },
-    // 7. LED− → ATX GND (справа LED, затем коридор под ATX до GND)
-    {
-      color: '#1d1d1f',
-      points: [
-        l_c,
-        { x: LED_OFFSET.tx + led.bbox.w + 20, y: l_c.y },
-        { x: LED_OFFSET.tx + led.bbox.w + 20, y: CORRIDOR(3) },
-        { x: a_gnd.x,        y: CORRIDOR(3) },
-        a_gnd
-      ],
-      labelAt: { x: LED_OFFSET.tx + led.bbox.w + 28, y: l_c.y + 15 }, labelText: 'GND'
-    }
+      ], label: { text: 'нагрузка', x: (r_no.x + l_a.x)/2 - 30, y: r_no.y - 8 } }
   ];
 
-  const wiresSvg = wires.map(w => `
-    <polyline class="wire" points="${path(w.points)}" stroke="${w.color}"/>
-    <circle class="dot" cx="${w.points[0].x}" cy="${w.points[0].y}" fill="${w.color}"/>
-    <circle class="dot" cx="${w.points[w.points.length-1].x}" cy="${w.points[w.points.length-1].y}" fill="${w.color}"/>
-    <text class="wlbl" x="${w.labelAt.x}" y="${w.labelAt.y}" fill="${w.color}">${w.labelText}</text>
-  `).join('');
+  const wiresSvg = wires.map(w => {
+    const start = w.points[0], end = w.points[w.points.length-1];
+    const lbl = w.label
+      ? `<text class="wlbl" x="${w.label.x}" y="${w.label.y}" fill="${w.color}">${w.label.text}</text>`
+      : '';
+    return `
+      <polyline class="wire" points="${path(w.points)}" stroke="${w.color}"/>
+      <circle class="dot" cx="${start.x}" cy="${start.y}" fill="${w.color}"/>
+      <circle class="dot" cx="${end.x}" cy="${end.y}" fill="${w.color}"/>
+      ${lbl}
+    `;
+  }).join('');
   document.getElementById('wires-layer').innerHTML = wiresSvg;
 
-  // Легенда
+  // ==== Легенда ====
   const legend = `
-    <g transform="translate(60, 590)" font-family="sans-serif" font-size="11">
+    <g transform="translate(80, 590)" font-family="sans-serif" font-size="12">
       ${[
-        ['#EF4444', 'питание +3.3V', 0],
-        ['#1d1d1f', 'земля GND', 170],
-        ['#22c55e', 'сигнал управления', 300],
-        ['#FBBF24', 'нагрузка к LED', 490]
+        [C_VCC,  'питание +3.3V', 0],
+        [C_GND,  'земля GND',     180],
+        [C_SIG,  'сигнал',        320],
+        [C_LOAD, 'нагрузка',      450]
       ].map(([c, t, x]) =>
-        `<line x1="${x}" y1="0" x2="${x+25}" y2="0" stroke="${c}" stroke-width="3" stroke-linecap="round"/>
-         <text x="${x+32}" y="4" fill="#1e2a4a">${t}</text>`
+        `<line x1="${x}" y1="0" x2="${x+25}" y2="0" stroke="${c}" stroke-width="4" stroke-linecap="round"/>
+         <text x="${x+32}" y="5" fill="#1e2a4a" font-weight="500">${t}</text>`
       ).join('')}
     </g>
   `;

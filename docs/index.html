@@ -59,15 +59,57 @@
   .brand .name{font-weight:700;font-size:15px;letter-spacing:-.2px}
   .brand .sub{font-size:11.5px;color:var(--muted);margin-top:3px}
 
-  .module-head{padding:0 16px 14px}
-  .module-title{font-size:10.5px;letter-spacing:1.2px;color:var(--muted);
-    font-weight:600;text-transform:uppercase;margin-bottom:8px;padding:0 6px}
-  .module-row{display:flex;gap:12px;align-items:center;padding:10px 12px;
-    border-radius:var(--radius);background:var(--card);
-    border:1px solid var(--border);box-shadow:var(--shadow-sm)}
-  .module-row .emoji{font-size:22px}
-  .module-row .t{font-weight:600;font-size:13.5px}
-  .module-row .s{font-size:11px;color:var(--muted);margin-top:1px}
+  .stage-head{padding:0 22px 12px}
+  .stage-name{font-size:10.5px;letter-spacing:1.2px;color:var(--muted);
+    font-weight:600;text-transform:uppercase;margin-bottom:2px}
+  .stage-sub{font-size:13px;color:var(--ink);font-weight:600}
+
+  /* ========== Modules list (8 модулей этапа) ========== */
+  .mod-item{display:flex;gap:10px;align-items:center;padding:9px 12px;
+    margin:2px 12px;border-radius:8px;cursor:pointer;
+    border:1px solid transparent;transition:background .12s,border-color .12s}
+  .mod-item:hover{background:var(--card)}
+  .mod-item.active{background:var(--accent-soft);border-color:rgba(59,130,246,.3)}
+  .mod-item.locked{opacity:.62}
+  .mod-item.locked:hover{opacity:.85}
+  .mod-item .m-num{width:24px;height:24px;border-radius:6px;
+    background:var(--panel);border:1px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:11.5px;color:var(--muted);flex-shrink:0}
+  .mod-item.active .m-num{background:var(--accent);border-color:var(--accent);color:#fff}
+  .mod-item .m-emoji{font-size:18px;flex-shrink:0}
+  .mod-item .m-info{flex:1;min-width:0}
+  .mod-item .m-name{font-size:13px;font-weight:600;color:var(--ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mod-item.locked .m-name{color:var(--ink-dim)}
+  .mod-item .m-sub{font-size:11px;color:var(--muted);margin-top:1px}
+  .mod-item .m-badge{font-size:9px;font-weight:700;letter-spacing:.6px;
+    text-transform:uppercase;padding:2px 7px;border-radius:100px;
+    background:#FEF3C7;color:#92400E;border:1px solid #FCD34D;flex-shrink:0}
+
+  /* Onboarding link in sidebar */
+  .onboarding-link{display:flex;align-items:center;gap:10px;
+    margin:0 12px 10px;padding:8px 12px;border-radius:8px;
+    background:#FEF7E6;border:1px solid #F5D472;cursor:pointer;
+    transition:background .12s}
+  .onboarding-link:hover{background:#FDF1D0}
+  .onboarding-link.current{background:#FDE68A;border-color:#F59E0B}
+  .onboarding-link .ob-ico{font-size:16px}
+  .onboarding-link .ob-text{font-size:12.5px;font-weight:600;color:#92400E;
+    letter-spacing:.2px}
+
+  /* Stub-страница модуля «в разработке» */
+  .stub-card{background:var(--card);border:1px solid var(--border);
+    border-radius:12px;padding:32px 28px;margin:18px 0;text-align:center}
+  .stub-card .stub-emoji{font-size:54px;margin-bottom:10px;line-height:1}
+  .stub-card .stub-num{font-size:11px;letter-spacing:1.2px;color:var(--muted);
+    font-weight:700;text-transform:uppercase;margin-bottom:6px}
+  .stub-card h2{font-size:22px;font-weight:700;margin:0 0 10px;letter-spacing:-.3px}
+  .stub-card .stub-desc{color:var(--ink-dim);font-size:14px;max-width:520px;
+    margin:0 auto 18px;line-height:1.55}
+  .stub-card .stub-state{display:inline-block;font-size:11.5px;font-weight:700;
+    letter-spacing:.5px;text-transform:uppercase;padding:6px 14px;
+    border-radius:100px;background:#FEF3C7;color:#92400E;border:1px solid #FCD34D}
   .progress-bar{height:3px;background:var(--border);border-radius:3px;
     margin:8px 14px 16px;overflow:hidden}
   .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--t),var(--s));
@@ -175,10 +217,6 @@
   .panel{padding:28px 48px 80px;max-width:820px}
 
   .phase-title-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
-  .time-badge{font-size:11.5px;color:var(--muted);background:var(--card);
-    padding:4px 10px;border-radius:100px;border:1px solid var(--border);
-    display:inline-flex;align-items:center;gap:5px;font-weight:500}
-  .time-badge::before{content:"⏱";font-size:11px}
   .phase-big-badge{padding:6px 14px;border-radius:100px;font-size:11px;
     font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
   .big-T{background:rgba(91,141,239,.15);color:var(--t);border:1px solid rgba(91,141,239,.3)}
@@ -229,6 +267,16 @@
   .c-info b{color:#1E40AF}
   .c-success{border-color:var(--s);background:#F0FDF4}
   .c-success b{color:#047857}
+
+  /* Список деталей для цикла (JIT-подготовка) */
+  .parts-needed{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px;
+    padding:14px 16px;background:#FEF7E6;border:1px solid #F5D472;border-radius:8px}
+  .parts-needed .pn-title{width:100%;font-size:11.5px;font-weight:700;color:#92400E;
+    letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px}
+  .parts-needed .pn-item{display:inline-flex;align-items:center;gap:6px;
+    background:#fff;border:1px solid #F5D472;border-radius:100px;
+    padding:5px 12px;font-size:13px;color:var(--ink);font-weight:500}
+  .parts-needed .pn-item .pn-emoji{font-size:14px;line-height:1}
 
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
   .chip{background:var(--card);border:1px solid var(--border);
@@ -512,25 +560,27 @@
       <div class="sub">ИИ-Инженерия · Этап 1 «База»</div>
     </div>
 
-    <div class="module-head">
-      <div class="module-title">Модуль 1</div>
-      <div class="module-row">
-        <div class="emoji">💡</div>
-        <div>
-          <div class="t">Управляемая лампа</div>
-          <div class="s">4 цикла · до 6 занятий</div>
-        </div>
+    <div class="stage-head">
+      <div class="stage-name">Этап 1</div>
+      <div class="stage-sub">«База» · 8 модулей</div>
+    </div>
+
+    <!-- Onboarding (1 раз на этап) -->
+    <div class="onboarding-link" onclick="selectStep('m0-onboarding')">
+      <span class="ob-ico">👋</span>
+      <span class="ob-text">Знакомство</span>
+    </div>
+
+    <!-- Module 1 (active) -->
+    <div class="mod-item active" data-module="1" onclick="selectStep('1-try')">
+      <div class="m-num">1</div>
+      <div class="m-emoji">💡</div>
+      <div class="m-info">
+        <div class="m-name">Управляемая лампа</div>
+        <div class="m-sub">4 цикла</div>
       </div>
     </div>
     <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
-
-    <!-- Перед началом -->
-    <div class="cycle">
-      <div class="cycle-head" role="button" tabindex="0" data-cycle="0" onclick="selectStep('0-start')" style="background:var(--card)">
-        <div class="num" style="background:var(--accent-soft);border-color:var(--accent);color:var(--accent)">0</div>
-        <div class="name">Перед началом</div>
-      </div>
-    </div>
 
     <!-- Cycle 1 -->
     <div class="cycle">
@@ -624,6 +674,44 @@
       </div>
     </div>
 
+    <!-- Modules 2-8 (заглушки) -->
+    <div style="margin-top:14px"></div>
+    <div class="mod-item locked" data-module="2" onclick="selectStep('m2-stub')">
+      <div class="m-num">2</div><div class="m-emoji">💧</div>
+      <div class="m-info"><div class="m-name">Сушилка для рук</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="3" onclick="selectStep('m3-stub')">
+      <div class="m-num">3</div><div class="m-emoji">🚨</div>
+      <div class="m-info"><div class="m-name">Лазерная сигнализация</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="4" onclick="selectStep('m4-stub')">
+      <div class="m-num">4</div><div class="m-emoji">🌡</div>
+      <div class="m-info"><div class="m-name">Метеостанция</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="5" onclick="selectStep('m5-stub')">
+      <div class="m-num">5</div><div class="m-emoji">🤖</div>
+      <div class="m-info"><div class="m-name">Робот-следопыт</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="6" onclick="selectStep('m6-stub')">
+      <div class="m-num">6</div><div class="m-emoji">🔐</div>
+      <div class="m-info"><div class="m-name">Кодовый замок</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="7" onclick="selectStep('m7-stub')">
+      <div class="m-num">7</div><div class="m-emoji">📡</div>
+      <div class="m-info"><div class="m-name">Умное освещение</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+    <div class="mod-item locked" data-module="8" onclick="selectStep('m8-stub')">
+      <div class="m-num">8</div><div class="m-emoji">🎓</div>
+      <div class="m-info"><div class="m-name">Финальный проект</div></div>
+      <div class="m-badge">скоро</div>
+    </div>
+
   </aside>
 
   <!-- ============ CENTER ============ -->
@@ -656,79 +744,118 @@
 
     <div class="panel">
 
-      <!-- ========== ПЕРЕД НАЧАЛОМ ========== -->
-      <div class="step-content" data-step="0-start">
+      <!-- ========== M0 · ОНБОРДИНГ ЭТАПА (1 раз) ========== -->
+      <div class="step-content" data-step="m0-onboarding">
         <div class="phase-title-row">
-          <span class="cycle-label">Подготовка</span>
-          <span class="phase-big-badge" style="background:var(--accent-soft);color:var(--accent);border:1px solid rgba(59,130,246,.3)">START · Что собрать на стол</span>
+          <span class="phase-big-badge" style="background:#FDE68A;color:#92400E;border:1px solid #F59E0B">👋 Знакомство</span>
         </div>
-        <h1 class="step-h">Перед тем как начать Модуль 1</h1>
-        <p class="step-intro">К концу модуля у вас будет работающее устройство — управляемая лампа, которой управляет ваш код. Дальше — что должно лежать на столе.</p>
+        <h1 class="step-h">Привет. Ты в ShokanLab.</h1>
+        <p class="step-intro">Этап 1 «База» — 8 модулей. В каждом ты соберёшь <b>реальное устройство</b>, а не выучишь теорию. К концу этапа у тебя будет 8 проектов в портфолио и <b>базовые знания инженера-мехатроника</b>.</p>
 
-        <h2>На столе у каждого ученика</h2>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Найдите эти детали на столе. Если чего-то не хватает — скажите ментору до начала.</p>
-        <div class="parts-grid" id="partsStudent"></div>
+        <h2>Главный принцип — ИИ-напарник, не ИИ-решатель</h2>
+        <p>В этой школе ты учишься <b>в паре с ИИ</b>. Но не так, как привыкли многие — «спроси и скопируй». Так ты ничего не запомнишь.</p>
+        <p>Чтобы ИИ работал как напарник, в начале каждого нового чата ты <b>отправляешь ему стартовый промпт</b> — короткий текст с твоей ролью, проектом и правилами. У <b>каждого модуля свой промпт</b> — он привязан к конкретному устройству, которое ты собираешь.</p>
+        <div class="callout c-info" style="margin:10px 0 14px">
+          <b>Важно знать:</b> бесплатные ИИ-чаты не помнят прошлые разговоры. Каждый новый чат — пустой. Поэтому промпт нужно отправлять <b>первым сообщением</b> каждого нового чата. Полный промпт текущего модуля ты найдёшь на первом шаге Цикла 1.
+        </div>
 
-        <h2>Общее на лабораторию</h2>
-        <div class="parts-grid" id="partsLab"></div>
+        <h2>Как примерно выглядит такой промпт</h2>
+        <p>Это <b>образец</b> — структура, не финальный текст. В каждом модуле он будет другой, под конкретный проект:</p>
+        <div class="socratic-block">
+          <div class="lbl">📝 Пример структуры промпта</div>
+          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я школьник, учусь инженерии в ShokanLab.
+Сейчас работаю над проектом: [НАЗВАНИЕ МОДУЛЯ]
+Что собираю: [короткое описание устройства]
+Что уже умею: [то, что прошёл в прошлых модулях]
 
-        <h2>Что нужно знать заранее</h2>
+Ты мой ИИ-напарник на этот проект. Правила:
+1. Не давай готовых решений — сначала задавай уточняющие вопросы.
+2. Если спрашиваю «как сделать X» — спроси «что ты уже попробовал?»
+3. Объясняй простыми словами, без университетских терминов.
+4. Когда я ошибся — направь, но не давай ответ.
+5. Когда я понял — кратко подтверди и предложи следующий шаг.
+
+Готов начать?</pre>
+        </div>
+        <p style="font-size:13px;color:var(--muted)">Готовый промпт для Модуля 1 — на странице <b>Цикл 1 · TRY</b>. Просто копируй и вставляй.</p>
+
+        <h2>Где открыть чат</h2>
         <ul>
-          <li>Читать по-русски — да</li>
-          <li>Математика — нет, базовых знаний достаточно</li>
-          <li>Программирование — нет, код вы напишете в паре с ИИ</li>
+          <li><b>Claude</b> — claude.ai (рекомендуем, бесплатный режим хватает)</li>
+          <li><b>ChatGPT</b> — chatgpt.com (тоже бесплатный)</li>
+          <li><b>Нет аккаунта или интернета?</b> Зови ментора — это ОК. Многие места в модулях можно пройти без ИИ, ментор подскажет где.</li>
         </ul>
 
-        <h2>⚠️ Безопасность</h2>
-        <div class="callout c-warn">
-          <b>Три правила, которые нельзя нарушать:</b>
-          <ol style="margin-top:8px">
-            <li><b>Блок питания включает ментор.</b> Вы соединяете провода на обесточенной плате.</li>
-            <li><b>Никогда не подавайте 5 V или 12 V на пин Pico.</b> Чип сгорит мгновенно. На Pico — только 3.3 V.</li>
-            <li><b>Не коммутируйте 220 V.</b> Реле умеет, но в этом модуле — только 3.3 V.</li>
-          </ol>
-        </div>
+        <h2>Как читать сайт — структура TKOS</h2>
+        <p>Каждый модуль состоит из 4 циклов. Каждый цикл — 4 фазы:</p>
+        <ul>
+          <li><b>TRY · Попробуй</b> — собрать руками. Понимание придёт потом.</li>
+          <li><b>KNOW · Пойми</b> — почему это сработало. Одно правило.</li>
+          <li><b>OWN · Сделай своим</b> — измени, поэкспериментируй, найди границы.</li>
+          <li><b>SHARE · Закрепи</b> — объясни словами или ИИ. Если можешь объяснить — значит понял.</li>
+        </ul>
+        <div class="callout c-info"><b>Лента сверху</b> показывает где ты сейчас: какой цикл (1-4) и какая фаза (T/K/O/S).</div>
 
-        <h2>Сколько времени это займёт</h2>
-        <p>Модуль рассчитан на <b>4–6 занятий</b>. Можно пройти быстрее или медленнее — темп ваш.</p>
+        <h2>Помощник справа</h2>
+        <p>На каждом шаге справа — 💡 <b>помощник шага</b>: термины, частые ошибки и готовые ИИ-промпты под текущую тему. Открывай его <b>как только что-то непонятно</b> — ответ часто уже там.</p>
 
+        <h2>Если застрял — ✋ внизу справа</h2>
+        <p>Внизу страницы есть плавающая кнопка ✋. Нажми, когда упёрся. Внутри — короткий протокол:</p>
+        <ol>
+          <li>Перечитай шаг — часто пропустил строку.</li>
+          <li>Объясни ИИ одной фразой, что не получается.</li>
+          <li>Загугли точное сообщение об ошибке (точный текст, не своими словами).</li>
+          <li>Разбей задачу на подшаги.</li>
+          <li><b>Зови ментора. Не раньше 5 минут (попробуй сам), не позже 15 (не выгорай).</b></li>
+        </ol>
+
+        <h2>🚨 Красные флаги — сигналы «не учусь, а пролистываю»</h2>
         <div class="red-flags">
-          <div class="lbl">🚨 Красные флаги — сигналы «не учусь, а пролистываю»</div>
-          <h3>Заметил у себя что-то из этого — остановись и сделай по правой колонке</h3>
+          <h3>Заметил у себя — остановись и сделай по правой колонке</h3>
           <table>
             <tr><th>Сигнал</th><th>Что делать</th></tr>
-            <tr><td>Залип на 15+ минут на одном шаге</td><td>Открой протокол «застрял» (✋ внизу справа)</td></tr>
+            <tr><td>Залип на 15+ минут на одном шаге</td><td>Открой ✋ протокол «застрял»</td></tr>
             <tr><td>Скопировал код от ИИ и запустил, не читая</td><td>Открой код, переведи каждую строку на русский ВСЛУХ</td></tr>
-            <tr><td>После урока не помнишь, что делал</td><td>Запиши 3 предложения о сегодня в портфолио</td></tr>
+            <tr><td>После урока не помнишь, что делал</td><td>Запиши 3 предложения о сегодня — ментор положит в твоё портфолио</td></tr>
             <tr><td>На «Стоп. Проверь себя» автоматически отвечаешь «всё понятно»</td><td>Попроси ИИ задать тебе 3 контрольных вопроса</td></tr>
             <tr><td>Решил «доделаю дома» три раза подряд</td><td>Скажи ментору вслух — это сигнал блока, не лени</td></tr>
           </table>
         </div>
 
-        <div class="callout c-success"><b>Готовы?</b> Если все компоненты на столе и блок питания у ментора — переходите к Циклу 1.</div>
+        <h2>⚠️ Главное правило безопасности на весь этап</h2>
+        <div class="callout c-warn">
+          <b>Силовое включение делает только ментор.</b> Ты соединяешь провода на обесточенной плате. Это правило не обсуждается ни в одном модуле.
+          <br><br>
+          Остальные правила безопасности зависят от модуля — будут на странице «Перед началом» каждого модуля.
+        </div>
+
+        <div class="callout c-success">
+          <b>Готов?</b> Иди в <b>Модуль 1 → Перед началом</b> — там что нужно положить на стол перед стартом.
+        </div>
 
         <div class="nav-row">
           <button class="nav-btn" disabled>←</button>
-          <button class="nav-btn primary" onclick="selectStep('1-try')">Начать Модуль 1: Цикл 1 →</button>
+          <button class="nav-btn primary" onclick="selectStep('1-try')">Модуль 1: Цикл 1 →</button>
         </div>
       </div>
+
 
       <!-- ========== CYCLE 1 · TRY ========== -->
       <div class="step-content active" data-step="1-try">
         <div class="phase-title-row">
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
-        <h1 class="step-h">Зажгите светодиод за 5 минут</h1>
+        <h1 class="step-h">Зажгите светодиод</h1>
         <p class="step-intro">Самая простая цепь в мире: источник + светодиод + два провода. Сделайте это руками, понимание придёт на следующем шаге.</p>
 
-        <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
-          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 600px; border: none; overflow: hidden; transform: scale(1.05); transform-origin: top center;" data-src="circuits/circuit_step01_atx_led.html"></iframe>
+        <div class="figure hero">
+          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width:100%; height:560px; border:none; display:block;" data-src="circuits/circuit_step01_atx_led.html"></iframe>
         </div>
 
         <div class="socratic-block">
-          <div class="lbl">🤖 Перед первым обращением к ИИ</div>
-          <h3>Настрой ИИ-чат на роль напарника по проекту</h3>
-          <p>Скопируй этот текст и отправь <b>первым сообщением</b> в ChatGPT или Claude. Без этого ИИ будет давать готовые решения, и через 2 дня ты ничего не запомнишь. Настрой нужен один раз — действует на весь Модуль 1.</p>
+          <div class="lbl">🤖 Промпт для Модуля 1</div>
+          <h3>Скопируй и отправь в новый чат с ИИ — первым сообщением</h3>
+          <p style="font-size:13px;color:var(--muted)">Это промпт под этот модуль. В каждом новом чате (или после длинной паузы) вставляй его заново — ИИ-чат не помнит прошлые разговоры. <a href="#" onclick="selectStep('m0-onboarding');return false;">Зачем именно так →</a></p>
           <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я школьник 12-17 лет, учусь инженерии в школе ShokanLab.
 Сейчас прохожу Модуль 1 «Управляемая лампа» — собираю устройство,
 где светодиод 3 Вт включается:
@@ -747,6 +874,15 @@
 Готов начать?</pre>
         </div>
 
+        <div class="parts-needed">
+          <div class="pn-title">📦 Возьми из набора</div>
+          <span class="pn-item"><span class="pn-emoji">🔌</span>Блок питания ATX</span>
+          <span class="pn-item"><span class="pn-emoji">⚡</span>Плата ATX XH-M229</span>
+          <span class="pn-item"><span class="pn-emoji">💡</span>LED 3 Вт</span>
+          <span class="pn-item"><span class="pn-emoji">🔧</span>2× Dupont-провода</span>
+          <span class="pn-item"><span class="pn-emoji">🪛</span>Отвёртка</span>
+        </div>
+
         <h2>Что делать</h2>
         <div class="action-card">
           <div class="action-head"><div class="action-num">1</div><div class="action-title">Попросите ментора включить ATX</div></div>
@@ -754,13 +890,13 @@
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">ATX включён</button></div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">2</div><div class="action-title">Провод 1: <code>+3.3V</code> → длинная ножка LED</div></div>
-          <div class="action-body">Возьмите Dupont-провод. Один конец в клемму <code>+3.3V</code> платы ATX, другой — к <b>длинной</b> ножке светодиода. Винты затяните до упора.</div>
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Провод 1: <code>+3.3V</code> → плюсовой провод LED</div></div>
+          <div class="action-body">У LED два провода — <b>плюс</b> и <b>минус</b>. Они разного цвета, плюс также помечен <code>(+)</code> на звезде около пятачка. Закрепи плюсовой провод в клемме <code>+3.3V</code> ATX, винт затяни до упора.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провод 1 закреплён</button></div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">3</div><div class="action-title">Провод 2: короткая ножка LED → <code>GND</code></div></div>
-          <div class="action-body">Второй провод: от <b>короткой</b> ножки LED в клемму <code>GND</code>. Закрутите винт.</div>
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Провод 2: минусовой провод LED → <code>GND</code></div></div>
+          <div class="action-body">Второй провод LED (минус, помечен <code>(−)</code> на звезде) — в клемму <code>GND</code> ATX. Закрути винт.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провод 2 закреплён</button></div>
         </div>
 
@@ -768,7 +904,7 @@
 
         <div class="callout c-warn">
           <b>Если не горит:</b><br>
-          • Переверните LED — длинная ножка должна быть на <code>+3.3V</code><br>
+          • Поменяй провода LED местами на клеммах ATX — плюс должен быть на <code>+3.3V</code><br>
           • Проверьте винты — все затянуты?<br>
           • Ментор точно включил ATX?
         </div>
@@ -788,7 +924,7 @@
         <p class="step-intro">Вы только что сделали — теперь объясним, почему это сработало. Одно ключевое правило.</p>
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
-          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 450px; border: none; overflow: hidden;" data-src="circuits/circuit_step01_know_closed_open.html"></iframe>
+          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width:100%; height:480px; border:none; display:block;" data-src="circuits/circuit_step01_know_closed_open.html"></iframe>
           <div class="caption">Слева — замкнутая цепь (электроны бегут, LED горит). Справа — разомкнутая (разрыв, LED погас).</div>
         </div>
 
@@ -842,37 +978,42 @@
         <div class="phase-title-row">
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
-        <h1 class="step-h">Переверните LED. Что будет?</h1>
-        <p class="step-intro">Поменяйте местами концы светодиода и посмотрите. Это проверка знания — и полезный навык на всю жизнь.</p>
+        <h1 class="step-h">Поменяй полярность. Что будет?</h1>
+        <p class="step-intro">Поменяй провода LED местами на клеммах ATX — плюс воткни в GND, минус в +3.3V. Это проверка знания и полезный навык на всю жизнь.</p>
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
-          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 450px; border: none; overflow: hidden;" data-src="circuits/circuit_step01_own_polarity.html"></iframe>
-          <div class="caption">Слева: Нормальная полярность. Справа: Расположение LED перевёрнуто — ток заблокирован.</div>
+          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width:100%; height:600px; border:none; display:block;" data-src="circuits/circuit_step01_own_polarity.html"></iframe>
+          <div class="caption">Слева — нормальное подключение, ток идёт. Справа — провода поменяны местами, ток заблокирован.</div>
         </div>
 
         <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Вытащите LED из клемм</div></div>
-          <div class="action-body">Ослабьте оба винта, достаньте светодиод.</div>
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Открути оба винта на клеммах ATX</div></div>
+          <div class="action-body">Освободи оба провода LED — плюсовой из <code>+3.3V</code> и минусовой из <code>GND</code>.</div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">2</div><div class="action-title">Вставьте обратно, но наоборот</div></div>
-          <div class="action-body">Теперь короткая ножка на <code>+3.3V</code>, длинная — на <code>GND</code>.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Перевернул</button></div>
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Поменяй провода местами и закрепи</div></div>
+          <div class="action-body">Теперь <b>минусовой</b> провод LED воткни в клемму <code>+3.3V</code>, а <b>плюсовой</b> — в <code>GND</code>. Затяни винты.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Поменял</button></div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">3</div><div class="action-title">Что видите?</div></div>
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Что видишь?</div></div>
           <div class="action-body"><b>LED не горит.</b> Но и не сгорел — просто не работает.</div>
         </div>
 
         <h2>Почему так</h2>
         <p>Внутри светодиода — маленький кристалл, пропускающий ток <b>только в одну сторону</b>. Как односторонняя дорога. Ток пошёл в другую сторону — не пропустило.</p>
-        <p>Это свойство называется <b>полярность</b>. У LED два вывода:</p>
+        <p>Это свойство называется <b>полярность</b>. У LED два контакта:</p>
         <ul>
-          <li><b>Длинная ножка</b> = плюс (+), называется <b>анод</b></li>
-          <li><b>Короткая ножка</b> = минус (−), называется <b>катод</b></li>
+          <li><b>Плюсовой</b> провод (отмечен <code>(+)</code> на звезде) — называется <b>анод</b></li>
+          <li><b>Минусовой</b> провод (отмечен <code>(−)</code> на звезде) — называется <b>катод</b></li>
         </ul>
 
-        <div class="callout c-tip"><b>Запомните:</b> перед подключением любого LED инженер всегда проверяет — какая ножка длиннее. Это 2 секунды, спасает от часа поиска ошибки.</div>
+        <div class="callout c-tip"><b>Запомни:</b> перед подключением любого LED инженер всегда проверяет — где плюс, где минус (по цвету провода или метке на корпусе). Это 2 секунды, спасает от часа поиска ошибки.</div>
+
+        <div class="action-card" style="margin-top:18px">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Верни всё как было</div></div>
+          <div class="action-body">Перед переходом дальше — поставь провода обратно правильно: плюс в <code>+3.3V</code>, минус в <code>GND</code>. LED должен загореться.</div>
+        </div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('1-know')">← Know</button>
@@ -923,7 +1064,7 @@
               <li>«Я собрал цепь из ___ и ___.»</li>
               <li>«LED горит потому что ___.»</li>
             </ul>
-            <em style="display:block;margin-top:8px">Ключевые слова: «замкнутая цепь», «длинная ножка», «ток от плюса в минус».</em>
+            <em style="display:block;margin-top:8px">Ключевые слова: «замкнутая цепь», «полярность LED», «ток от плюса в минус».</em>
           </div>
         </div>
 
@@ -934,7 +1075,7 @@
           <h3>Через 2 дня вернись и ответь без подглядывания</h3>
           <ol>
             <li>Что такое замкнутая цепь?</li>
-            <li>Какая ножка LED длиннее — плюс или минус?</li>
+            <li>По чему отличишь плюсовой провод LED от минусового?</li>
             <li>Что произойдёт, если оторвать один провод?</li>
           </ol>
           <em>Если не помнишь — это нормально. Просто вернись к Циклу 1 KNOW и пройди ещё раз. Это убивает иллюзию «я понял», когда на самом деле забыл.</em>
@@ -952,11 +1093,21 @@
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Теперь палец управляет LED</h1>
-        <p class="step-intro">Добавим кнопку в цепь. Теперь LED горит не всегда, а только когда вы нажимаете.</p>
+        <p class="step-intro">Добавь кнопку в цепь. Теперь LED горит не всегда, а только когда ты нажимаешь.</p>
+
+        <div class="parts-needed">
+          <div class="pn-title">📦 Возьми из набора</div>
+          <span class="pn-item"><span class="pn-emoji">🔌</span>Блок питания ATX</span>
+          <span class="pn-item"><span class="pn-emoji">⚡</span>Плата ATX XH-M229</span>
+          <span class="pn-item"><span class="pn-emoji">💡</span>LED 3 Вт</span>
+          <span class="pn-item"><span class="pn-emoji">🔘</span>Тактовая кнопка</span>
+          <span class="pn-item"><span class="pn-emoji">🔧</span>4× Dupont-провода</span>
+          <span class="pn-item"><span class="pn-emoji">🪛</span>Отвёртка</span>
+        </div>
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 560px; border: none; overflow: hidden;" data-src="circuits/circuit_step02_try_button.html"></iframe>
-          <div class="caption">Новая схема: наведите и зажмите левую кнопку мыши на красной кнопке. Нажали — цепь замкнута, отпустили — разорвана.</div>
+          <div class="caption">Новая схема: наведи и зажми левую кнопку мыши на красной кнопке. Нажал — цепь замкнута, отпустил — разорвана.</div>
         </div>
 
         <div class="action-card">
@@ -968,8 +1119,8 @@
           <div class="action-body">
             <ul>
               <li>Провод 1: <code>+3.3V</code> → одна ножка кнопки</li>
-              <li>Провод 2: другая ножка кнопки → длинная ножка LED</li>
-              <li>Провод 3: короткая ножка LED → <code>GND</code></li>
+              <li>Провод 2: другая ножка кнопки → плюсовой провод LED</li>
+              <li>Провод 3: минусовой провод LED → <code>GND</code></li>
             </ul>
           </div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Собрал</button></div>
@@ -994,39 +1145,115 @@
           <span class="phase-big-badge big-K">KNOW · Пойми</span>
         </div>
         <h1 class="step-h">Что внутри кнопки и провода</h1>
-        <p class="step-intro">Два маленьких, но важных знания: как работает кнопка и что умеет мультиметр.</p>
+        <p class="step-intro">Кнопка — это маленький механизм. Понимаешь его — понимаешь, почему она «работает».</p>
 
         <div class="figure hero">
-          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 440px; border: none; overflow: hidden;" data-src="circuits/circuit_step02_know_multimeter.html"></iframe>
-          <div class="caption">Ваш мультиметр UNI-T UT33C+. Четыре части, которые нужны в Модуле 1.</div>
+          <svg viewBox="0 0 600 250" style="width:100%; height:auto; display:block">
+            <!-- ========== ОТПУЩЕНА (LEFT) ========== -->
+            <g transform="translate(20, 16)">
+              <text x="135" y="0" text-anchor="middle" font-size="16" font-weight="700" fill="#10B981">ОТПУЩЕНА — цепь разомкнута</text>
+
+              <!-- стрелка вверх (палец отпустил) -->
+              <path d="M 135 18 L 135 36 M 128 26 L 135 18 L 142 26" stroke="#10B981" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <text x="155" y="30" font-size="13" fill="#10B981">отпускает</text>
+
+              <!-- круглая нажимная кнопка сверху корпуса -->
+              <ellipse cx="135" cy="58" rx="28" ry="6" fill="#E53935" stroke="#B71C1C" stroke-width="2"/>
+              <rect x="107" y="58" width="56" height="12" fill="#E53935" stroke="#B71C1C" stroke-width="2"/>
+              <ellipse cx="135" cy="70" rx="28" ry="5" fill="#B71C1C"/>
+
+              <!-- корпус кнопки -->
+              <rect x="60" y="70" width="150" height="124" rx="6" fill="#FAFAFA" stroke="#9E9E9E" stroke-width="2"/>
+
+              <!-- штырь от кнопки в пружину -->
+              <rect x="130" y="70" width="10" height="14" fill="#9E9E9E"/>
+
+              <!-- пружина (растянута) -->
+              <path d="M 135 84 L 120 94 L 150 104 L 120 114 L 150 124 L 120 134 L 135 144"
+                    stroke="#757575" stroke-width="2" fill="none"/>
+              <text x="220" y="115" font-size="13" fill="#616161">пружина</text>
+              <line x1="218" y1="110" x2="170" y2="110" stroke="#9E9E9E" stroke-width="1" stroke-dasharray="2 2"/>
+
+              <!-- контактный мостик (вверху, не касается) -->
+              <rect x="100" y="150" width="70" height="6" fill="#FFC107" stroke="#FF8F00" stroke-width="1"/>
+
+              <!-- две клеммы внизу (не соединены) -->
+              <rect x="60" y="174" width="60" height="6" fill="#9E9E9E"/>
+              <rect x="150" y="174" width="60" height="6" fill="#9E9E9E"/>
+
+              <!-- зазор между мостиком и клеммами + надпись -->
+              <text x="135" y="167" text-anchor="middle" font-size="11" font-style="italic" fill="#EF4444" font-weight="700">зазор</text>
+
+              <!-- провода наружу -->
+              <line x1="60" y1="177" x2="20" y2="177" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+              <line x1="210" y1="177" x2="250" y2="177" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+
+              <text x="135" y="210" text-anchor="middle" font-size="13" fill="#616161" font-style="italic">контакты разъединены — ток не идёт</text>
+            </g>
+
+            <!-- ========== НАЖАТА (RIGHT) ========== -->
+            <g transform="translate(310, 16)">
+              <text x="135" y="0" text-anchor="middle" font-size="16" font-weight="700" fill="#EF4444">НАЖАТА — цепь замкнута</text>
+
+              <!-- стрелка вниз (палец нажимает) -->
+              <path d="M 135 18 L 135 56 M 128 48 L 135 56 L 142 48" stroke="#EF4444" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <text x="155" y="40" font-size="13" fill="#EF4444">нажимает</text>
+
+              <!-- круглая нажимная кнопка (утоплена ниже) -->
+              <ellipse cx="135" cy="74" rx="28" ry="6" fill="#C62828" stroke="#7F0000" stroke-width="2"/>
+              <rect x="107" y="74" width="56" height="12" fill="#C62828" stroke="#7F0000" stroke-width="2"/>
+              <ellipse cx="135" cy="86" rx="28" ry="5" fill="#7F0000"/>
+
+              <!-- корпус кнопки -->
+              <rect x="60" y="86" width="150" height="108" rx="6" fill="#FAFAFA" stroke="#9E9E9E" stroke-width="2"/>
+
+              <!-- штырь от кнопки в пружину (короче) -->
+              <rect x="130" y="86" width="10" height="10" fill="#9E9E9E"/>
+
+              <!-- пружина (сжата — больше витков плотнее) -->
+              <path d="M 135 96 L 122 104 L 148 112 L 122 120 L 148 128 L 122 136 L 148 144 L 122 152 L 135 168"
+                    stroke="#757575" stroke-width="2" fill="none"/>
+
+              <!-- контактный мостик (на клеммах, замыкает) -->
+              <rect x="100" y="170" width="70" height="6" fill="#FFC107" stroke="#FF8F00" stroke-width="1"/>
+
+              <!-- две клеммы (мостик их соединяет) -->
+              <rect x="60" y="174" width="60" height="6" fill="#9E9E9E"/>
+              <rect x="150" y="174" width="60" height="6" fill="#9E9E9E"/>
+
+              <!-- индикация контакта -->
+              <circle cx="100" cy="176" r="5" fill="#10B981"/>
+              <circle cx="170" cy="176" r="5" fill="#10B981"/>
+
+              <!-- провода наружу с подсветкой потока -->
+              <line x1="60" y1="177" x2="20" y2="177" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+              <line x1="210" y1="177" x2="250" y2="177" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+
+              <text x="135" y="210" text-anchor="middle" font-size="13" fill="#616161" font-style="italic">контакты соединены — ток идёт</text>
+            </g>
+          </svg>
+          <div class="caption">Тактовая кнопка изнутри. Пружина держит мостик вверху — по умолчанию контакты разомкнуты.</div>
         </div>
 
-        <h2>Кнопка — это пружина</h2>
-        <p>Внутри тактовой кнопки — две металлические пластины и <b>пружина</b>. Нажали пальцем — пружина прижимает пластины друг к другу, цепь замкнулась. Отпустили — пружина оттолкнула, цепь разорвалась.</p>
-        <p>По сути кнопка делает то же, что вы делали пальцем в Цикле 1: <b>замыкает и размыкает цепь</b>.</p>
+        <h2>Кнопка — это пружина и два контакта</h2>
+        <p>Внутри тактовой кнопки — <b>две металлические клеммы</b> и <b>пружина</b>. Между клеммами — подвижный мостик. По умолчанию пружина держит мостик вверху → клеммы разомкнуты, ток не идёт.</p>
+        <p>Нажал пальцем — пружина сжимается, мостик ложится на обе клеммы → цепь замкнулась, ток пошёл. Отпустил — пружина возвращает мостик вверх.</p>
+        <p>То же самое ты делал пальцем в Цикле 1, когда соединял и разъединял провода: <b>замыкаешь и размыкаешь цепь</b>. Кнопка — это инструмент, чтобы делать это быстро и многократно.</p>
 
         <h2>Что внутри провода</h2>
         <ul>
           <li><b>Медь</b> внутри — много «свободных» электронов, готовы двигаться</li>
-          <li><b>Пластик</b> снаружи — изолятор, ток не уходит в вас</li>
+          <li><b>Пластик</b> снаружи — изолятор, ток не уходит в твою руку</li>
         </ul>
         <p>Поэтому провод можно спокойно держать руками.</p>
-
-        <h2>🔊 Прозвонка — глаза инженера</h2>
-        <p>Мультиметр в режиме <code>🔊</code> пропускает через щупы маленький ток и проверяет целостность провода:</p>
-        <ul>
-          <li><b>Пикает</b> → провод целый, ток проходит</li>
-          <li><b>Тишина</b> → обрыв или изолятор</li>
-        </ul>
-        <div class="callout c-info">Это ваш главный инструмент поиска неисправностей. Не работает цепь? Прозвоните каждый провод.</div>
 
         <div class="self-check">
           <div class="lbl">🛑 Стоп. Проверь себя</div>
           <h3>Ответь себе на 3 вопроса</h3>
           <ol>
-            <li>Что внутри кнопки физически делает её «кнопкой»? Что движется?</li>
-            <li>Почему провод в изоляции можно держать в руках, а оголённый конец — нет?</li>
-            <li>Если на «всё понятно» — объясните вслух разницу между проводником и изолятором за 30 секунд. Засеките таймер.</li>
+            <li>Что физически делает кнопку «кнопкой»? Какие 2 элемента внутри?</li>
+            <li>Почему по умолчанию (без нажатия) ток через кнопку не идёт?</li>
+            <li>Если на «всё понятно» — объясни вслух разницу между проводником и изолятором за 30 секунд. Засеки таймер.</li>
           </ol>
           <em>Если уложился — понимаешь. Если запинался или говорил «эээ, ну...» — вернись к разделу.</em>
         </div>
@@ -1042,12 +1269,50 @@
         <div class="phase-title-row">
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
-        <h1 class="step-h">Замерьте все три линии ATX</h1>
-        <p class="step-intro">Мультиметр — не игрушка из описания, а инструмент. Научитесь им пользоваться на практике.</p>
+        <h1 class="step-h">Знакомство с мультиметром и замер 3 линий ATX</h1>
+        <p class="step-intro">Сначала — что такое мультиметр и его главные режимы. Потом замеряешь напряжение трёх линий своего блока питания.</p>
 
+        <h2>🔧 Мультиметр — главный инструмент инженера</h2>
         <div class="figure hero">
-          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 380px; border: none; overflow: hidden;" data-src="circuits/circuit_step02_own_atx.html"></iframe>
-          <div class="caption">Ваша плата ATX XH-M229. Красным пунктиром подсвечены клеммы +3.3V и GND — замеряете именно их парой.</div>
+          <iframe scrolling="no" title="Мультиметр" style="width: 100%; height: 480px; border: none; overflow: hidden; pointer-events: none;" data-src="circuits/circuit_step02_know_multimeter.html"></iframe>
+          <div class="caption">Твой мультиметр UNI-T UT33C+. Четыре части, которые нужны в Модуле 1.</div>
+        </div>
+
+        <h2>🔊 Прозвонка — глаза инженера</h2>
+        <p>Мультиметр в режиме <code>🔊</code> пропускает через щупы маленький ток и проверяет целостность провода:</p>
+        <ul>
+          <li><b>Пикает</b> → провод целый, ток проходит</li>
+          <li><b>Тишина</b> → обрыв или изолятор</li>
+        </ul>
+        <div class="callout c-info">Это твой главный инструмент поиска неисправностей. Не работает цепь? Прозвони каждый провод.</div>
+
+        <h2>🔊 Прозвонка — практика</h2>
+        <p>Прежде чем мерить вольты — научись слышать. Три простых проверки на твоём наборе:</p>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Тест мультиметра — замкни щупы между собой</div></div>
+          <div class="action-body">Переключатель на <code>🔊</code>. Коснись чёрного и красного щупа друг другом. Должно <b>пикнуть</b> — это значит мультиметр и его батарейка работают.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Пикнуло</button></div>
+        </div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Целый проводник — Dupont-провод</div></div>
+          <div class="action-body">Возьми любой Dupont-провод. Один щуп на металлический штырёк с одного конца, второй щуп — на штырёк с другого. Должно <b>пикнуть</b> → медь внутри целая, ток проходит.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Пикнуло</button></div>
+        </div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Изолятор — пластиковая оболочка</div></div>
+          <div class="action-body">Тот же провод. Теперь касайся щупами не штырьков, а <b>пластиковой изоляции</b> снаружи (в двух местах вдоль провода). <b>Тишина</b> — пластик не пропускает ток.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Тишина — понял</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Главное правило прозвонки:</b> «пик» = есть путь для тока, «тишина» = нет пути (обрыв или изолятор). Этого достаточно, чтобы найти любую неисправность в Модуле 1.</div>
+
+        <h2>📐 Теперь замер — 3 линии ATX</h2>
+        <div class="figure hero">
+          <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 380px; border: none; overflow: hidden; pointer-events: none;" data-src="circuits/circuit_step02_own_atx.html"></iframe>
+          <div class="caption">Твоя плата ATX XH-M229. Красным пунктиром подсвечены клеммы +3.3V и GND — замеряешь именно их парой.</div>
         </div>
 
         <div class="action-card">
@@ -1061,23 +1326,18 @@
           </div>
         </div>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">2</div><div class="action-title">Замерьте и запишите</div></div>
-          <div class="action-body">Чёрный щуп держите на <code>GND</code> ATX. Красным касайтесь по очереди трёх клемм:</div>
-          <table>
-            <tr><th>Линия</th><th>Ваш замер</th><th>Должно быть</th></tr>
-            <tr><td><code>+3.3V</code></td><td>___ В</td><td>~3.3</td></tr>
-            <tr><td><code>+5V</code></td><td>___ В</td><td>~5.0</td></tr>
-            <tr><td><code>+12V</code></td><td>___ В</td><td>~12.0</td></tr>
-          </table>
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Замерь три линии</div></div>
+          <div class="action-body">Чёрный щуп держи на <code>GND</code> ATX. Красным по очереди касайся клемм <code>+3.3V</code>, <code>+5V</code>, <code>+12V</code>. Запомни три числа — они должны быть примерно:</div>
+          <ul style="margin:8px 0 8px 22px">
+            <li><code>+3.3V</code> ≈ <b>3.3 В</b></li>
+            <li><code>+5V</code> ≈ <b>5.0 В</b></li>
+            <li><code>+12V</code> ≈ <b>12.0 В</b></li>
+          </ul>
+          <div class="action-body" style="margin-top:6px">Если твои замеры близки к этим — питание в норме. Сильно отличаются — скажи ментору.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Замерил все три</button></div>
         </div>
-        <div class="action-card">
-          <div class="action-head"><div class="action-num">3</div><div class="action-title">Прозвоните любой провод</div></div>
-          <div class="action-body">Переключатель на <code>🔊</code>. Один щуп на один конец провода, другой — на другой. Должно пикнуть — провод целый.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Пикнуло</button></div>
-        </div>
 
-        <div class="callout c-warn"><b>Запомните:</b> <code>12V</code> в пин Pico = моментальная поломка. Перед подключением Pico всегда проверяйте линию.</div>
+        <div class="callout c-warn"><b>Запомни:</b> <code>12V</code> в пин Pico = моментальная поломка. Перед подключением Pico (Цикл 4) всегда проверяй линию мультиметром.</div>
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('2-know')">← Know</button>
@@ -1159,6 +1419,17 @@
         <h1 class="step-h">Реле щёлкает — LED горит</h1>
         <p class="step-intro">Добавляем посредника. Кнопка теперь не включает LED напрямую — она включает реле, а реле включает LED.</p>
 
+        <div class="parts-needed">
+          <div class="pn-title">📦 Возьми из набора</div>
+          <span class="pn-item"><span class="pn-emoji">🔌</span>Блок питания ATX</span>
+          <span class="pn-item"><span class="pn-emoji">⚡</span>Плата ATX XH-M229</span>
+          <span class="pn-item"><span class="pn-emoji">🔄</span>Реле JQC-3FF-S-Z</span>
+          <span class="pn-item"><span class="pn-emoji">💡</span>LED 3 Вт</span>
+          <span class="pn-item"><span class="pn-emoji">🔘</span>Тактовая кнопка</span>
+          <span class="pn-item"><span class="pn-emoji">🔧</span>6× Dupont-провода</span>
+          <span class="pn-item"><span class="pn-emoji">🪛</span>Отвёртка</span>
+        </div>
+
         <div class="figure hero">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 640px; border: none; overflow: hidden;" data-src="circuits/circuit_step03_try_relay.html"></iframe>
           <div class="caption">Две цепи в одной: слабая (кнопка → катушка реле) и силовая (+3.3V → COM → NO → LED).</div>
@@ -1171,8 +1442,8 @@
           <div class="action-body">
             <ul>
               <li><code>+3.3V</code> ATX → <code>COM</code> реле</li>
-              <li><code>NO</code> реле → длинная ножка LED</li>
-              <li>Короткая ножка LED → <code>GND</code> ATX</li>
+              <li><code>NO</code> реле → плюсовой провод LED</li>
+              <li>Минусовой провод LED → <code>GND</code> ATX</li>
             </ul>
           </div>
         </div>
@@ -1211,8 +1482,77 @@
         <p class="step-intro">Реле — это просто электрический выключатель, управляемый другим током.</p>
 
         <div class="figure hero">
-          <img src="diagrams/relay-inside.svg" alt="Устройство реле в разрезе: катушка, якорь, контакты COM/NO/NC"/>
-          <div class="caption">Как устроено реле: катушка становится магнитом → тянет якорь → COM касается NO. Щелчок.</div>
+          <svg viewBox="0 0 720 240" style="width:100%; height:auto; display:block">
+            <!-- ========== ЛЕВО: НЕТ СИГНАЛА (NC) ========== -->
+            <g transform="translate(20, 20)">
+              <text x="135" y="-2" text-anchor="middle" font-size="14" font-weight="700" fill="#10B981">Нет сигнала — COM↔NC</text>
+
+              <!-- Корпус реле -->
+              <rect x="20" y="20" width="230" height="140" rx="4" fill="none" stroke="#1d1d1f" stroke-width="3"/>
+
+              <!-- 3 пина слева: DC+, IN, DC- -->
+              <line x1="0" y1="50"  x2="20" y2="50"  stroke="#1d1d1f" stroke-width="3"/>
+              <text x="-3" y="54"  text-anchor="end" font-size="13" font-weight="700" fill="#1d1d1f">DC+</text>
+              <line x1="0" y1="90"  x2="20" y2="90"  stroke="#1d1d1f" stroke-width="3"/>
+              <text x="-3" y="94"  text-anchor="end" font-size="13" font-weight="700" fill="#1d1d1f">IN</text>
+              <line x1="0" y1="130" x2="20" y2="130" stroke="#1d1d1f" stroke-width="3"/>
+              <text x="-3" y="134" text-anchor="end" font-size="13" font-weight="700" fill="#1d1d1f">DC−</text>
+
+              <!-- 3 контактных точки справа -->
+              <circle cx="190" cy="50"  r="6" fill="#1d1d1f"/>
+              <circle cx="190" cy="90"  r="6" fill="#1d1d1f"/>
+              <circle cx="190" cy="130" r="6" fill="#1d1d1f"/>
+
+              <!-- Внешние пины справа -->
+              <line x1="196" y1="50"  x2="250" y2="50"  stroke="#1d1d1f" stroke-width="3"/>
+              <text x="255" y="54"  font-size="13" font-weight="700" fill="#1d1d1f">NO</text>
+              <line x1="196" y1="90"  x2="250" y2="90"  stroke="#1d1d1f" stroke-width="3"/>
+              <text x="255" y="94"  font-size="13" font-weight="700" fill="#1d1d1f">COM</text>
+              <line x1="196" y1="130" x2="250" y2="130" stroke="#10B981" stroke-width="3"/>
+              <text x="255" y="134" font-size="13" font-weight="700" fill="#10B981">NC ✓</text>
+
+              <!-- Рычаг: COM → NC (по умолчанию) -->
+              <line x1="190" y1="90" x2="184" y2="130" stroke="#1d1d1f" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="184" y1="130" x2="190" y2="130" stroke="#1d1d1f" stroke-width="3.5" stroke-linecap="round"/>
+            </g>
+
+            <!-- ========== ПРАВО: ЕСТЬ СИГНАЛ (NO) ========== -->
+            <g transform="translate(400, 20)">
+              <text x="135" y="-2" text-anchor="middle" font-size="14" font-weight="700" fill="#EF4444">Сигнал на IN — COM↔NO</text>
+
+              <!-- Корпус реле -->
+              <rect x="20" y="20" width="230" height="140" rx="4" fill="none" stroke="#1d1d1f" stroke-width="3"/>
+
+              <!-- 3 пина слева -->
+              <line x1="0" y1="50"  x2="20" y2="50"  stroke="#EF4444" stroke-width="3"/>
+              <text x="-3" y="54"  text-anchor="end" font-size="13" font-weight="700" fill="#EF4444">DC+</text>
+              <line x1="0" y1="90"  x2="20" y2="90"  stroke="#EF4444" stroke-width="3"/>
+              <text x="-3" y="94"  text-anchor="end" font-size="13" font-weight="700" fill="#EF4444">IN</text>
+              <line x1="0" y1="130" x2="20" y2="130" stroke="#1d1d1f" stroke-width="3"/>
+              <text x="-3" y="134" text-anchor="end" font-size="13" font-weight="700" fill="#1d1d1f">DC−</text>
+
+              <!-- 3 контактных точки -->
+              <circle cx="190" cy="50"  r="6" fill="#1d1d1f"/>
+              <circle cx="190" cy="90"  r="6" fill="#1d1d1f"/>
+              <circle cx="190" cy="130" r="6" fill="#1d1d1f"/>
+
+              <!-- Внешние пины -->
+              <line x1="196" y1="50"  x2="250" y2="50"  stroke="#EF4444" stroke-width="3"/>
+              <text x="255" y="54"  font-size="13" font-weight="700" fill="#EF4444">NO ✓</text>
+              <line x1="196" y1="90"  x2="250" y2="90"  stroke="#1d1d1f" stroke-width="3"/>
+              <text x="255" y="94"  font-size="13" font-weight="700" fill="#1d1d1f">COM</text>
+              <line x1="196" y1="130" x2="250" y2="130" stroke="#1d1d1f" stroke-width="3"/>
+              <text x="255" y="134" font-size="13" font-weight="700" fill="#1d1d1f">NC</text>
+
+              <!-- Рычаг: COM → NO (переключился) -->
+              <line x1="190" y1="90" x2="184" y2="50"  stroke="#EF4444" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="184" y1="50" x2="190" y2="50"  stroke="#EF4444" stroke-width="3.5" stroke-linecap="round"/>
+
+              <!-- Маленькая молния — индикатор активации -->
+              <text x="135" y="100" text-anchor="middle" font-size="20">⚡</text>
+            </g>
+          </svg>
+          <div class="caption">Внутри реле — переключатель. По умолчанию (без сигнала) рычаг на NC. Подаёшь ток на IN — рычаг переключается на NO.</div>
         </div>
 
         <h2>Как работает</h2>
@@ -1378,7 +1718,20 @@ NO/NC контакты, джампер H/L.
           <span class="phase-big-badge big-T">TRY · Попробуй</span>
         </div>
         <h1 class="step-h">Код вместо пальца</h1>
-        <p class="step-intro">Pico заменит кнопку. Код, который вы напишете с ИИ, будет автоматически включать и выключать реле. Это первое в вашей жизни программно-управляемое устройство.</p>
+        <p class="step-intro">Pico заменит кнопку. Код, который ты напишешь с ИИ, будет автоматически включать и выключать реле. Это первое в твоей жизни программно-управляемое устройство.</p>
+
+        <div class="parts-needed">
+          <div class="pn-title">📦 Возьми из набора</div>
+          <span class="pn-item"><span class="pn-emoji">🔌</span>Блок питания ATX</span>
+          <span class="pn-item"><span class="pn-emoji">⚡</span>Плата ATX XH-M229</span>
+          <span class="pn-item"><span class="pn-emoji">🤖</span>Raspberry Pi Pico</span>
+          <span class="pn-item"><span class="pn-emoji">🔄</span>Реле JQC-3FF-S-Z</span>
+          <span class="pn-item"><span class="pn-emoji">💡</span>LED 3 Вт</span>
+          <span class="pn-item"><span class="pn-emoji">🔌</span>USB-кабель Micro-B</span>
+          <span class="pn-item"><span class="pn-emoji">💻</span>Ноутбук с Thonny</span>
+          <span class="pn-item"><span class="pn-emoji">🔧</span>8× Dupont-провода</span>
+          <span class="pn-item"><span class="pn-emoji">🪛</span>Отвёртка</span>
+        </div>
 
         <div class="figure hero">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 680px; border: none; overflow: hidden;" data-src="circuits/circuit_step04_try_final.html"></iframe>
@@ -1625,7 +1978,78 @@ relay = Pin(15, Pin.OUT)
 
         <div class="nav-row">
           <button class="nav-btn" onclick="selectStep('4-own')">← Own</button>
-          <button class="nav-btn primary" style="opacity:.5;cursor:default">Дальше: Модуль 2</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-stub')">Дальше: Модуль 2 →</button>
+        </div>
+      </div>
+
+      <!-- ========== ЗАГЛУШКИ модулей 2–8 ========== -->
+      <div class="step-content" data-step="m2-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">💧</div>
+          <div class="stub-num">Модуль 2</div>
+          <h2>Сушилка для рук</h2>
+          <p class="stub-desc">ИК-датчик движения + реле + двигатель. Поднёс ладонь — устройство среагировало и включилось. Первый шаг от ручного выключателя к автоматике.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">🚨</div>
+          <div class="stub-num">Модуль 3</div>
+          <h2>Лазерная сигнализация</h2>
+          <p class="stub-desc">Лазерный модуль + фоторезистор + зуммер. Невидимый луч пересекают — срабатывает тревога. Знакомство с аналоговыми сенсорами и пороговыми условиями.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m4-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">🌡</div>
+          <div class="stub-num">Модуль 4</div>
+          <h2>Метеостанция</h2>
+          <p class="stub-desc">Датчик DHT22 + OLED-дисплей. Показывает температуру и влажность в комнате. Цифровая шина I²C, графика на экране, реальные данные физического мира.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m5-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">🤖</div>
+          <div class="stub-num">Модуль 5</div>
+          <h2>Робот-следопыт</h2>
+          <p class="stub-desc">Два двигателя + IR-сенсоры линии + шасси. Робот едет вдоль чёрной линии на бумаге. Управление моторами, обратная связь, простой алгоритм принятия решений.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m6-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">🔐</div>
+          <div class="stub-num">Модуль 6</div>
+          <h2>Кодовый замок</h2>
+          <p class="stub-desc">Матричная клавиатура + сервопривод + LCD. Вводишь правильный код — замок открывается. Состояния, неудачные попытки, безопасность.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m7-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">📡</div>
+          <div class="stub-num">Модуль 7</div>
+          <h2>Умное освещение</h2>
+          <p class="stub-desc">Bluetooth-модуль + WS2812 LED-лента. Управление цветом и яркостью со смартфона. Беспроводной обмен данными, протокол команд.</p>
+          <div class="stub-state">в разработке</div>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m8-stub">
+        <div class="stub-card">
+          <div class="stub-emoji">🎓</div>
+          <div class="stub-num">Модуль 8</div>
+          <h2>Финальный проект</h2>
+          <p class="stub-desc">Свой замысел. Защита перед группой. Используете всё, что освоили в модулях 1–7. Этим закрываете «Базу» и решаете, какой инженер вам ближе: железо, код, дизайн, безопасность.</p>
+          <div class="stub-state">в разработке</div>
         </div>
       </div>
 
@@ -1708,6 +2132,9 @@ relay = Pin(15, Pin.OUT)
   }
 
   function selectStep(stepId){
+    const isStub = /^m\d+-stub$/.test(stepId);
+    const isOnboarding = stepId === 'm0-onboarding';
+    const isCycleStep = !isStub && !isOnboarding;
     // content
     document.querySelectorAll('.step-content').forEach(c=>{
       c.classList.toggle('active', c.dataset.step===stepId);
@@ -1716,16 +2143,29 @@ relay = Pin(15, Pin.OUT)
     document.querySelectorAll('.phase-item').forEach(p=>{
       p.classList.toggle('current', p.dataset.step===stepId);
     });
-    // expand corresponding cycle
-    const cycleNum = stepId.split('-')[0];
-    toggleCycle(cycleNum);
+    // onboarding row highlight
+    document.querySelector('.onboarding-link')?.classList.toggle('current', isOnboarding);
+    // expand corresponding cycle (только для шагов M1 циклов)
+    if (isCycleStep) {
+      const cycleNum = stepId.split('-')[0];
+      toggleCycle(cycleNum);
+    }
+    // active module в сайдбаре
+    updateActiveModule(stepId);
     // breadcrumb + counter
-    if (stepId === '0-start') {
-      document.getElementById('crumbCycle').textContent = 'Подготовка';
-      document.getElementById('stepIdx').textContent = '0';
+    const crumb = document.getElementById('crumbCycle');
+    const idx = document.getElementById('stepIdx');
+    if (isOnboarding) {
+      crumb.textContent = 'Знакомство';
+      idx.textContent = '—';
+    } else if (isStub) {
+      const n = stepId.match(/^m(\d+)-stub$/)[1];
+      crumb.textContent = `Модуль ${n} · скоро`;
+      idx.textContent = '—';
     } else {
-      document.getElementById('crumbCycle').textContent = CYCLE_NAMES[cycleNum];
-      document.getElementById('stepIdx').textContent = ORDER.indexOf(stepId)+1;
+      const cycleNum = stepId.split('-')[0];
+      crumb.textContent = CYCLE_NAMES[cycleNum];
+      idx.textContent = ORDER.indexOf(stepId)+1;
     }
     updateStepper(stepId);
     // lazy-инициализация iframe и контекстный помощник
@@ -1743,10 +2183,19 @@ relay = Pin(15, Pin.OUT)
     }
   }
 
+  function updateActiveModule(stepId){
+    let activeModule = '1';
+    const m = stepId.match(/^m(\d+)-stub$/);
+    if (m) activeModule = m[1];
+    document.querySelectorAll('.mod-item[data-module]').forEach(el=>{
+      el.classList.toggle('active', el.dataset.module === activeModule);
+    });
+  }
+
   function updateStepper(stepId){
     const stepper = document.getElementById('cycleStepper');
     if (!stepper) return;
-    if (stepId === '0-start'){
+    if (stepId === 'm0-onboarding' || /^m\d+-stub$/.test(stepId)){
       stepper.style.display = 'none';
       return;
     }
@@ -1849,8 +2298,8 @@ relay = Pin(15, Pin.OUT)
 
   // ============ Глобальный глоссарий ============
   const GLOSSARY = {
-    'анод':         'Длинная ножка LED, плюсовой вывод (+).',
-    'катод':        'Короткая ножка LED, минусовой вывод (−).',
+    'анод':         'Плюсовой контакт LED, отмечен (+) на звезде около пятачка.',
+    'катод':        'Минусовой контакт LED, отмечен (−) на звезде около пятачка.',
     'клемма':       'Винтовое отверстие на плате для зажима провода.',
     'цепь':         'Замкнутый круг проводника, по которому течёт электрический ток.',
     'полярность':   'Свойство компонента работать только в одном направлении тока.',
@@ -2084,10 +2533,39 @@ relay = Pin(15, Pin.OUT)
     return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">${inner}</svg>`;
   }
 
+  function renderCycleParts(){
+    const sets = {
+      '1': [
+        partCard({ svg: svgFromRegistry('atx_xh_m229'),       name: 'Плата расширения ATX', hint: 'с винтовыми клеммами', count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.psu,                 name: 'Блок питания ATX',    hint: '3.3 V / 5 V / 12 V',   count: '1 шт' }),
+        partCard({ svg: svgFromRegistry('led_3w_star'),       name: 'Светодиод 3 Вт',      hint: 'на алюминиевой звезде',count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'для соединений',       count: '2 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.screwdriver,         name: 'Плоская отвёртка',    hint: 'для винтовых клемм',   count: '1 шт' })
+      ],
+      '2': [
+        partCard({ svg: svgFromRegistry('button_tactile_2pin'),name: 'Тактовая кнопка',    hint: 'нажал — замкнула',     count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.multimeter,          name: 'Мультиметр',          hint: 'для замеров',          count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'добавь к существующим',count: '+2 шт' })
+      ],
+      '3': [
+        partCard({ svg: svgFromRegistry('relay_jqc_3ff_s_z'), name: 'Реле',                hint: '1-канал с оптопарой',  count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'добавь к существующим',count: '+4 шт' })
+      ],
+      '4': [
+        partCard({ svg: svgFromRegistry('raspberry_pi_pico'), name: 'Raspberry Pi Pico',   hint: 'микроконтроллер',      count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.usb,                 name: 'USB-кабель Micro-B',  hint: 'с поддержкой данных',  count: '1 шт' }),
+        partCard({ svg: PARTS_INLINE_SVG.laptop,              name: 'Ноутбук с Thonny',    hint: 'для прошивки Pico',    count: '1 шт' })
+      ]
+    };
+    Object.keys(sets).forEach(n => {
+      const el = document.getElementById('parts-cycle-' + n);
+      if (el) el.innerHTML = sets[n].join('');
+    });
+  }
+
   function renderPartsGrids(){
     const studentEl = document.getElementById('partsStudent');
-    const labEl = document.getElementById('partsLab');
-    if (!studentEl || !labEl) return;
+    if (!studentEl) return;
 
     studentEl.innerHTML = [
       partCard({ svg: svgFromRegistry('raspberry_pi_pico'), name: 'Raspberry Pi Pico', hint: 'микроконтроллер', count: '1 шт' }),
@@ -2096,55 +2574,16 @@ relay = Pin(15, Pin.OUT)
       partCard({ svg: svgFromRegistry('led_3w_star'),       name: 'Светодиод 3 Вт',      hint: 'на алюминиевой звезде', count: '1 шт' }),
       partCard({ svg: svgFromRegistry('button_tactile_2pin'), name: 'Тактовая кнопка',   hint: 'нажал — замкнула', count: '1 шт' }),
       partCard({ svg: PARTS_INLINE_SVG.dupont,              name: 'Dupont-провода',      hint: 'для соединений', count: '10 шт' }),
-      partCard({ svg: PARTS_INLINE_SVG.usb,                 name: 'USB-кабель Micro-B',  hint: 'с поддержкой данных', count: '1 шт' })
+      partCard({ svg: PARTS_INLINE_SVG.usb,                 name: 'USB-кабель Micro-B',  hint: 'с поддержкой данных', count: '1 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.psu,                 name: 'Блок питания ATX',    hint: '3.3 V / 5 V / 12 V', count: '1 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.multimeter,          name: 'Мультиметр',          hint: 'для замеров напряжения', count: '1 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.screwdriver,         name: 'Плоская отвёртка',    hint: 'для винтовых клемм', count: '1 шт' }),
+      partCard({ svg: PARTS_INLINE_SVG.laptop,              name: 'Ноутбук с Thonny',    hint: 'для прошивки Pico', count: '1 шт' })
     ].join('');
-
-    labEl.innerHTML = [
-      partCard({ svg: PARTS_INLINE_SVG.psu,                 name: 'Блок питания ATX',    hint: '3.3 V / 5 V / 12 V', count: '1 на стол' }),
-      partCard({ svg: PARTS_INLINE_SVG.multimeter,          name: 'Мультиметр',          hint: 'один на 2–3 ученика', count: '' }),
-      partCard({ svg: PARTS_INLINE_SVG.screwdriver,         name: 'Плоская отвёртка',    hint: 'для клемм', count: '' }),
-      partCard({ svg: PARTS_INLINE_SVG.laptop,              name: 'Ноутбук с Thonny',    hint: 'для прошивки Pico', count: '' })
-    ].join('');
-  }
-
-  // ============ Время на шаг ============
-  const STEP_TIMES = {
-    '1-try': 5,  '1-know': 4, '1-own': 6,  '1-share': 3,
-    '2-try': 7,  '2-know': 6, '2-own': 12, '2-share': 4,
-    '3-try': 12, '3-know': 8, '3-own': 6,  '3-share': 4,
-    '4-try': 18, '4-know': 10,'4-own': 12, '4-share': 20
-  };
-  function injectTimeBadges(){
-    document.querySelectorAll('.step-content').forEach(step => {
-      const id = step.dataset.step;
-      const min = STEP_TIMES[id];
-      if (!min) return;
-      const row = step.querySelector('.phase-title-row');
-      if (!row || row.querySelector('.time-badge')) return;
-      const badge = document.createElement('span');
-      badge.className = 'time-badge';
-      badge.textContent = `${min} мин`;
-      row.appendChild(badge);
-    });
   }
 
   // ============ Контекстный помощник ============
   const STEP_HELPERS = {
-    '0-start': {
-      terms: [
-        ['Pico', 'Микроконтроллер RP2040, 40 пинов, работает на 3.3V.'],
-        ['ATX', 'Блок питания компьютера, даёт +3.3V/+5V/+12V/GND.'],
-        ['Dupont-провод', 'Тонкий провод с разъёмами на концах, для прототипирования.']
-      ],
-      pitfalls: [
-        'USB-кабель только для зарядки — Pico не появится в Thonny. Нужен кабель с поддержкой данных.',
-        'ATX без переключателя ON/OFF — лишний риск. Берите XH-M229 с тумблером.',
-        'Дешёвый мультиметр без прозвонки — зачем мультиметр без главного режима.'
-      ],
-      prompts: [
-        'Я хочу собрать набор для электроники с Raspberry Pi Pico. Что ещё мне может пригодиться кроме базового списка?'
-      ]
-    },
     '1-try': {
       terms: [
         ['Клемма', 'Винтовое отверстие на плате для зажима провода.'],
@@ -2152,7 +2591,7 @@ relay = Pin(15, Pin.OUT)
         ['Катод', 'Короткая ножка LED, минус (−).']
       ],
       pitfalls: [
-        'LED перевёрнут — длинная ножка должна быть на +3.3V',
+        'Перепутаны провода — плюсовой провод LED должен быть на +3.3V',
         'Винт не до конца затянут — провод болтается',
         'ATX выключен — нет красного индикатора PWR'
       ],
@@ -2212,34 +2651,39 @@ relay = Pin(15, Pin.OUT)
       ],
       prompts: [
         'Чем тактовая кнопка отличается от тумблера или переключателя?',
-        'Я собрал цепь: блок питания ATX +3.3V → кнопка → длинная ножка LED → короткая ножка LED → GND. Кнопка нажата, но LED не горит. Не предлагай решение. Задавай мне вопросы по очереди — пусть я сам найду, что не так. После каждого моего ответа — следующий вопрос.'
+        'Я собрал цепь: блок питания ATX +3.3V → кнопка → плюсовой провод LED → минусовой провод LED → GND. Кнопка нажата, но LED не горит. Не предлагай решение. Задавай мне вопросы по очереди — пусть я сам найду, что не так. После каждого моего ответа — следующий вопрос.'
       ]
     },
     '2-know': {
       terms: [
-        ['Мультиметр', 'Прибор для измерения V, Ω, A.'],
-        ['Прозвонка 🔊', 'Режим проверки целостности проводника.'],
+        ['Тактовая кнопка', 'Кнопка с пружиной — цепь замкнута пока нажата.'],
+        ['Контактный мостик', 'Подвижная пластина внутри кнопки — замыкает клеммы при нажатии.'],
         ['Проводник', 'Медь, алюминий — пропускают ток.'],
         ['Изолятор', 'Пластик, резина — не пропускают.']
       ],
       pitfalls: [
-        'Пытаешься замерить напряжение в режиме Ω — мультиметр сгорит.',
-        'Прозваниваешь живую цепь под напряжением — недопустимо, режим Ω даёт свой ток.'
+        'Думаешь, что кнопка постоянно «включает» — нет, она держит цепь замкнутой только пока нажата.',
+        'Перепутал проводник (медь) и изолятор (пластик) — провод имеет оба слоя, оба важны.'
       ],
       prompts: [
-        'Объясни как работает прозвонка мультиметра: что он на самом деле измеряет?'
+        'Какие ещё бывают типы кнопок (помимо тактовой) и чем они отличаются?'
       ]
     },
     '2-own': {
       terms: [
+        ['Мультиметр', 'Прибор для измерения V, Ω, A.'],
+        ['Прозвонка 🔊', 'Режим проверки целостности проводника.'],
         ['DC (V=)', 'Постоянное напряжение, как от батарейки или ATX.'],
         ['AC (V~)', 'Переменное, как в розетке 220В.']
       ],
       pitfalls: [
+        'Пытаешься замерить напряжение в режиме Ω — мультиметр может выйти из строя.',
+        'Прозваниваешь живую цепь под напряжением — недопустимо.',
         '12V в пин Pico = моментальная поломка чипа. Перед подключением Pico — всегда замер.',
         'Чёрный щуп в гнездо VΩmA вместо COM — измерения покажут чушь.'
       ],
       prompts: [
+        'Объясни как работает прозвонка мультиметра: что он на самом деле измеряет?',
         'У меня мультиметр UNI-T UT33C+. Объясни безопасный порядок измерения напряжения.'
       ]
     },
@@ -2374,8 +2818,10 @@ relay = Pin(15, Pin.OUT)
   function renderHelper(stepId){
     const data = STEP_HELPERS[stepId];
     const body = document.getElementById('helperBody');
-    const idx = ORDER.indexOf(stepId) + 1;
-    document.getElementById('helperStepLabel').textContent = idx + ' / 16';
+    const label = document.getElementById('helperStepLabel');
+    if (stepId === 'm0-onboarding') label.textContent = 'знакомство';
+    else if (/^m\d+-stub$/.test(stepId)) label.textContent = stepId.match(/^m(\d+)/)[1] + '·скоро';
+    else label.textContent = (ORDER.indexOf(stepId) + 1) + ' / 16';
 
     if (!data) {
       body.innerHTML = '<div class="h-empty">Помощник этого шага пока пуст.</div>';
@@ -2418,7 +2864,6 @@ relay = Pin(15, Pin.OUT)
   // Инициализация после полной загрузки DOM (защищённая от падений отдельных шагов)
   document.addEventListener('DOMContentLoaded', () => {
     const safe = (label, fn) => { try { fn(); } catch(e) { console.warn('[init] '+label+':', e); } };
-    safe('time badges',      () => injectTimeBadges());
     safe('parts grids',      () => renderPartsGrids());
     safe('term tooltips',    () => attachTermTooltips());
     safe('progress restore', () => applyProgressFromStorage());
@@ -2426,7 +2871,8 @@ relay = Pin(15, Pin.OUT)
     let initialStep = '1-try';
     try {
       const last = localStorage.getItem('shokanlab.prototype.lastStep');
-      if (last && (ORDER.includes(last) || last === '0-start')) initialStep = last;
+      if (last && (ORDER.includes(last) || last === 'm0-onboarding' || /^m\d+-stub$/.test(last))) initialStep = last;
+      else initialStep = 'm0-onboarding';
     } catch(e) {}
     safe('initial select', () => selectStep(initialStep));
   });

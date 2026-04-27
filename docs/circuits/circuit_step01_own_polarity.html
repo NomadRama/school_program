@@ -97,18 +97,6 @@
                 <g id="right-wires"></g>
             </g>
             
-            <!-- Blocking indicator -->
-            <g transform="translate(204, 346)">
-                <g class="barrier-icon">
-                    <circle cx="0" cy="0" r="16" fill="#EF4444" opacity="0.2" />
-                    <line x1="-10" y1="-10" x2="10" y2="10" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
-                    <line x1="-10" y1="10" x2="10" y2="-10" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
-                </g>
-            </g>
-            
-            <!-- Connection labels to emphasize the flip -->
-            <text x="80" y="350" fill="#EF4444" font-size="12" font-weight="700">Ток заблокирован</text>
-            
             <text x="220" y="415" class="desc" text-anchor="middle">Односторонняя дорога: ток не может пройти</text>
         </g>
 
@@ -147,11 +135,13 @@
 
     ledOnSvg = ledOnSvg.replace('opacity="0.3"', 'opacity="0.9" r="28"');
     ledOffSvg = ledOffSvg.replace(/<circle cx="\d+" cy="\d+" r="\d+" fill="url\(#ledGlow\)".*?\/>/, '');
+    // Убираем подпись «LED 3 Вт» — иначе она зеркалится при rotate(180)
+    ledOffSvg = ledOffSvg.replace(/<text[^>]*>\s*LED 3 Вт\s*<\/text>/, '');
 
     // ==========================================
     // 1. LEFT SIDE (Correct)
     // ==========================================
-    const leftLedWrap = `<g transform="translate(${ledbbox.x}, ${ledbbox.y})">${ledOnSvg}</g>`;
+    const leftLedWrap = `<g transform="translate(${LED_OFFSET.tx}, ${LED_OFFSET.ty})">${ledOnSvg}</g>`;
     document.getElementById('left-components').innerHTML = atxSvg + leftLedWrap;
     
     const wireRed = `
@@ -177,7 +167,7 @@
     // ==========================================
     // Wrap LED in translate and rotate(180) around its center (30, 30)
     const rightLedWrap = `
-        <g transform="translate(${ledbbox.x}, ${ledbbox.y}) rotate(180, 30, 30)">
+        <g transform="translate(${LED_OFFSET.tx}, ${LED_OFFSET.ty}) rotate(180, 30, 30)">
             ${ledOffSvg}
         </g>
     `;

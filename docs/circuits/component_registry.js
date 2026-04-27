@@ -221,9 +221,46 @@ COMPONENT_LIBRARY["atx_xh_m229"] = {
             }).join('')}
 
             <!-- Board label -->
-            <text x="${ox + w/2}" y="${oy + h + 18}" text-anchor="middle" 
+            <text x="${ox + w/2}" y="${oy + h + 18}" text-anchor="middle"
                   fill="#78909C" font-size="13" font-weight="600">
                 Плата ATX · XH-M229
+            </text>
+        </g>`;
+    },
+
+    // === КОМПАКТНЫЙ РЕНДЕР для compare-схем (1-know, 1-own и т.д.) ===
+    // Только нижний ряд клемм с подписями. Без 24-pin, switch, fuses, traces.
+    // Pin-координаты совместимы с pin()/pinExit() — центры клемм там же, что в renderSVG.
+    renderSVG_compact: function(origin) {
+        const ox = origin?.x ?? 0;
+        const oy = origin?.y ?? 0;
+        const pinY = 160;       // совпадает с pin.y в registry
+        const minX = 70, maxX = 730;
+        const stripTop = pinY - 22, stripH = 44;
+        const labelY = pinY + 30;
+        const titleY = pinY + 60;
+
+        const plugs = Object.entries(this.pins).map(([key, p]) => {
+            const isVcc = p.type === 'power';
+            const outer = isVcc ? '#D32F2F' : '#212121';
+            const inner = isVcc ? '#FFCDD2' : '#616161';
+            return `
+                <circle cx="${ox + p.x}" cy="${oy + p.y}" r="14" fill="${outer}" stroke="#0D47A1" stroke-width="1.5"/>
+                <circle cx="${ox + p.x}" cy="${oy + p.y}" r="6"  fill="${inner}" opacity="0.85"/>
+                <text x="${ox + p.x}" y="${oy + labelY}" text-anchor="middle"
+                      fill="#1A237E" font-size="13" font-weight="700">${p.label}</text>`;
+        }).join('');
+
+        return `
+        <g id="comp-atx_xh_m229_compact" class="component" data-component="atx_xh_m229">
+            <!-- Простая полоса вместо платы -->
+            <rect x="${ox + minX}" y="${oy + stripTop}" width="${maxX - minX}" height="${stripH}"
+                  rx="8" ry="8" fill="#1565C0" stroke="#0D47A1" stroke-width="2"/>
+            ${plugs}
+            <!-- Подпись -->
+            <text x="${ox + (minX + maxX)/2}" y="${oy + titleY}" text-anchor="middle"
+                  fill="#78909C" font-size="13" font-weight="600">
+                Плата ATX · выходные клеммы
             </text>
         </g>`;
     }

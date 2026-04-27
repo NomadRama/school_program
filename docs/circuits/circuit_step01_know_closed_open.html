@@ -38,12 +38,12 @@
 
         .label {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 18px;
             letter-spacing: 0.5px;
         }
         .desc {
-            font-size: 11px;
-            fill: #6e6e73;
+            font-size: 16px;
+            fill: #4a4a4f;
             font-style: italic;
         }
         .break-mark {
@@ -56,9 +56,9 @@
 </head>
 <body>
 
-    <!-- Scaled viewBox tightened for maximum scale -->
-    <svg id="circuit" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-        
+    <!-- Vertical-stack layout: ATX top, LED below, wires straight down -->
+    <svg id="circuit" viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+
         <defs>
             <!-- Glowing LED effect for closed circuit -->
             <radialGradient id="ledGlowStrong">
@@ -72,14 +72,13 @@
         <!-- ========================================== -->
         <g transform="translate(15, 50)">
             <text x="220" y="-15" class="label" fill="#10B981" text-anchor="middle">✓ ЗАМКНУТАЯ — LED горит</text>
-            
-            <!-- Increased scale from 0.4 to 0.55 -->
+
             <g transform="scale(0.55)">
                 <g id="left-components"></g>
                 <g id="left-wires"></g>
             </g>
-            
-            <text x="220" y="415" class="desc" text-anchor="middle">электроны идут по кругу → LED горит</text>
+
+            <text x="220" y="450" class="desc" text-anchor="middle">электроны идут по кругу → LED горит</text>
         </g>
 
         <!-- ========================================== -->
@@ -87,22 +86,21 @@
         <!-- ========================================== -->
         <g transform="translate(485, 50)">
             <text x="220" y="-15" class="label" fill="#EF4444" text-anchor="middle">✗ РАЗОМКНУТАЯ — LED не горит</text>
-            
-            <!-- Increased scale from 0.4 to 0.55 -->
+
             <g transform="scale(0.55)">
                 <g id="right-components"></g>
                 <g id="right-wires"></g>
             </g>
-            
-            <!-- Red X and break indicator at scale=1 for crispness -->
-            <!-- x=341, y=206 corresponds exactly to the middle of the broken wire gap -->
-            <g transform="translate(341, 206)">
+
+            <!-- Break-X position: middle of red wire gap. Coords in side-local (post-scale) space.
+                 Component-coord midpoint = (650, 415). After scale 0.55: (358, 228) -->
+            <g transform="translate(358, 228)">
                 <line x1="-12" y1="-12" x2="12" y2="12" class="break-mark" stroke="#EF4444" stroke-width="3" stroke-linecap="round" />
                 <line x1="-12" y1="12" x2="12" y2="-12" class="break-mark" stroke="#EF4444" stroke-width="3" stroke-linecap="round" />
                 <text x="0" y="32" fill="#EF4444" font-size="12" font-weight="700" text-anchor="middle">РАЗРЫВ</text>
             </g>
 
-            <text x="220" y="415" class="desc" text-anchor="middle">разрыв в круге — всё останавливается</text>
+            <text x="220" y="450" class="desc" text-anchor="middle">разрыв в круге — всё останавливается</text>
         </g>
 
     </svg>
@@ -114,8 +112,9 @@
     const ledComp = COMPONENT_LIBRARY["led_3w_star"];
 
     // SOP: координаты клемм/падов берём через pin() — визуальная позиция из реестра
+    // Vertical-stack: LED размещён прямо под клеммами +3.3V/GND ATX → провода идут почти прямо вниз
     const ATX_OFFSET = { tx: 30,  ty: 0   };
-    const LED_OFFSET = { tx: 370, ty: 600 };
+    const LED_OFFSET = { tx: 620, ty: 700 };
 
     const atxPins = {
         "plus3V3": pin(atxComp, 'plus3V3', ATX_OFFSET),
@@ -137,14 +136,17 @@
     // 1. LEFT SIDE (Closed)
     document.getElementById('left-components').innerHTML = atxSvg + ledOnSvg;
     
+    // Vertical wires: clemma → straight down → small bend at LED level → into pin
+    const Y_BUS = ledPins.anode.y - 30; // горизонтальная "шина" чуть выше LED для финального изгиба
+
     // Left Wires (Closed)
     const wireRed = `
-        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPins.anode.x - 50},450 ${ledPins.anode.x - 50},${ledPins.anode.y} ${ledPins.anode.x},${ledPins.anode.y}" class="wire wire-solid" stroke="#ef4444" />
-        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},450 ${ledPins.anode.x - 50},450 ${ledPins.anode.x - 50},${ledPins.anode.y} ${ledPins.anode.x},${ledPins.anode.y}" class="electron-flow" />
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},${Y_BUS} ${ledPins.anode.x},${Y_BUS} ${ledPins.anode.x},${ledPins.anode.y}" class="wire wire-solid" stroke="#ef4444" />
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},${Y_BUS} ${ledPins.anode.x},${Y_BUS} ${ledPins.anode.x},${ledPins.anode.y}" class="electron-flow" />
     `;
     const wireBlack = `
-        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},500 ${ledPins.cathode.x + 50},500 ${ledPins.cathode.x + 50},${ledPins.cathode.y} ${ledPins.cathode.x},${ledPins.cathode.y}" class="wire wire-solid" stroke="#1d1d1f" />
-        <polyline points="${ledPins.cathode.x},${ledPins.cathode.y} ${ledPins.cathode.x + 50},${ledPins.cathode.y} ${ledPins.cathode.x + 50},500 ${atxPins.gnd_4.x},500 ${atxPins.gnd_4.x},${atxPins.gnd_4.y}" class="electron-flow" />
+        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},${Y_BUS} ${ledPins.cathode.x},${Y_BUS} ${ledPins.cathode.x},${ledPins.cathode.y}" class="wire wire-solid" stroke="#1d1d1f" />
+        <polyline points="${ledPins.cathode.x},${ledPins.cathode.y} ${ledPins.cathode.x},${Y_BUS} ${atxPins.gnd_4.x},${Y_BUS} ${atxPins.gnd_4.x},${atxPins.gnd_4.y}" class="electron-flow" />
     `;
     
     document.getElementById('left-wires').innerHTML = wireRed + wireBlack + 
@@ -159,13 +161,15 @@
     ledOffSvg = ledOffSvg.replace(/<circle cx="\d+" cy="\d+" r="\d+" fill="url\(#ledGlow\)".*?\/>/, '');
     document.getElementById('right-components').innerHTML = atxSvg + ledOffSvg;
 
-    // Right Wires (Open - with gap in red wire)
+    // Right Wires (Open) — разрыв в середине красного провода
+    const Y_BREAK_TOP = 360;
+    const Y_BREAK_BOT = 470;
     const wireRedBroken = `
-        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},300" class="wire wire-solid" stroke="#ef4444" />
-        <polyline points="${atxPins.plus3V3.x},450 ${ledPins.anode.x - 50},450 ${ledPins.anode.x - 50},${ledPins.anode.y} ${ledPins.anode.x},${ledPins.anode.y}" class="wire wire-solid" stroke="#ef4444" />
+        <polyline points="${atxPins.plus3V3.x},${atxPins.plus3V3.y} ${atxPins.plus3V3.x},${Y_BREAK_TOP}" class="wire wire-solid" stroke="#ef4444" />
+        <polyline points="${atxPins.plus3V3.x},${Y_BREAK_BOT} ${atxPins.plus3V3.x},${Y_BUS} ${ledPins.anode.x},${Y_BUS} ${ledPins.anode.x},${ledPins.anode.y}" class="wire wire-solid" stroke="#ef4444" />
     `;
     const wireBlackOpen = `
-        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},500 ${ledPins.cathode.x + 50},500 ${ledPins.cathode.x + 50},${ledPins.cathode.y} ${ledPins.cathode.x},${ledPins.cathode.y}" class="wire wire-solid" stroke="#1d1d1f" />
+        <polyline points="${atxPins.gnd_4.x},${atxPins.gnd_4.y} ${atxPins.gnd_4.x},${Y_BUS} ${ledPins.cathode.x},${Y_BUS} ${ledPins.cathode.x},${ledPins.cathode.y}" class="wire wire-solid" stroke="#1d1d1f" />
     `;
 
     document.getElementById('right-wires').innerHTML = wireRedBroken + wireBlackOpen +

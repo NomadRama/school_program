@@ -53,8 +53,6 @@ const LED_OFFSET = { tx: 370, ty: 380 };
 const atx = COMPONENT_LIBRARY["atx_xh_m229"];
 const led = COMPONENT_LIBRARY["led_3w_star"];
 
-// bbox компонента ATX по умолчанию {x:40, y:30, ...}. Оставляем как есть,
-// origin = (0,0) означает "рисуй с этого локального origin на странице"
 const compLayer = document.getElementById('components-layer');
 compLayer.innerHTML += atx.renderSVG({ x: ATX_OFFSET.tx, y: ATX_OFFSET.ty });
 compLayer.innerHTML += led.renderSVG({ x: LED_OFFSET.tx, y: LED_OFFSET.ty });
