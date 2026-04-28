@@ -48,6 +48,9 @@
 
   .app{display:grid;grid-template-columns:320px 1fr 400px;
     height:calc(100vh - 32px)}
+  /* Grid/flex children must have min-height:0, иначе контент растягивает колонки сверх viewport и скролл не появляется */
+  .side,.content,.right{min-height:0}
+  .helper-body{min-height:0}
 
   /* ============ LEFT ============ */
   .side{background:var(--panel);border-right:1px solid var(--border);
@@ -584,6 +587,9 @@
     </div>
     <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
 
+    <!-- M1 cycles wrapper -->
+    <div class="module-cycles" data-module="1">
+
     <!-- Cycle 1 -->
     <div class="cycle">
       <div class="cycle-head expanded" role="button" tabindex="0" data-cycle="1" onclick="toggleCycle(1)">
@@ -676,18 +682,218 @@
       </div>
     </div>
 
-    <!-- Modules 2-8 (заглушки) -->
+    </div>
+    <!-- /M1 cycles wrapper -->
+
+    <!-- Module 2 (active, в разработке Цикл 1) -->
     <div style="margin-top:14px"></div>
-    <div class="mod-item locked" data-module="2" onclick="selectStep('m2-stub')">
+    <div class="mod-item" data-module="2" onclick="selectStep('m2-1-try')">
       <div class="m-num">2</div><div class="m-emoji">💧</div>
-      <div class="m-info"><div class="m-name">Сушилка для рук</div></div>
-      <div class="m-badge">скоро</div>
+      <div class="m-info">
+        <div class="m-name">Умная сушилка</div>
+        <div class="m-sub">Цикл 1 готов, 2-4 в работе</div>
+      </div>
     </div>
-    <div class="mod-item locked" data-module="3" onclick="selectStep('m3-stub')">
+
+    <!-- M2 cycles wrapper -->
+    <div class="module-cycles" data-module="2">
+
+    <!-- M2 Cycle 1 -->
+    <div class="cycle">
+      <div class="cycle-head expanded" role="button" tabindex="0" data-cycle="m2-1" onclick="toggleCycle('m2-1')">
+        <div class="num">1</div>
+        <div class="name">Вентилятор на стойке</div>
+        <div class="caret">▶</div>
+      </div>
+      <div class="cycle-phases open" id="cycle-phases-m2-1">
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-1-try"   onclick="selectStep('m2-1-try')">
+          <div class="badge badge-T">T</div><span>Закрепите вентилятор</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-1-know"  onclick="selectStep('m2-1-know')">
+          <div class="badge badge-K">K</div><span>Мотор vs лампа</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-1-own"   onclick="selectStep('m2-1-own')">
+          <div class="badge badge-O">O</div><span>Замерьте ток</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-1-share" onclick="selectStep('m2-1-share')">
+          <div class="badge badge-S">S</div><span>Что нового</span><span class="mark-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- M2 Cycle 2 -->
+    <div class="cycle">
+      <div class="cycle-head" role="button" tabindex="0" data-cycle="m2-2" onclick="toggleCycle('m2-2')">
+        <div class="num">2</div>
+        <div class="name">Кнопка + реле</div>
+        <div class="caret">▶</div>
+      </div>
+      <div class="cycle-phases" id="cycle-phases-m2-2">
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-2-try"   onclick="selectStep('m2-2-try')">
+          <div class="badge badge-T">T</div><span>Реле + кнопка</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-2-know"  onclick="selectStep('m2-2-know')">
+          <div class="badge badge-K">K</div><span>Зачем реле для мотора</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-2-own"   onclick="selectStep('m2-2-own')">
+          <div class="badge badge-O">O</div><span>Кнопка vs переключатель</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-2-share" onclick="selectStep('m2-2-share')">
+          <div class="badge badge-S">S</div><span>Какой режим выбрал</span><span class="mark-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- M2 Cycle 3 -->
+    <div class="cycle">
+      <div class="cycle-head" role="button" tabindex="0" data-cycle="m2-3" onclick="toggleCycle('m2-3')">
+        <div class="num">3</div>
+        <div class="name">Pico вместо кнопки</div>
+        <div class="caret">▶</div>
+      </div>
+      <div class="cycle-phases" id="cycle-phases-m2-3">
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-3-try"   onclick="selectStep('m2-3-try')">
+          <div class="badge badge-T">T</div><span>Pico → реле</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-3-know"  onclick="selectStep('m2-3-know')">
+          <div class="badge badge-K">K</div><span>Цифровой выход</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-3-own"   onclick="selectStep('m2-3-own')">
+          <div class="badge badge-O">O</div><span>Блинк → таймер → if</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-3-share" onclick="selectStep('m2-3-share')">
+          <div class="badge badge-S">S</div><span>Объясни ИИ HIGH</span><span class="mark-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- M2 Cycle 4 -->
+    <div class="cycle">
+      <div class="cycle-head" role="button" tabindex="0" data-cycle="m2-4" onclick="toggleCycle('m2-4')">
+        <div class="num">4</div>
+        <div class="name">ИК-датчик (финал)</div>
+        <div class="caret">▶</div>
+      </div>
+      <div class="cycle-phases" id="cycle-phases-m2-4">
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-4-try"   onclick="selectStep('m2-4-try')">
+          <div class="badge badge-T">T</div><span>ИК-модуль на стойку</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-4-know"  onclick="selectStep('m2-4-know')">
+          <div class="badge badge-K">K</div><span>Как видит датчик</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-4-own"   onclick="selectStep('m2-4-own')">
+          <div class="badge badge-O">O</div><span>Код + чувствительность</span><span class="mark-dot"></span>
+        </div>
+        <div class="phase-item" role="button" tabindex="0" data-step="m2-4-share" onclick="selectStep('m2-4-share')">
+          <div class="badge badge-S">S</div><span>Видео-демо «сушилка»</span><span class="mark-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <!-- /M2 cycles wrapper -->
+    <!-- Module 3 (active) -->
+    <div class="mod-item" data-module="3" onclick="selectStep('m3-1-try')">
       <div class="m-num">3</div><div class="m-emoji">🚨</div>
-      <div class="m-info"><div class="m-name">Лазерная сигнализация</div></div>
-      <div class="m-badge">скоро</div>
+      <div class="m-info">
+        <div class="m-name">Лазерная сигнализация</div>
+        <div class="m-sub">4 цикла</div>
+      </div>
     </div>
+
+    <!-- M3 cycles wrapper -->
+    <div class="module-cycles" data-module="3">
+
+      <div class="cycle">
+        <div class="cycle-head expanded" role="button" tabindex="0" data-cycle="m3-1" onclick="toggleCycle('m3-1')">
+          <div class="num">1</div>
+          <div class="name">Лазер + фотодатчик</div>
+          <div class="caret">▶</div>
+        </div>
+        <div class="cycle-phases open" id="cycle-phases-m3-1">
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-1-try"   onclick="selectStep('m3-1-try')">
+            <div class="badge badge-T">T</div><span>Лазер светит</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-1-know"  onclick="selectStep('m3-1-know')">
+            <div class="badge badge-K">K</div><span>Что такое лазер</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-1-own"   onclick="selectStep('m3-1-own')">
+            <div class="badge badge-O">O</div><span>Фотодатчик → Pico</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-1-share" onclick="selectStep('m3-1-share')">
+            <div class="badge badge-S">S</div><span>Что нового</span><span class="mark-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle">
+        <div class="cycle-head" role="button" tabindex="0" data-cycle="m3-2" onclick="toggleCycle('m3-2')">
+          <div class="num">2</div>
+          <div class="name">Бузер + PWM</div>
+          <div class="caret">▶</div>
+        </div>
+        <div class="cycle-phases" id="cycle-phases-m3-2">
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-2-try"   onclick="selectStep('m3-2-try')">
+            <div class="badge badge-T">T</div><span>Бузер пищит</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-2-know"  onclick="selectStep('m3-2-know')">
+            <div class="badge badge-K">K</div><span>Что такое PWM</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-2-own"   onclick="selectStep('m3-2-own')">
+            <div class="badge badge-O">O</div><span>Сирена двух тонов</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-2-share" onclick="selectStep('m3-2-share')">
+            <div class="badge badge-S">S</div><span>Объясни PWM</span><span class="mark-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle">
+        <div class="cycle-head" role="button" tabindex="0" data-cycle="m3-3" onclick="toggleCycle('m3-3')">
+          <div class="num">3</div>
+          <div class="name">RGB светодиод</div>
+          <div class="caret">▶</div>
+        </div>
+        <div class="cycle-phases" id="cycle-phases-m3-3">
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-3-try"   onclick="selectStep('m3-3-try')">
+            <div class="badge badge-T">T</div><span>3 канала по очереди</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-3-know"  onclick="selectStep('m3-3-know')">
+            <div class="badge badge-K">K</div><span>Смесь цветов</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-3-own"   onclick="selectStep('m3-3-own')">
+            <div class="badge badge-O">O</div><span>set_color()</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-3-share" onclick="selectStep('m3-3-share')">
+            <div class="badge badge-S">S</div><span>Эксперимент с цветом</span><span class="mark-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle">
+        <div class="cycle-head" role="button" tabindex="0" data-cycle="m3-4" onclick="toggleCycle('m3-4')">
+          <div class="num">4</div>
+          <div class="name">Сигнализация (финал)</div>
+          <div class="caret">▶</div>
+        </div>
+        <div class="cycle-phases" id="cycle-phases-m3-4">
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-4-try"   onclick="selectStep('m3-4-try')">
+            <div class="badge badge-T">T</div><span>Всё на стойке</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-4-know"  onclick="selectStep('m3-4-know')">
+            <div class="badge badge-K">K</div><span>Параллельная логика</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-4-own"   onclick="selectStep('m3-4-own')">
+            <div class="badge badge-O">O</div><span>Финальный код</span><span class="mark-dot"></span>
+          </div>
+          <div class="phase-item" role="button" tabindex="0" data-step="m3-4-share" onclick="selectStep('m3-4-share')">
+            <div class="badge badge-S">S</div><span>Видео-демо</span><span class="mark-dot"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /M3 cycles wrapper -->
     <div class="mod-item locked" data-module="4" onclick="selectStep('m4-stub')">
       <div class="m-num">4</div><div class="m-emoji">🌡</div>
       <div class="m-info"><div class="m-name">Метеостанция</div></div>
@@ -1949,24 +2155,1789 @@ relay = Pin(15, Pin.OUT)
         </div>
       </div>
 
-      <!-- ========== ЗАГЛУШКИ модулей 2–8 ========== -->
-      <div class="step-content" data-step="m2-stub">
-        <div class="stub-card">
-          <div class="stub-emoji">💧</div>
-          <div class="stub-num">Модуль 2</div>
-          <h2>Сушилка для рук</h2>
-          <p class="stub-desc">ИК-датчик движения + реле + двигатель. Поднёс ладонь — устройство среагировало и включилось. Первый шаг от ручного выключателя к автоматике.</p>
-          <div class="stub-state">в разработке</div>
+      <!-- ========== M2 · Цикл 1 «Вентилятор на стойке» ========== -->
+      <div class="step-content" data-step="m2-1-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 1 · Вентилятор на стойке</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Закрепите вентилятор на стойке</h1>
+        <p class="step-intro">Стойка из алюминиевого профиля уже собрана. Ваша задача — посадить на неё компьютерный вентилятор так, чтобы он не болтался и дул в нужную сторону. Это первый шаг сборки сушилки.</p>
+
+        <div class="socratic-block">
+          <div class="lbl">🤖 Промпт для Модуля 2</div>
+          <h3>Скопируй и отправь в новый чат с ИИ — первым сообщением</h3>
+          <p style="font-size:13px;color:var(--muted)">Это промпт под этот модуль. В каждом новом чате (или после длинной паузы) вставляй его заново — ИИ-чат не помнит прошлые разговоры. <a href="#" onclick="selectStep('m0-onboarding');return false;">Зачем именно так →</a></p>
+          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я школьник 12-17 лет, учусь инженерии в школе ShokanLab.
+Уже прошёл Модуль 1 «Управляемая лампа» — знаю что такое цепь, замкнутая/разомкнутая,
+полярность LED, напряжения 3.3V/5V/12V на ATX, реле NC/NO/COM, GPIO Pico, простой код на MicroPython.
+
+Сейчас прохожу Модуль 2 «Умная сушилка» — собираю устройство,
+где компьютерный вентилятор 12V включается:
+1) Цикл 1: напрямую от блока питания ATX (12V)
+2) Цикл 2: через тактовую кнопку и реле (или переключатель с защёлкой)
+3) Цикл 3: кодом на Raspberry Pi Pico через реле (без датчика)
+4) Цикл 4: финально — по ИК-датчику движения (FC-51 с регулятором чувствительности)
+
+Ты мой ИИ-напарник на весь модуль. Правила:
+1. Не давай готовых решений — сначала задавай уточняющие вопросы.
+2. Если спрашиваю «как сделать X» — спроси «что ты уже попробовал?»
+3. Объясняй простыми словами, без университетских терминов.
+4. Когда я ошибся — направь, но не давай ответ.
+5. Когда я понял — кратко подтверди и предложи следующий шаг.
+6. Связывай новое с тем, что я знаю из Модуля 1 (LED, реле, мультиметр, Pico).
+
+Готов начать?</pre>
+        </div>
+
+        <h2>Что делать</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Найдите стрелку направления потока</div></div>
+          <div class="action-body">На корпусе вентилятора сбоку — две стрелки: одна показывает <b>направление вращения</b>, другая — <b>направление воздуха</b>. Запомните: воздух дует в сторону стрелки потока.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Нашёл стрелку потока</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Заведите 4 T-slot гайки в паз профиля</div></div>
+          <div class="action-body">Возьмите 4 квадратные гайки M3, заведите их в паз стойки в местах, где будет стоять вентилятор. Гайки должны двигаться по пазу — пока не затягивайте.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Гайки в пазу</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Прислоните вентилятор и закрутите 4 болта M3</div></div>
+          <div class="action-body">Сторона вентилятора с проводом — вниз (так удобнее тянуть провод). Стрелка потока — наружу от стойки (воздух будет дуть на «руку», как в финальной сушилке). Закрутите 4 болта M3 в подготовленные гайки. Затяните до упора шестигранником.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Вентилятор на стойке</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Покачайте — не болтается?</div></div>
+          <div class="action-body">Возьмите вентилятор пальцами и попробуйте подвигать. Не должно быть люфта. Если болтается — подтяните болты крестом (1→3→2→4).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Жёстко закреплён</button></div>
+        </div>
+
+        <div class="callout c-tip"><b>Инженерная привычка:</b> любую механику собирают «крестом» — затягивая противоположные крепления по очереди. Это распределяет нагрузку и не перекашивает деталь.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('4-share')">← Финал M1</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-1-know')">Know: мотор vs лампа →</button>
         </div>
       </div>
 
-      <div class="step-content" data-step="m3-stub">
-        <div class="stub-card">
-          <div class="stub-emoji">🚨</div>
-          <div class="stub-num">Модуль 3</div>
-          <h2>Лазерная сигнализация</h2>
-          <p class="stub-desc">Лазерный модуль + фоторезистор + зуммер. Невидимый луч пересекают — срабатывает тревога. Знакомство с аналоговыми сенсорами и пороговыми условиями.</p>
-          <div class="stub-state">в разработке</div>
+      <div class="step-content" data-step="m2-1-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 1 · Вентилятор на стойке</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Чем мотор отличается от лампы</h1>
+        <p class="step-intro">В Модуле 1 вы зажигали светодиод. Сейчас в руках компьютерный вентилятор — это тоже электрическая нагрузка, но он работает по-другому. Разберитесь, в чём разница, прежде чем подключать.</p>
+
+        <h2>Что у вас в руках</h2>
+        <p>Внутри вентилятора — <b>DC-мотор</b>. Это катушка проволоки в магнитном поле. Когда через катушку течёт ток, она поворачивается. Лопасти насажены на эту катушку — поэтому крутятся.</p>
+
+        <h2>Главные отличия от LED (M1)</h2>
+        <table>
+          <tr><th></th><th>LED (M1)</th><th>DC-мотор (M2)</th></tr>
+          <tr><td><b>Что делает</b></td><td>Превращает ток в свет</td><td>Превращает ток в <b>движение</b></td></tr>
+          <tr><td><b>Напряжение</b></td><td>~3.3V (с резистором)</td><td><b>12V</b> (надо мощнее)</td></tr>
+          <tr><td><b>Ток</b></td><td>~10 мА</td><td>~150–300 мА (<b>в 20 раз больше</b>)</td></tr>
+          <tr><td><b>Стартовый ток</b></td><td>как обычный</td><td>в первый момент <b>×2–3</b></td></tr>
+          <tr><td><b>Полярность</b></td><td>важна (длинная/короткая)</td><td>важна (направление вращения)</td></tr>
+        </table>
+
+        <div class="callout c-info"><b>🔁 Повтор из M1:</b> на ATX три уровня напряжения — 3.3V, 5V, 12V. Вентилятор компьютера — <b>12V</b>. Pico — 3.3V. Это базовое правило: смотри на корпус нагрузки, найди надпись «12V/0.2A» и подключай к соответствующей клемме.</div>
+
+        <h2>Найдите надпись на корпусе вентилятора</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Поверните вентилятор этикеткой к себе</div></div>
+          <div class="action-body">Найдите строку вида <code>DC 12V 0.20A</code> или похожую. Это <b>паспорт</b> мотора.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Нашёл надпись</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Запишите два числа</div></div>
+          <div class="action-body">Напряжение (V) и ток (A). Дальше будете сравнивать с замерами мультиметром.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Записал V и A</button></div>
+        </div>
+
+        <div class="callout c-warn"><b>Чего нельзя:</b><br>
+          • Вентилятор 12V подключить к 3.3V — <b>не закрутится</b><br>
+          • Вентилятор 5V подключить к 12V — <b>сгорит</b> за секунды<br>
+          • Подключить вентилятор к Pico GPIO напрямую — <b>сгорит Pico</b>
+        </div>
+
+        <div class="chips">
+          <span class="chip">DC-мотор</span>
+          <span class="chip">Стартовый ток</span>
+          <span class="chip">Паспорт детали</span>
+          <span class="chip">12V vs 3.3V</span>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-1-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-1-own')">Own: замерьте ток →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-1-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 1 · Вентилятор на стойке</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Замерьте напряжение и ток вентилятора</h1>
+        <p class="step-intro">Сейчас вы подключите вентилятор напрямую к ATX и замерите мультиметром, сколько он реально ест. Сравните с тем, что написано на корпусе и с LED из M1.</p>
+
+        <div class="callout c-warn"><b>🔁 Безопасность из M1:</b> ATX включает только ментор. Сами вы блок питания не трогаете. Все подключения делаете при <b>выключенной</b> ATX.</div>
+
+        <h2>Часть 1 — подключите вентилятор к 12V</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Найдите провода вентилятора</div></div>
+          <div class="action-body">Из вентилятора выходят 2 (или 3) провода. <b>Красный</b> — плюс (+12V). <b>Чёрный</b> — GND. Если есть третий (жёлтый или синий) — оставьте свободным, он для тахометра, нам не нужен.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Нашёл +/−</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключите красный к <code>+12V</code> ATX</div></div>
+          <div class="action-body">Клемма <code>+12V</code> на плате ATX. Зажмите винтом до упора.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Красный закреплён</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Подключите чёрный к <code>GND</code></div></div>
+          <div class="action-body">Любая клемма <code>GND</code> на ATX (их несколько — все равноценны).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Чёрный закреплён</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Попросите ментора включить ATX</div></div>
+          <div class="action-body">Вентилятор должен закрутиться сразу. Должно быть слышно ровный шум, без рывков и стуков.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Вентилятор крутится</button></div>
+        </div>
+
+        <h2>Часть 2 — замер напряжения (🔁 как в M1)</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">Мультиметр на <code>V=</code></div></div>
+          <div class="action-body">Переключатель на постоянное напряжение. Чёрный щуп в <code>COM</code>, красный — в <code>VΩmA</code>. Прикоснитесь щупами к проводам вентилятора: чёрный на чёрный, красный на красный.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Замерил V</button></div>
+        </div>
+        <table>
+          <tr><th>Что замерил</th><th>Ваш результат</th><th>Должно быть</th></tr>
+          <tr><td>Напряжение на вентиляторе</td><td>___ В</td><td>~12.0 В</td></tr>
+        </table>
+
+        <h2>Часть 3 — замер тока (новое в M2!)</h2>
+        <div class="callout c-info"><b>Важное отличие:</b> ток мерится <b>в разрыв цепи</b>, не на клеммах. Мультиметр должен «пропустить ток через себя» — поэтому его вставляют последовательно с нагрузкой.</div>
+
+        <div class="callout c-warn">
+          <b>🛡 STOP — 3 правила безопасного замера тока. Без них спалишь мультиметр, ATX или сожжёшь предохранитель.</b><br><br>
+          <b>1. Переключатель мультиметра — на <code>A=</code> (постоянный ток).</b><br>
+          Если останется на <code>V=</code> — замер не получится, прибор испугается.<br><br>
+          <b>2. Красный щуп — в гнездо <code>10A</code>, НЕ в <code>VΩmA</code>.</b><br>
+          Гнездо <code>VΩmA</code> рассчитано на максимум 200 мА. Вентилятор ест 200+ мА в покое и ×2-3 в момент пуска. <b>Если щуп остался в <code>VΩmA</code> — сгорит внутренний предохранитель мультиметра</b>. Вы это не сразу заметите — он просто перестанет показывать ток в любом замере.<br><br>
+          <b>3. ATX выключена, пока вы перестраиваете схему.</b><br>
+          Любая перестановка проводов — только при выключенном питании. Включает обратно — ментор.<br><br>
+          <em>Без галочек на всех 3 пунктах — не переходи к следующим шагам.</em>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5a</div><div class="action-title">Safety-чек перед замером тока</div></div>
+          <div class="action-body">Прежде чем брать мультиметр в руки — поставь 3 галочки:</div>
+          <div class="action-btn-row" style="flex-wrap:wrap;gap:8px">
+            <button class="micro-btn" onclick="toggleDone(this)">1️⃣ Переключатель на A=</button>
+            <button class="micro-btn" onclick="toggleDone(this)">2️⃣ Красный щуп в 10A</button>
+            <button class="micro-btn" onclick="toggleDone(this)">3️⃣ ATX выключена</button>
+          </div>
+        </div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">6</div><div class="action-title">Переставьте красный щуп в гнездо <code>10A</code></div></div>
+          <div class="action-body">Для тока выше 200 мА используется отдельное гнездо <code>10A</code>. Переключатель на <code>A=</code> (постоянный ток).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Мультиметр готов к A</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">7</div><div class="action-title">Разорвите цепь и вставьте мультиметр</div></div>
+          <div class="action-body">Ментор выключает ATX. Отсоедините красный провод вентилятора от ATX. Между клеммой <code>+12V</code> и красным проводом вентилятора вставьте мультиметр: красный щуп → клемма ATX, чёрный щуп → провод вентилятора. Ментор включает ATX.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Замерил A</button></div>
+        </div>
+        <table>
+          <tr><th>Что замерил</th><th>Ваш результат</th><th>Должно быть</th></tr>
+          <tr><td>Ток вентилятора в работе</td><td>___ мА</td><td>~150–300 мА</td></tr>
+        </table>
+
+        <h2>Сравните с LED из M1</h2>
+        <table>
+          <tr><th></th><th>LED (M1)</th><th>Вентилятор (M2)</th><th>Во сколько раз?</th></tr>
+          <tr><td>Ток</td><td>~10 мА</td><td>~200 мА</td><td><b>×20</b></td></tr>
+        </table>
+
+        <div class="callout c-tip"><b>Инженерный вывод:</b> Pico-пин выдерживает ~12 мА. Вентилятор ест 200 мА. <b>В 16 раз больше предела.</b> Поэтому нужен посредник — реле. Это будет в Цикле 2.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-1-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-1-share')">Share: что нового →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-1-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 1 · Вентилятор на стойке</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Что нового по сравнению с Модулем 1</h1>
+        <p class="step-intro">Вы прошли Модуль 1 на лампе и сейчас сделали то же самое (подключение к ATX), но с мотором. Что изменилось? Сформулируйте инженерным языком — это тренировка главного навыка.</p>
+
+        <div class="share-prompt">
+          <div class="lbl">Задание — обсудите с ИИ-напарником</div>
+          <p>Откройте чат с ИИ. Вставьте промпт ниже и впишите свои замеры. ИИ задаст наводящие вопросы — отвечайте своими словами, не копируйте.</p>
+        </div>
+
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>В Модуле 1 я зажигал LED от ATX (ток ~10 мА на 3.3V).
+В Модуле 2 я подключил вентилятор 12V от ATX и замерил мультиметром:
+— напряжение: ___ В
+— ток: ___ мА
+
+Объясни мне 3 вещи:
+1) Почему мотор ест в 20 раз больше тока, чем светодиод?
+2) Что значит «стартовый ток» и почему он опасен для электроники?
+3) Почему я не могу подключить вентилятор к пину Pico напрямую (Pico работает на 3.3V и ~12 мА на пин).
+
+После каждого пункта — задай мне один проверочный вопрос. Не давай весь ответ сразу.</pre>
+
+        <h2>Стоп — проверь себя (не подсматривая в KNOW)</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Назови два главных отличия мотора от лампы</div></div>
+          <div class="action-body">Своими словами. Если не получается — вернись к шагу <b>Know</b>.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Назвал</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Что будет, если 12V вентилятор подключить к 3.3V?</div></div>
+          <div class="action-body">Не «сгорит» — другой ответ. Подумай.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Ответил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Зачем нам понадобится реле в Цикле 2?</div></div>
+          <div class="action-body">Подсказка в callout-е шага Own.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Понял зачем</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Цикл 1 пройден.</b> Вы умеете: закрепить вентилятор на стойке, читать паспорт DC-мотора, замерять V и A мультиметром, объяснять разницу мотора и лампы. Циклы 2-4 — в разработке.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-1-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-2-try')">Цикл 2: Кнопка + реле →</button>
+        </div>
+      </div>
+
+      <!-- ========== M2 · Цикл 2 «Кнопка + реле» ========== -->
+      <div class="step-content" data-step="m2-2-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 2 · Кнопка + реле</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Подключите вентилятор через реле и кнопку</h1>
+        <p class="step-intro">В Цикле 1 вы убедились, что мотор ест в 20 раз больше тока, чем LED. Теперь добавим управление: реле как «выключатель», кнопка как «триггер». 🔁 Из M1 вы уже знаете, что такое реле — здесь применяем те же знания к мотору.</p>
+
+        <h2>Что собрать на стойке</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите модуль реле на стойке</div></div>
+          <div class="action-body">2 болта M3 + T-slot гайки. Положение — рядом с вентилятором, чтобы провода не тянулись через всю стойку.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Реле на стойке</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Закрепите тактовую кнопку</div></div>
+          <div class="action-body">Удобное место, где её легко нажимать. Можно использовать монтажную панель или приклеить на плёнку.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Кнопка установлена</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">🔁 Вспомните распиновку реле</div></div>
+          <div class="action-body">Слаботочная сторона: <code>VCC</code> (3.3V), <code>GND</code>, <code>IN</code> (сигнал). Силовая сторона: <code>NO</code>, <code>NC</code>, <code>COM</code>. Используем <b>NO</b> (Normally Open) — в покое цепь разомкнута, при сигнале замыкается.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Соберите силовую цепь через реле</div></div>
+          <div class="action-body">ATX <code>+12V</code> → COM реле. NO реле → красный провод вентилятора. Чёрный провод вентилятора → ATX <code>GND</code>. Теперь, когда реле «срабатывает», ток идёт через NO к вентилятору.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Силовая цепь собрана</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">Соберите слаботочную цепь с кнопкой</div></div>
+          <div class="action-body">ATX <code>+3.3V</code> → одна нога кнопки. Другая нога → <code>IN</code> реле. <code>VCC</code> реле → ATX <code>+3.3V</code>. <code>GND</code> реле → ATX <code>GND</code>. Когда нажмёшь кнопку — на IN придёт 3.3V → реле замкнёт NO-COM → вентилятор закрутится.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Слаботочная цепь собрана</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">6</div><div class="action-title">Тест: жми кнопку</div></div>
+          <div class="action-body">Ментор включает ATX. Нажмите и держите кнопку — вентилятор должен закрутиться. Отпустите — остановится.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Жму — дует</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Wow:</b> вы только что развязали слаботочную цепь (3.3V, миллиамперы, безопасно для рук) и силовую (12V, сотни миллиампер). Это базовый принцип всей мехатроники.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-1-share')">← Цикл 1</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-2-know')">Know: зачем реле для мотора →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-2-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 2 · Кнопка + реле</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Зачем нужно реле для мотора</h1>
+        <p class="step-intro">Реле выглядит как лишняя деталь — «можно же просто кнопкой!». Но в моторе есть две причины, почему кнопка напрямую не работает.</p>
+
+        <h2>Причина 1 — пусковой ток</h2>
+        <p>В первый момент включения двигатель тянет ток в <b>2-3 раза выше</b> рабочего. Кулер на 200 мА в момент пуска может потребовать 600 мА. Тактовая кнопка рассчитана на ~100 мА — она <b>обгорает</b> от такого тока. Реле имеет металлические контакты, выдерживающие до 10A.</p>
+
+        <h2>Причина 2 — развязка цепей</h2>
+        <p>Если бы кнопка стояла прямо в цепи 12V, ваш палец касался бы провода, по которому идёт силовой ток. <b>Это небезопасно</b> при больших нагрузках. Реле разрывает физическую связь между:</p>
+        <ul>
+          <li><b>Слаботочной</b> цепью — кнопка, 3.3V, миллиамперы → безопасно для рук</li>
+          <li><b>Силовой</b> цепью — мотор, 12V, сотни миллиампер → изолирована</li>
+        </ul>
+        <div class="callout c-info"><b>🔁 Повтор из M1:</b> в M1 вы использовали реле для лампы — там был тот же принцип. Здесь применяем к мотору.</div>
+
+        <h2>Pull-up — ещё раз</h2>
+        <p>🔁 В M1 вы видели pull-up на кнопке. Здесь модуль реле сам обрабатывает сигнал на <code>IN</code>: если <code>IN</code> = 3.3V → реле срабатывает, если 0V → выключается. Кнопка просто подаёт 3.3V на IN, когда нажата.</p>
+
+        <div class="chips">
+          <span class="chip">Пусковой ток</span>
+          <span class="chip">Развязка цепей</span>
+          <span class="chip">Слаботочная vs силовая</span>
+          <span class="chip">NO/NC/COM</span>
+        </div>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          Закрой эту страницу мысленно и ответь своими словами:<br><br>
+          <b>1.</b> Что такое пусковой ток мотора и почему он опасен для тактовой кнопки?<br>
+          <b>2.</b> Зачем нужна «развязка слаботочной и силовой цепи» — приведи аналогию из жизни.<br>
+          <b>3.</b> Что произойдёт, если перепутать NO и NC при подключении реле к вентилятору?<br><br>
+          <em>Если на любой не уверен — пере-прочитай раздел и попробуй снова. Если всё «понятно» — попроси ИИ задать тебе 1 углубляющий вопрос.</em>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-2-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-2-own')">Own: кнопка vs переключатель →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-2-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 2 · Кнопка + реле</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Тактовая кнопка vs переключатель с защёлкой</h1>
+        <p class="step-intro">Сейчас у вас тактовая кнопка: пока держите — дует, отпустили — стоп. А что если хочется «нажал и забыл»? Для этого есть другой компонент — переключатель. Соберите оба варианта и сравните.</p>
+
+        <h2>Часть 1 — что такое каждый из них</h2>
+        <table>
+          <tr><th></th><th>Тактовая кнопка</th><th>Переключатель (с защёлкой)</th></tr>
+          <tr><td><b>Поведение</b></td><td>Замкнута пока держишь</td><td>Замкнут пока не переключишь обратно</td></tr>
+          <tr><td><b>Внутри</b></td><td>Пружина возвращает в покой</td><td>Бистабильная механика</td></tr>
+          <tr><td><b>Где встречается</b></td><td>Звонки, кнопки лифтов</td><td>Свет в комнате, кнопка ON/OFF на удлинителе</td></tr>
+        </table>
+
+        <h2>Часть 2 — соберите вариант с переключателем</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Замените тактовую кнопку на переключатель с 3 ножками</div></div>
+          <div class="action-body">У переключателя 3 ножки: средняя — общая (COM), крайние — два положения. Используем <b>среднюю ножку и одну крайнюю</b> — вторая остаётся свободной.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Заменил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключите так, как кнопку</div></div>
+          <div class="action-body">Среднюю ножку → ATX <code>+3.3V</code>. Крайнюю → <code>IN</code> реле.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Подключил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Тест</div></div>
+          <div class="action-body">Переключите в одно положение — вентилятор включается и <b>остаётся включённым</b>. Переключите обратно — выключается.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Защёлка работает</button></div>
+        </div>
+
+        <h2>Часть 3 — ваш выбор</h2>
+        <div class="callout c-tip"><b>Подумайте:</b> для будущей сушилки на ИК-датчике — какой режим логичнее? «Дует пока стоишь под ним» или «нажал — дует, пока не выключишь»?</div>
+        <p>В Цикле 4 мы сделаем сушилку через ИК. Там вентилятор будет дуть <b>несколько секунд после взмаха руки</b> — это поведение похоже на тактовую кнопку (с автоматическим отпусканием). Поэтому в текущем модуле тактовая кнопка ближе к финалу.</p>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-2-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-2-share')">Share: какой режим выбрал →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-2-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 2 · Кнопка + реле</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Самопроверка: что ты понял в Цикле 2</h1>
+        <p class="step-intro">Без видео — только мысленная проверка. Если на любой из вопросов «не знаю» — вернись на нужный шаг и пере-прочитай. Это не оценка, это твой собственный сигнал, где у тебя дыра.</p>
+
+        <h2>Промпт для проверки понимания с ИИ</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я собрал в Цикле 2 Модуля 2 две версии управления вентилятором через реле:
+1) тактовая кнопка — пока держу, дует
+2) переключатель с тремя ножками — переключил в одно положение, дует постоянно
+
+Спроси меня:
+1. В чём смысл реле в этой схеме (зачем оно нужно)?
+2. Какие два типа цепей я разделил с помощью реле?
+3. Почему пусковой ток мотора опасен для тактовой кнопки?
+4. В каком из двух режимов кнопка/переключатель ближе к будущей сушилке (Цикл 4 — ИК-датчик)?
+
+Не давай ответы. Жди мои. После каждого моего ответа — оцени и задай следующий вопрос.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Прошёл проверку с ИИ</div></div>
+          <div class="action-body">Все 4 вопроса. Если на каком-то застрял — вернись на TRY/KNOW/OWN и пере-прочитай.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-info"><b>💡 Главная идея, которую важно унести из Цикла 2:</b><br>
+        Что вы только что делали пальцем — это <b>создание цифрового сигнала вручную</b>.<br>
+        • Нажали кнопку → на IN реле <code>3.3V</code> = <b>HIGH</b><br>
+        • Отпустили → <code>0V</code> = <b>LOW</b><br>
+        Реле умеет реагировать только на эти два состояния — больше ему ничего не нужно. В Цикле 3 ваш палец заменит <b>Pico</b>: тот же сигнал HIGH/LOW, но создаваемый кодом, не рукой. Кнопка отпадёт за ненадобностью — её работу выполнит программа.</div>
+
+        <div class="callout c-success"><b>Цикл 2 пройден.</b> Вы умеете: монтировать реле и кнопку на стойку, разделять слаботочную/силовую цепи, понимаете два типа коммутаторов. Дальше — заменим палец на код Pico.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-2-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-3-try')">Цикл 3: Pico вместо кнопки →</button>
+        </div>
+      </div>
+
+      <!-- ========== M2 · Цикл 3 «Pico вместо кнопки» ========== -->
+      <div class="step-content" data-step="m2-3-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 3 · Pico вместо кнопки</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Замените кнопку на Pico</h1>
+        <p class="step-intro">Кнопка работала, но управление руками — не «умное». Подключите Raspberry Pi Pico вместо кнопки: GPIO-пин будет подавать 3.3V на IN реле так же, как раньше делала кнопка.</p>
+
+        <h2>Что собрать</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите Pico на стойке</div></div>
+          <div class="action-body">🔁 Используйте монтажный держатель из M1 либо просто двусторонний скотч. USB-разъём — наружу, чтобы можно было подключать к ноутбуку.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Pico на стойке</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Питание Pico</div></div>
+          <div class="action-body">🔁 Pico питается от USB ноутбука (5V). VBUS на пине 40, GND на пине 38. Сам с ATX питать не нужно.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">USB подключён</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Уберите кнопку (или переключатель)</div></div>
+          <div class="action-body">Отсоедините провода кнопки от <code>+3.3V</code> и <code>IN</code> реле. Сама кнопка пока остаётся на стойке — пригодится в OWN.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Кнопка отключена</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Подключите Pico GPIO к реле</div></div>
+          <div class="action-body">Pico пин <code>GP15</code> (вы его использовали в M1) → <code>IN</code> реле. Pico <code>GND</code> (пин 38) → <code>GND</code> реле (общая земля обязательна).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Pico → реле</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">Питание реле остаётся от ATX</div></div>
+          <div class="action-body">Реле <code>VCC</code> → ATX <code>+3.3V</code> (как было). Pico не питает модуль реле — только подаёт сигнал на IN.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">VCC проверен</button></div>
+        </div>
+
+        <div class="callout c-info"><b>Что должно работать после этого шага:</b> ничего. Просто пере-разводка, без кода. Включите ATX — вентилятор стоит. Это нормально, потому что GP15 пока в неактивном состоянии (LOW). В OWN напишем код, который будет переключать GP15.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-2-share')">← Цикл 2</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-3-know')">Know: цифровой выход →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-3-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 3 · Pico вместо кнопки</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Что такое цифровой выход GPIO</h1>
+        <p class="step-intro">Pico-пин — не батарейка. Он не «выдаёт» 3.3V постоянно. Это управляемый выход: код решает, когда подавать HIGH (3.3V), а когда LOW (0V).</p>
+
+        <h2>Два состояния пина</h2>
+        <table>
+          <tr><th>Состояние</th><th>Что значит</th><th>В нашей цепи</th></tr>
+          <tr><td><code>HIGH</code></td><td>На пине 3.3V</td><td>На IN реле приходит сигнал → реле срабатывает → вентилятор крутится</td></tr>
+          <tr><td><code>LOW</code></td><td>На пине 0V</td><td>На IN реле сигнала нет → реле в покое → вентилятор стоит</td></tr>
+        </table>
+
+        <p>🔁 В M1 вы использовали тот же принцип, но управляли LED. Здесь ровно та же логика: <code>pin.value(1)</code> = HIGH, <code>pin.value(0)</code> = LOW. Просто на месте LED — реле, на месте реле — вентилятор.</p>
+
+        <h2>Цепочка управления</h2>
+        <pre class="code">Код Pico (1 или 0)
+   ↓
+GP15 (3.3V или 0V)
+   ↓
+IN реле
+   ↓
+Реле NO ↔ COM (замкнуто или разомкнуто)
+   ↓
+12V цепь вентилятора (есть ток или нет)
+   ↓
+Вентилятор крутится / стоит</pre>
+
+        <div class="callout c-tip"><b>Главная идея Цикла 3:</b> вы вставили в схему «программируемого посредника». Теперь поведение управляется кодом, а не пальцем. Это шаг от «электрического» к «электронному».</div>
+
+        <div class="chips">
+          <span class="chip">GPIO выход</span>
+          <span class="chip">HIGH = 3.3V</span>
+          <span class="chip">LOW = 0V</span>
+          <span class="chip">pin.value(1/0)</span>
+        </div>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          Закрой эту страницу мысленно и ответь своими словами:<br><br>
+          <b>1.</b> Что физически происходит на пине GP15, когда я пишу <code>relay.value(1)</code>?<br>
+          <b>2.</b> Почему я не могу написать <code>relay.value(12)</code>, чтобы «дать на пин 12V»?<br>
+          <b>3.</b> Если в коде убрать строку <code>relay.value(0)</code> после <code>time.sleep(3)</code> — что будет с вентилятором при следующем нажатии кнопки?<br><br>
+          <em>Если на любой не уверен — пере-прочитай таблицу состояний пина. Если всё «понятно» — предскажи, что напишет в консоль <code>print(relay.value())</code> сразу после <code>relay.value(1)</code>. Не можешь — значит не понял.</em>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-3-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-3-own')">Own: блинк → таймер → if →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-3-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 3 · Pico вместо кнопки</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Три уровня кода: блинк → таймер → условие</h1>
+        <p class="step-intro">Вместо одного финального кода — три постепенных шага. На каждом шаге вы видите, как код «оживает» и управляет реальной железкой. Это лучший способ почувствовать программирование.</p>
+
+        <h2>Уровень 1 — блинк (🔁 как в M1, но с вентилятором)</h2>
+        <p>Открой Thonny на ноутбуке, подключи Pico, создай новый файл. Скопируй код:</p>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+relay = Pin(15, Pin.OUT)
+
+while True:
+    relay.value(1)   # HIGH — реле сработало, вентилятор крутится
+    time.sleep(2)
+    relay.value(0)   # LOW — реле в покое, вентилятор стоит
+    time.sleep(2)</pre>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Запусти (▶ в Thonny)</div></div>
+          <div class="action-body">Вентилятор должен крутиться 2 сек, стоять 2 сек, и так бесконечно.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Блинк работает</button></div>
+        </div>
+
+        <h2>Уровень 2 — один импульс по таймеру</h2>
+        <p>Замени код на:</p>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+relay = Pin(15, Pin.OUT)
+
+print("Включаю вентилятор на 5 секунд")
+relay.value(1)
+time.sleep(5)
+relay.value(0)
+print("Выключил")</pre>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Запусти</div></div>
+          <div class="action-body">Вентилятор крутится ровно 5 секунд, потом останавливается. Программа завершается.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Таймер работает</button></div>
+        </div>
+
+        <h2>Уровень 3 — условие if на кнопку</h2>
+        <p>🔁 Из M1: подключи кнопку обратно — одна нога к Pico GPIO 14, другая к GND. Pin.PULL_UP в коде. Замени код:</p>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+relay = Pin(15, Pin.OUT)
+button = Pin(14, Pin.IN, Pin.PULL_UP)
+
+print("Жми кнопку — вентилятор включится на 3 секунды")
+while True:
+    if button.value() == 0:    # кнопка нажата = LOW (pull-up)
+        relay.value(1)
+        time.sleep(3)
+        relay.value(0)
+    time.sleep(0.05)</pre>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Запусти и нажми кнопку</div></div>
+          <div class="action-body">Каждое нажатие → вентилятор дует 3 секунды → останавливается. Это уже похоже на финал — только вместо кнопки в Цикле 4 будет ИК-датчик.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Кнопка → 3 сек дует</button></div>
+        </div>
+
+        <h2>🔧 Сделай своим — измени код под себя</h2>
+        <p>До этого ты копировал чужой код. Теперь — сам поменяй. Если застрял — спроси ИИ-напарника, но НЕ проси готовый код. Проси наводящий вопрос.</p>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">🟢 Лёгкая: измени длительность</div></div>
+          <div class="action-body">Сделай так, чтобы вентилятор работал не 3 секунды, а <b>5 секунд</b> при нажатии кнопки.<br>
+          <em>Подсказка: поменяй ровно одну строку.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сделал, работает 5с</button></div>
+        </div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">🟡 Средняя: счётчик нажатий</div></div>
+          <div class="action-body">Добавь в код переменную, которая считает, сколько раз ты нажал кнопку. После каждого выключения вентилятора пусть в консоль выводится: <code>Сработало раз: 1</code>, <code>Сработало раз: 2</code> и т.д.<br>
+          <em>Подсказка: переменная объявляется ДО <code>while True</code>, а внутри увеличивается на 1 (<code>count = count + 1</code> или <code>count += 1</code>).</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Счётчик работает</button></div>
+        </div>
+
+        <div class="action-card" style="border-color:#FCD34D;background:#FFFBEB">
+          <div class="action-head"><div class="action-num" style="background:#F59E0B;color:white">🏆</div><div class="action-title">Бонус для тех, кто хочет глубже: накопительная защёлка</div></div>
+          <div class="action-body"><b>Это необязательная задача.</b> Если у тебя ещё есть силы и интерес — сделай так: первое нажатие включает вентилятор на <b>10 секунд</b>. Если в течение этих 10 секунд нажмёшь ещё раз — таймер сбрасывается, идут новые 10 секунд (продление).<br>
+          <em>Подсказка: классический <code>time.sleep(10)</code> не подойдёт — он блокирует код. Понадобится <code>time.ticks_ms()</code> и сравнение. Это уже уровень olympiad — час-два работы, проси ИИ задавать тебе наводящие вопросы. Если не получилось — это абсолютно нормально, переходи к Share.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">🏆 Бонус сделан</button></div>
+        </div>
+
+        <div class="callout c-tip"><b>💡 Что ты только что начал делать:</b> ты не просто запускаешь чужой код — ты его <b>модифицируешь под задачу</b>. Это и есть настоящее программирование. Если у тебя что-то получилось из задач 4-5 — это уже большое дело. Бонус 🏆 — для тех, кто хочет нырнуть глубже.</div>
+
+        <div class="callout c-success"><b>Что вы только что сделали:</b> код вашего изобретения уже работает на 80%. Замените в коде <code>button.value()==0</code> на чтение ИК-датчика — и сушилка готова. Это в Цикле 4.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-3-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-3-share')">Share: объясни ИИ HIGH →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-3-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 3 · Pico вместо кнопки</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Объясни ИИ, что значит HIGH в реальной цепи</h1>
+        <p class="step-intro">Самый частый провал в обучении Pico — когда ученик думает что HIGH «делает что-то». На самом деле HIGH — это просто 3.3V на пине, и от того, что подключено к этому пину, зависит всё. Проверьте своё понимание.</p>
+
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>В Цикле 3 Модуля 2 я подключил Pico к модулю реле,
+и через реле — к вентилятору 12V.
+В коде на MicroPython я использую relay.value(1) и relay.value(0).
+
+Спроси меня:
+1. Что физически происходит на пине GP15 когда я пишу relay.value(1)?
+2. Почему я не могу написать relay.value(12), чтобы «дать 12V»?
+3. Что произойдёт, если убрать модуль реле и соединить GP15 с вентилятором напрямую? (подсказка: вспомни Цикл 1)
+4. В коде на Уровне 3 я использую if button.value()==0. Почему именно 0, а не 1? (подсказка: pull-up)
+5. Если бы у меня был не вентилятор, а лампа M1 — какая часть кода поменялась бы, а какая осталась бы такой же?
+
+Жди мои ответы. После каждого — оцени и переходи к следующему. Не давай ответы заранее.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Прошёл все 5 вопросов</div></div>
+          <div class="action-body">Если на каком-то застрял — вернись на KNOW и пере-прочитай таблицу состояний пина.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Цикл 3 пройден.</b> Вы умеете: подключать Pico к реле, писать код 3 уровней (блинк, таймер, if-условие), понимаете что HIGH/LOW = это физическое напряжение на пине. Дальше — добавим датчик и получим финал.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-3-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-4-try')">Цикл 4: ИК-датчик (финал) →</button>
+        </div>
+      </div>
+
+      <!-- ========== M2 · Цикл 4 «ИК-датчик (финал)» ========== -->
+      <div class="step-content" data-step="m2-4-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 4 · ИК-датчик (финал)</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Подключите ИК-модуль к Pico</h1>
+        <p class="step-intro">Финальный компонент. Замените кнопку на ИК-датчик — и устройство станет «умным»: само увидит руку и включится. Подключение похоже на кнопку — те же 3 провода, но логика другая.</p>
+
+        <h2>Что собрать</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите ИК-модуль на стойке</div></div>
+          <div class="action-body">Поставьте сверху стойки или сбоку, так чтобы он смотрел в зону «над вентилятором». Туда ученик будет подносить руку.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Модуль установлен</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Уберите кнопку из Цикла 3</div></div>
+          <div class="action-body">Отключите провода кнопки от Pico. Сама кнопка остаётся — может пригодится для других проектов.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Кнопка отключена</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Подключите 3 провода ИК-модуля</div></div>
+          <div class="action-body">У модуля 3 пина: <code>VCC</code>, <code>GND</code>, <code>DO</code> (digital out).<br>
+          • <code>VCC</code> → Pico пин <code>3V3 OUT</code> (пин 36) — питание самого модуля<br>
+          • <code>GND</code> → Pico <code>GND</code> (пин 38)<br>
+          • <code>DO</code> → Pico <code>GP14</code> (туда же, где была кнопка)</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">3 провода подключены</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Тест без кода</div></div>
+          <div class="action-body">Включите Pico через USB. На модуле должен загореться красный индикатор (питание). Поднесите руку — должен загореться второй индикатор (срабатывание). Если не срабатывает — крутаните потенциометр на модуле (про него подробнее в KNOW).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Светодиод реагирует на руку</button></div>
+        </div>
+
+        <div class="callout c-tip"><b>Если светодиод не реагирует:</b> покрутите потенциометр на модуле (маленькая «отвёртка» сбоку). Один край = «срабатывает на всё», другой = «не срабатывает никогда». Найдите среднее положение.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-3-share')">← Цикл 3</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-4-know')">Know: как видит датчик →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-4-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 4 · ИК-датчик (финал)</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Как ИК-датчик «видит» руку</h1>
+        <p class="step-intro">Внутри модуля FC-51 — два светодиода: один невидимо светит инфракрасным светом, другой принимает отражённое. Если поверхность близко — отражение сильное. Это всё, на чём основана работа.</p>
+
+        <h2>Физика за 1 минуту</h2>
+        <ul>
+          <li><b>ИК-источник</b> (передающий светодиод, чёрный) — испускает инфракрасный свет, невидимый глазу</li>
+          <li><b>ИК-приёмник</b> (фототранзистор, прозрачный) — измеряет, сколько отражённого света до него доходит</li>
+          <li><b>Объект отражает луч обратно</b> → приёмник видит свет → модуль выдаёт <code>LOW</code> (0)</li>
+          <li><b>Объекта нет</b> → отражения нет → модуль выдаёт <code>HIGH</code> (1)</li>
+        </ul>
+        <div class="callout c-info"><b>Внимание — инверсная логика:</b> в покое DO = 1, рука рядом = 0. В коде это <code>if ir.value() == 0:</code> — как кнопка с pull-up в Цикле 3. 🔁</div>
+
+        <h2>Зачем потенциометр</h2>
+        <p>Сбоку модуля — синий регулятор. Это <b>порог чувствительности</b>: насколько сильное отражение считать за «есть объект». Зачем он нужен:</p>
+        <ul>
+          <li>Тёмная одежда отражает плохо → нужен низкий порог</li>
+          <li>Белая стена отражает сильно → нужен высокий порог (иначе ложные срабатывания)</li>
+          <li>Расстояние до объекта тоже влияет — чем дальше, тем слабее отражение</li>
+        </ul>
+        <p>На Цикле 4 OWN вы будете подбирать положение потенциометра под свою установку.</p>
+
+        <h2>Ограничения, которые надо знать</h2>
+        <div class="callout c-warn">
+          <b>FC-51 НЕ работает:</b><br>
+          • Через стекло (отражается от стекла, ложное срабатывание)<br>
+          • С чёрными матовыми поверхностями (почти не отражают)<br>
+          • На большом расстоянии (рабочий диапазон — 2-30 см)<br>
+          • На прямом солнечном свете (засветка приёмника)
+        </div>
+
+        <h2>Стоп — проверь себя</h2>
+        <ol>
+          <li>Что произойдёт, если поднести <b>чёрную перчатку</b> на 5 см?</li>
+          <li>Где на стойке лучше закрепить датчик — сверху или сбоку?</li>
+          <li>Если потенциометр повернуть на максимум — сработает ли он на свет лампы в комнате?</li>
+        </ol>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Подумай, прежде чем читать дальше</div></div>
+          <div class="action-body">Каждый вопрос — твоя гипотеза. Проверишь её в OWN, когда будешь крутить потенциометр.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Подумал</button></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip">ИК-светодиод</span>
+          <span class="chip">Инверсная логика</span>
+          <span class="chip">Порог чувствительности</span>
+          <span class="chip">Цифровой вход с датчика</span>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-4-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-4-own')">Own: код + чувствительность →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-4-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 4 · ИК-датчик (финал)</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Финальный код + настройка чувствительности</h1>
+        <p class="step-intro">Теперь самое интересное — соедините датчик и Pico программно, добейтесь, чтобы вентилятор включался от взмаха рукой и работал ровно 3 секунды.</p>
+
+        <h2>Финальный код</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+relay = Pin(15, Pin.OUT)
+ir    = Pin(14, Pin.IN, Pin.PULL_UP)
+
+print("Сушилка готова — поднеси руку")
+while True:
+    if ir.value() == 0:        # рука обнаружена
+        print("Рука!")
+        relay.value(1)         # вентилятор on
+        time.sleep(3)          # 3 секунды дует
+        relay.value(0)         # off
+        time.sleep(0.5)        # короткая пауза, чтобы не зациклиться
+    time.sleep(0.05)           # лёгкая разгрузка процессора</pre>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Запусти код</div></div>
+          <div class="action-body">В консоль Thonny должно вывестись «Сушилка готова — поднеси руку».</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Запустил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Поднеси руку на 5-10 см</div></div>
+          <div class="action-body">Должно вывестись «Рука!» и вентилятор закрутится на 3 секунды.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сработало</button></div>
+        </div>
+
+        <h2>Подбор чувствительности (мини-эксперимент)</h2>
+        <p>Покрути потенциометр и проверь:</p>
+        <table>
+          <tr><th>Положение</th><th>Что заметил</th></tr>
+          <tr><td>Минимум (одна крайность)</td><td>___</td></tr>
+          <tr><td>Среднее</td><td>___</td></tr>
+          <tr><td>Максимум (другая крайность)</td><td>___</td></tr>
+        </table>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Найди оптимальное положение</div></div>
+          <div class="action-body">Цель: датчик срабатывает на руку 5-15 см, не срабатывает на пустоту, не залипает в одно положение.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Подобрал</button></div>
+        </div>
+
+        <h2>Тест на разные поверхности</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Поднеси по очереди:</div></div>
+          <div class="action-body">белый лист, чёрный лист, ладонь, чёрную ткань. Что срабатывает, что нет? Это подтверждение того, что датчик «видит» отражение, а не движение.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Протестировал поверхности</button></div>
+        </div>
+
+        <h2>🔧 Расширения — измени код под себя</h2>
+        <p>Базовая сушилка работает. Теперь сделай её умнее. Если застрял — проси ИИ-напарника задавать наводящие вопросы, не давать готовый код.</p>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">🟢 Лёгкая: счётчик срабатываний</div></div>
+          <div class="action-body">Добавь переменную, которая считает, сколько раз сработал датчик. При каждом срабатывании пусть в консоль выводится: <code>Вижу руку! 1-й раз</code>, <code>2-й раз</code> и т.д.<br>
+          <em>Подсказка: 🔁 это та же задача, что в Цикле 3 (#5). Если сделал там — здесь почти готово.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Счётчик работает</button></div>
+        </div>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">6</div><div class="action-title">🟡 Средняя: cooldown (антидребезг)</div></div>
+          <div class="action-body">Сейчас если ты держишь руку рядом с датчиком — вентилятор включается, дует 3с, выключается, видит руку снова, и снова дует. Получается «зацикливание». Сделай так: после того как сработало, датчик игнорирует руку <b>2 секунды</b>, даже если рука всё ещё рядом. Это называется <b>cooldown</b>.<br>
+          <em>Подсказка: после <code>relay.value(0)</code> добавь <code>time.sleep(2)</code> — да, так просто. Подумай, почему это работает.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Cooldown работает</button></div>
+        </div>
+
+        <div class="callout c-tip"><b>💡 Зачем cooldown в реальности:</b> в магазинах такие датчики стоят на дверях, на кранах в туалетах, на эскалаторах. Везде есть cooldown — иначе устройство срабатывало бы 10 раз в секунду от одного человека.</div>
+
+        <div class="callout c-success"><b>🎉 У вас работает сушилка с ИК-датчиком!</b> Это полноценное мехатронное устройство: сенсор → контроллер → исполнительный механизм. Поздравляю — вы прошли Модуль 2.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-4-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m2-4-share')">Share: видео-демо →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m2-4-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M2 · Цикл 4 · ИК-датчик (финал)</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Видео-демо: «моя умная сушилка»</h1>
+        <p class="step-intro">Финальный шаг Модуля 2. Снимите 60-секундное видео, где вы показываете готовое устройство и объясняете, как оно работает. Это ваше доказательство того, что вы освоили модуль.</p>
+
+        <h2>Сценарий видео (60 секунд)</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">0-15 сек: «Что я сделал»</div></div>
+          <div class="action-body">«Это умная сушилка. Она включается, когда я подношу руку, и работает 3 секунды.» Сделай взмах — покажи как работает.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">15-30 сек: «Из чего состоит»</div></div>
+          <div class="action-body">Покажи по очереди: стойку, вентилятор, реле, Pico, ИК-датчик. На каждый компонент — одна фраза «зачем он».</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">30-45 сек: «Как работает» (цепочка)</div></div>
+          <div class="action-body">«ИК-датчик видит руку → передаёт сигнал на Pico → Pico включает реле → реле подаёт 12V на вентилятор → дует 3 секунды.»</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">45-60 сек: «Что было сложно»</div></div>
+          <div class="action-body">Одна фраза о том, что было самое трудное. Своими словами, без подсказок.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">Снято и сохранено</div></div>
+          <div class="action-body">Сохрани файл, переименуй: «M2_Сушилка_<твоё_имя>.mp4». Это твой артефакт.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Видео готово</button></div>
+        </div>
+
+        <h2>Промпт для ИИ — финальная проверка</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я закончил Модуль 2 «Умная сушилка» в школе ShokanLab.
+Собрал устройство на алюминиевой стойке: вентилятор 12V, модуль реле,
+Raspberry Pi Pico, ИК-датчик FC-51. Код на MicroPython:
+ИК-датчик читает GP14, реле управляется через GP15, вентилятор дует 3 сек после взмаха рукой.
+
+Прежде чем меня хвалить — проверь меня жёстко.
+Задай мне 7 вопросов разной сложности по всему модулю:
+- 2 базовых (что такое реле, что такое HIGH)
+- 2 средних (зачем развязка слаботочной/силовой цепи, что значит «инверсная логика» датчика)
+- 2 продвинутых (что произойдёт если убрать реле, как улучшить код чтобы датчик не залипал)
+- 1 переносной (как изменился бы код если вместо ИК — кнопка из Цикла 3)
+
+Жди мои ответы. После 7 — оцени, где у меня дыры.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">6</div><div class="action-title">Прошёл проверку с ИИ</div></div>
+          <div class="action-body">7 вопросов. Дыры — не страшно, главное знать где они.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-success"><b>🎓 Модуль 2 пройден.</b> Вы умеете: собирать механику на профиле, разделять слаботочные/силовые цепи через реле, писать код на 3 уровнях сложности, читать датчик и реагировать на него. Это уже инженерные навыки. Дальше — Модуль 3 «Лазерная сигнализация» (в разработке).</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-4-own')">← Own</button>
+          <button class="nav-btn primary" disabled>Модуль 3 в разработке</button>
+        </div>
+      </div>
+
+      <!-- ========== M3 · Цикл 1 «Лазер + фотодатчик» ========== -->
+      <div class="step-content" data-step="m3-1-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 1 · Лазер + фотодатчик</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Включите лазер</h1>
+        <p class="step-intro">В Модулях 1 и 2 вы работали с обычными источниками света и движения. Сейчас — узконаправленный луч лазера. С него начинается ваша сигнализация.</p>
+
+        <div class="socratic-block">
+          <div class="lbl">🤖 Промпт для Модуля 3</div>
+          <h3>Скопируй и отправь в новый чат с ИИ — первым сообщением</h3>
+          <p style="font-size:13px;color:var(--muted)">Это промпт под весь модуль. В каждом новом чате вставляй заново — ИИ не помнит прошлые разговоры.</p>
+          <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я школьник 12-17 лет, учусь инженерии в школе ShokanLab.
+Уже прошёл Модули 1 и 2 — знаю цепи, реле, GPIO Pico,
+if/else в MicroPython, цифровой вход с датчиков (кнопка, ИК).
+
+Сейчас прохожу Модуль 3 «Лазерная сигнализация» —
+собираю устройство на алюминиевой стойке:
+1) Цикл 1: лазер светит на фотодатчик (цифровой выход)
+2) Цикл 2: пассивный бузер + PWM (учусь генерировать тон)
+3) Цикл 3: RGB светодиод (3 канала через PWM = смесь цветов)
+4) Цикл 4: финал — луч прерван → сирена + красный мигает
+
+Ты мой ИИ-напарник на весь модуль. Правила:
+1. Не давай готовых решений — сначала задавай уточняющие вопросы.
+2. Если спрашиваю «как сделать X» — спроси «что ты уже попробовал?»
+3. Объясняй простыми словами, без университетских терминов.
+4. Когда я ошибся — направь, но не давай ответ.
+5. Когда я понял — кратко подтверди и предложи следующий шаг.
+6. Связывай новое с тем, что я знаю из M1 и M2 (LED, реле, GPIO, кнопка, ИК-датчик).
+
+Готов начать?</pre>
+        </div>
+
+        <div class="callout c-warn">
+          <b>🛡 БЕЗОПАСНОСТЬ ЛАЗЕРА — это не игрушка!</b><br>
+          • <b>Никогда не направляй лазер в глаза</b> — ни себе, ни другим. Даже на доли секунды.<br>
+          • Не направляй на отражающие поверхности (зеркало, экран телефона) — может прийти в глаз.<br>
+          • Если ослепил кого-то случайно — сразу сообщи ментору. Это серьёзно.<br>
+          • Школьные модули обычно класса 2 (&lt;1 мВт) — относительно безопасны при кратком воздействии, но правила всё равно жёсткие.
+        </div>
+
+        <h2>Что делать</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите лазерный модуль на стойке</div></div>
+          <div class="action-body">Используй T-slot гайки и болты M3 (🔁 как делал в M2 с вентилятором). Направь лазер в свободное место — не на одноклассника, не на стену с зеркалом.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Лазер закреплён</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключите 2 провода лазера</div></div>
+          <div class="action-body">У большинства модулей: <b>красный</b> → <code>+3.3V</code> или <code>+5V</code> (смотри маркировку на корпусе!), <b>чёрный</b> → <code>GND</code>. Лазер питается от Pico или от ATX через 3.3V.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провода подключены</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Включите питание</div></div>
+          <div class="action-body">Должна появиться тонкая красная точка. Это сфокусированный когерентный свет — рабочий лазер.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Лазер светит</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Wow:</b> у вас в руках источник света принципиально нового типа. В отличие от LED, лазер сохраняет узкий луч даже на расстоянии 5-10 метров. Поэтому он идеален для сигнализации.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m2-4-share')">← Финал M2</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-1-know')">Know: что такое лазер →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-1-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 1 · Лазер + фотодатчик</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Чем лазер отличается от LED</h1>
+        <p class="step-intro">🔁 В M1 вы работали с LED — он светит «во все стороны». Лазер светит только в одну, узким лучом. Разберитесь, почему так и зачем нам это для сигнализации.</p>
+
+        <h2>Главное отличие — когерентность</h2>
+        <p>LED испускает фотоны хаотично — каждый летит куда хочет. Лазер заставляет их лететь <b>в одну сторону параллельно</b>. Это называется <b>когерентность</b>.</p>
+
+        <table>
+          <tr><th></th><th>LED (M1)</th><th>Лазер (M3)</th></tr>
+          <tr><td><b>Свет</b></td><td>Рассеянный, во все стороны</td><td>Узкий луч, в одну сторону</td></tr>
+          <tr><td><b>Расстояние работы</b></td><td>~метр, дальше — слабо</td><td>5-10+ метров без потери</td></tr>
+          <tr><td><b>Опасность для глаз</b></td><td>Безопасно</td><td><b>Опасно — нельзя в глаз</b></td></tr>
+          <tr><td><b>Применение</b></td><td>Освещение, индикация</td><td>Указка, барьер, измерения</td></tr>
+        </table>
+
+        <h2>Зачем нам это в сигнализации</h2>
+        <p>Идея: лазер светит на <b>фотодатчик</b>. Пока луч непрерывен, фотодатчик «видит» его. Если кто-то прошёл через луч — фотодатчик на доли секунды «теряет» свет → подаёт сигнал тревоги.</p>
+        <div class="callout c-info"><b>🔁 Из M2:</b> ИК-датчик «видел» руку через отражение. Здесь принципиально другое — фотодатчик видит <b>прерывание</b>. Не отражение, а наоборот — пропадание света.</div>
+
+        <h2>Фотодатчик: цифровой выход (DO)</h2>
+        <p>Мы используем модуль фотодатчика с DO-ножкой — он сам решает, есть свет или нет. Выдаёт 0 или 1, как ИК-датчик в M2. 🔁</p>
+        <ul>
+          <li><b>Свет есть</b> (лазер не прерван) → DO = ?</li>
+          <li><b>Свет пропал</b> (кто-то пересёк луч) → DO = ?</li>
+        </ul>
+        <p><em>Конкретные значения 0/1 проверим в OWN — у разных модулей логика инвертирована, лучше измерить, чем гадать.</em></p>
+
+        <div class="chips">
+          <span class="chip">Когерентность</span>
+          <span class="chip">Лазер vs LED</span>
+          <span class="chip">Безопасность лазера</span>
+          <span class="chip">DO фотодатчика</span>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-1-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-1-own')">Own: фотодатчик → Pico →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-1-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 1 · Лазер + фотодатчик</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Подключите фотодатчик и проверьте логику</h1>
+        <p class="step-intro">Сейчас вы соберёте «детектор луча»: фотодатчик читает свет от лазера, Pico выводит в консоль состояние. Это половина финальной сигнализации.</p>
+
+        <h2>Часть 1 — подключение фотодатчика</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите фотодатчик напротив лазера</div></div>
+          <div class="action-body">Расстояние 10-30 см, чтобы луч точно попадал на сенсор. Подкрути позицию — на модуле обычно есть LED-индикатор «вижу свет».</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Датчик ловит луч</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">3 провода фотодатчика → Pico (🔁 как ИК-датчик в M2)</div></div>
+          <div class="action-body">
+            • <code>VCC</code> → Pico <code>3V3 OUT</code> (пин 36)<br>
+            • <code>GND</code> → Pico <code>GND</code> (пин 38)<br>
+            • <code>DO</code> → Pico <code>GP14</code>
+          </div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">3 провода подключены</button></div>
+        </div>
+
+        <h2>Часть 2 — код для проверки</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+photo = Pin(14, Pin.IN)
+
+print("Читаю фотодатчик. Перекрой луч рукой и смотри.")
+while True:
+    state = photo.value()
+    print("DO =", state)
+    time.sleep(0.3)</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Запусти код</div></div>
+          <div class="action-body">В консоли побежит строка <code>DO = 1</code> или <code>DO = 0</code>.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Запустил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">Перекрой луч рукой → смотри в консоль</div></div>
+          <div class="action-body">Значение DO должно <b>измениться</b>. Запиши: «когда луч есть — DO=___, когда перекрыт — DO=___». Это твоя логика тревоги.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Записал значения</button></div>
+        </div>
+        <table>
+          <tr><th>Состояние</th><th>DO =</th></tr>
+          <tr><td>Луч есть (фотодатчик видит свет)</td><td>___</td></tr>
+          <tr><td>Луч прерван (тёмно)</td><td>___</td></tr>
+        </table>
+
+        <div class="callout c-tip"><b>💡 Логика инвертирована или нет?</b> 🔁 В M2 у ИК-датчика было: рука рядом = LOW. Здесь у фотодатчика наоборот может быть: свет есть = HIGH, нет света = LOW. Или наоборот — зависит от модуля. Главное: ты <b>измерил</b>, а не угадал. Это инженерный подход.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-1-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-1-share')">Share: что нового →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-1-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 1 · Лазер + фотодатчик</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Самопроверка: лазер vs LED, фотодатчик vs ИК</h1>
+        <p class="step-intro">Без видео. Только мысленная проверка. Главное — ты сравнил с M1 и M2 в голове.</p>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          Закрой страницу мысленно и ответь своими словами:<br><br>
+          <b>1.</b> Чем лазер отличается от LED — назови 3 различия (помимо «лазер опаснее»).<br>
+          <b>2.</b> Зачем для сигнализации нужен именно лазер, а не обычная лампочка?<br>
+          <b>3.</b> 🔁 ИК-датчик в M2 видел руку через отражение. Чем твой фотодатчик с лазером работает <b>принципиально иначе</b>?<br>
+          <b>4.</b> Какое значение DO у тебя при прерванном луче? Это HIGH или LOW?
+        </div>
+
+        <h2>Промпт для проверки с ИИ</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я закончил Цикл 1 Модуля 3 «Лазерная сигнализация».
+Подключил лазер 3.3V и фотодатчик с DO-ножкой к Pico GPIO 14.
+Замерил: когда луч есть DO=___, когда перекрыт DO=___.
+
+Сравни мне Модуль 2 (ИК-датчик «видел» руку через отражение) и Модуль 3 (фотодатчик видит прерывание лазера) — что общего, что разного. Дай таблицу.
+
+Потом задай мне 3 контрольных вопроса. Жди мои ответы.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Прошёл проверку</div></div>
+          <div class="action-body">4 вопроса самопроверки + ответы ИИ.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Цикл 1 пройден.</b> У тебя работает «детектор прерывания луча». Это половина финальной сигнализации. Дальше — добавим звук.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-1-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-2-try')">Цикл 2: Бузер + PWM →</button>
+        </div>
+      </div>
+
+      <!-- ========== M3 · Цикл 2 «Бузер + PWM» ========== -->
+      <div class="step-content" data-step="m3-2-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 2 · Бузер + PWM</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Заставьте бузер пищать</h1>
+        <p class="step-intro">Пассивный бузер не пищит сам — ему нужны импульсы определённой частоты. Это называется <b>PWM</b>. В этом цикле вы впервые управляете не «вкл/выкл», а <b>длительностью импульсов</b>.</p>
+
+        <h2>Что собрать</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Закрепите бузер на стойке</div></div>
+          <div class="action-body">Двусторонним скотчем или хомутом. Важно отличить пассивный от активного: <b>пассивный</b> — обычно открытый снизу (видно мембрану), <b>активный</b> — закрытый, на корпусе наклейка с напряжением.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Закрепил</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключите 2 провода</div></div>
+          <div class="action-body">У бузера: <b>+</b> (длинная ножка или маркер) → Pico <code>GP16</code>. <b>−</b> → Pico <code>GND</code>. 🔁 Полярность как у LED в M1 — длинная это плюс.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провода подключены</button></div>
+        </div>
+
+        <h2>Запусти первый код</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(16))
+buzzer.freq(1000)       # частота 1000 Hz = тон ~до
+buzzer.duty_u16(32768)  # 50% громкости
+
+time.sleep(2)           # звучит 2 секунды
+
+buzzer.duty_u16(0)      # выключить
+print("Тишина")</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Запусти и слушай</div></div>
+          <div class="action-body">Бузер должен пищать ровно 2 секунды на частоте ~1 кГц. Если тишина — проверь, что бузер именно <b>пассивный</b> (активный пищит сразу при <code>pin.value(1)</code> без PWM).</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Пищит</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Wow:</b> ты только что заставил кусок пластика звучать на нужной тебе ноте. Это уже не «вкл/выкл» — это <b>управление формой сигнала</b>.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-1-share')">← Цикл 1</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-2-know')">Know: что такое PWM →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-2-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 2 · Бузер + PWM</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Что такое PWM</h1>
+        <p class="step-intro">PWM = <b>Pulse Width Modulation</b> — модуляция длительности импульса. Это новый способ работать с GPIO, отличный от того, что было в M1 и M2.</p>
+
+        <h2>🔁 Что было до этого</h2>
+        <p>В M1 и M2 пин был либо <code>HIGH</code> (3.3V) либо <code>LOW</code> (0V). Только два состояния.</p>
+
+        <h2>Что нового в PWM</h2>
+        <p>Pico быстро-быстро переключает пин между HIGH и LOW. Например, <b>1000 раз в секунду</b>. Получается «прерывистый» сигнал. Параметры:</p>
+        <ul>
+          <li><b>Частота (freq)</b> — сколько раз в секунду происходит цикл «HIGH-LOW-HIGH-LOW». Измеряется в Гц (Hz).</li>
+          <li><b>Duty cycle</b> — какую долю времени пин в HIGH. <code>duty_u16(32768)</code> = 50% (32768 из 65535).</li>
+        </ul>
+
+        <h2>Как PWM делает звук в бузере</h2>
+        <p>Мембрана пассивного бузера движется вперёд-назад в такт импульсам. <b>Частота импульсов = высота тона.</b> Например:</p>
+        <table>
+          <tr><th>Частота (Hz)</th><th>Тон</th></tr>
+          <tr><td>262</td><td>До (нижняя)</td></tr>
+          <tr><td>440</td><td>Ля</td></tr>
+          <tr><td>1000</td><td>~ До (выше)</td></tr>
+          <tr><td>2000</td><td>~ До (ещё выше)</td></tr>
+        </table>
+
+        <h2>А duty cycle на бузер влияет?</h2>
+        <p>На бузере duty cycle влияет на <b>громкость</b> (но слабо — главное частота). На LED duty cycle влияет на <b>яркость</b> — это будет в Цикле 3 на RGB.</p>
+
+        <div class="callout c-tip"><b>💡 Главная идея PWM:</b> цифровой пин эмулирует «промежуточные значения» через быстрые переключения. Глаз/ухо/мотор не успевают реагировать на отдельные импульсы — воспринимают как «среднее».</div>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          <b>1.</b> Что произойдёт с тоном, если поставить freq=200 вместо 1000? Будет ниже или выше?<br>
+          <b>2.</b> Если duty_u16(0) — тон будет звучать?<br>
+          <b>3.</b> 🔁 Чем PWM отличается от <code>pin.value(1)</code> из M2?
+        </div>
+
+        <div class="chips">
+          <span class="chip">PWM</span>
+          <span class="chip">Частота = тон</span>
+          <span class="chip">Duty cycle = громкость/яркость</span>
+          <span class="chip">freq + duty_u16</span>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-2-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-2-own')">Own: сирена двух тонов →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-2-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 2 · Бузер + PWM</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Сирена: чередование двух тонов</h1>
+        <p class="step-intro">Полицейская сирена — это два тона, которые быстро меняются. Сделай такую сами. Это уже похоже на финал — только пока без триггера от датчика.</p>
+
+        <h2>Базовый код сирены</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(16))
+buzzer.duty_u16(32768)  # 50% громкости
+
+print("Сирена 5 секунд")
+end_time = time.time() + 5
+
+while time.time() &lt; end_time:
+    buzzer.freq(800)
+    time.sleep(0.3)
+    buzzer.freq(1200)
+    time.sleep(0.3)
+
+buzzer.duty_u16(0)  # тишина
+print("Конец")</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Запусти и послушай</div></div>
+          <div class="action-body">Должна звучать чередующаяся «у-и-у-и» 5 секунд.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сирена работает</button></div>
+        </div>
+
+        <h2>🔧 Сделай своим</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">🟢 Лёгкая: измени тоны</div></div>
+          <div class="action-body">Поменяй пары частот — например, 600 и 1500 Hz. Какая комбинация звучит «жутче» для сигнализации? Запиши свои значения.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Подобрал свои тоны</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">🟡 Средняя: ускоряющаяся сирена</div></div>
+          <div class="action-body">Сделай так, чтобы тоны чередовались всё быстрее (для усиления тревоги). Сначала пауза 0.5 сек, потом 0.4, 0.3, 0.2, 0.1.<br>
+          <em>Подсказка: используй цикл <code>for delay in [0.5, 0.4, 0.3, 0.2, 0.1]:</code></em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Ускорение работает</button></div>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-2-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-2-share')">Share: объясни PWM →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-2-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 2 · Бузер + PWM</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Объясни ИИ, что такое PWM</h1>
+        <p class="step-intro">PWM — концепт, который будет работать ещё во многих модулях. Сейчас закрепи понимание через объяснение.</p>
+
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>В Цикле 2 Модуля 3 я научился использовать PWM на пассивном бузере.
+Сделал сирену из двух чередующихся тонов через freq() и duty_u16().
+
+Спроси меня:
+1. Чем PWM-выход отличается от обычного pin.value(1) из M2?
+2. Что физически происходит на пине, когда PWM работает на 1000 Hz?
+3. Если поставить freq=50 — что услышу (или не услышу)?
+4. Можно ли управлять громкостью через duty_u16? Как именно?
+5. PWM применяется только к звуку? Или к чему ещё? (подумай — в Цикле 3 будем использовать PWM на чём-то другом)
+
+Жди мои ответы. После каждого — оцени.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Прошёл проверку</div></div>
+          <div class="action-body">5 вопросов с ИИ.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-info"><b>💡 Мост к Циклу 3:</b> PWM, который ты только что учил для звука, в следующем цикле будет управлять <b>яркостью каналов RGB-светодиода</b>. Та же команда <code>duty_u16()</code>, но эффект — не громкость, а интенсивность цвета.</div>
+
+        <div class="callout c-success"><b>Цикл 2 пройден.</b> Ты научился новому способу управления GPIO — через PWM. Это качественный скачок.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-2-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-3-try')">Цикл 3: RGB светодиод →</button>
+        </div>
+      </div>
+
+      <!-- ========== M3 · Цикл 3 «RGB светодиод» ========== -->
+      <div class="step-content" data-step="m3-3-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 3 · RGB светодиод</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Подключите RGB и зажгите 3 канала по очереди</h1>
+        <p class="step-intro">RGB-светодиод — это <b>3 LED в одном корпусе</b>: красный, зелёный, синий. Каждый канал — отдельный пин. 🔁 Полярность работает как обычный LED из M1.</p>
+
+        <h2>Что у вас в руках</h2>
+        <p>RGB-светодиод имеет <b>4 ножки</b>:</p>
+        <ul>
+          <li><b>Красный (R)</b></li>
+          <li><b>Зелёный (G)</b></li>
+          <li><b>Синий (B)</b></li>
+          <li><b>Общий</b> — катод (минус, GND) или анод (плюс, +3.3V) — зависит от модели</li>
+        </ul>
+        <p>В большинстве учебных модулей — <b>общий катод</b> (GND). Если у тебя анод — логика инвертируется (HIGH = выкл, LOW = вкл).</p>
+
+        <h2>Подключение</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Найди самую длинную ножку</div></div>
+          <div class="action-body">Это <b>общий</b>. Подключи её к Pico <code>GND</code> (если общий катод) или к <code>3V3 OUT</code> (если общий анод). 🔁 Полярность как в M1.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Общая нога подключена</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключи 3 канала</div></div>
+          <div class="action-body">
+            • <b>R</b> → Pico <code>GP18</code><br>
+            • <b>G</b> → Pico <code>GP19</code><br>
+            • <b>B</b> → Pico <code>GP20</code>
+          </div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Каналы подключены</button></div>
+        </div>
+
+        <h2>Тестовый код — 3 цвета по очереди</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin
+import time
+
+R = Pin(18, Pin.OUT)
+G = Pin(19, Pin.OUT)
+B = Pin(20, Pin.OUT)
+
+print("Красный")
+R.value(1); time.sleep(1); R.value(0)
+
+print("Зелёный")
+G.value(1); time.sleep(1); G.value(0)
+
+print("Синий")
+B.value(1); time.sleep(1); B.value(0)
+
+print("Готово")</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Запусти</div></div>
+          <div class="action-body">Светодиод должен по очереди светиться красным, зелёным, синим — по 1 секунде.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">3 цвета работают</button></div>
+        </div>
+
+        <div class="callout c-warn"><b>Если каналы перепутаны:</b> ты подключил физический пин R к, например, GP19 (а не GP18). Поправь либо железо, либо коды пинов в скрипте — главное, чтобы R/G/B соответствовали именам.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-2-share')">← Цикл 2</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-3-know')">Know: смесь цветов →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-3-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 3 · RGB светодиод</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Любой цвет = смесь R + G + B</h1>
+        <p class="step-intro">Глаз человека видит миллионы цветов через 3 типа рецепторов: красный, зелёный, синий. Все цвета — это <b>пропорции</b> этих трёх. RGB-светодиод работает по этому же принципу.</p>
+
+        <h2>Чистые цвета</h2>
+        <table>
+          <tr><th>Цвет</th><th>R</th><th>G</th><th>B</th></tr>
+          <tr><td>Красный</td><td>100%</td><td>0%</td><td>0%</td></tr>
+          <tr><td>Зелёный</td><td>0%</td><td>100%</td><td>0%</td></tr>
+          <tr><td>Синий</td><td>0%</td><td>0%</td><td>100%</td></tr>
+        </table>
+
+        <h2>Смешанные цвета</h2>
+        <table>
+          <tr><th>Цвет</th><th>R</th><th>G</th><th>B</th></tr>
+          <tr><td>Жёлтый</td><td>100%</td><td>100%</td><td>0%</td></tr>
+          <tr><td>Циан</td><td>0%</td><td>100%</td><td>100%</td></tr>
+          <tr><td>Маджента</td><td>100%</td><td>0%</td><td>100%</td></tr>
+          <tr><td>Белый</td><td>100%</td><td>100%</td><td>100%</td></tr>
+          <tr><td>Оранжевый</td><td>100%</td><td>50%</td><td>0%</td></tr>
+          <tr><td>Розовый</td><td>100%</td><td>50%</td><td>50%</td></tr>
+        </table>
+
+        <h2>Где здесь PWM?</h2>
+        <p>🔁 Из Цикла 2: PWM duty_u16 управляет «промежуточными значениями». На бузере это была громкость. Здесь — <b>яркость каждого канала</b>. 50% яркости красного = красный «вполсилы».</p>
+        <p>Без PWM ты можешь только включить/выключить канал — то есть только <b>чистые</b> цвета. С PWM — <b>смешанные</b>, любая пропорция.</p>
+
+        <div class="callout c-info"><b>🔁 Главная идея:</b> та же команда <code>duty_u16(N)</code>, что и в Цикле 2, теперь меняет интенсивность цвета. Это даёт миллион оттенков.</div>
+
+        <div class="chips">
+          <span class="chip">Аддитивная модель цвета</span>
+          <span class="chip">Чистые vs смешанные</span>
+          <span class="chip">PWM = яркость канала</span>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-3-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-3-own')">Own: функция set_color →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-3-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 3 · RGB светодиод</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Напиши функцию set_color(r, g, b)</h1>
+        <p class="step-intro">Вместо того чтобы каждый раз настраивать 3 PWM-канала — оберни их в одну функцию. Это <b>твоё первое определение функции</b> в MicroPython. Применишь её в финале (Цикл 4).</p>
+
+        <h2>Базовый код с PWM</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin, PWM
+import time
+
+R = PWM(Pin(18))
+G = PWM(Pin(19))
+B = PWM(Pin(20))
+
+R.freq(1000); G.freq(1000); B.freq(1000)
+
+def set_color(r, g, b):
+    """r, g, b — числа 0..255 (как обычные RGB-коды)"""
+    R.duty_u16(r * 257)   # перевод 0..255 → 0..65535
+    G.duty_u16(g * 257)
+    B.duty_u16(b * 257)
+
+# Тест: 5 цветов по 1 секунде
+print("Красный")
+set_color(255, 0, 0); time.sleep(1)
+
+print("Жёлтый")
+set_color(255, 255, 0); time.sleep(1)
+
+print("Циан")
+set_color(0, 255, 255); time.sleep(1)
+
+print("Маджента")
+set_color(255, 0, 255); time.sleep(1)
+
+print("Розовый")
+set_color(255, 128, 128); time.sleep(1)
+
+set_color(0, 0, 0)  # выключить
+print("Готово")</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Запусти</div></div>
+          <div class="action-body">Светодиод покажет 5 цветов по очереди.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">5 цветов работают</button></div>
+        </div>
+
+        <h2>🔧 Сделай своим</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">🟢 Лёгкая: подбери свой оттенок</div></div>
+          <div class="action-body">Найди значения r, g, b, которые дают тебе любимый цвет (бирюзовый? оранжевый? фиолетовый?). Запиши свои значения.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Свой цвет найден</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">🟡 Средняя: плавный переход</div></div>
+          <div class="action-body">Сделай плавный переход красный → жёлтый → зелёный (за 3 секунды). Это значит, что G растёт от 0 до 255, потом R падает от 255 до 0.<br>
+          <em>Подсказка: цикл <code>for i in range(256):</code> + <code>set_color(...)</code> внутри.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Плавный переход</button></div>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-3-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-3-share')">Share: эксперимент с цветом →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-3-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 3 · RGB светодиод</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Самопроверка: PWM и смесь цветов</h1>
+        <p class="step-intro">Без видео. Только проверка понимания.</p>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          <b>1.</b> Что произойдёт, если в <code>set_color(255, 255, 255)</code> поменять на <code>set_color(50, 50, 50)</code> — какой цвет, и в чём разница?<br>
+          <b>2.</b> Я хочу яркий пурпурный (без зелёного, красный и синий поровну) — какие значения?<br>
+          <b>3.</b> 🔁 В Цикле 2 PWM делал звук разной громкости. В Цикле 3 PWM делает <b>что</b>? Назови принцип одной фразой.<br>
+          <b>4.</b> Зачем нужна функция <code>set_color()</code>? Что было бы, если бы её не было?
+        </div>
+
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>В Цикле 3 Модуля 3 я подключил RGB-светодиод и написал функцию set_color(r, g, b),
+которая принимает 3 числа от 0 до 255 и через PWM duty_u16 управляет яркостью каналов.
+
+Спроси меня:
+1. Если все три канала на 50% — какой цвет получится и почему «50% белый» это серый?
+2. В чём разница между моим RGB и LED из M1? (несколько ответов есть)
+3. Почему я делю 65535 на 257, а не на 256? Где тут хитрость?
+4. Что если у меня RGB с общим анодом вместо катода — как поменять код?
+
+Жди мои ответы. После каждого — оцени.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Прошёл проверку</div></div>
+          <div class="action-body">4 вопроса самопроверки + ИИ.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-success"><b>Цикл 3 пройден.</b> Ты умеешь смешивать цвета, написал свою первую функцию в MicroPython, понял PWM на двух разных применениях. Дальше — финал.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-3-own')">← Own</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-4-try')">Цикл 4: Сигнализация (финал) →</button>
+        </div>
+      </div>
+
+      <!-- ========== M3 · Цикл 4 «Сигнализация (финал)» ========== -->
+      <div class="step-content" data-step="m3-4-try">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 4 · Сигнализация (финал)</span>
+          <span class="phase-big-badge big-T">TRY · Попробуй</span>
+        </div>
+        <h1 class="step-h">Соберите всё на стойке</h1>
+        <p class="step-intro">Сейчас всё, что вы делали отдельными циклами, объединяется в одно устройство. Лазер, фотодатчик, бузер, RGB — все работают вместе на стойке.</p>
+
+        <h2>Финальная схема подключения</h2>
+        <table>
+          <tr><th>Компонент</th><th>Pico пин</th><th>🔁 откуда</th></tr>
+          <tr><td>Лазер VCC</td><td>3V3 OUT</td><td>Цикл 1</td></tr>
+          <tr><td>Лазер GND</td><td>GND</td><td>Цикл 1</td></tr>
+          <tr><td>Фотодатчик DO</td><td>GP14</td><td>Цикл 1</td></tr>
+          <tr><td>Бузер +</td><td>GP16 (PWM)</td><td>Цикл 2</td></tr>
+          <tr><td>Бузер −</td><td>GND</td><td>Цикл 2</td></tr>
+          <tr><td>RGB R</td><td>GP18 (PWM)</td><td>Цикл 3</td></tr>
+          <tr><td>RGB G</td><td>GP19 (PWM)</td><td>Цикл 3</td></tr>
+          <tr><td>RGB B</td><td>GP20 (PWM)</td><td>Цикл 3</td></tr>
+          <tr><td>RGB общий</td><td>GND или 3V3</td><td>Цикл 3</td></tr>
+        </table>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Расположи компоненты на стойке</div></div>
+          <div class="action-body">Лазер и фотодатчик — на расстоянии 20-50 см, луч направлен точно в датчик. Бузер и RGB — рядом с Pico, чтобы провода не натягивались.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Все компоненты на стойке</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Подключи всё по таблице</div></div>
+          <div class="action-body">Перепроверь дважды — частая ошибка перепутать пины GP18/19/20 у RGB.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Все провода подключены</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">Тест: каждый компонент по отдельности</div></div>
+          <div class="action-body">Перед финальным кодом — запусти короткие тесты из Циклов 1, 2, 3, чтобы убедиться что каждая часть работает после переразводки.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Все 3 части работают</button></div>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-3-share')">← Цикл 3</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-4-know')">Know: параллельная логика →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-4-know">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 4 · Сигнализация (финал)</span>
+          <span class="phase-big-badge big-K">KNOW · Пойми</span>
+        </div>
+        <h1 class="step-h">Параллельная работа: один while True, два исполнителя</h1>
+        <p class="step-intro">Сирена пищит И светодиод мигает <b>одновременно</b>. Как это сделать, если у нас один процессор и одна программа?</p>
+
+        <h2>Простой подход (последовательный)</h2>
+        <p>Самое простое: «пищим тоном A → красный → пищим тоном B → выключить → пищим тоном A → ...». Это работает, но звучит странно — звук и свет «двигаются по очереди».</p>
+
+        <h2>Лучше — короткий шаг каждого + цикл</h2>
+        <p>В одном проходе <code>while True</code>:</p>
+        <ol>
+          <li>Меняем тон бузера (мгновенно)</li>
+          <li>Меняем цвет RGB (мгновенно)</li>
+          <li>Делаем <b>короткую паузу</b> (например, 0.2 сек)</li>
+          <li>Снова</li>
+        </ol>
+        <p>Поскольку шаги быстрые, ухо и глаз воспринимают их как одновременные.</p>
+
+        <h2>🔁 Что было до этого</h2>
+        <p>В M2 у тебя был один датчик + один исполнитель (вентилятор). Здесь — один датчик + два исполнителя. Цепочка управления усложнилась, но принцип тот же:</p>
+        <pre class="code">Фотодатчик (DO=0 если луч прерван)
+   ↓
+Pico (читает GP14 в цикле)
+   ↓
+Если прерван → активирует ОБА исполнителя одновременно:
+   ├─ Бузер: PWM с чередованием тонов
+   └─ RGB: красный мигает</pre>
+
+        <h2>🛑 Стоп. Проверь себя</h2>
+        <div class="callout c-info">
+          <b>1.</b> Почему <code>time.sleep(2)</code> — это плохо для параллельной работы?<br>
+          <b>2.</b> Если в одном цикле 4 шага по 0.2 сек — за сколько секунд они проходят все вместе?<br>
+          <b>3.</b> 🔁 В M2-3 финальном коде ИК-датчика была проблема залипания. Здесь нужен ли cooldown?
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-4-try')">← Try</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-4-own')">Own: финальный код →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-4-own">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 4 · Сигнализация (финал)</span>
+          <span class="phase-big-badge big-O">OWN · Сделай своим</span>
+        </div>
+        <h1 class="step-h">Финальный код: луч прерван → сирена + красный мигает</h1>
+        <p class="step-intro">Самый сложный код в твоей жизни на сегодня. Это объединение всего, что ты выучил в M1, M2 и M3.</p>
+
+        <h2>Финальный код</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>from machine import Pin, PWM
+import time
+
+# Датчик
+photo = Pin(14, Pin.IN)
+
+# Бузер
+buzzer = PWM(Pin(16))
+buzzer.freq(800)
+buzzer.duty_u16(0)  # выключен на старте
+
+# RGB
+R = PWM(Pin(18))
+G = PWM(Pin(19))
+B = PWM(Pin(20))
+for ch in [R, G, B]:
+    ch.freq(1000)
+
+def set_color(r, g, b):
+    R.duty_u16(r * 257)
+    G.duty_u16(g * 257)
+    B.duty_u16(b * 257)
+
+def alarm_off():
+    buzzer.duty_u16(0)
+    set_color(0, 0, 0)
+
+def alarm_step(tick):
+    """Один шаг тревоги — чередуем тоны и мигание"""
+    if tick % 2 == 0:
+        buzzer.freq(800)
+        set_color(255, 0, 0)   # красный
+    else:
+        buzzer.freq(1200)
+        set_color(50, 0, 0)    # тусклый красный
+    buzzer.duty_u16(32768)
+
+# ВАЖНО: проверь в Цикле 1 — какое DO у тебя при прерванном луче (0 или 1).
+# Здесь предполагаем, что луч прерван = DO == 0
+# Если у тебя наоборот — поменяй на == 1
+
+print("Сигнализация активна. Перекрой луч.")
+alarm_off()
+tick = 0
+
+while True:
+    if photo.value() == 0:           # луч прерван!
+        alarm_step(tick)
+        tick = tick + 1
+        time.sleep(0.2)
+    else:                            # луч есть, всё спокойно
+        alarm_off()
+        tick = 0
+        time.sleep(0.05)</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Запусти и протестируй</div></div>
+          <div class="action-body">При работающем коде — тишина и тёмный RGB. Перекрой луч рукой → должна включиться сирена + красный мигает. Убери руку → всё затихает.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Сигнализация работает</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">Если наоборот — поменяй условие</div></div>
+          <div class="action-body">Если код тревожит, когда луча НЕТ перерыва (или наоборот) — у твоего фотодатчика инвертированная логика. Просто измени <code>== 0</code> на <code>== 1</code>.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Логика верная</button></div>
+        </div>
+
+        <h2>🔧 Расширения</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">🟢 Лёгкая: измени тоны и цвета</div></div>
+          <div class="action-body">В функции <code>alarm_step</code> подбери <b>свои</b> частоты бузера и пары цветов RGB. Найди комбинацию, от которой реально страшно.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Своя комбинация</button></div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">🟡 Средняя: ускоряющаяся тревога</div></div>
+          <div class="action-body">Сделай так, чтобы при прерывании луча первые 5 секунд сирена была медленной, а потом ускорялась.<br>
+          <em>Подсказка: используй <code>time.ticks_ms()</code> чтобы отслеживать сколько прошло после первого срабатывания.</em></div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Ускорение работает</button></div>
+        </div>
+
+        <div class="callout c-success"><b>🎉 У вас работает лазерная сигнализация!</b> Это уже сложное мехатронное устройство: датчик → контроллер → два параллельных исполнителя.</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-4-know')">← Know</button>
+          <button class="nav-btn primary" onclick="selectStep('m3-4-share')">Share: видео-демо →</button>
+        </div>
+      </div>
+
+      <div class="step-content" data-step="m3-4-share">
+        <div class="phase-title-row">
+          <span class="cycle-label">M3 · Цикл 4 · Сигнализация (финал)</span>
+          <span class="phase-big-badge big-S">SHARE · Покажи</span>
+        </div>
+        <h1 class="step-h">Видео-демо: «моя сигнализация»</h1>
+        <p class="step-intro">Финальный артефакт Модуля 3. 60 секунд видео.</p>
+
+        <h2>Сценарий видео (60 секунд)</h2>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">0-15 сек: «Что я сделал»</div></div>
+          <div class="action-body">«Это лазерная сигнализация. Когда кто-то пересекает луч, срабатывает сирена и мигает красный свет.» Покажи срабатывание.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">2</div><div class="action-title">15-35 сек: «Из чего состоит»</div></div>
+          <div class="action-body">Лазер, фотодатчик, бузер, RGB-светодиод, Pico. На каждый — одна фраза «зачем».</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">3</div><div class="action-title">35-50 сек: «Цепочка работы»</div></div>
+          <div class="action-body">«Лазер светит на фотодатчик. Pico читает датчик. Когда DO=0 (луч прерван), Pico через PWM включает бузер и RGB.»</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">4</div><div class="action-title">50-60 сек: «Что было трудно»</div></div>
+          <div class="action-body">Одна фраза. Своими словами.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">5</div><div class="action-title">Сохранил видео</div></div>
+          <div class="action-body">Файл «M3_Сигнализация_<имя>.mp4».</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Видео готово</button></div>
+        </div>
+
+        <h2>Финальная проверка с ИИ</h2>
+        <pre class="code"><button class="copy-btn" onclick="copyCode(this)">Копировать</button>Я закончил Модуль 3 «Лазерная сигнализация» в школе ShokanLab.
+Собрал устройство: лазер, фотодатчик с DO, пассивный бузер, RGB-светодиод, Pico.
+Использовал PWM для бузера (тон) и для RGB (яркость каналов).
+Финальный код в while True проверяет фотодатчик и при прерывании луча
+параллельно мигает красным и пищит сиреной.
+
+Прежде чем хвалить — задай мне 8 вопросов разной сложности:
+- 2 базовых (что такое PWM, чем лазер отличается от LED)
+- 2 средних (зачем функция set_color, что значит duty_u16)
+- 2 продвинутых (почему параллельная работа возможна на одном процессоре, как избежать time.sleep блокирующего)
+- 1 переносной (как изменить код, чтобы вместо мигания красным был плавный fade-in/out)
+- 1 связь с прошлыми модулями (что общего у фотодатчика M3 и ИК-датчика M2)
+
+Жди мои ответы. После всех 8 — оцени, где у меня дыры.</pre>
+
+        <div class="action-card">
+          <div class="action-head"><div class="action-num">6</div><div class="action-title">Прошёл проверку</div></div>
+          <div class="action-body">8 вопросов с ИИ.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Прошёл</button></div>
+        </div>
+
+        <div class="callout c-success"><b>🎓 Модуль 3 пройден.</b> Ты умеешь: работать с лазером и безопасностью, использовать PWM для звука и цвета, собирать устройство из 4+ компонентов и заставлять их работать вместе. Это уже серьёзная инженерия. Дальше — Модуль 4 (в разработке).</div>
+
+        <div class="nav-row">
+          <button class="nav-btn" onclick="selectStep('m3-4-own')">← Own</button>
+          <button class="nav-btn primary" disabled>Модуль 4 в разработке</button>
         </div>
       </div>
 
@@ -2067,12 +4038,45 @@ relay = Pin(15, Pin.OUT)
     '3-try','3-know','3-own','3-share',
     '4-try','4-know','4-own','4-share'
   ];
+  const ORDER_M2 = [
+    'm2-1-try','m2-1-know','m2-1-own','m2-1-share',
+    'm2-2-try','m2-2-know','m2-2-own','m2-2-share',
+    'm2-3-try','m2-3-know','m2-3-own','m2-3-share',
+    'm2-4-try','m2-4-know','m2-4-own','m2-4-share'
+  ];
   const CYCLE_NAMES = {
     1:'Цикл 1 · Просто LED',
     2:'Цикл 2 · С кнопкой',
     3:'Цикл 3 · С реле',
     4:'Цикл 4 · С Pico (финал)'
   };
+  const CYCLE_NAMES_M2 = {
+    1:'M2 · Цикл 1 · Вентилятор на стойке',
+    2:'M2 · Цикл 2 · Кнопка + реле',
+    3:'M2 · Цикл 3 · Pico вместо кнопки',
+    4:'M2 · Цикл 4 · ИК-датчик (финал)'
+  };
+  const ORDER_M3 = [
+    'm3-1-try','m3-1-know','m3-1-own','m3-1-share',
+    'm3-2-try','m3-2-know','m3-2-own','m3-2-share',
+    'm3-3-try','m3-3-know','m3-3-own','m3-3-share',
+    'm3-4-try','m3-4-know','m3-4-own','m3-4-share'
+  ];
+  const CYCLE_NAMES_M3 = {
+    1:'M3 · Цикл 1 · Лазер + фотодатчик',
+    2:'M3 · Цикл 2 · Бузер + PWM',
+    3:'M3 · Цикл 3 · RGB светодиод',
+    4:'M3 · Цикл 4 · Сигнализация (финал)'
+  };
+
+  // Парсер step-ID: возвращает {module, cycle, phase} либо null
+  function parseStep(stepId){
+    let m = stepId.match(/^m(\d+)-(\d+)-(try|know|own|share)$/);
+    if (m) return {module: +m[1], cycle: +m[2], phase: m[3]};
+    m = stepId.match(/^(\d+)-(try|know|own|share)$/);
+    if (m) return {module: 1, cycle: +m[1], phase: m[2]};
+    return null;
+  }
 
   function toggleStuck(){
     document.getElementById('stuckCard').classList.toggle('open');
@@ -2089,19 +4093,21 @@ relay = Pin(15, Pin.OUT)
   }
 
   function toggleCycle(n){
-    // Close all, open clicked
+    // n может быть числом (M1 циклы) или строкой 'm2-1' (M2 циклы)
+    const key = String(n);
     document.querySelectorAll('.cycle-head').forEach(h=>{
-      h.classList.toggle('expanded', h.dataset.cycle==String(n));
+      h.classList.toggle('expanded', h.dataset.cycle===key);
     });
     document.querySelectorAll('.cycle-phases').forEach(p=>p.classList.remove('open'));
-    const phases = document.getElementById('cycle-phases-'+n);
+    const phases = document.getElementById('cycle-phases-'+key);
     if (phases) phases.classList.add('open');
   }
 
   function selectStep(stepId){
     const isStub = /^m\d+-stub$/.test(stepId);
     const isOnboarding = stepId === 'm0-onboarding';
-    const isCycleStep = !isStub && !isOnboarding;
+    const parsed = parseStep(stepId);
+    const isCycleStep = parsed !== null;
     // content
     document.querySelectorAll('.step-content').forEach(c=>{
       c.classList.toggle('active', c.dataset.step===stepId);
@@ -2112,10 +4118,10 @@ relay = Pin(15, Pin.OUT)
     });
     // onboarding row highlight
     document.querySelector('.onboarding-link')?.classList.toggle('current', isOnboarding);
-    // expand corresponding cycle (только для шагов M1 циклов)
+    // expand corresponding cycle
     if (isCycleStep) {
-      const cycleNum = stepId.split('-')[0];
-      toggleCycle(cycleNum);
+      const cycleKey = parsed.module === 1 ? String(parsed.cycle) : `m${parsed.module}-${parsed.cycle}`;
+      toggleCycle(cycleKey);
     }
     // active module в сайдбаре
     updateActiveModule(stepId);
@@ -2129,10 +4135,19 @@ relay = Pin(15, Pin.OUT)
       const n = stepId.match(/^m(\d+)-stub$/)[1];
       crumb.textContent = `Модуль ${n} · скоро`;
       idx.textContent = '—';
-    } else {
-      const cycleNum = stepId.split('-')[0];
-      crumb.textContent = CYCLE_NAMES[cycleNum];
-      idx.textContent = ORDER.indexOf(stepId)+1;
+    } else if (parsed) {
+      if (parsed.module === 1) {
+        crumb.textContent = CYCLE_NAMES[parsed.cycle];
+        idx.textContent = ORDER.indexOf(stepId)+1;
+      } else if (parsed.module === 2) {
+        crumb.textContent = CYCLE_NAMES_M2[parsed.cycle];
+        const i = ORDER_M2.indexOf(stepId);
+        idx.textContent = i >= 0 ? (i+1) + '/16' : '—';
+      } else if (parsed.module === 3) {
+        crumb.textContent = CYCLE_NAMES_M3[parsed.cycle];
+        const i = ORDER_M3.indexOf(stepId);
+        idx.textContent = i >= 0 ? (i+1) + '/16' : '—';
+      }
     }
     updateStepper(stepId);
     // lazy-инициализация iframe и контекстный помощник
@@ -2152,10 +4167,17 @@ relay = Pin(15, Pin.OUT)
 
   function updateActiveModule(stepId){
     let activeModule = '1';
-    const m = stepId.match(/^m(\d+)-stub$/);
-    if (m) activeModule = m[1];
+    const stub = stepId.match(/^m(\d+)-stub$/);
+    if (stub) activeModule = stub[1];
+    const parsed = parseStep(stepId);
+    if (parsed) activeModule = String(parsed.module);
+    // подсветка mod-item
     document.querySelectorAll('.mod-item[data-module]').forEach(el=>{
       el.classList.toggle('active', el.dataset.module === activeModule);
+    });
+    // показать только циклы активного модуля
+    document.querySelectorAll('.module-cycles[data-module]').forEach(el=>{
+      el.style.display = (el.dataset.module === activeModule) ? '' : 'none';
     });
   }
 
@@ -2256,7 +4278,7 @@ relay = Pin(15, Pin.OUT)
 
   // ============ Lazy-загрузка iframe ============
   // Версия для cache-busting iframe и его внутренних ресурсов
-  const ASSET_VERSION = '2026-04-28-2';
+  const ASSET_VERSION = '2026-04-28-3';
   function activateIframes(stepId){
     const step = document.querySelector(`.step-content[data-step="${stepId}"]`);
     if (!step) return;
@@ -2833,6 +4855,485 @@ relay = Pin(15, Pin.OUT)
       prompts: [
         'Дай 3 уточняющих вопроса, чтобы я проверил понимание моего проекта «Управляемая лампа на Pico+реле».',
         'Я закончил Модуль 1 — собрал цепь LED через реле, управляемое Pico с кодом на MicroPython. Задай мне 5 вопросов разной сложности, чтобы я проверил что реально понимаю. Не показывай ответы. Только вопросы. После того как я отвечу на все 5 — оцени, где у меня дыры.'
+      ]
+    },
+
+    // ============ M2 · Цикл 1 «Вентилятор на стойке» ============
+    'm2-1-try': {
+      terms: [
+        ['Алюминиевый профиль 2020', 'Стандартный профиль 20×20 мм с пазами под T-slot гайки.'],
+        ['T-slot гайка', 'Квадратная гайка M3, заводится в паз профиля сбоку.'],
+        ['Стрелка потока', 'Метка на корпусе вентилятора, показывающая в какую сторону дует воздух.']
+      ],
+      pitfalls: [
+        'Стрелка потока перевёрнута — воздух дует не туда (в финале сушилки воздух идёт «на руку»).',
+        'Болты затянуты с одной стороны — вентилятор перекошен. Затягивай крестом 1→3→2→4.',
+        'Гайки забыл завести в паз ДО прикладывания вентилятора — потом не вставишь.'
+      ],
+      prompts: [
+        'Я закрепил вентилятор на алюминиевом профиле 2020 четырьмя болтами M3. Объясни, почему механика собирается «крестом», а не по очереди по периметру.'
+      ]
+    },
+    'm2-1-know': {
+      terms: [
+        ['DC-мотор', 'Двигатель постоянного тока: катушка проволоки в магнитном поле, поворачивается под током.'],
+        ['Стартовый ток', 'Ток в первый момент включения — в 2-3 раза выше рабочего.'],
+        ['Паспорт детали', 'Надпись на корпусе с напряжением и током (например, DC 12V 0.20A).']
+      ],
+      pitfalls: [
+        'Подключаешь 12V вентилятор к 5V — не закрутится, кажется «сломан».',
+        'Подключаешь 5V вентилятор к 12V — сгорит за секунды.',
+        'Подключаешь вентилятор к Pico GPIO напрямую — сгорает Pico (ток мотора больше предела пина).'
+      ],
+      prompts: [
+        'У меня вентилятор с надписью «DC 12V 0.20A». Объясни, что значит каждое из этих чисел и какой источник питания мне для него подходит.',
+        'Чем DC-мотор отличается от лампы накаливания и от LED? Дай 3 ключевых отличия.'
+      ]
+    },
+    'm2-1-own': {
+      terms: [
+        ['Ампер (А)', 'Единица тока. 1 A = много, 1 мА = тысячная часть.'],
+        ['Параллельный замер (V)', 'Мультиметр прикладывается к двум точкам, не разрывая цепь.'],
+        ['Последовательный замер (A)', 'Мультиметр вставляется в разрыв цепи — ток идёт через него.'],
+        ['Гнездо 10A', 'Отдельное гнездо мультиметра для тока выше 200 мА. Защищено предохранителем.']
+      ],
+      pitfalls: [
+        'Замеряешь ток, не переставив красный щуп в гнездо 10A — мультиметр уйдёт в защиту или сгорит предохранитель.',
+        'Замеряешь ток без разрыва цепи (как напряжение) — короткое замыкание через мультиметр.',
+        'Забыл переключить с V= на A= — ничего не показывает или показывает чушь.'
+      ],
+      prompts: [
+        'Я замерил ток вентилятора 12V и получил ___ мА. На корпусе написано 0.20A. Что значат эти 200 мА против моего замера, есть ли разница?',
+        'Объясни простыми словами, почему ток мерится «в разрыв», а напряжение — «на клеммах». Используй аналогию воды.'
+      ]
+    },
+    'm2-1-share': {
+      terms: [
+        ['Спираль обучения', 'M2 опирается на знания из M1. Отличия — это новые точки роста.'],
+        ['Стоп-проверь-себя', 'Метакогниция: проверка, что ты действительно помнишь, а не просто узнал.']
+      ],
+      pitfalls: [
+        'Подсматриваешь в KNOW при ответе на проверочные вопросы — мозг не работает.',
+        'Сразу копируешь готовый ответ ИИ — не учишься, только имитируешь.'
+      ],
+      prompts: [
+        'Я прошёл Цикл 1 Модуля 2: закрепил вентилятор на стойке, замерил ток (___ мА) и напряжение (___ В). Что я должен был запомнить? Перечисли 5 главных вещей, потом задай мне 3 вопроса для проверки.',
+        'Сравни мне Модуль 1 (LED) и Цикл 1 Модуля 2 (вентилятор) в виде таблицы: что одинаковое, что новое.'
+      ]
+    },
+
+    // ============ M2 · Цикл 2 «Кнопка + реле» ============
+    'm2-2-try': {
+      terms: [
+        ['Слаботочная цепь', 'Цепь с малым током (миллиамперы), безопасная для рук. У нас — кнопка + IN реле на 3.3V.'],
+        ['Силовая цепь', 'Цепь с большим током (сотни миллиампер). У нас — 12V → реле NO/COM → вентилятор.'],
+        ['NO/NC/COM', 'Контакты реле: NO разомкнут в покое, NC замкнут в покое, COM общий.']
+      ],
+      pitfalls: [
+        'Перепутал NO и NC — вентилятор работает «наоборот» (выключен при нажатой кнопке).',
+        'Забыл общий GND между ATX и модулем реле — реле не срабатывает.',
+        'Подключил кнопку напрямую к 12V вместо 3.3V — кнопка обгорит от пускового тока.'
+      ],
+      prompts: [
+        'Объясни мне, что такое «развязка цепей» через реле и почему это важно при работе с моторами и нагревателями.',
+        'У меня есть тактовая кнопка с двумя ножками и переключатель с тремя ножками. Объясни разницу и в каких задачах какой удобнее.'
+      ]
+    },
+    'm2-2-know': {
+      terms: [
+        ['Пусковой ток', 'Ток мотора в первый момент включения, в 2-3 раза выше рабочего.'],
+        ['Развязка цепей', 'Физическое разделение слаботочной (управление) и силовой (нагрузка) частей через реле.'],
+        ['Pull-up', 'Подтяжка пина к 3.3V резистором — обеспечивает чёткий «нулевой» уровень при разрыве. Используется в Pico для кнопок.']
+      ],
+      pitfalls: [
+        'Думаешь что кнопке всё равно — на самом деле тактовая кнопка не выдержит ток мотора.',
+        'Считаешь что реле «усиливает» сигнал — нет, оно физически переключает контакты.'
+      ],
+      prompts: [
+        'Я разделил цепи через реле: слаботочная 3.3V с кнопкой, силовая 12V с вентилятором. Задай мне 3 вопроса, чтобы проверить — действительно ли я понимаю смысл этой развязки.'
+      ]
+    },
+    'm2-2-own': {
+      terms: [
+        ['Тактовая кнопка', 'Замыкается пока держишь, размыкается когда отпускаешь. Возврат через пружину.'],
+        ['Переключатель с защёлкой', 'Бистабильное состояние: переключил — остался в положении.'],
+        ['Бистабильный', 'Имеющий два устойчивых состояния (как лампочка в комнате — она «помнит» состояние).']
+      ],
+      pitfalls: [
+        'Подключил все 3 ножки переключателя — не работает. Нужны только 2: средняя (COM) и одна крайняя.',
+        'Думаешь, что переключатель «лучше» кнопки — в задачах с автоматикой (как сушилка) тактовая кнопка ближе к датчику.'
+      ],
+      prompts: [
+        'У меня переключатель с тремя ножками. Какие именно две ножки я должен подключить, чтобы он работал как бистабильный замыкатель? Объясни, что делает третья.',
+        'Приведи 5 примеров из жизни, где используется тактовая кнопка, и 5 — где переключатель с защёлкой. Что общего у задач каждого типа?'
+      ]
+    },
+    'm2-2-share': {
+      terms: [
+        ['Видео-артефакт', 'Запись готового устройства — лучшее доказательство того, что вы что-то сделали.']
+      ],
+      pitfalls: [
+        'Описываешь только «что сделал» — забываешь объяснить «почему так».',
+        'Показал работающее устройство, но не объяснил, какую задачу оно решает.'
+      ],
+      prompts: [
+        'Я собрал две версии управления вентилятором (тактовая кнопка vs переключатель). Спроси меня, в чём смысл реле в этой схеме, какие два типа цепей я разделил, и почему пусковой ток мотора опасен. Не давай ответы, жди мои.'
+      ]
+    },
+
+    // ============ M2 · Цикл 3 «Pico вместо кнопки» ============
+    'm2-3-try': {
+      terms: [
+        ['GPIO', 'General Purpose Input/Output — программируемый пин Pico. Может быть входом или выходом.'],
+        ['GP15', 'Конкретный пин Pico, к которому подключаем сигнал управления реле.'],
+        ['Общая земля (common GND)', 'GND Pico и GND ATX должны быть соединены, иначе сигнал не «дойдёт» до реле.']
+      ],
+      pitfalls: [
+        'Забыл соединить GND Pico с GND ATX — реле не срабатывает, хотя «всё подключено».',
+        'Подключил VCC реле к Pico — Pico не выдаст достаточный ток. VCC реле должен идти от ATX.',
+        'Подаёшь питание на Pico через ATX вместо USB — необязательно вредно, но создаёт ненужные проблемы.'
+      ],
+      prompts: [
+        'У меня Pico, модуль реле и вентилятор 12V. GND Pico должен быть соединён с GND ATX, объясни почему — что физически произойдёт если они не соединены?'
+      ]
+    },
+    'm2-3-know': {
+      terms: [
+        ['HIGH', 'Состояние пина: 3.3V относительно GND.'],
+        ['LOW', 'Состояние пина: 0V относительно GND.'],
+        ['pin.value(1)', 'Команда MicroPython, ставит пин в HIGH.'],
+        ['pin.value(0)', 'Команда MicroPython, ставит пин в LOW.']
+      ],
+      pitfalls: [
+        'Думаешь что pin.value(1) «выдаёт что-то особенное» — нет, это просто 3.3V на пине.',
+        'Хочешь написать pin.value(12), чтобы «дать 12V» — пин этого не умеет, для 12V нужно реле или транзистор.'
+      ],
+      prompts: [
+        'Объясни простыми словами, что физически происходит с пином GP15, когда я пишу relay.value(1) в коде. Используй аналогию с краном или выключателем.'
+      ]
+    },
+    'm2-3-own': {
+      terms: [
+        ['Блинк', 'Простейший код-цикл: HIGH → пауза → LOW → пауза. Базовая проверка, что код вообще работает.'],
+        ['time.sleep(N)', 'Пауза на N секунд. Программа стоит, ничего не делает.'],
+        ['if/else', 'Условный оператор: «если условие — делай это, иначе — то».'],
+        ['while True', 'Бесконечный цикл. Программа крутится, пока её не остановят.']
+      ],
+      pitfalls: [
+        'Запустил код, но забыл сохранить файл сначала — Thonny запускает старую версию.',
+        'Написал bouton.value() == 0 (французская раскладка) или 0 == button.value() (поломал синтаксис) — типичная опечатка.',
+        'Не заземлил кнопку через GND — pull-up не помогает, кнопка «висит в воздухе».'
+      ],
+      prompts: [
+        'Я написал код с if button.value() == 0. Объясни мне, почему именно ==0, а не ==1. Связано ли это с pull-up? Дай объяснение через физику тока в цепи.',
+        'Расширь мой код Уровня 3 так, чтобы вентилятор работал: 1 нажатие = 3 сек, двойное нажатие в течение секунды = 6 сек. Покажи код и объясни логику.'
+      ]
+    },
+    'm2-3-share': {
+      terms: [
+        ['Цепочка управления', 'Код → пин → IN реле → NO/COM → силовая цепь → нагрузка. Понимание этой цепочки — ключ ко всей электронике.']
+      ],
+      pitfalls: [
+        'Думаешь, что HIGH «делает что-то» — на самом деле HIGH = 3.3V, и от того, что подключено к пину, зависит результат.',
+        'Если бы не было реле, GP15 «бы дал 12V» — нет, GP15 максимум 3.3V и ~12 мА. Реле — обязательный посредник.'
+      ],
+      prompts: [
+        'Спроси меня по очереди: 1) что значит pin.value(1) физически, 2) почему я не могу управлять вентилятором без реле, 3) почему if button.value()==0 а не ==1, 4) что общего и что разного с кодом из M1 (LED+реле). Жди мои ответы, оценивай каждое.'
+      ]
+    },
+
+    // ============ M2 · Цикл 4 «ИК-датчик (финал)» ============
+    'm2-4-try': {
+      terms: [
+        ['ИК (инфракрасный)', 'Свет с длиной волны больше видимого. Невидим глазом, но фиксируется фототранзистором.'],
+        ['DO (Digital Out)', 'Цифровой выход датчика — даёт 0 или 1. Подключается к GPIO Pico как кнопка.'],
+        ['FC-51', 'Распространённая модель ИК-датчика отражения с регулировкой чувствительности.']
+      ],
+      pitfalls: [
+        'Подключил VCC к 5V вместо 3.3V — модуль FC-51 рассчитан на 3.3-5V, обычно работает, но логика сигнала может быть рассогласована с Pico.',
+        'Не настроил потенциометр — датчик либо постоянно «видит», либо никогда не срабатывает.',
+        'Установил датчик в место, где есть прямое солнце или лампа — засветка приёмника.'
+      ],
+      prompts: [
+        'У меня модуль FC-51. Я подключил VCC, GND, DO. Расскажи, что такое потенциометр на этом модуле и зачем мне его крутить.'
+      ]
+    },
+    'm2-4-know': {
+      terms: [
+        ['ИК-светодиод', 'Источник инфракрасного света на модуле. Чёрный диод.'],
+        ['Фототранзистор', 'Приёмник ИК-света. Прозрачный диод.'],
+        ['Инверсная логика', 'Датчик в покое = HIGH, рука = LOW. В коде проверяем == 0.'],
+        ['Порог чувствительности', 'Уровень отражения, который считается «есть объект». Регулируется потенциометром.']
+      ],
+      pitfalls: [
+        'Думаешь, что датчик «видит движение» — нет, он видит отражение. Если рука стоит неподвижно близко — он всё равно срабатывает.',
+        'Хочешь использовать его через стекло — стекло само отражает ИК, ложные срабатывания постоянно.',
+        'Не учёл, что чёрные одежда/перчатки почти не отражают ИК — датчик их «не видит».'
+      ],
+      prompts: [
+        'Объясни мне физику ИК-датчика отражения за 1 минуту: как именно он понимает, что объект близко. И назови 3 ситуации, в которых он точно не сработает.'
+      ]
+    },
+    'm2-4-own': {
+      terms: [
+        ['Подбор чувствительности', 'Поиск положения потенциометра, при котором датчик срабатывает на нужное расстояние.'],
+        ['Зацикливание (залипание)', 'Когда датчик после срабатывания продолжает «видеть» объект и не возвращается в покой. Решается коротким time.sleep после выключения.']
+      ],
+      pitfalls: [
+        'Время time.sleep(3) слишком короткое — датчик «видит» руку дольше → реле сработает второй раз.',
+        'Не добавил time.sleep(0.5) после выключения — программа сразу проверяет датчик и снова видит руку.',
+        'Поставил потенциометр на максимум — датчик видит даже стену в 50 см → постоянное срабатывание.'
+      ],
+      prompts: [
+        'Мой код на ИК-датчике зацикливается: вентилятор то включается, то выключается без пауз. Объясни, почему так, и помоги добавить корректный антизалипатель.',
+        'Я хочу, чтобы вентилятор дул ровно 3 секунды, потом игнорировал датчик ещё 2 секунды (антидребезг). Покажи как изменить код.'
+      ]
+    },
+    'm2-4-share': {
+      terms: [
+        ['Финальный артефакт', 'Видео-демо законченного устройства. Главное доказательство, что вы прошли модуль.'],
+        ['Цепочка объяснения', 'Сенсор → контроллер → исполнительный механизм. Стандартная схема всей мехатроники.']
+      ],
+      pitfalls: [
+        'В видео показал только финал, но не процесс — родителю/зрителю непонятно, что именно вы делали.',
+        'В teardown написал «всё было легко» — себя обманываешь, не пиши так.'
+      ],
+      prompts: [
+        'Я закончил Модуль 2 — собрал умную сушилку. Задай мне 7 вопросов разной сложности, чтобы я проверил что реально понимаю всё устройство, а не просто скопировал код. Не показывай ответы, только вопросы. После всех ответов — оцени, где у меня дыры.'
+      ]
+    },
+
+    // ============ M3 · Цикл 1 «Лазер + фотодатчик» ============
+    'm3-1-try': {
+      terms: [
+        ['Лазер', 'Источник когерентного света — узкий направленный луч.'],
+        ['Когерентность', 'Свойство света двигаться параллельно одной волной.'],
+        ['Класс лазера 2', 'Школьный лазер мощностью &lt;1 мВт. Опасен для глаз при долгом прямом попадании.']
+      ],
+      pitfalls: [
+        'Направил лазер в глаза другому ученику или себе — недопустимо. Сразу выключи и сообщи ментору.',
+        'Лазер на отражающую поверхность (зеркало, экран) — луч может прийти в чьё-то лицо.',
+        'Подключил лазер к 12V вместо 3.3V/5V — сгорит за секунды.'
+      ],
+      prompts: [
+        'Я подключил школьный лазерный модуль 3.3V к Pico. Объясни мне правила безопасности при работе с лазером класса 2 — что именно опасно и почему.'
+      ]
+    },
+    'm3-1-know': {
+      terms: [
+        ['Лазер vs LED', 'Лазер: узкий когерентный луч. LED: рассеянный свет во все стороны.'],
+        ['Прерывание vs отражение', 'Сигнализация на лазере = детекция прерывания луча. Сигнализация на ИК = детекция отражения от объекта.'],
+        ['Цифровой выход (DO)', 'Модуль фотодатчика сам решает 0 или 1. У разных модулей логика может быть инвертированной.']
+      ],
+      pitfalls: [
+        'Думаешь, что DO = 1 всегда «есть свет» — у некоторых модулей наоборот. Всегда измеряй.',
+        'Пытаешься направить рассеянный свет лампы вместо лазера — фотодатчик может не различить разрыв.'
+      ],
+      prompts: [
+        'Объясни, чем лазер принципиально отличается от LED, и почему именно лазер подходит для барьерной сигнализации, а LED — нет.',
+        '🔁 Сравни: ИК-датчик в M2 видел руку через отражение. Фотодатчик в M3 видит прерывание лазера. В чём разница в физике, и какие плюсы/минусы у каждого подхода?'
+      ]
+    },
+    'm3-1-own': {
+      terms: [
+        ['Pin.IN', 'Режим пина Pico — чтение цифрового сигнала.'],
+        ['photo.value()', 'Команда чтения текущего состояния пина: 0 или 1.'],
+        ['Юстировка лазера', 'Подкрутить позицию лазера и фотодатчика так, чтобы луч точно попадал в сенсор.']
+      ],
+      pitfalls: [
+        'Лазер немного сбит — фотодатчик «теряет» свет даже без преграды → ложные срабатывания.',
+        'Фотодатчик стоит на солнце или под лампой — фоновая засветка не даёт ему «увидеть» прерывание лазера.',
+        'Перепутал VCC и GND фотодатчика — модуль может сгореть.'
+      ],
+      prompts: [
+        'У меня лазер светит на фотодатчик, но при перекрытии луча значение DO не меняется. Помоги мне продиагностировать — задавай вопросы.'
+      ]
+    },
+    'm3-1-share': {
+      terms: [
+        ['Барьерная сигнализация', 'Тип сенсора: луч + приёмник на расстоянии, тревога при разрыве луча.'],
+        ['Инверсная логика модуля', 'Когда «событие» = LOW, а «покой» = HIGH (как pull-up на кнопке).']
+      ],
+      pitfalls: [
+        'Самопроверка превращается в подсматривание — закрывай страницу мысленно.',
+        'Пишешь «всё понял» без проверки — это иллюзия понимания (fluency illusion).'
+      ],
+      prompts: [
+        '🔁 Сравни Модуль 2 (ИК-датчик отражения) и Цикл 1 Модуля 3 (фотодатчик прерывания) — что общего, что разного. Дай таблицу и задай мне 3 контрольных вопроса.'
+      ]
+    },
+
+    // ============ M3 · Цикл 2 «Бузер + PWM» ============
+    'm3-2-try': {
+      terms: [
+        ['Пассивный бузер', 'Не пищит сам — нужны импульсы определённой частоты (PWM).'],
+        ['Активный бузер', 'Пищит сам при подаче VCC, частота фиксированная.'],
+        ['PWM (Pulse Width Modulation)', 'Быстрое переключение пина HIGH/LOW с заданной частотой и длительностью.']
+      ],
+      pitfalls: [
+        'Подключил активный бузер вместо пассивного — пищит на одной ноте, PWM не работает.',
+        'Перепутал полярность бузера — может работать тише или искажённо.',
+        'Поставил duty_u16(65535) на 100% — бузер может дребезжать вместо чистого тона.'
+      ],
+      prompts: [
+        'Объясни мне разницу между активным и пассивным бузером простыми словами. Какой из них в моих руках, если я слышу разные тоны при изменении freq()?'
+      ]
+    },
+    'm3-2-know': {
+      terms: [
+        ['freq', 'Частота PWM в герцах. Для бузера — это высота тона.'],
+        ['duty_u16', 'Доля HIGH в цикле PWM, 0-65535. Для бузера — громкость, для LED — яркость.'],
+        ['Гц (Hz)', 'Раз в секунду. 1000 Hz = 1000 циклов HIGH/LOW в секунду.']
+      ],
+      pitfalls: [
+        'Думаешь, что duty_u16 на бузере — это «как долго играет тон». Нет, это громкость. Длительность задаётся через time.sleep.',
+        'Хочешь нот ниже 50 Hz — ухо начнёт слышать отдельные щелчки, а не тон.'
+      ],
+      prompts: [
+        'Я понял, что freq() задаёт высоту тона, а duty_u16 — громкость. Спроси меня 3 вопроса, чтобы убедиться что я не путаю эти параметры.'
+      ]
+    },
+    'm3-2-own': {
+      terms: [
+        ['Сирена', 'Чередование двух или более частот для привлечения внимания.'],
+        ['for цикл', 'Цикл с заданным набором значений: <code>for delay in [0.5, 0.4, 0.3]:</code>']
+      ],
+      pitfalls: [
+        'Поставил тоны слишком близко по частоте (800 и 850) — на слух почти не отличаются.',
+        'Тоны слишком далеко (200 и 4000) — звучит резко и неприятно.',
+        'Забыл выключить duty_u16 в конце — бузер пищит после завершения программы.'
+      ],
+      prompts: [
+        'Я делаю «ускоряющуюся сирену» где паузы уменьшаются. Помоги мне понять, как использовать цикл for с массивом длительностей. Задавай вопросы.'
+      ]
+    },
+    'm3-2-share': {
+      terms: [
+        ['PWM универсален', 'Тот же концепт работает на бузере (звук), LED (яркость), серво (угол). Меняется применение, не суть.']
+      ],
+      pitfalls: [
+        'Думаешь, что PWM — это только для звука. Это общий способ управления GPIO с промежуточными значениями.',
+        'Не закрепил концепт — в Цикле 3 он понадобится снова на RGB.'
+      ],
+      prompts: [
+        'Закрепи мне PWM окончательно: спроси что такое freq, что такое duty_u16, и где ещё (помимо бузера) можно применять. После 5 вопросов — оцени.'
+      ]
+    },
+
+    // ============ M3 · Цикл 3 «RGB светодиод» ============
+    'm3-3-try': {
+      terms: [
+        ['RGB светодиод', '3 LED в одном корпусе: красный, зелёный, синий.'],
+        ['Общий катод', 'Длинная нога идёт на GND, каналы R/G/B на отдельные пины (HIGH = вкл).'],
+        ['Общий анод', 'Длинная нога на 3.3V, каналы R/G/B на отдельные пины (LOW = вкл, инверсная логика).']
+      ],
+      pitfalls: [
+        'Не определил тип RGB (катод или анод) — вместо нужного цвета горит другой или ничего.',
+        'Подключил каналы напрямую к Pico без резисторов — может работать, но с риском перегрузки. Использовать встроенные модули с резисторами.',
+        'Перепутал номера пинов GP18/19/20 — цвета поменялись местами.'
+      ],
+      prompts: [
+        'У меня RGB-светодиод с длинной ногой. Помоги мне определить, общий катод или анод — задай вопросы и подскажи, как проверить мультиметром.'
+      ]
+    },
+    'm3-3-know': {
+      terms: [
+        ['Аддитивная модель цвета', 'Цвет = смесь R + G + B. Все три = белый. Все 0 = чёрный.'],
+        ['Чистые цвета', 'Один канал на максимум, остальные 0 (например, R=255 G=0 B=0).'],
+        ['Смешанные цвета', 'Несколько каналов работают одновременно (R=255 G=255 = жёлтый).']
+      ],
+      pitfalls: [
+        'Думаешь что R=G=B=128 даст серый — да, но цвет получится тусклый, не «настоящий» серый. Серый — это сложный смешанный цвет.',
+        'Хочешь оранжевый и ставишь R=255 G=255 — получаешь жёлтый. Оранжевый: R=255 G=128 B=0.'
+      ],
+      prompts: [
+        'Я хочу нежно-розовый цвет. Подскажи мне комбинацию R/G/B, объясни почему именно такие значения, и как их корректировать чтобы оттенок был «теплее» или «холоднее».'
+      ]
+    },
+    'm3-3-own': {
+      terms: [
+        ['def', 'Ключевое слово MicroPython для определения функции.'],
+        ['set_color(r, g, b)', 'Твоя функция, оборачивающая 3 PWM канала в одну удобную команду.'],
+        ['Параметры функции', 'r, g, b — числа от 0 до 255, как стандартные RGB-коды в HTML/CSS.']
+      ],
+      pitfalls: [
+        'Забыл умножить на 257 при переводе 0..255 → 0..65535 — цвета будут едва различимы.',
+        'Назвал функцию через тире (set-color) — Python такое имя не примет, нужно подчёркивание.',
+        'Использовал глобальные переменные R, G, B внутри функции без объявления — может быть путаница.'
+      ],
+      prompts: [
+        'У меня функция set_color(r, g, b) работает, но плавный переход красный→зелёный получается рывками, не плавно. Помоги мне найти причину — задавай вопросы про цикл for.'
+      ]
+    },
+    'm3-3-share': {
+      terms: [
+        ['Функция как абстракция', 'def set_color() прячет 3 строки PWM за одной читаемой командой. Это и есть программирование.']
+      ],
+      pitfalls: [
+        'Думаешь что функция — это «лишнее усложнение». Нет, это способ не повторять одно и то же.',
+        'Не понял зачем вообще def — попробуй переписать код без функции и сравни длину.'
+      ],
+      prompts: [
+        'Объясни мне, почему функция set_color лучше, чем 3 отдельные строки. Спроси мне 4 вопроса про PWM и про функции — после ответов оцени.'
+      ]
+    },
+
+    // ============ M3 · Цикл 4 «Сигнализация (финал)» ============
+    'm3-4-try': {
+      terms: [
+        ['Юстировка системы', 'Финальная подстройка: лазер точно в фотодатчик, RGB виден, бузер слышен.'],
+        ['Изоляция компонентов', 'Перед финальным кодом — проверить каждый компонент по отдельности.']
+      ],
+      pitfalls: [
+        'Сразу запускаешь финальный код — если что-то не работает, не понятно, какая часть сломалась.',
+        'Провода натянуты после переразводки — могут отключиться при срабатывании. Дай слабину.',
+        'Забыл общий GND между Pico и питанием датчика — DO «висит в воздухе».'
+      ],
+      prompts: [
+        'Я собрал все 4 компонента (лазер, фотодатчик, бузер, RGB) на стойке. Помоги мне составить чек-лист проверки до запуска финального кода — что именно тестировать и в каком порядке.'
+      ]
+    },
+    'm3-4-know': {
+      terms: [
+        ['Параллельная работа', 'Несколько устройств работают одновременно через быстрые шаги в одном while True.'],
+        ['Блокирующая пауза', 'time.sleep(2) — программа стоит. Плохо для параллельной работы.'],
+        ['Короткий шаг', 'Маленькая пауза (0.05-0.2 сек) — глаз/ухо не замечают, а параллельность сохраняется.']
+      ],
+      pitfalls: [
+        'Используешь time.sleep(2) внутри while True — все остальные действия замораживаются на 2 секунды.',
+        'Думаешь, что Pico может «реально» делать два дела одновременно. Нет, он быстро переключается.'
+      ],
+      prompts: [
+        'Объясни мне, как Pico с одним процессором может «параллельно» пищать бузером и мигать RGB. Где здесь хитрость?'
+      ]
+    },
+    'm3-4-own': {
+      terms: [
+        ['tick', 'Счётчик шагов цикла. Помогает чередовать действия (тон A / тон B).'],
+        ['tick % 2', 'Остаток от деления на 2. Чередуется между 0 и 1 при росте tick.'],
+        ['Финальная цепочка', 'Датчик → условие → 2+ исполнителя одновременно.']
+      ],
+      pitfalls: [
+        'Забыл сбросить tick=0 когда тревога заканчивается — следующее срабатывание начнётся не с начала.',
+        'Сирена слишком тихая — duty_u16 не достаточный.',
+        'RGB не выключается полностью — забыл set_color(0,0,0) в alarm_off.'
+      ],
+      prompts: [
+        'Мой финальный код работает, но между тонами слышен щелчок. Помоги мне найти причину — это связано с duty_u16 или с переключением freq?',
+        'Я хочу, чтобы при первой 1 секунде тревоги мигание было быстрым, а потом замедлялось. Помоги мне сделать через time.ticks_ms — задавай вопросы.'
+      ]
+    },
+    'm3-4-share': {
+      terms: [
+        ['Финальный артефакт M3', 'Видео-демо законченной сигнализации.'],
+        ['Спираль M1+M2+M3', 'M3 опирается на цепи M1, GPIO и условия M2. Каждый модуль строит на предыдущем.']
+      ],
+      pitfalls: [
+        'Снимаешь только финал, не показываешь как работает изнутри.',
+        'Боишься признать, где было трудно — это и есть точки роста.'
+      ],
+      prompts: [
+        'Я закончил Модуль 3 — лазерная сигнализация с PWM-сиреной и RGB. Задай мне 8 вопросов разной сложности от базовых до продвинутых. Не давай ответы. После 8 — оцени где дыры.'
       ]
     }
   };
