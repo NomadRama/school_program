@@ -2255,11 +2255,14 @@ relay = Pin(15, Pin.OUT)
   }
 
   // ============ Lazy-загрузка iframe ============
+  // Версия для cache-busting iframe и его внутренних ресурсов
+  const ASSET_VERSION = '2026-04-28-2';
   function activateIframes(stepId){
     const step = document.querySelector(`.step-content[data-step="${stepId}"]`);
     if (!step) return;
     step.querySelectorAll('iframe[data-src]:not([src])').forEach(f => {
-      f.src = f.dataset.src;
+      const sep = f.dataset.src.includes('?') ? '&' : '?';
+      f.src = `${f.dataset.src}${sep}v=${ASSET_VERSION}`;
     });
   }
 
