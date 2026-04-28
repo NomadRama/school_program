@@ -223,7 +223,7 @@ COMPONENT_LIBRARY["atx_xh_m229"] = {
             <!-- Board label -->
             <text x="${ox + w/2}" y="${oy + h + 18}" text-anchor="middle"
                   fill="#78909C" font-size="13" font-weight="600">
-                Плата ATX · XH-M229
+                Источник питания
             </text>
         </g>`;
     },
@@ -260,7 +260,7 @@ COMPONENT_LIBRARY["atx_xh_m229"] = {
             <!-- Подпись -->
             <text x="${ox + (minX + maxX)/2}" y="${oy + titleY}" text-anchor="middle"
                   fill="#78909C" font-size="13" font-weight="600">
-                Плата ATX · выходные клеммы
+                Источник питания · клеммы
             </text>
         </g>`;
     }

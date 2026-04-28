@@ -35,7 +35,8 @@
 <script>
   // ==== Правила (visual_rules.md):
   //   1. Только 90° (никаких диагоналей)
-  //   2. Bus-rail для общих питаний (+3.3V и GND — единая шина, ответвления вниз)
+  //   2. Один провод = одна клемма источника. У ATX 4 GND клеммы — используем разные.
+  //      Bus-rail только когда клемма ОДНА на N потребителей (например plus3V3).
   //   3. Минимум пересечений
   //   4. Палитра: красный=VCC, чёрный=GND, зелёный=сигнал, жёлтый=нагрузка
   //   5. Лейблы коротко: «+3.3V», «GND», «сигнал», «нагрузка»
@@ -58,8 +59,10 @@
   document.getElementById('led-layer').innerHTML    = led.renderSVG({ x: LED_OFFSET.tx, y: LED_OFFSET.ty });
 
   // ==== Pin-координаты ====
-  const a_3v3 = pin(atx,   'plus3V3', ATX_OFFSET);
-  const a_gnd = pin(atx,   'gnd_4',   ATX_OFFSET);
+  // ПРАВИЛО: один провод = одна клемма источника. У ATX 4 GND клеммы — используем разные.
+  const a_3v3   = pin(atx, 'plus3V3', ATX_OFFSET);   // единственная +3.3V → 3 потребителя из неё
+  const a_gnd_4 = pin(atx, 'gnd_4',   ATX_OFFSET);   // GND для DC− реле
+  const a_gnd_3 = pin(atx, 'gnd_3',   ATX_OFFSET);   // GND для LED− (отдельная клемма)
   const b_a   = pin(btn,   'pin_a',   BUTTON_OFFSET);
   const b_b   = pin(btn,   'pin_b',   BUTTON_OFFSET);
   const r_dcp = pin(relay, 'dc_plus', RELAY_OFFSET);
@@ -70,9 +73,14 @@
   const l_a   = pin(led,   'anode',   LED_OFFSET);
   const l_c   = pin(led,   'cathode', LED_OFFSET);
 
-  // ==== Уровни шин (правило 2) ====
-  const VCC_BUS_Y = ATX_OFFSET.ty + atx.bbox.y + atx.bbox.h + 30;     // y ≈ 280, главная шина +3.3V
-  const GND_BUS_Y = VCC_BUS_Y + 25;                                    // y ≈ 305, шина GND ниже на 25px
+  // ==== Уровни параллельных дорожек (для визуальной читаемости) ====
+  // VCC: 3 провода с одной клеммы +3.3V → разные y чтобы не сливались
+  const VCC_Y_BUTTON = ATX_OFFSET.ty + atx.bbox.y + atx.bbox.h + 28;   // y ≈ 278
+  const VCC_Y_DCP    = VCC_Y_BUTTON + 8;                                // y ≈ 286
+  const VCC_Y_COM    = VCC_Y_BUTTON + 16;                               // y ≈ 294
+  // GND: 2 провода с разных клемм
+  const GND_Y_DCM    = VCC_Y_BUTTON + 30;                               // y ≈ 308
+  const GND_Y_LED    = VCC_Y_BUTTON + 38;                               // y ≈ 316
 
   const path = pts => pts.map(p => `${p.x},${p.y}`).join(' ');
 
@@ -83,45 +91,42 @@
   const C_LOAD = '#FBBF24';
 
   const wires = [
-    // ── +3.3V шина ──
-    // 1. Из клеммы вниз на VCC bus (главная шина-стержень)
+    // ── +3.3V: 3 отдельных провода из ОДНОЙ клеммы plus3V3 ──
+    // 1. plus3V3 → button pin_a (полный путь, своя дорожка)
     { color: C_VCC, points: [
         a_3v3,
-        { x: a_3v3.x, y: VCC_BUS_Y },
-        { x: b_a.x,   y: VCC_BUS_Y }
-      ], label: { text: '+3.3V', x: 480, y: VCC_BUS_Y - 8 } },
-    // 2. Drop к кнопке pin_a
-    { color: C_VCC, points: [
-        { x: b_a.x, y: VCC_BUS_Y },
+        { x: a_3v3.x, y: VCC_Y_BUTTON },
+        { x: b_a.x,   y: VCC_Y_BUTTON },
         b_a
-      ] },
-    // 3. Drop к relay DC+
+      ], label: { text: '+3.3V', x: 460, y: VCC_Y_BUTTON - 8 } },
+    // 2. plus3V3 → relay DC+
     { color: C_VCC, points: [
-        { x: r_dcp.x, y: VCC_BUS_Y },
+        a_3v3,
+        { x: a_3v3.x, y: VCC_Y_DCP },
+        { x: r_dcp.x, y: VCC_Y_DCP },
         r_dcp
       ] },
-    // 4. Drop к relay COM (правее)
+    // 3. plus3V3 → relay COM
     { color: C_VCC, points: [
-        { x: r_com.x, y: VCC_BUS_Y },
+        a_3v3,
+        { x: a_3v3.x, y: VCC_Y_COM },
+        { x: r_com.x, y: VCC_Y_COM },
         r_com
       ] },
 
-    // ── GND шина ──
-    // 5. Из клеммы вниз на GND bus + протяжка влево
+    // ── GND: 2 отдельных провода из РАЗНЫХ клемм ──
+    // 4. gnd_4 → relay DC−
     { color: C_GND, points: [
-        a_gnd,
-        { x: a_gnd.x, y: GND_BUS_Y },
-        { x: r_dcm.x, y: GND_BUS_Y }
-      ], label: { text: 'GND', x: 500, y: GND_BUS_Y + 16 } },
-    // 6. Drop к relay DC−
-    { color: C_GND, points: [
-        { x: r_dcm.x, y: GND_BUS_Y },
+        a_gnd_4,
+        { x: a_gnd_4.x, y: GND_Y_DCM },
+        { x: r_dcm.x,   y: GND_Y_DCM },
         r_dcm
-      ] },
-    // 7. Drop к LED− (катод). GND bus продлевается ВПРАВО до LED-катода
+      ], label: { text: 'GND', x: 500, y: GND_Y_DCM + 16 } },
+    // 5. gnd_3 → LED− (отдельная клемма)
     { color: C_GND, points: [
-        { x: a_gnd.x, y: GND_BUS_Y },
-        { x: l_c.x,   y: GND_BUS_Y },
+        a_gnd_3,
+        { x: a_gnd_3.x, y: GND_Y_LED },
+        { x: l_c.x,     y: GND_Y_LED },
         l_c
       ] },
 

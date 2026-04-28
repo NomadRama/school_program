@@ -880,18 +880,18 @@
 
         <h2>Что делать</h2>
         <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Попросите ментора включить ATX</div></div>
-          <div class="action-body">Загорится красный индикатор на плате питания. Вы сами ATX не трогаете — это правило безопасности №1.</div>
-          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">ATX включён</button></div>
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Попроси ментора включить источник питания</div></div>
+          <div class="action-body">Загорится красный индикатор PWR на источнике. Ты сам его не трогаешь — это правило безопасности №1.</div>
+          <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Источник включён</button></div>
         </div>
         <div class="action-card">
           <div class="action-head"><div class="action-num">2</div><div class="action-title">Провод 1: <code>+3.3V</code> → плюсовой провод LED</div></div>
-          <div class="action-body">У LED два провода — <b>плюс</b> и <b>минус</b>. Они разного цвета, плюс также помечен <code>(+)</code> на звезде около пятачка. Закрепи плюсовой провод в клемме <code>+3.3V</code> ATX, винт затяни до упора.</div>
+          <div class="action-body">У LED два провода — <b>плюс</b> и <b>минус</b>. Они разного цвета, плюс также помечен <code>(+)</code> на звезде около пятачка. Закрепи плюсовой провод в клемме <code>+3.3V</code> источника, винт затяни до упора.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провод 1 закреплён</button></div>
         </div>
         <div class="action-card">
           <div class="action-head"><div class="action-num">3</div><div class="action-title">Провод 2: минусовой провод LED → <code>GND</code></div></div>
-          <div class="action-body">Второй провод LED (минус, помечен <code>(−)</code> на звезде) — в клемму <code>GND</code> ATX. Закрути винт.</div>
+          <div class="action-body">Второй провод LED (минус, помечен <code>(−)</code> на звезде) — в клемму <code>GND</code> источника. Закрути винт.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Провод 2 закреплён</button></div>
         </div>
 
@@ -899,9 +899,9 @@
 
         <div class="callout c-warn">
           <b>Если не горит:</b><br>
-          • Поменяй провода LED местами на клеммах ATX — плюс должен быть на <code>+3.3V</code><br>
-          • Проверьте винты — все затянуты?<br>
-          • Ментор точно включил ATX?
+          • Поменяй провода LED местами на клеммах источника — плюс должен быть на <code>+3.3V</code><br>
+          • Проверь винты — все затянуты?<br>
+          • Ментор точно включил источник питания?
         </div>
 
         <div class="nav-row">
@@ -974,7 +974,7 @@
           <span class="phase-big-badge big-O">OWN · Сделай своим</span>
         </div>
         <h1 class="step-h">Поменяй полярность. Что будет?</h1>
-        <p class="step-intro">Поменяй провода LED местами на клеммах ATX — плюс воткни в GND, минус в +3.3V. Это проверка знания и полезный навык на всю жизнь.</p>
+        <p class="step-intro">Поменяй провода LED местами на клеммах источника — плюс воткни в GND, минус в +3.3V. Это проверка знания и полезный навык на всю жизнь.</p>
 
         <div class="figure hero" style="padding: 0; background: transparent; border: none; box-shadow: none;">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width:100%; height:600px; border:none; display:block;" data-src="circuits/circuit_step01_own_polarity.html"></iframe>
@@ -982,12 +982,12 @@
         </div>
 
         <div class="action-card">
-          <div class="action-head"><div class="action-num">1</div><div class="action-title">Открути оба винта на клеммах ATX</div></div>
+          <div class="action-head"><div class="action-num">1</div><div class="action-title">Открути оба винта на клеммах источника</div></div>
           <div class="action-body">Освободи оба провода LED — плюсовой из <code>+3.3V</code> и минусовой из <code>GND</code>.</div>
         </div>
         <div class="action-card">
           <div class="action-head"><div class="action-num">2</div><div class="action-title">Поменяй провода местами и закрепи</div></div>
-          <div class="action-body">Теперь <b>минусовой</b> провод LED воткни в клемму <code>+3.3V</code>, а <b>плюсовой</b> — в <code>GND</code>. Затяни винты.</div>
+          <div class="action-body">Теперь <b>минусовой</b> провод LED воткни в клемму <code>+3.3V</code> источника, а <b>плюсовой</b> — в <code>GND</code>. Затяни винты.</div>
           <div class="action-btn-row"><button class="micro-btn" onclick="toggleDone(this)">Поменял</button></div>
         </div>
         <div class="action-card">
@@ -1299,7 +1299,7 @@
         <h2>📐 Теперь замер — 3 линии ATX</h2>
         <div class="figure hero">
           <iframe scrolling="no" loading="lazy" title="Схема цепи" style="width: 100%; height: 380px; border: none; overflow: hidden; pointer-events: none;" data-src="circuits/circuit_step02_own_atx.html"></iframe>
-          <div class="caption">Твоя плата ATX XH-M229. Красным пунктиром подсвечены клеммы +3.3V и GND — замеряешь именно их парой.</div>
+          <div class="caption">Источник питания на твоём столе. Красным пунктиром подсвечены клеммы +3.3V и GND — замеряешь именно их парой.</div>
         </div>
 
         <div class="action-card">
@@ -2283,7 +2283,7 @@ relay = Pin(15, Pin.OUT)
     'мультиметр':   'Прибор для измерения напряжения (V), сопротивления (Ω) и тока (A).',
     'micropython':  'Python для микроконтроллеров — урезанный, но почти идентичный обычному Python.',
     'thonny':       'Бесплатная IDE для записи и запуска MicroPython на Pico.',
-    'atx':          'Стандартный блок питания компьютера с 24-pin разъёмом, выдаёт +3.3V/+5V/+12V/GND.',
+    'atx':          'Источник питания на рабочем столе — плата с винтовыми клеммами, выдаёт +3.3V/+5V/+12V/GND. ATX — стандарт компьютерных блоков питания.',
     'pull-up':      'Резистор подтягивает пин к HIGH; кнопка нажата → пин уходит в LOW.',
     'pwm':          'Pulse Width Modulation — быстрое включение/выключение пина для имитации плавного значения.'
   };
@@ -2545,25 +2545,21 @@ relay = Pin(15, Pin.OUT)
 
   const CYCLE_PARTS = {
     '1': [
-      { icon: 'atx',    name: 'Плата ATX XH-M229' },
       { icon: 'led',    name: 'LED 3 Вт' },
       { icon: 'dupont', name: '2× Dupont-провода' }
     ],
     '2': [
-      { icon: 'atx',    name: 'Плата ATX XH-M229' },
       { icon: 'led',    name: 'LED 3 Вт' },
       { icon: 'button', name: 'Тактовая кнопка' },
       { icon: 'dupont', name: '4× Dupont-провода' }
     ],
     '3': [
-      { icon: 'atx',    name: 'Плата ATX XH-M229' },
       { icon: 'led',    name: 'LED 3 Вт' },
       { icon: 'button', name: 'Тактовая кнопка' },
       { icon: 'relay',  name: 'Реле JQC-3FF-S-Z' },
       { icon: 'dupont', name: '6× Dupont-провода' }
     ],
     '4': [
-      { icon: 'atx',    name: 'Плата ATX XH-M229' },
       { icon: 'led',    name: 'LED 3 Вт' },
       { icon: 'button', name: 'Тактовая кнопка' },
       { icon: 'relay',  name: 'Реле JQC-3FF-S-Z' },
@@ -2580,7 +2576,7 @@ relay = Pin(15, Pin.OUT)
       if (!items) return;
       el.innerHTML = `
         <div class="pn-title">📦 Возьми из ячейки модуля</div>
-        <div class="pn-sub">Постоянно на столе: блок питания, ноутбук с монитором, мультиметр, отвёртки</div>
+        <div class="pn-sub">Постоянно на столе: источник питания, ноутбук с монитором, мультиметр, отвёртки</div>
         ${items.map(p => `<span class="pn-item">${PN_ICONS[p.icon]}${p.name}</span>`).join('')}
       `;
     });
@@ -2616,7 +2612,7 @@ relay = Pin(15, Pin.OUT)
       pitfalls: [
         'Перепутаны провода — плюсовой провод LED должен быть на +3.3V',
         'Винт не до конца затянут — провод болтается',
-        'ATX выключен — нет красного индикатора PWR'
+        'Источник питания выключен — нет красного индикатора PWR'
       ],
       prompts: [
         'Объясни простыми словами, почему светодиод горит только если ток идёт от плюса к минусу.',
